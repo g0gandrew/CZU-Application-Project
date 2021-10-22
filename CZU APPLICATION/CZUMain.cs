@@ -25,7 +25,6 @@ namespace CZU_APPLICATION
         {
             connectedId.Text = connectedUser;
             update_statistics(statisticsUsers, "on");
-            //merge?
 
         }
         private static int db_read_statistics(string t_command, string t_searchedKey)
