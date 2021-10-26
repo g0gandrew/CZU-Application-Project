@@ -17,6 +17,7 @@ namespace CZU_APPLICATION
         private void LoginButton_Click(object sender, EventArgs e)
         {
             Security.login(inUsername, inPassword, inPinCode, ref count, this);
+            // text adaugat
         }
 
         private void signUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
