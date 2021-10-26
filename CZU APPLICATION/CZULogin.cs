@@ -16,11 +16,10 @@ namespace CZU_APPLICATION
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            Security.login(inUsername, inPassword, inPinCode, count, this);
-
+            Security.login(inUsername, inPassword, inPinCode, ref count, this);
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void signUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CZURegister register = new CZURegister();
             register.Show();
