@@ -38,7 +38,7 @@
             this.inPinCode = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.signUp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,16 +123,18 @@
             this.label1.Text = "Connect your account";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // linkLabel1
+            // signUp
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(444, 376);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(61, 20);
-            this.linkLabel1.TabIndex = 10;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Sign Up";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.signUp.AutoSize = true;
+            this.signUp.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.signUp.LinkColor = System.Drawing.Color.Red;
+            this.signUp.Location = new System.Drawing.Point(426, 359);
+            this.signUp.Name = "signUp";
+            this.signUp.Size = new System.Drawing.Size(95, 35);
+            this.signUp.TabIndex = 10;
+            this.signUp.TabStop = true;
+            this.signUp.Text = "Sign Up";
+            this.signUp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signUp_LinkClicked);
             // 
             // CZULogin
             // 
@@ -140,7 +142,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(886, 533);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.signUp);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.inPinCode);
             this.Controls.Add(this.label4);
@@ -173,7 +175,7 @@
         private System.Windows.Forms.TextBox inPinCode;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel signUp;
     }
 }
 

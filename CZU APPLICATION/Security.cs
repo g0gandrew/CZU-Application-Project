@@ -27,7 +27,7 @@ namespace CZU_APPLICATION
             }
         }
 
-        public static void login(TextBox t_inUsername, TextBox t_inPassword, TextBox t_inPinCode, int t_count, CZULogin Login)
+        public static void login(TextBox t_inUsername, TextBox t_inPassword, TextBox t_inPinCode, ref int t_count, CZULogin Login)
         {
             // Opening SQL connection
             SqlConnection connection = new SqlConnection(path);
@@ -69,7 +69,7 @@ namespace CZU_APPLICATION
                 t_count++;
                 if (t_count != 3)
                 {
-                    MessageBox.Show($"Incorrect credentials {t_count}");
+                    MessageBox.Show($"Incorrect credentials");
                     t_inUsername.Clear();
                     t_inPassword.Clear();
                     t_inPinCode.Clear();
