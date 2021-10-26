@@ -42,7 +42,6 @@ namespace CZU_APPLICATION
         {
             birthdate = birthdate_control.Value.ToString();
             Security.gender(maleCheck, femaleCheck, unspecifiedCheck, sex_value);
-
             registration(inUsername.Text, inPassword.Text, inPinCode.Text, inEmail.Text, inPhoneNumber.Text, inRegKey.Text, sex_value, birthdate);
         }
 

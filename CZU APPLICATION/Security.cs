@@ -62,25 +62,25 @@ namespace CZU_APPLICATION
                     // Closing SQL connection
                     break;
                 }
-            }
-            if (!loggedIn)
-            {
-                t_count++;
-                if (t_count != 3)
+                if (!loggedIn)
                 {
-                    MessageBox.Show("Incorrect credentials");
-                    t_inUsername.Clear();
-                    t_inPassword.Clear();
-                    t_inPinCode.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("You failed attempting to enter your connection informations too many times");
-                    Login.Close();
+
+                    t_count++;
+                    if (t_count != 3)
+                    {
+                        MessageBox.Show($"Incorrect credentials {t_count}");
+                        t_inUsername.Clear();
+                        t_inPassword.Clear();
+                        t_inPinCode.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You failed attempting to enter your connection informations too many times");
+                        Login.Close();
+                    }
                 }
             }
         }
-
-
     }
 }
+

@@ -7,7 +7,7 @@ namespace CZU_APPLICATION
     
     public partial class CZULogin : Form
     {
-        int count;
+        int count = 0;
         string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public CZULogin()
         {
