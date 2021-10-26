@@ -9,24 +9,78 @@ namespace CZU_APPLICATION
 {
     internal class Security
     {
-        private void genderSecurity(CheckBox maleCheck, CheckBox femaleCheck, CheckBox unspecified)
+        static string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static void gender(CheckBox t_maleCheck, CheckBox t_femaleCheck, CheckBox t_unspecifiedCheck, string t_sexValue)
         {
-            if (maleCheck.Checked)
-                sex_value = "male";
-            if (femaleCheck.Checked)
-                sex_value = "female";
+            if (t_maleCheck.Checked)
+                t_sexValue = "male";
+            if (t_femaleCheck.Checked)
+                t_sexValue = "female";
             else
-                sex_value = "unspecified";
-            while (maleCheck.Checked && femaleCheck.Checked || maleCheck.Checked && unspecifiedCheck.Checked || femaleCheck.Checked && unspecifiedCheck.Checked)
+                t_sexValue = "unspecified";
+            while (t_maleCheck.Checked && t_femaleCheck.Checked || t_maleCheck.Checked && t_unspecifiedCheck.Checked || t_femaleCheck.Checked && t_unspecifiedCheck.Checked)
             {
-                maleCheck.Checked = false;
-                femaleCheck.Checked = false;
-                unspecifiedCheck.Checked = false;
+                t_maleCheck.Checked = false;
+                t_femaleCheck.Checked = false;
+                t_unspecifiedCheck.Checked = false;
                 MessageBox.Show("Select just one gender");
             }
         }
 
+        public static void login(TextBox t_inUsername, TextBox t_inPassword, TextBox t_inPinCode, int t_count, CZULogin Login)
+        {
+            // Opening SQL connection
+            SqlConnection connection = new SqlConnection(path);
+            SqlCommand query;
+            SqlDataReader dataReader;
+            connection.Open();
+            string cmd = "select id, name, password, pin from users";
+            query = new SqlCommand(cmd, connection);
+            dataReader = query.ExecuteReader();
+            bool loggedIn = false;
+            while (dataReader.Read())
+            {
+                if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inPinCode.Text == (string)dataReader.GetValue(3))
+                {
+                    CZUMain form2 = new CZUMain();
+                    CZURegister form3 = new CZURegister();
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand nonquery;
+                    string command = $"update users set connected = 'on' where id = {dataReader.GetValue(0)}";
+                    form2.connectedUser = $"{dataReader.GetValue(1)}";
+                    dataReader.Close();
+                    nonquery = new SqlCommand(command, connection);
+                    adapter.InsertCommand = nonquery;
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    nonquery.Dispose();
+                    dataReader.Close();
+                    loggedIn = true;
+                    MessageBox.Show("Succesfully logged in");
+                    Login.Hide();
+                    form2.Show();
+                    connection.Close();
+                    // Closing SQL connection
+                    break;
+                }
+                if (!loggedIn)
+                {
 
-
+                    t_count++;
+                    if (t_count != 3)
+                    {
+                        MessageBox.Show($"Incorrect credentials {t_count}");
+                        t_inUsername.Clear();
+                        t_inPassword.Clear();
+                        t_inPinCode.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You failed attempting to enter your connection informations too many times");
+                        Login.Close();
+                    }
+                }
+            }
+        }
     }
 }
+

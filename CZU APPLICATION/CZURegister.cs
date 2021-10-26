@@ -20,30 +20,10 @@ namespace CZU_APPLICATION
             InitializeComponent();
         }
         // Global Variables
-        string  sex_value, birthdate;
+        string sex_value, birthdate;
         string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         //
-        private void genderSecurity(CheckBox maleCheck, CheckBox femaleCheck, CheckBox unspecified)
-        {
-            if (maleCheck.Checked)
-                sex_value = "male";
-            if (femaleCheck.Checked)
-                sex_value = "female";
-            else
-                sex_value = "unspecified";
-            while (maleCheck.Checked && femaleCheck.Checked || maleCheck.Checked && unspecifiedCheck.Checked || femaleCheck.Checked && unspecifiedCheck.Checked)
-            {
-                maleCheck.Checked = false;
-                femaleCheck.Checked = false;
-                unspecifiedCheck.Checked = false;
-                MessageBox.Show("Select just one gender");
-            }
-        }
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-           // registration(inUsername, inPassword, inPinCode, inEmail, inPhoneNumber, inRegKey, );
-        }
+        
         private void registration(string  a, string b, string c, string d, string e, string f, string g, string h) 
         {
             SqlConnection connection = new SqlConnection(path);
@@ -57,21 +37,11 @@ namespace CZU_APPLICATION
             this.Close();
         }
 
-        /*private bool details_filled(string a, string b, string c, string d, string e, string f, string g, string h)
-        {
-            while(b.Count() < 8)
-                MessageBox.Show("Your password must have minimum 8 characters!");
-
-            while (a.Count() < 5)
-                MessageBox.Show("Your username must have minimum 5 characters!");
-         
-        }*/ // ----> A method to verify the text boxes if they're filled in the right way
  
         private void register_button_Click(object sender, EventArgs e)
         {
             birthdate = birthdate_control.Value.ToString();
-            genderSecurity(maleCheck, femaleCheck, unspecifiedCheck);
-
+            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, sex_value);
             registration(inUsername.Text, inPassword.Text, inPinCode.Text, inEmail.Text, inPhoneNumber.Text, inRegKey.Text, sex_value, birthdate);
         }
 
