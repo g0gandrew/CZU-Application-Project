@@ -15,7 +15,7 @@ namespace CZU_APPLICATION
 {
     public partial class CZUMain : Form
     {
-        public string connectedUser, command;
+        private string _connectedUser, _command;
         public CZUMain()
         {
             InitializeComponent();
@@ -23,13 +23,13 @@ namespace CZU_APPLICATION
 
         private void CZUMain_Load(object sender, EventArgs e)
         {
-            connectedId.Text = connectedUser;
-            command = "select connected from users where connected =";
-            Statistics.update(statisticsUsers, command, "on");
+            connectedId.Text = _connectedUser;
+            _command = "select connected from users where connected =";
+            Statistics.update(statisticsUsers, _command, "on");
         }
         private void CZUMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string command = $"update users set connected = 'off' where name = '{connectedUser}'";
+            string command = $"update users set connected = 'off' where name = '{_connectedUser}'";
             Database.insert(command);
 
         }
