@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
 
 namespace CZU_APPLICATION
 {
@@ -13,10 +14,11 @@ namespace CZU_APPLICATION
         {
             int count = 0;
             t_command += $"'{t_searchedKey}'";
-            string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            SqlConnection connection = new SqlConnection(path);
-            SqlCommand cmd = new SqlCommand(t_command, connection);
-            SqlDataReader dataReader;
+            string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = path;
+            MySqlCommand cmd = new MySqlCommand(t_command, connection);
+            MySqlDataReader dataReader;
             connection.Open();
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read()) // counting for statistics 

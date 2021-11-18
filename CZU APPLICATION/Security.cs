@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace CZU_APPLICATION
 {
     internal class Security
     {
-        static string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public static void gender(CheckBox t_maleCheck, CheckBox t_femaleCheck, CheckBox t_unspecifiedCheck, string t_sexValue)
         {
             if (t_maleCheck.Checked)
@@ -29,31 +28,27 @@ namespace CZU_APPLICATION
 
         public static void login(TextBox t_inUsername, TextBox t_inPassword, TextBox t_inPinCode, ref int t_count, CZULogin Login)
         {
-            // Opening SQL connection
-            SqlConnection connection = new SqlConnection(path);
-            SqlCommand query;
-            SqlDataReader dataReader;
-            connection.Open();
+            string path = "SERVER=localhost;PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
             string cmd = "select id, name, password, pin from users";
-            query = new SqlCommand(cmd, connection);
+            // Opening SQL connection
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = path; 
+            MySqlCommand query = new MySqlCommand(cmd, connection);
+            MySqlDataReader dataReader;
+            connection.Open();
             dataReader = query.ExecuteReader();
             bool loggedIn = false;
             while (dataReader.Read())
             {
-                if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inPinCode.Text == (string)dataReader.GetValue(3))
+                if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) &&  t_inPinCode.Text == (string)dataReader.GetValue(3))
                 {
                     CZUMain form2 = new CZUMain();
                     CZURegister form3 = new CZURegister();
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    SqlCommand nonquery;
-                    string command = $"update users set connected = 'on' where id = {dataReader.GetValue(0)}";
                     form2.connectedUser = $"{dataReader.GetValue(1)}";
+                    string command = $"update users set connected = 'on' where id = {dataReader.GetValue(0)}";
                     dataReader.Close();
-                    nonquery = new SqlCommand(command, connection);
-                    adapter.InsertCommand = nonquery;
-                    adapter.InsertCommand.ExecuteNonQuery();
-                    nonquery.Dispose();
-                    dataReader.Close();
+                    MySqlCommand nonquery = new MySqlCommand(command, connection);
+                    nonquery.ExecuteNonQuery();
                     loggedIn = true;
                     MessageBox.Show("Succesfully logged in");
                     Login.Hide();
@@ -65,7 +60,6 @@ namespace CZU_APPLICATION
             }
             if (!loggedIn)
             {
-
                 t_count++;
                 if (t_count != 3)
                 {
@@ -80,6 +74,7 @@ namespace CZU_APPLICATION
                     Login.Close();
                 }
             }
+
         }
     }
 }
