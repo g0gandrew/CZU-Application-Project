@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlTypes;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 
 namespace CZU_APPLICATION
@@ -20,29 +19,29 @@ namespace CZU_APPLICATION
             InitializeComponent();
         }
         // Global Variables
-        string sex_value, birthdate;
-        string path = @"Data Source=DESKTOP-3GAOIRP;Initial Catalog=czu_users;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string sexValue, birthdate;
+        string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
         //
-        
-        private void registration(string  a, string b, string c, string d, string e, string f, string g, string h) 
+
+        private void registration(string  t_name, string t_password, string t_pin, string t_email, string t_phoneNumber, string t_registrationKey, string t_sex, string t_birthdate) 
         {
-            SqlConnection connection = new SqlConnection(path);
-            string nonquery = $"insert into users(name, password, pin, email, phone_number, registration_key, sex, birth_date) values('{a}', '{b}', '{c}', '{d}', '{e}', '{f}', '{g}', '{h}')";
-            SqlCommand cmd = new SqlCommand(nonquery, connection);
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = path;
+            string nonquery = $"insert into users(name, password, pin, email, phoneNumber, registrationKey, sex, birthDate) values('{t_name}', '{t_password}', '{t_pin}', '{t_email}', '{t_phoneNumber}', '{t_registrationKey}', '{t_sex}', '{t_birthdate}')";
             connection.Open();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-            dataAdapter.InsertCommand = cmd;
-            dataAdapter.InsertCommand.ExecuteNonQuery();
+            MySqlCommand cmd = new MySqlCommand(nonquery, connection);
+            cmd.ExecuteNonQuery();
             connection.Close();
             this.Close();
+
         }
 
- 
+
         private void register_button_Click(object sender, EventArgs e)
         {
             birthdate = birthdate_control.Value.ToString();
-            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, sex_value);
-            registration(inUsername.Text, inPassword.Text, inPinCode.Text, inEmail.Text, inPhoneNumber.Text, inRegKey.Text, sex_value, birthdate);
+            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, sexValue);
+            registration(inUsername.Text, inPassword.Text, inPinCode.Text, inEmail.Text, inPhoneNumber.Text, inRegKey.Text, sexValue, birthdate);
         }
 
     }
