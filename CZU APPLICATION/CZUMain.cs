@@ -27,7 +27,9 @@ namespace CZU_APPLICATION
         {
             connectedId.Text = _connectedUser;
             _command = "select connected from users where connected =";
-            Statistics.update(statisticsUsers, _command, "on");
+            Statistics.update(ref statisticsUsers, _command, "on");
+            Statistics.updateStudentPanel(ref studentGB1, ref studentImage1, ref studentConnected1, ref studentName1, ref studentQuestion1, ref studentAssignment1, ref studentMeeting1); // Need 6 here
+
         }   
 
         private void studentsButton_Click(object sender, EventArgs e)
@@ -73,6 +75,9 @@ namespace CZU_APPLICATION
             CZUUserDetails userDetails = new CZUUserDetails();
             userDetails.Show();
         }
+
+     
+
 
         private void studentTabState(Boolean mode)
         {
