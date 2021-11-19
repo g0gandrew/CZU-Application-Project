@@ -28,43 +28,38 @@ namespace CZU_APPLICATION
             connectedId.Text = _connectedUser;
             _command = "select connected from users where connected =";
             Statistics.update(statisticsUsers, _command, "on");
-        }
-
-
+        }   
 
         private void studentsButton_Click(object sender, EventArgs e)
         {
-            studentsPanel.Visible = true;
+            studentTabState(true);
+
         }
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            studentsPanel.Visible = false;
-
+            studentTabState(false);
 
         }
 
         private void meetingsButton_Click(object sender, EventArgs e)
         {
-            studentsPanel.Visible = false;
+            studentTabState(false);
 
         }
 
         private void questionsButton_Click(object sender, EventArgs e)
         {
-            studentsPanel.Visible = false;
+            studentTabState(false);
 
         }
 
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
-            studentsPanel.Visible = false;
+            studentTabState(false);
 
         }
 
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
-        }
 
         private void CZUMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -72,5 +67,19 @@ namespace CZU_APPLICATION
             Database.insert(command);
 
         }
+
+        private void studentImage1_Click(object sender, EventArgs e)
+        {
+            CZUUserDetails userDetails = new CZUUserDetails();
+            userDetails.Show();
+        }
+
+        private void studentTabState(Boolean mode)
+        {
+            studentsPanel.Enabled = mode;
+            studentsPanel.Visible = mode;
+        }
+
+
     }
 }
