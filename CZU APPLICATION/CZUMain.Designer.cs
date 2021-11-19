@@ -49,7 +49,7 @@
             this.statisticsAssignments = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.studentsPanel = new System.Windows.Forms.Panel();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.studentMainGB = new System.Windows.Forms.GroupBox();
             this.rightStudentList = new System.Windows.Forms.Button();
             this.leftStudentList = new System.Windows.Forms.Button();
             this.studentImage6 = new System.Windows.Forms.Button();
@@ -124,7 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.studentsPanel.SuspendLayout();
-            this.groupBox8.SuspendLayout();
+            this.studentMainGB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected2)).BeginInit();
@@ -377,42 +377,42 @@
             // 
             // studentsPanel
             // 
-            this.studentsPanel.Controls.Add(this.groupBox8);
+            this.studentsPanel.Controls.Add(this.studentMainGB);
             this.studentsPanel.Location = new System.Drawing.Point(174, 0);
             this.studentsPanel.Name = "studentsPanel";
             this.studentsPanel.Size = new System.Drawing.Size(1145, 681);
             this.studentsPanel.TabIndex = 4;
             this.studentsPanel.Visible = false;
             // 
-            // groupBox8
+            // studentMainGB
             // 
-            this.groupBox8.Controls.Add(this.rightStudentList);
-            this.groupBox8.Controls.Add(this.leftStudentList);
-            this.groupBox8.Controls.Add(this.studentImage6);
-            this.groupBox8.Controls.Add(this.studentImage5);
-            this.groupBox8.Controls.Add(this.studentImage4);
-            this.groupBox8.Controls.Add(this.studentImage3);
-            this.groupBox8.Controls.Add(this.studentImage2);
-            this.groupBox8.Controls.Add(this.studentImage1);
-            this.groupBox8.Controls.Add(this.studentConnected1);
-            this.groupBox8.Controls.Add(this.studentConnected3);
-            this.groupBox8.Controls.Add(this.studentConnected2);
-            this.groupBox8.Controls.Add(this.studentConnected6);
-            this.groupBox8.Controls.Add(this.studentGB3);
-            this.groupBox8.Controls.Add(this.studentGB6);
-            this.groupBox8.Controls.Add(this.studentConnected5);
-            this.groupBox8.Controls.Add(this.studentGB2);
-            this.groupBox8.Controls.Add(this.studentConnected4);
-            this.groupBox8.Controls.Add(this.pictureBox7);
-            this.groupBox8.Controls.Add(this.studentGB1);
-            this.groupBox8.Controls.Add(this.studentGB5);
-            this.groupBox8.Controls.Add(this.studentGB4);
-            this.groupBox8.Location = new System.Drawing.Point(20, 12);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(1104, 656);
-            this.groupBox8.TabIndex = 5;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Students Status";
+            this.studentMainGB.Controls.Add(this.rightStudentList);
+            this.studentMainGB.Controls.Add(this.leftStudentList);
+            this.studentMainGB.Controls.Add(this.studentImage6);
+            this.studentMainGB.Controls.Add(this.studentImage5);
+            this.studentMainGB.Controls.Add(this.studentImage4);
+            this.studentMainGB.Controls.Add(this.studentImage3);
+            this.studentMainGB.Controls.Add(this.studentImage2);
+            this.studentMainGB.Controls.Add(this.studentImage1);
+            this.studentMainGB.Controls.Add(this.studentConnected1);
+            this.studentMainGB.Controls.Add(this.studentConnected3);
+            this.studentMainGB.Controls.Add(this.studentConnected2);
+            this.studentMainGB.Controls.Add(this.studentConnected6);
+            this.studentMainGB.Controls.Add(this.studentGB3);
+            this.studentMainGB.Controls.Add(this.studentGB6);
+            this.studentMainGB.Controls.Add(this.studentConnected5);
+            this.studentMainGB.Controls.Add(this.studentGB2);
+            this.studentMainGB.Controls.Add(this.studentConnected4);
+            this.studentMainGB.Controls.Add(this.pictureBox7);
+            this.studentMainGB.Controls.Add(this.studentGB1);
+            this.studentMainGB.Controls.Add(this.studentGB5);
+            this.studentMainGB.Controls.Add(this.studentGB4);
+            this.studentMainGB.Location = new System.Drawing.Point(20, 12);
+            this.studentMainGB.Name = "studentMainGB";
+            this.studentMainGB.Size = new System.Drawing.Size(1104, 656);
+            this.studentMainGB.TabIndex = 5;
+            this.studentMainGB.TabStop = false;
+            this.studentMainGB.Text = "Students Status";
             // 
             // rightStudentList
             // 
@@ -566,11 +566,11 @@
             // studentName3
             // 
             this.studentName3.AutoSize = true;
-            this.studentName3.Location = new System.Drawing.Point(74, 23);
+            this.studentName3.Location = new System.Drawing.Point(92, 23);
             this.studentName3.Name = "studentName3";
-            this.studentName3.Size = new System.Drawing.Size(88, 20);
-            this.studentName3.TabIndex = 29;
-            this.studentName3.Text = "Maria Ioana";
+            this.studentName3.Size = new System.Drawing.Size(58, 20);
+            this.studentName3.TabIndex = 13;
+            this.studentName3.Text = "label11";
             // 
             // studentMeeting3
             // 
@@ -646,11 +646,11 @@
             // studentName6
             // 
             this.studentName6.AutoSize = true;
-            this.studentName6.Location = new System.Drawing.Point(74, 23);
+            this.studentName6.Location = new System.Drawing.Point(94, 23);
             this.studentName6.Name = "studentName6";
-            this.studentName6.Size = new System.Drawing.Size(77, 20);
-            this.studentName6.TabIndex = 29;
-            this.studentName6.Text = "TEST TEST";
+            this.studentName6.Size = new System.Drawing.Size(50, 20);
+            this.studentName6.TabIndex = 30;
+            this.studentName6.Text = "label5";
             // 
             // studentMeeting6
             // 
@@ -736,11 +736,11 @@
             // studentName2
             // 
             this.studentName2.AutoSize = true;
-            this.studentName2.Location = new System.Drawing.Point(74, 23);
+            this.studentName2.Location = new System.Drawing.Point(86, 23);
             this.studentName2.Name = "studentName2";
-            this.studentName2.Size = new System.Drawing.Size(85, 20);
-            this.studentName2.TabIndex = 29;
-            this.studentName2.Text = "Gog Andrei";
+            this.studentName2.Size = new System.Drawing.Size(50, 20);
+            this.studentName2.TabIndex = 11;
+            this.studentName2.Text = "label6";
             // 
             // studentMeeting2
             // 
@@ -836,11 +836,11 @@
             // studentName1
             // 
             this.studentName1.AutoSize = true;
-            this.studentName1.Location = new System.Drawing.Point(74, 23);
+            this.studentName1.Location = new System.Drawing.Point(89, 23);
             this.studentName1.Name = "studentName1";
-            this.studentName1.Size = new System.Drawing.Size(106, 20);
-            this.studentName1.TabIndex = 29;
-            this.studentName1.Text = "Cristina Gimon";
+            this.studentName1.Size = new System.Drawing.Size(50, 20);
+            this.studentName1.TabIndex = 10;
+            this.studentName1.Text = "label4";
             // 
             // studentMeeting1
             // 
@@ -917,11 +917,11 @@
             // studentName5
             // 
             this.studentName5.AutoSize = true;
-            this.studentName5.Location = new System.Drawing.Point(74, 23);
+            this.studentName5.Location = new System.Drawing.Point(86, 23);
             this.studentName5.Name = "studentName5";
-            this.studentName5.Size = new System.Drawing.Size(77, 20);
-            this.studentName5.TabIndex = 30;
-            this.studentName5.Text = "TEST TEST";
+            this.studentName5.Size = new System.Drawing.Size(50, 20);
+            this.studentName5.TabIndex = 12;
+            this.studentName5.Text = "label3";
             // 
             // label18
             // 
@@ -1005,11 +1005,11 @@
             // studentName4
             // 
             this.studentName4.AutoSize = true;
-            this.studentName4.Location = new System.Drawing.Point(74, 23);
+            this.studentName4.Location = new System.Drawing.Point(83, 23);
             this.studentName4.Name = "studentName4";
-            this.studentName4.Size = new System.Drawing.Size(77, 20);
-            this.studentName4.TabIndex = 29;
-            this.studentName4.Text = "TEST TEST";
+            this.studentName4.Size = new System.Drawing.Size(58, 20);
+            this.studentName4.TabIndex = 15;
+            this.studentName4.Text = "label13";
             // 
             // studentMeeting4
             // 
@@ -1096,7 +1096,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.studentsPanel.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
+            this.studentMainGB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected2)).EndInit();
@@ -1147,7 +1147,6 @@
         public System.Windows.Forms.Panel studentsPanel;
         private System.Windows.Forms.PictureBox studentConnected3;
         private System.Windows.Forms.GroupBox studentGB3;
-        private System.Windows.Forms.Label studentName3;
         private System.Windows.Forms.Label studentMeeting3;
         private System.Windows.Forms.Label studentAssignment3;
         private System.Windows.Forms.Label studentQuestion3;
@@ -1156,17 +1155,15 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.PictureBox studentConnected2;
         private System.Windows.Forms.GroupBox studentGB2;
-        private System.Windows.Forms.Label studentName2;
         private System.Windows.Forms.Label studentMeeting2;
         private System.Windows.Forms.Label studentAssignment2;
         private System.Windows.Forms.Label studentQuestion2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox studentMainGB;
         private System.Windows.Forms.PictureBox studentConnected6;
         private System.Windows.Forms.GroupBox studentGB6;
-        private System.Windows.Forms.Label studentName6;
         private System.Windows.Forms.Label studentMeeting6;
         private System.Windows.Forms.Label studentAssignment6;
         private System.Windows.Forms.Label studentQuestion6;
@@ -1178,7 +1175,6 @@
         private System.Windows.Forms.PictureBox studentConnected1;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.GroupBox studentGB1;
-        private System.Windows.Forms.Label studentName1;
         private System.Windows.Forms.Label studentMeeting1;
         private System.Windows.Forms.Label studentAssignment1;
         private System.Windows.Forms.Label studentQuestion1;
@@ -1186,7 +1182,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label studentQ1;
         private System.Windows.Forms.GroupBox studentGB5;
-        private System.Windows.Forms.Label studentName5;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label studentMeeting5;
         private System.Windows.Forms.Label studentAssignment5;
@@ -1195,7 +1190,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.GroupBox studentGB4;
-        private System.Windows.Forms.Label studentName4;
         private System.Windows.Forms.Label studentMeeting4;
         private System.Windows.Forms.Label studentAssignment4;
         private System.Windows.Forms.Label studentQuestion4;
@@ -1210,5 +1204,11 @@
         private System.Windows.Forms.Button studentImage1;
         private System.Windows.Forms.Button rightStudentList;
         private System.Windows.Forms.Button leftStudentList;
+        private System.Windows.Forms.Label studentName3;
+        private System.Windows.Forms.Label studentName2;
+        private System.Windows.Forms.Label studentName1;
+        private System.Windows.Forms.Label studentName4;
+        private System.Windows.Forms.Label studentName6;
+        private System.Windows.Forms.Label studentName5;
     }
 }
