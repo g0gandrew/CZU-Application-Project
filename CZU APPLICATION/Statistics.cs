@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace CZU_APPLICATION
 {
-    internal class Statistics
+    static class Statistics
     {
         public static int update(ref Label t_a, string t_command, string t_searchedKey)
         {
@@ -32,6 +32,41 @@ namespace CZU_APPLICATION
             return count;
         }
 
+        public static void updateConnectedStudents(params Panel[] t_studentPanel)
+        {
+            /// Setting up MYSQL CONNECTION (1)
+            string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            cmd.CommandText = "select connected from students;";
+            dataReader = cmd.ExecuteReader();
+            ///
+            int i = 0;
+            while(dataReader.Read())
+            {
+                if (dataReader.GetString(0) == "on" && i < 6)
+                {
+
+                    t_studentPanel[i].Enabled = false;
+                    t_studentPanel[i++].Visible = false;
+                }
+                if (i == 5)
+                    break;
+            }
+            for (int z = i; z < 6; ++z) // When there are less than 6 connected users, from the remained number, set panel
+            {
+                t_studentPanel[z].Enabled = true;
+                t_studentPanel[z].Visible = true;
+            }
+
+            dataReader.Close();
+            connection.Close();
+        }
+
         public static void updateStudentPanel(ref GroupBox t_studentGB, ref Button t_studentImage, ref PictureBox t_studentConnected, ref Label t_label0, ref Label t_label1, ref Label t_label2, ref Label t_label3)
         {
             string studentID = "";
@@ -46,7 +81,7 @@ namespace CZU_APPLICATION
             ///
 
             // Command list
-            List<string> command = new List<string>();
+            List <string> command = new List<string>();
             //
 
             // Student Name, studentGB Color related to sex, Student Image, Student Connected Status
@@ -111,7 +146,13 @@ namespace CZU_APPLICATION
             dataReader.Close();
             //
 
-           // Closing MYSQL Connection, and DataReader
+            // Updating Connected Users Panels
+
+            // 
+           
+            
+            
+            // Closing MYSQL Connection, and DataReader
               connection.Close();
            //
 
