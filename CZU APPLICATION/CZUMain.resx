@@ -58,6 +58,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="studentConnected3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        cQAAEnEB89x6jgAAADtJREFUOE+txzENADAMwLBCKH9YRbQ/pzXJj2du/+hZz3rWs571rGc961nPetaz
+        nvWsZz3rWc961pvbB2khvQA8g/iZAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="studentConnected3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        cQAAEnEB89x6jgAAADtJREFUOE+txzENADAMwLBCKH9YRbQ/pzXJj2du/+hZz3rWs571rGc961nPetaz
+        nvWsZz3rWc961pvbB2khvQA8g/iZAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="studentConnected5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
@@ -1654,20 +1668,6 @@
 </value>
   </data>
   <data name="studentConnected4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cQAAEnEB89x6jgAAADtJREFUOE+txzENADAMwLBCKH9YRbQ/pzXJj2du/+hZz3rWs571rGc961nPetaz
-        nvWsZz3rWc961pvbB2khvQA8g/iZAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="studentConnected3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cQAAEnEB89x6jgAAADtJREFUOE+txzENADAMwLBCKH9YRbQ/pzXJj2du/+hZz3rWs571rGc961nPetaz
-        nvWsZz3rWc961pvbB2khvQA8g/iZAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="studentConnected3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAVCAIAAADTi7lxAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
         cQAAEnEB89x6jgAAADtJREFUOE+txzENADAMwLBCKH9YRbQ/pzXJj2du/+hZz3rWs571rGc961nPetaz

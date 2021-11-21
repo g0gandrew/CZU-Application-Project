@@ -12,7 +12,22 @@ namespace CZU_APPLICATION
 {
     public partial class CZUMain : Form
     {
+        // Student Panel
+        List<GroupBox> studentGB = new List<GroupBox>();
+        List<PictureBox> studentConnected = new List<PictureBox>();
+        List<Button> studentImage = new List<Button>();
+        List<Label> studentName = new List<Label>();
+        List<Label> studentQuestion = new List<Label>();
+        List<Label> studentAssignment = new List<Label>();
+        List<Label> studentMeeting = new List<Label>();
+        List<Panel> studentPanel = new List<Panel>();
+        int startingFrom = 0;
+        bool leftPossible = false, rightPossible = false;
+        int recordsOnPage = 0;
+        //
+
         private string _connectedUser, _command;
+        private int times = 0;
         public string connectedUser
         {
             get { return _connectedUser; }
@@ -21,6 +36,7 @@ namespace CZU_APPLICATION
         public CZUMain()
         {
             InitializeComponent();
+           
         }
           
         private void CZUMain_Load(object sender, EventArgs e)
@@ -28,39 +44,42 @@ namespace CZU_APPLICATION
             connectedId.Text = _connectedUser;
             _command = "select connected from users where connected =";
             Statistics.update(ref statisticsUsers, _command, "on");
-        }   
+        }
 
 
         private void studentsButton_Click(object sender, EventArgs e)
         {
-            Statistics.updateStudentPanel(ref studentGB1, ref studentImage1, ref studentConnected1, ref studentName1, ref studentQuestion1, ref studentAssignment1, ref studentMeeting1); // Need 6 here
-            Statistics.updateConnectedStudents(studentPanel1, studentPanel2, studentPanel3, studentPanel4, studentPanel5, studentPanel6);
-            studentTabState(true);
+            if (times++ == 0)
+            {
+                studentTabDataInitialization();
+            }
+            studentMainPanel(true);
+            Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB,  studentImage,  studentConnected,  studentName,   studentQuestion,   studentAssignment,  studentMeeting); 
 
         }
 
         private void homeButton_Click(object sender, EventArgs e)
         {
-            studentTabState(false);
-
+            studentMainPanel(false);
+            studentTabDataInitialization();
         }
 
         private void meetingsButton_Click(object sender, EventArgs e)
         {
-            studentTabState(false);
-
+            studentMainPanel(false);
+            studentTabDataInitialization();
         }
 
         private void questionsButton_Click(object sender, EventArgs e)
         {
-            studentTabState(false);
-
+            studentMainPanel(false);
+            studentTabDataInitialization();
         }
 
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
-            studentTabState(false);
-
+            studentMainPanel(false);
+            studentTabDataInitialization();
         }
 
 
@@ -77,11 +96,7 @@ namespace CZU_APPLICATION
             userDetails.Show();
         }
 
-        private void studentConnected3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+  
         private void studentImage1_Click_1(object sender, EventArgs e)
         {
             CZUUserDetails studentDetails = new CZUUserDetails();
@@ -119,13 +134,81 @@ namespace CZU_APPLICATION
             CZUUserDetails studentDetails = new CZUUserDetails();
             studentDetails.Show();
         }
-
-        private void studentTabState(Boolean mode)
+                
+        private void studentMainPanel(bool mode)
         {
-            studentsPanel.Enabled = mode;
-            studentsPanel.Visible = mode;
+            studentsMainPanel.Enabled = mode;
+            studentsMainPanel.Visible = mode;
+
         }
 
+        private void leftStudentList_Click(object sender, EventArgs e)
+        {
+            if (leftPossible)
+            {
+                startingFrom -= recordsOnPage + 6;
+                Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
+            }
+        }
 
+        private void rightStudentList_Click(object sender, EventArgs e)
+        {
+            if(startingFrom % 6 == 0 && rightPossible == true) {
+                Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
+            }
+
+        }
+
+        private void studentTabDataInitialization( )
+        {
+            studentConnected.Add(studentConnected1);
+            studentConnected.Add(studentConnected2);
+            studentConnected.Add(studentConnected3);
+            studentConnected.Add(studentConnected4);
+            studentConnected.Add(studentConnected5);
+            studentConnected.Add(studentConnected6);
+            studentGB.Add(studentGB1);
+            studentGB.Add(studentGB2);
+            studentGB.Add(studentGB3);
+            studentGB.Add(studentGB4);
+            studentGB.Add(studentGB5);
+            studentGB.Add(studentGB6);
+            studentImage.Add(studentImage1);
+            studentImage.Add(studentImage2);
+            studentImage.Add(studentImage3);
+            studentImage.Add(studentImage4);
+            studentImage.Add(studentImage5);
+            studentImage.Add(studentImage6);
+            studentName.Add(studentName1);
+            studentName.Add(studentName2);
+            studentName.Add(studentName3);
+            studentName.Add(studentName4);
+            studentName.Add(studentName5);
+            studentName.Add(studentName6);
+            studentQuestion.Add(studentQuestion1);
+            studentQuestion.Add(studentQuestion2);
+            studentQuestion.Add(studentQuestion3);
+            studentQuestion.Add(studentQuestion4);
+            studentQuestion.Add(studentQuestion5);
+            studentQuestion.Add(studentQuestion6);
+            studentAssignment.Add(studentAssignment1);
+            studentAssignment.Add(studentAssignment2);
+            studentAssignment.Add(studentAssignment3);
+            studentAssignment.Add(studentAssignment4);
+            studentAssignment.Add(studentAssignment5);
+            studentAssignment.Add(studentAssignment6);
+            studentMeeting.Add(studentMeeting1);
+            studentMeeting.Add(studentMeeting2);
+            studentMeeting.Add(studentMeeting3);
+            studentMeeting.Add(studentMeeting4);
+            studentMeeting.Add(studentMeeting5);
+            studentMeeting.Add(studentMeeting6);
+            studentPanel.Add(studentPanel1);
+            studentPanel.Add(studentPanel2);
+            studentPanel.Add(studentPanel3);
+            studentPanel.Add(studentPanel4);
+            studentPanel.Add(studentPanel5);
+            studentPanel.Add(studentPanel6);
+        }
     }
 }
