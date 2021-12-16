@@ -44,7 +44,7 @@ namespace CZU_APPLICATION
 
 
             /// Command 0 - Updating users, connect status, that are shown, related to number of students registered
-            command[0] = $"select connected from students where studentID >= {t_startingFrom + 1}";
+            command[0] = $"select connected from student where ID >= {t_startingFrom + 1}";
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -76,7 +76,7 @@ namespace CZU_APPLICATION
 
 
             /// Command 1 - First command, for gatthering the studentID + others
-            command[1] = $"select studentID, firstName, lastname, sex, connected from students where studentID >= {t_startingFrom + 1}"; // need to modify it aswell
+            command[1] = $"select ID, firstName, lastname, sex, connected from student where ID >= {t_startingFrom + 1}"; // need to modify it aswell
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
             i = 0; // restarting the value for being used further
@@ -113,7 +113,7 @@ namespace CZU_APPLICATION
             // Command 2 - Student --> Questions
             for (int z = 0; z <= loopLength; z++)
             {
-                command[2] = $"select count(questionID) from questions where studentID = {studentID[z]};";
+                command[2] = $"select count(ID) from question where studentID = {studentID[z]};";
                 cmd.CommandText = command[2];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -127,7 +127,7 @@ namespace CZU_APPLICATION
             // Command 3 - Student --> Meetings
             for (int z = 0; z <= loopLength; z++)
             {
-                command[3] =$"select count(meetingID) from StudentsMeetings where studentID = {studentID[z]};";
+                command[3] =$"select count(ID) from StudentMeeting where studentID = {studentID[z]};";
                 cmd.CommandText = command[3];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -141,7 +141,7 @@ namespace CZU_APPLICATION
             // Command 4 - Student --> Assignments
             for (int z = 0; z <= loopLength; z++)
             {
-                command[4] = $"select count(assignmentID) from StudentsAssignments where studentID = {studentID[z]};";
+                command[4] = $"select count(ID) from StudentAssignment where studentID = {studentID[z]};";
                 cmd.CommandText = command[4];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())

@@ -23,7 +23,7 @@ namespace CZU_APPLICATION
         private void register_button_Click(object sender, EventArgs e)
         {
             string birthDate, sexValue = null;
-            birthDate = birthDateControl.Value.Date.ToString("yyyy/MM/dd");
+            birthDate = birthDateControl.Value.Date.ToString("yyyy.MM.dd");
             Security.gender(maleCheck, femaleCheck, unspecifiedCheck, ref sexValue);
             Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
         }

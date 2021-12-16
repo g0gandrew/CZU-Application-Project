@@ -12,7 +12,7 @@ namespace CZU_APPLICATION
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
-        public static int update(ref Label t_a, string t_command, string t_searchedKey)
+        public static void update(ref Label t_a, string t_command, string t_searchedKey, ref int statisticCount)
         {
             int count = 0;
             t_command += $"'{t_searchedKey}'";
@@ -29,8 +29,8 @@ namespace CZU_APPLICATION
             }
             dataReader.Close();
             connection.Close();
-            t_a.Text = $"{count}";
-            return count;
+            t_a.Text = $"{count + statisticCount}";
+            statisticCount = count;
         }
     }
  }

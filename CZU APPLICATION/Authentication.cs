@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace CZU_APPLICATION
 {
@@ -24,21 +16,19 @@ namespace CZU_APPLICATION
             registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student)
             MessageBox.Show(registrationType);
             MessageBox.Show(t_birthDate);
-
             switch (registrationType)
             {
                 case "teacher":
                 {
-                    nonquery = $"insert into teacher(username, firstName, lastName, password, authKey, email, phoneNumber, sex, birthDate) values('{t_username}', '{t_firstName}', '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', {t_phoneNumber}, '{t_sex}', '{t_birthDate}')";
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
-                    MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     connection.Open();
+                    nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
+                    MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
                     connection.Close();
                     break;
-              
-                    } 
+                }
 
                 case "student":
                 {
@@ -80,11 +70,11 @@ namespace CZU_APPLICATION
                 }
                 default:
                 {
-                        MessageBox.Show("Registration Token is invalid");
-                        break;
+                    MessageBox.Show("Registration Token is invalid");
+                    break;
                 }
-        }
-         
+            }
+
         }
         //
 
@@ -99,7 +89,7 @@ namespace CZU_APPLICATION
             connection.Open();
             dataReader = query.ExecuteReader();
             bool loggedIn = false;
-            
+
             // Student Table Data Verifying
             while (dataReader.Read())
             {
@@ -108,6 +98,7 @@ namespace CZU_APPLICATION
                     CZUMain form2 = new CZUMain();
                     CZURegister form3 = new CZURegister();
                     form2.connectedUser = $"{dataReader.GetValue(1)}";
+                    form2.connectedUserType = "student";
                     string command = $"update student set connected = 'on' where id = {dataReader.GetValue(0)}";
                     dataReader.Close();
                     MySqlCommand nonquery = new MySqlCommand(command, connection);
@@ -122,28 +113,32 @@ namespace CZU_APPLICATION
                 }
             }
             // 
-            // Teacher Table Data Verifying
-            dataReader.Close();
-            dataReader = query.ExecuteReader();
-            query.CommandText = $"select id, username, password, authKey from teacher";
-            while (dataReader.Read())
+            if (!loggedIn)
             {
-                if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
+                // Teacher Table Data Verifying
+                dataReader.Close();
+                query.CommandText = $"select id, username, password, authKey from teacher";
+                dataReader = query.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    CZUMain form2 = new CZUMain();
-                    CZURegister form3 = new CZURegister();
-                    form2.connectedUser = $"{dataReader.GetValue(1)}";
-                    string command = $"update teacher set connected = 'on' where id = {dataReader.GetValue(0)}";
-                    dataReader.Close();
-                    MySqlCommand nonquery = new MySqlCommand(command, connection);
-                    nonquery.ExecuteNonQuery();
-                    loggedIn = true;
-                    MessageBox.Show("Succesfully logged in");
-                    Login.Hide();
-                    form2.Show();
-                    connection.Close();
-                    // Closing SQL connection
-                    break;
+                    if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
+                    {
+                        CZUMain form2 = new CZUMain();
+                        CZURegister form3 = new CZURegister();
+                        form2.connectedUser = $"{dataReader.GetValue(1)}";
+                        form2.connectedUserType = "teacher";
+                        string command = $"update teacher set connected = 'on' where id = {dataReader.GetValue(0)}";
+                        dataReader.Close();
+                        MySqlCommand nonquery = new MySqlCommand(command, connection);
+                        nonquery.ExecuteNonQuery();
+                        loggedIn = true;
+                        MessageBox.Show("Succesfully logged in");
+                        Login.Hide();
+                        form2.Show();
+                        connection.Close();
+                        // Closing SQL connection
+                        break;
+                    }
                 }
             }
             //
@@ -164,6 +159,10 @@ namespace CZU_APPLICATION
                     MessageBox.Show("You failed attempting to enter your connection informations too many times");
                     Login.Close();
                 }
+            }
+            else
+            {
+                connection.Close();
             }
             //
         }

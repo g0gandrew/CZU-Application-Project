@@ -12,7 +12,7 @@ namespace CZU_APPLICATION
 {
     public partial class CZUMain : Form
     {
-        // Student Panel
+        // Student Panel Controls
         List<GroupBox> studentGB = new List<GroupBox>();
         List<PictureBox> studentConnected = new List<PictureBox>();
         List<Button> studentImage = new List<Button>();
@@ -21,6 +21,19 @@ namespace CZU_APPLICATION
         List<Label> studentAssignment = new List<Label>();
         List<Label> studentMeeting = new List<Label>();
         List<Panel> studentPanel = new List<Panel>();
+        // 
+        private string _connectedUserType;
+        public string connectedUserType
+        {
+            get
+            {
+                return _connectedUserType;
+            }
+            set
+            {
+                _connectedUserType = value;
+            }
+        }
         private int _recordsOnPage = 0;
         public int recordsOnPage
         {
@@ -94,9 +107,15 @@ namespace CZU_APPLICATION
           
         private void CZUMain_Load(object sender, EventArgs e)
         {
+            int statisticCount = 0;
             connectedId.Text = _connectedUser;
-            _command = "select connected from users where connected =";
-            Statistics.update(ref statisticsUsers, _command, "on");
+            // Updating main panels number of connected users.
+            _command = "select connected from student where connected =";
+            Statistics.update(ref statisticsUsers, _command, "on", ref statisticCount);
+            _command = "select connected from teacher where connected =";
+            Statistics.update(ref statisticsUsers, _command, "on", ref statisticCount);
+            statisticCount = 0; 
+            //
         }
 
 
@@ -138,9 +157,12 @@ namespace CZU_APPLICATION
 
         private void CZUMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string command = $"update users set connected = 'off' where name = '{_connectedUser}'";
+            string command = null;
+            if(connectedUserType == "student")
+                  command = $"update student set connected = 'off' where username = '{_connectedUser}'";
+            else
+                command = $"update teacher set connected = 'off' where username = '{_connectedUser}'";
             Database.insert(command);
-
         }
 
         private void studentImage1_Click(object sender, EventArgs e)
