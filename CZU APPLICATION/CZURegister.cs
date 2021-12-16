@@ -18,31 +18,14 @@ namespace CZU_APPLICATION
         {
             InitializeComponent();
         }
-        // Global Variables
-        string sexValue, birthdate;
-        string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
-        //
-
-        private void registration(string  t_name, string t_password, string t_pin, string t_email, string t_phoneNumber, string t_registrationKey, string t_sex, string t_birthdate) 
-        {
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = path;
-            string nonquery = $"insert into users(name, password, pin, email, phoneNumber, registrationKey, sex, birthDate) values('{t_name}', '{t_password}', '{t_pin}', '{t_email}', '{t_phoneNumber}', '{t_registrationKey}', '{t_sex}', '{t_birthdate}')";
-            connection.Open();
-            MySqlCommand cmd = new MySqlCommand(nonquery, connection);
-            cmd.ExecuteNonQuery();
-            connection.Close();
-            this.Close();
-
-        }
-
+    
 
         private void register_button_Click(object sender, EventArgs e)
         {
-            birthdate = birthdate_control.Value.ToString();
-            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, sexValue);
-            registration(inUsername.Text, inPassword.Text, inPinCode.Text, inEmail.Text, inPhoneNumber.Text, inRegKey.Text, sexValue, birthdate);
+            string birthDate, sexValue = null;
+            birthDate = birthDateControl.Value.Date.ToString("yyyy/MM/dd");
+            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, ref sexValue);
+            Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
         }
-
     }
 }

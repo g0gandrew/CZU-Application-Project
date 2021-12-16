@@ -14,6 +14,8 @@ namespace CZU_APPLICATION
 {
     static class Students
     {
+        private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
+
         public static void updatePanel(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List <GroupBox> t_studentGB,  List <Button> t_studentImage, List<PictureBox> t_studentConnected, List <Label> t_studentName,  List<Label> t_studentQuestion,  List<Label> t_studentAssignment,  List<Label> t_studentMeeting)
         {
             // Pseudo-Assignments until proven different
@@ -28,9 +30,8 @@ namespace CZU_APPLICATION
             //
 
             /// Setting up MYSQL CONNECTION (1)
-            string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
             MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = path;
+            connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
@@ -94,7 +95,7 @@ namespace CZU_APPLICATION
                     else
                     { // Need to implement custom SEX} 
                     }
-                    //
+                    //-
                     // Changing studentConnected image status
                     // Need to be implemented, linked with image
                     //
@@ -137,7 +138,6 @@ namespace CZU_APPLICATION
             }
             //
            
-
             // Command 4 - Student --> Assignments
             for (int z = 0; z <= loopLength; z++)
             {

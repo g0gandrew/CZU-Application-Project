@@ -21,18 +21,71 @@ namespace CZU_APPLICATION
         List<Label> studentAssignment = new List<Label>();
         List<Label> studentMeeting = new List<Label>();
         List<Panel> studentPanel = new List<Panel>();
-        int startingFrom = 0;
-        bool leftPossible = false, rightPossible = false;
-        int recordsOnPage = 0;
-        //
+        private int _recordsOnPage = 0;
+        public int recordsOnPage
+        {
+            get
+            {
+                return _recordsOnPage;
+            }
+            set
+            {
+                _recordsOnPage = value;
+            }
+        }
+        private int _startingFrom = 0;
+        public int startingFrom
+        {
+            get
+            {
+                return _startingFrom;
+            }
+            set
+            {
+                _startingFrom = value;
+            }
+        }
+        private bool _leftPossible = false;
+        public bool leftPossible
+        {
+            get
+            {
+                return _leftPossible;
+            }
+            set
+            {
+                _leftPossible = value;  
+            }
+        }
+        private bool _rightPossible = false;
+        public bool rightPossible
+        {
+            get
+            {
+                return _rightPossible;  
+            }
+            set
+            {
+                 _rightPossible = value;
+            }
+        }
 
-        private string _connectedUser, _command;
-        private int times = 0;
+        //
+        private string _connectedUser;
         public string connectedUser
         {
-            get { return _connectedUser; }
-            set {  _connectedUser = value; }
+            get
+            {
+                return _connectedUser;
+            }
+            set
+            {
+                _connectedUser = value;
+            }
         }
+        private string _command { get; set; }
+        private int _times { get; set; } = 0;
+
         public CZUMain()
         {
             InitializeComponent();
@@ -49,12 +102,12 @@ namespace CZU_APPLICATION
 
         private void studentsButton_Click(object sender, EventArgs e)
         {
-            if (times++ == 0)
+            if (_times++ == 0)
             {
                 studentTabDataInitialization();
             }
             studentMainPanel(true);
-            Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB,  studentImage,  studentConnected,  studentName,   studentQuestion,   studentAssignment,  studentMeeting); 
+            Students.updatePanel(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB,  studentImage,  studentConnected,  studentName,   studentQuestion,   studentAssignment,  studentMeeting); 
 
         }
 
@@ -147,14 +200,14 @@ namespace CZU_APPLICATION
             if (leftPossible)
             {
                 startingFrom -= recordsOnPage + 6;
-                Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
+                Students.updatePanel(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
             }
         }
 
         private void rightStudentList_Click(object sender, EventArgs e)
         {
             if(startingFrom % 6 == 0 && rightPossible == true) {
-                Students.updatePanel(out recordsOnPage, out rightPossible, out leftPossible, ref startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
+                Students.updatePanel(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting);
             }
 
         }

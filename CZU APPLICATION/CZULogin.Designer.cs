@@ -35,7 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.inPinCode = new System.Windows.Forms.TextBox();
+            this.t_inAuthKey = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.signUp = new System.Windows.Forms.LinkLabel();
@@ -89,16 +89,16 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(283, 259);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 20);
+            this.label4.Size = new System.Drawing.Size(71, 20);
             this.label4.TabIndex = 7;
-            this.label4.Text = "PIN CODE: ";
+            this.label4.Text = "Auth Key:";
             // 
-            // inPinCode
+            // t_inAuthKey
             // 
-            this.inPinCode.Location = new System.Drawing.Point(375, 259);
-            this.inPinCode.Name = "inPinCode";
-            this.inPinCode.Size = new System.Drawing.Size(205, 27);
-            this.inPinCode.TabIndex = 8;
+            this.t_inAuthKey.Location = new System.Drawing.Point(375, 259);
+            this.t_inAuthKey.Name = "t_inAuthKey";
+            this.t_inAuthKey.Size = new System.Drawing.Size(205, 27);
+            this.t_inAuthKey.TabIndex = 8;
             // 
             // pictureBox1
             // 
@@ -144,7 +144,7 @@
             this.ClientSize = new System.Drawing.Size(886, 533);
             this.Controls.Add(this.signUp);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.inPinCode);
+            this.Controls.Add(this.t_inAuthKey);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.label3);
@@ -172,7 +172,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox inPinCode;
+        private System.Windows.Forms.TextBox t_inAuthKey;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel signUp;
