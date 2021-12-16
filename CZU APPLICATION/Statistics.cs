@@ -32,5 +32,20 @@ namespace CZU_APPLICATION
             t_a.Text = $"{count + statisticCount}";
             statisticCount = count;
         }
+
+        public static void updateConnectedUsers(ref Label t_statisticsUsers)
+        {
+            // Variables
+            int statisticCount = 0;
+            string command;
+            // Updating main panels number of connected users.
+            command = "select connected from student where connected =";
+            update(ref t_statisticsUsers, command, "on", ref statisticCount);
+            command = "select connected from teacher where connected =";
+            update(ref t_statisticsUsers, command, "on", ref statisticCount);
+            //
+        }
+
+
     }
- }
+}

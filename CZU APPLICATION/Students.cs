@@ -26,7 +26,9 @@ namespace CZU_APPLICATION
             // Variables
             int loopLength; // Updating the panel by the number of students;
             string[] studentID = new string[6];
+            string[] classID = new string[6];
             int i = 0, tempI;
+
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -76,7 +78,7 @@ namespace CZU_APPLICATION
 
 
             /// Command 1 - First command, for gatthering the studentID + others
-            command[1] = $"select ID, firstName, lastname, sex, connected from student where ID >= {t_startingFrom + 1}"; // need to modify it aswell
+            command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where ID >= {t_startingFrom + 1}"; // need to modify it aswell
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
             i = 0; // restarting the value for being used further
@@ -84,7 +86,8 @@ namespace CZU_APPLICATION
             {
                 if (i <= loopLength)
                 {
-                    studentID[i] = dataReader.GetString(0); // getting the student id 
+                    classID[i] = dataReader.GetString(5);// getting students classID
+                    studentID[i] = dataReader.GetString(0); // getting students id 
                     t_studentName[i].Text = dataReader.GetString(1) + " " + dataReader.GetString(2); // concatinating for obtaining a full name to be displayed
                     string studentConnectedStatus = dataReader.GetString(4);
                     // Setting groupbox color related to sex
@@ -127,7 +130,7 @@ namespace CZU_APPLICATION
             // Command 3 - Student --> Meetings
             for (int z = 0; z <= loopLength; z++)
             {
-                command[3] =$"select count(ID) from StudentMeeting where studentID = {studentID[z]};";
+                command[3] =$"select count(classID) from ClassMeeting where classID = {classID[z]};";
                 cmd.CommandText = command[3];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -141,7 +144,7 @@ namespace CZU_APPLICATION
             // Command 4 - Student --> Assignments
             for (int z = 0; z <= loopLength; z++)
             {
-                command[4] = $"select count(ID) from StudentAssignment where studentID = {studentID[z]};";
+                command[4] = $"select count(classID) from ClassAssignment where classID = {classID[z]};";
                 cmd.CommandText = command[4];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -161,7 +164,11 @@ namespace CZU_APPLICATION
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
-
         }
+
+         
+
+
+
     }
 }

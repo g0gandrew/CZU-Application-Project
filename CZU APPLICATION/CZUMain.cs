@@ -107,15 +107,8 @@ namespace CZU_APPLICATION
           
         private void CZUMain_Load(object sender, EventArgs e)
         {
-            int statisticCount = 0;
             connectedId.Text = _connectedUser;
-            // Updating main panels number of connected users.
-            _command = "select connected from student where connected =";
-            Statistics.update(ref statisticsUsers, _command, "on", ref statisticCount);
-            _command = "select connected from teacher where connected =";
-            Statistics.update(ref statisticsUsers, _command, "on", ref statisticCount);
-            statisticCount = 0; 
-            //
+            Statistics.updateConnectedUsers(ref statisticsUsers);
         }
 
 
@@ -127,7 +120,6 @@ namespace CZU_APPLICATION
             }
             studentMainPanel(true);
             Students.updatePanel(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB,  studentImage,  studentConnected,  studentName,   studentQuestion,   studentAssignment,  studentMeeting); 
-
         }
 
         private void homeButton_Click(object sender, EventArgs e)
