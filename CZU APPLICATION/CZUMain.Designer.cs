@@ -50,8 +50,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.studentsMainPanel = new System.Windows.Forms.Panel();
             this.studentMainGB = new System.Windows.Forms.GroupBox();
-            this.studentPanel5 = new System.Windows.Forms.Panel();
+            this.studentsPanelNoData = new System.Windows.Forms.Panel();
+            this.noStudentsTeachedLabel = new System.Windows.Forms.Label();
+            this.selectClassID = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.studentPanel1 = new System.Windows.Forms.Panel();
+            this.studentPanel5 = new System.Windows.Forms.Panel();
             this.studentPanel3 = new System.Windows.Forms.Panel();
             this.studentConnected3 = new System.Windows.Forms.PictureBox();
             this.studentPanel4 = new System.Windows.Forms.Panel();
@@ -130,6 +134,7 @@
             this.groupBox1.SuspendLayout();
             this.studentsMainPanel.SuspendLayout();
             this.studentMainGB.SuspendLayout();
+            this.studentsPanelNoData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected5)).BeginInit();
             this.studentGB5.SuspendLayout();
@@ -391,6 +396,9 @@
             // 
             // studentMainGB
             // 
+            this.studentMainGB.Controls.Add(this.studentsPanelNoData);
+            this.studentMainGB.Controls.Add(this.selectClassID);
+            this.studentMainGB.Controls.Add(this.label3);
             this.studentMainGB.Controls.Add(this.studentPanel1);
             this.studentMainGB.Controls.Add(this.studentPanel5);
             this.studentMainGB.Controls.Add(this.studentPanel3);
@@ -425,14 +433,46 @@
             this.studentMainGB.TabStop = false;
             this.studentMainGB.Text = "Students Status";
             // 
-            // studentPanel5
+            // studentsPanelNoData
             // 
-            this.studentPanel5.Enabled = false;
-            this.studentPanel5.Location = new System.Drawing.Point(441, 320);
-            this.studentPanel5.Name = "studentPanel5";
-            this.studentPanel5.Size = new System.Drawing.Size(243, 203);
-            this.studentPanel5.TabIndex = 56;
-            this.studentPanel5.Visible = false;
+            this.studentsPanelNoData.Controls.Add(this.noStudentsTeachedLabel);
+            this.studentsPanelNoData.Enabled = false;
+            this.studentsPanelNoData.Location = new System.Drawing.Point(-20, -12);
+            this.studentsPanelNoData.Name = "studentsPanelNoData";
+            this.studentsPanelNoData.Size = new System.Drawing.Size(1145, 681);
+            this.studentsPanelNoData.TabIndex = 62;
+            this.studentsPanelNoData.Visible = false;
+            // 
+            // noStudentsTeachedLabel
+            // 
+            this.noStudentsTeachedLabel.AutoSize = true;
+            this.noStudentsTeachedLabel.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noStudentsTeachedLabel.Location = new System.Drawing.Point(138, 259);
+            this.noStudentsTeachedLabel.Name = "noStudentsTeachedLabel";
+            this.noStudentsTeachedLabel.Size = new System.Drawing.Size(854, 70);
+            this.noStudentsTeachedLabel.TabIndex = 0;
+            this.noStudentsTeachedLabel.Text = "No Teached Classes Available";
+            // 
+            // selectClassID
+            // 
+            this.selectClassID.FormattingEnabled = true;
+            this.selectClassID.ItemHeight = 20;
+            this.selectClassID.Items.AddRange(new object[] {
+            "No Classes"});
+            this.selectClassID.Location = new System.Drawing.Point(992, 23);
+            this.selectClassID.Name = "selectClassID";
+            this.selectClassID.Size = new System.Drawing.Size(89, 24);
+            this.selectClassID.TabIndex = 61;
+            this.selectClassID.SelectedValueChanged += new System.EventHandler(this.selectClassID_SelectedValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(922, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 20);
+            this.label3.TabIndex = 60;
+            this.label3.Text = "Class ID:";
             // 
             // studentPanel1
             // 
@@ -442,6 +482,15 @@
             this.studentPanel1.Size = new System.Drawing.Size(243, 201);
             this.studentPanel1.TabIndex = 53;
             this.studentPanel1.Visible = false;
+            // 
+            // studentPanel5
+            // 
+            this.studentPanel5.Enabled = false;
+            this.studentPanel5.Location = new System.Drawing.Point(441, 320);
+            this.studentPanel5.Name = "studentPanel5";
+            this.studentPanel5.Size = new System.Drawing.Size(243, 203);
+            this.studentPanel5.TabIndex = 56;
+            this.studentPanel5.Visible = false;
             // 
             // studentPanel3
             // 
@@ -1161,6 +1210,9 @@
             this.groupBox1.PerformLayout();
             this.studentsMainPanel.ResumeLayout(false);
             this.studentMainGB.ResumeLayout(false);
+            this.studentMainGB.PerformLayout();
+            this.studentsPanelNoData.ResumeLayout(false);
+            this.studentsPanelNoData.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected5)).EndInit();
             this.studentGB5.ResumeLayout(false);
@@ -1279,5 +1331,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel studentPanel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox selectClassID;
+        private System.Windows.Forms.Panel studentsPanelNoData;
+        private System.Windows.Forms.Label noStudentsTeachedLabel;
     }
 }

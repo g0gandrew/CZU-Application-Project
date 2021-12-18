@@ -33,7 +33,7 @@ namespace CZU_APPLICATION
             statisticCount = count;
         }
 
-        public static void updateConnectedUsers(ref Label t_statisticsUsers)
+        public static void mainPanelNoConnectedUsers(ref Label t_statisticsUsers)
         {
             // Variables
             int statisticCount = 0;
@@ -43,9 +43,6 @@ namespace CZU_APPLICATION
             update(ref t_statisticsUsers, command, "on", ref statisticCount);
             command = "select connected from teacher where connected =";
             update(ref t_statisticsUsers, command, "on", ref statisticCount);
-            //
         }
-
-
     }
 }

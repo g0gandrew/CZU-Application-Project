@@ -12,11 +12,59 @@ using System.Linq;
 
 namespace CZU_APPLICATION
 {
-    static class Students
+    static class StudentsPanel
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
-        public static void updatePanel(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List <GroupBox> t_studentGB,  List <Button> t_studentImage, List<PictureBox> t_studentConnected, List <Label> t_studentName,  List<Label> t_studentQuestion,  List<Label> t_studentAssignment,  List<Label> t_studentMeeting)
+
+        public static List <string> teachedClasses(string t_connectedUser, out string t_teacherID)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+            // Variables
+            List<string> teachedClasses = new List<string>();
+            t_teacherID = null; // pseudo assign
+            //
+
+            // getting connected teacher ID
+            cmd.CommandText = $"select ID from teacher where username = '{t_connectedUser}'";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+                t_teacherID = dataReader.GetString(0);
+            dataReader.Close();
+            //
+
+            // getting course teached by teacher
+            string teachedCourse = null; 
+            cmd.CommandText = $"select id from course where teacherID = {t_teacherID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+                teachedCourse = dataReader.GetString(0);
+            //
+            dataReader.Close();
+            if (teachedCourse != null)
+            {
+                // getting classes IDs teached by teacher
+                cmd.CommandText = $"select distinct classID from classcourse where courseID = {teachedCourse}";
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    teachedClasses.Add(dataReader.GetString(0));
+                }
+                dataReader.Close();
+            }
+            connection.Close();
+            //
+            return teachedClasses; // returning the list of classes teached by teacher x     
+        }
+
+        public static void updatePanel(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, List<Label> t_studentQuestion, List<Label> t_studentAssignment, List<Label> t_studentMeeting, string t_connectedUserType, string t_connectedUser, string t_selectedClass)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -27,8 +75,8 @@ namespace CZU_APPLICATION
             int loopLength; // Updating the panel by the number of students;
             string[] studentID = new string[6];
             string[] classID = new string[6];
+            string connectedTeacherID = null;
             int i = 0, tempI;
-
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -40,16 +88,34 @@ namespace CZU_APPLICATION
             connection.Open();
             ///
 
-            // Command list
+            // Commands list
             string[] command = new string[5];
             //
 
+            /// Getting crucial data for further processes related to connected user type
+            if (t_connectedUserType == "teacher")
+            {
+            }
+            else
+            {
+                // student
+            }
+            ///
 
-            /// Command 0 - Updating users, connect status, that are shown, related to number of students registered
-            command[0] = $"select connected from student where ID >= {t_startingFrom + 1}";
+            /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
+            if (t_connectedUserType == "teacher")
+            {
+                command[0] = $"select connected from student where classID = {t_selectedClass}"; //  
+            }
+            else
+            {
+
+            }
+
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
+           
+            while (dataReader.Read()) // for as long it finds data, maximum 6.
             {
                 if (i <= 5)
                 {
@@ -76,9 +142,16 @@ namespace CZU_APPLICATION
             dataReader.Close();
             ///
 
-
             /// Command 1 - First command, for gatthering the studentID + others
-            command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where ID >= {t_startingFrom + 1}"; // need to modify it aswell
+            if (t_connectedUserType == "teacher")
+            {
+                command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where classID = {t_selectedClass}"; // need to modify it aswell       
+            }
+            else
+            {
+
+            }
+
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
             i = 0; // restarting the value for being used further
@@ -86,7 +159,6 @@ namespace CZU_APPLICATION
             {
                 if (i <= loopLength)
                 {
-                    classID[i] = dataReader.GetString(5);// getting students classID
                     studentID[i] = dataReader.GetString(0); // getting students id 
                     t_studentName[i].Text = dataReader.GetString(1) + " " + dataReader.GetString(2); // concatinating for obtaining a full name to be displayed
                     string studentConnectedStatus = dataReader.GetString(4);
@@ -116,7 +188,13 @@ namespace CZU_APPLICATION
             // Command 2 - Student --> Questions
             for (int z = 0; z <= loopLength; z++)
             {
-                command[2] = $"select count(ID) from question where studentID = {studentID[z]};";
+                if (t_connectedUserType == "teacher") 
+                    command[2] = $"select count(ID) from question where studentID = {studentID[z]};";
+                else
+                {
+                        ///
+                }
+                
                 cmd.CommandText = command[2];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -130,7 +208,12 @@ namespace CZU_APPLICATION
             // Command 3 - Student --> Meetings
             for (int z = 0; z <= loopLength; z++)
             {
-                command[3] =$"select count(classID) from ClassMeeting where classID = {classID[z]};";
+                if (t_connectedUserType == "teacher")
+                    command[3] =$"select count(classID) from ClassMeeting where classID = {t_selectedClass};";
+                else
+                {
+                    // 
+                }
                 cmd.CommandText = command[3];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -144,7 +227,12 @@ namespace CZU_APPLICATION
             // Command 4 - Student --> Assignments
             for (int z = 0; z <= loopLength; z++)
             {
-                command[4] = $"select count(classID) from ClassAssignment where classID = {classID[z]};";
+                if (t_connectedUserType == "teacher")
+                    command[4] = $"select count(classID) from ClassAssignment where classID = {t_selectedClass};";
+                else
+                {
+                    // 
+                }
                 cmd.CommandText = command[4];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
