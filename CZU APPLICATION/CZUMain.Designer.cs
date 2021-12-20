@@ -51,7 +51,7 @@
             this.studentsMainPanel = new System.Windows.Forms.Panel();
             this.studentMainGB = new System.Windows.Forms.GroupBox();
             this.studentsPanelNoData = new System.Windows.Forms.Panel();
-            this.noStudentsTeachedLabel = new System.Windows.Forms.Label();
+            this.noDataInStudentPanelMessage = new System.Windows.Forms.Label();
             this.selectClassID = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.studentPanel1 = new System.Windows.Forms.Panel();
@@ -435,7 +435,7 @@
             // 
             // studentsPanelNoData
             // 
-            this.studentsPanelNoData.Controls.Add(this.noStudentsTeachedLabel);
+            this.studentsPanelNoData.Controls.Add(this.noDataInStudentPanelMessage);
             this.studentsPanelNoData.Enabled = false;
             this.studentsPanelNoData.Location = new System.Drawing.Point(-20, -12);
             this.studentsPanelNoData.Name = "studentsPanelNoData";
@@ -443,15 +443,15 @@
             this.studentsPanelNoData.TabIndex = 62;
             this.studentsPanelNoData.Visible = false;
             // 
-            // noStudentsTeachedLabel
+            // noDataInStudentPanelMessage
             // 
-            this.noStudentsTeachedLabel.AutoSize = true;
-            this.noStudentsTeachedLabel.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.noStudentsTeachedLabel.Location = new System.Drawing.Point(138, 259);
-            this.noStudentsTeachedLabel.Name = "noStudentsTeachedLabel";
-            this.noStudentsTeachedLabel.Size = new System.Drawing.Size(854, 70);
-            this.noStudentsTeachedLabel.TabIndex = 0;
-            this.noStudentsTeachedLabel.Text = "No Teached Classes Available";
+            this.noDataInStudentPanelMessage.AutoSize = true;
+            this.noDataInStudentPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noDataInStudentPanelMessage.Location = new System.Drawing.Point(138, 259);
+            this.noDataInStudentPanelMessage.Name = "noDataInStudentPanelMessage";
+            this.noDataInStudentPanelMessage.Size = new System.Drawing.Size(854, 70);
+            this.noDataInStudentPanelMessage.TabIndex = 0;
+            this.noDataInStudentPanelMessage.Text = "No Teached Classes Available";
             // 
             // selectClassID
             // 
@@ -1334,6 +1334,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox selectClassID;
         private System.Windows.Forms.Panel studentsPanelNoData;
-        private System.Windows.Forms.Label noStudentsTeachedLabel;
+        private System.Windows.Forms.Label noDataInStudentPanelMessage;
     }
 }

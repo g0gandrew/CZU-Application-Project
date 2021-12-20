@@ -18,8 +18,6 @@ namespace CZU_APPLICATION
         {
             InitializeComponent();
         }
-    
-
         private void register_button_Click(object sender, EventArgs e)
         {
             string birthDate, sexValue = null;

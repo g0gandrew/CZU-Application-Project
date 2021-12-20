@@ -33,16 +33,28 @@ namespace CZU_APPLICATION
             statisticCount = count;
         }
 
-        public static void mainPanelNoConnectedUsers(ref Label t_statisticsUsers)
+        public static void mainPanelConnectedColleagues(ref Label t_statisticsUsers, string t_classID)
         {
             // Variables
             int statisticCount = 0;
             string command;
-            // Updating main panels number of connected users.
-            command = "select connected from student where connected =";
-            update(ref t_statisticsUsers, command, "on", ref statisticCount);
-            command = "select connected from teacher where connected =";
+            command = $"select connected from student where classID = {t_classID} && connected =";
             update(ref t_statisticsUsers, command, "on", ref statisticCount);
         }
+        public static void mainPanelConnectedStudents(ref Label t_statisticsUsers, List <string> t_teachedClasses)
+        {
+            // Variables
+            int statisticCount = 0;
+            string command;
+            foreach(string i in t_teachedClasses)
+            {
+                command = $"select connected from student where classID = {Convert.ToInt32(i)} && connected =";
+                update(ref t_statisticsUsers, command, "on", ref statisticCount);
+            }
+        }
+        
+
+
+
     }
 }
