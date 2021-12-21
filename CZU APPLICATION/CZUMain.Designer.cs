@@ -29,16 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CZUMain));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.questionsButton = new System.Windows.Forms.Button();
-            this.meetingsButton = new System.Windows.Forms.Button();
-            this.studentsButton = new System.Windows.Forms.Button();
-            this.assignmentsButton = new System.Windows.Forms.Button();
-            this.homeButton = new System.Windows.Forms.Button();
-            this.connectedId = new System.Windows.Forms.Label();
-            this.admin_image = new System.Windows.Forms.PictureBox();
-            this.student_image = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.homeMainPanelLogo = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -47,13 +38,11 @@
             this.statisticsMeetings = new System.Windows.Forms.Label();
             this.statisticsQuestions = new System.Windows.Forms.Label();
             this.statisticsAssignments = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
             this.studentsMainPanel = new System.Windows.Forms.Panel();
             this.studentMainGB = new System.Windows.Forms.GroupBox();
-            this.studentsPanelNoData = new System.Windows.Forms.Panel();
-            this.noDataInStudentPanelMessage = new System.Windows.Forms.Label();
             this.selectClassID = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.classIDLabel = new System.Windows.Forms.Label();
             this.studentPanel1 = new System.Windows.Forms.Panel();
             this.studentPanel5 = new System.Windows.Forms.Panel();
             this.studentPanel3 = new System.Windows.Forms.Panel();
@@ -123,18 +112,26 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_image)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.student_image)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.studentsPanelNoData = new System.Windows.Forms.Panel();
+            this.noDataInStudentPanelMessage = new System.Windows.Forms.Label();
+            this.homeMainPanel = new System.Windows.Forms.Panel();
+            this.student_image = new System.Windows.Forms.PictureBox();
+            this.admin_image = new System.Windows.Forms.PictureBox();
+            this.connectedId = new System.Windows.Forms.Label();
+            this.homeButton = new System.Windows.Forms.Button();
+            this.assignmentsButton = new System.Windows.Forms.Button();
+            this.studentsButton = new System.Windows.Forms.Button();
+            this.meetingsButton = new System.Windows.Forms.Button();
+            this.questionsButton = new System.Windows.Forms.Button();
+            this.Menu = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.statisticsGroupBox.SuspendLayout();
             this.studentsMainPanel.SuspendLayout();
             this.studentMainGB.SuspendLayout();
-            this.studentsPanelNoData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected5)).BeginInit();
             this.studentGB5.SuspendLayout();
@@ -148,140 +145,22 @@
             this.studentGB1.SuspendLayout();
             this.studentGB4.SuspendLayout();
             this.studentGB3.SuspendLayout();
+            this.studentsPanelNoData.SuspendLayout();
+            this.homeMainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.student_image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_image)).BeginInit();
+            this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // homeMainPanelLogo
             // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
-            this.panel1.Controls.Add(this.questionsButton);
-            this.panel1.Controls.Add(this.meetingsButton);
-            this.panel1.Controls.Add(this.studentsButton);
-            this.panel1.Controls.Add(this.assignmentsButton);
-            this.panel1.Controls.Add(this.homeButton);
-            this.panel1.Controls.Add(this.connectedId);
-            this.panel1.Controls.Add(this.admin_image);
-            this.panel1.Controls.Add(this.student_image);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(173, 681);
-            this.panel1.TabIndex = 0;
-            // 
-            // questionsButton
-            // 
-            this.questionsButton.BackColor = System.Drawing.Color.Red;
-            this.questionsButton.FlatAppearance.BorderSize = 0;
-            this.questionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.questionsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.questionsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_questions;
-            this.questionsButton.Location = new System.Drawing.Point(5, 277);
-            this.questionsButton.Name = "questionsButton";
-            this.questionsButton.Size = new System.Drawing.Size(166, 85);
-            this.questionsButton.TabIndex = 14;
-            this.questionsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.questionsButton.UseVisualStyleBackColor = false;
-            this.questionsButton.Click += new System.EventHandler(this.questionsButton_Click);
-            // 
-            // meetingsButton
-            // 
-            this.meetingsButton.BackColor = System.Drawing.Color.Red;
-            this.meetingsButton.FlatAppearance.BorderSize = 0;
-            this.meetingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.meetingsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.meetingsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_meetings;
-            this.meetingsButton.Location = new System.Drawing.Point(5, 186);
-            this.meetingsButton.Name = "meetingsButton";
-            this.meetingsButton.Size = new System.Drawing.Size(166, 85);
-            this.meetingsButton.TabIndex = 13;
-            this.meetingsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.meetingsButton.UseVisualStyleBackColor = false;
-            this.meetingsButton.Click += new System.EventHandler(this.meetingsButton_Click);
-            // 
-            // studentsButton
-            // 
-            this.studentsButton.BackColor = System.Drawing.Color.Red;
-            this.studentsButton.FlatAppearance.BorderSize = 0;
-            this.studentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.studentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.studentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_students2;
-            this.studentsButton.Location = new System.Drawing.Point(2, 97);
-            this.studentsButton.Name = "studentsButton";
-            this.studentsButton.Size = new System.Drawing.Size(168, 85);
-            this.studentsButton.TabIndex = 12;
-            this.studentsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.studentsButton.UseVisualStyleBackColor = false;
-            this.studentsButton.Click += new System.EventHandler(this.studentsButton_Click);
-            // 
-            // assignmentsButton
-            // 
-            this.assignmentsButton.BackColor = System.Drawing.Color.Red;
-            this.assignmentsButton.FlatAppearance.BorderSize = 0;
-            this.assignmentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.assignmentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.assignmentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_assignments;
-            this.assignmentsButton.Location = new System.Drawing.Point(5, 368);
-            this.assignmentsButton.Name = "assignmentsButton";
-            this.assignmentsButton.Size = new System.Drawing.Size(168, 85);
-            this.assignmentsButton.TabIndex = 11;
-            this.assignmentsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.assignmentsButton.UseVisualStyleBackColor = false;
-            this.assignmentsButton.Click += new System.EventHandler(this.assignmentsButton_Click);
-            // 
-            // homeButton
-            // 
-            this.homeButton.BackColor = System.Drawing.Color.Red;
-            this.homeButton.FlatAppearance.BorderSize = 0;
-            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.homeButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.homeButton.Image = global::CZU_APPLICATION.Properties.Resources.button_home3;
-            this.homeButton.Location = new System.Drawing.Point(0, 12);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(168, 88);
-            this.homeButton.TabIndex = 10;
-            this.homeButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.homeButton.UseVisualStyleBackColor = false;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-            // 
-            // connectedId
-            // 
-            this.connectedId.AutoSize = true;
-            this.connectedId.Font = new System.Drawing.Font("Rockwell", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.connectedId.Location = new System.Drawing.Point(22, 616);
-            this.connectedId.Name = "connectedId";
-            this.connectedId.Size = new System.Drawing.Size(103, 29);
-            this.connectedId.TabIndex = 7;
-            this.connectedId.Text = "user_on";
-            // 
-            // admin_image
-            // 
-            this.admin_image.Image = global::CZU_APPLICATION.Properties.Resources.administrator_image;
-            this.admin_image.Location = new System.Drawing.Point(22, 470);
-            this.admin_image.Name = "admin_image";
-            this.admin_image.Size = new System.Drawing.Size(134, 133);
-            this.admin_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.admin_image.TabIndex = 2;
-            this.admin_image.TabStop = false;
-            // 
-            // student_image
-            // 
-            this.student_image.Image = global::CZU_APPLICATION.Properties.Resources.student;
-            this.student_image.Location = new System.Drawing.Point(22, 468);
-            this.student_image.Name = "student_image";
-            this.student_image.Size = new System.Drawing.Size(134, 135);
-            this.student_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.student_image.TabIndex = 8;
-            this.student_image.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::CZU_APPLICATION.Properties.Resources.logofem1;
-            this.pictureBox6.Location = new System.Drawing.Point(425, 0);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(608, 138);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 3;
-            this.pictureBox6.TabStop = false;
+            this.homeMainPanelLogo.Image = global::CZU_APPLICATION.Properties.Resources.logofem1;
+            this.homeMainPanelLogo.Location = new System.Drawing.Point(268, 28);
+            this.homeMainPanelLogo.Name = "homeMainPanelLogo";
+            this.homeMainPanelLogo.Size = new System.Drawing.Size(608, 138);
+            this.homeMainPanelLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.homeMainPanelLogo.TabIndex = 3;
+            this.homeMainPanelLogo.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -367,38 +246,39 @@
             this.statisticsAssignments.Text = "0";
             this.statisticsAssignments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox1
+            // statisticsGroupBox
             // 
-            this.groupBox1.Controls.Add(this.statisticsAssignments);
-            this.groupBox1.Controls.Add(this.statisticsQuestions);
-            this.groupBox1.Controls.Add(this.statisticsMeetings);
-            this.groupBox1.Controls.Add(this.statisticsUsers);
-            this.groupBox1.Controls.Add(this.pictureBox5);
-            this.groupBox1.Controls.Add(this.pictureBox4);
-            this.groupBox1.Controls.Add(this.pictureBox3);
-            this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(188, 186);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1110, 482);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Statistics";
+            this.statisticsGroupBox.Controls.Add(this.statisticsAssignments);
+            this.statisticsGroupBox.Controls.Add(this.statisticsQuestions);
+            this.statisticsGroupBox.Controls.Add(this.statisticsMeetings);
+            this.statisticsGroupBox.Controls.Add(this.statisticsUsers);
+            this.statisticsGroupBox.Controls.Add(this.pictureBox5);
+            this.statisticsGroupBox.Controls.Add(this.pictureBox4);
+            this.statisticsGroupBox.Controls.Add(this.pictureBox3);
+            this.statisticsGroupBox.Controls.Add(this.pictureBox2);
+            this.statisticsGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.statisticsGroupBox.Location = new System.Drawing.Point(14, 186);
+            this.statisticsGroupBox.Name = "statisticsGroupBox";
+            this.statisticsGroupBox.Size = new System.Drawing.Size(1110, 482);
+            this.statisticsGroupBox.TabIndex = 2;
+            this.statisticsGroupBox.TabStop = false;
+            this.statisticsGroupBox.Text = "Statistics";
             // 
             // studentsMainPanel
             // 
             this.studentsMainPanel.Controls.Add(this.studentMainGB);
+            this.studentsMainPanel.Enabled = false;
             this.studentsMainPanel.Location = new System.Drawing.Point(174, 0);
             this.studentsMainPanel.Name = "studentsMainPanel";
             this.studentsMainPanel.Size = new System.Drawing.Size(1145, 681);
             this.studentsMainPanel.TabIndex = 4;
             this.studentsMainPanel.Visible = false;
+            this.studentsMainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.studentsMainPanel_MouseClick);
             // 
             // studentMainGB
             // 
-            this.studentMainGB.Controls.Add(this.studentsPanelNoData);
             this.studentMainGB.Controls.Add(this.selectClassID);
-            this.studentMainGB.Controls.Add(this.label3);
+            this.studentMainGB.Controls.Add(this.classIDLabel);
             this.studentMainGB.Controls.Add(this.studentPanel1);
             this.studentMainGB.Controls.Add(this.studentPanel5);
             this.studentMainGB.Controls.Add(this.studentPanel3);
@@ -433,46 +313,24 @@
             this.studentMainGB.TabStop = false;
             this.studentMainGB.Text = "Students Status";
             // 
-            // studentsPanelNoData
-            // 
-            this.studentsPanelNoData.Controls.Add(this.noDataInStudentPanelMessage);
-            this.studentsPanelNoData.Enabled = false;
-            this.studentsPanelNoData.Location = new System.Drawing.Point(-20, -12);
-            this.studentsPanelNoData.Name = "studentsPanelNoData";
-            this.studentsPanelNoData.Size = new System.Drawing.Size(1145, 681);
-            this.studentsPanelNoData.TabIndex = 62;
-            this.studentsPanelNoData.Visible = false;
-            // 
-            // noDataInStudentPanelMessage
-            // 
-            this.noDataInStudentPanelMessage.AutoSize = true;
-            this.noDataInStudentPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.noDataInStudentPanelMessage.Location = new System.Drawing.Point(138, 259);
-            this.noDataInStudentPanelMessage.Name = "noDataInStudentPanelMessage";
-            this.noDataInStudentPanelMessage.Size = new System.Drawing.Size(854, 70);
-            this.noDataInStudentPanelMessage.TabIndex = 0;
-            this.noDataInStudentPanelMessage.Text = "No Teached Classes Available";
-            // 
             // selectClassID
             // 
             this.selectClassID.FormattingEnabled = true;
             this.selectClassID.ItemHeight = 20;
-            this.selectClassID.Items.AddRange(new object[] {
-            "No Classes"});
             this.selectClassID.Location = new System.Drawing.Point(992, 23);
             this.selectClassID.Name = "selectClassID";
             this.selectClassID.Size = new System.Drawing.Size(89, 24);
             this.selectClassID.TabIndex = 61;
             this.selectClassID.SelectedValueChanged += new System.EventHandler(this.selectClassID_SelectedValueChanged);
             // 
-            // label3
+            // classIDLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(922, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 60;
-            this.label3.Text = "Class ID:";
+            this.classIDLabel.AutoSize = true;
+            this.classIDLabel.Location = new System.Drawing.Point(922, 27);
+            this.classIDLabel.Name = "classIDLabel";
+            this.classIDLabel.Size = new System.Drawing.Size(64, 20);
+            this.classIDLabel.TabIndex = 60;
+            this.classIDLabel.Text = "Class ID:";
             // 
             // studentPanel1
             // 
@@ -1179,15 +1037,169 @@
             this.label31.TabIndex = 3;
             this.label31.Text = "Q:";
             // 
+            // studentsPanelNoData
+            // 
+            this.studentsPanelNoData.Controls.Add(this.noDataInStudentPanelMessage);
+            this.studentsPanelNoData.Enabled = false;
+            this.studentsPanelNoData.Location = new System.Drawing.Point(174, 0);
+            this.studentsPanelNoData.Name = "studentsPanelNoData";
+            this.studentsPanelNoData.Size = new System.Drawing.Size(1145, 681);
+            this.studentsPanelNoData.TabIndex = 62;
+            this.studentsPanelNoData.Visible = false;
+            // 
+            // noDataInStudentPanelMessage
+            // 
+            this.noDataInStudentPanelMessage.AutoSize = true;
+            this.noDataInStudentPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noDataInStudentPanelMessage.Location = new System.Drawing.Point(138, 259);
+            this.noDataInStudentPanelMessage.Name = "noDataInStudentPanelMessage";
+            this.noDataInStudentPanelMessage.Size = new System.Drawing.Size(854, 70);
+            this.noDataInStudentPanelMessage.TabIndex = 0;
+            this.noDataInStudentPanelMessage.Text = "No Teached Classes Available";
+            // 
+            // homeMainPanel
+            // 
+            this.homeMainPanel.Controls.Add(this.statisticsGroupBox);
+            this.homeMainPanel.Controls.Add(this.homeMainPanelLogo);
+            this.homeMainPanel.Enabled = false;
+            this.homeMainPanel.Location = new System.Drawing.Point(174, 0);
+            this.homeMainPanel.Name = "homeMainPanel";
+            this.homeMainPanel.Size = new System.Drawing.Size(1146, 680);
+            this.homeMainPanel.TabIndex = 5;
+            this.homeMainPanel.Visible = false;
+            // 
+            // student_image
+            // 
+            this.student_image.Image = global::CZU_APPLICATION.Properties.Resources.student;
+            this.student_image.Location = new System.Drawing.Point(22, 468);
+            this.student_image.Name = "student_image";
+            this.student_image.Size = new System.Drawing.Size(134, 135);
+            this.student_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.student_image.TabIndex = 8;
+            this.student_image.TabStop = false;
+            // 
+            // admin_image
+            // 
+            this.admin_image.Image = global::CZU_APPLICATION.Properties.Resources.administrator_image;
+            this.admin_image.Location = new System.Drawing.Point(22, 470);
+            this.admin_image.Name = "admin_image";
+            this.admin_image.Size = new System.Drawing.Size(134, 133);
+            this.admin_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.admin_image.TabIndex = 2;
+            this.admin_image.TabStop = false;
+            // 
+            // connectedId
+            // 
+            this.connectedId.AutoSize = true;
+            this.connectedId.Font = new System.Drawing.Font("Rockwell", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.connectedId.Location = new System.Drawing.Point(22, 616);
+            this.connectedId.Name = "connectedId";
+            this.connectedId.Size = new System.Drawing.Size(103, 29);
+            this.connectedId.TabIndex = 7;
+            this.connectedId.Text = "user_on";
+            // 
+            // homeButton
+            // 
+            this.homeButton.BackColor = System.Drawing.Color.Red;
+            this.homeButton.FlatAppearance.BorderSize = 0;
+            this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.homeButton.Image = global::CZU_APPLICATION.Properties.Resources.button_home3;
+            this.homeButton.Location = new System.Drawing.Point(0, 12);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(168, 88);
+            this.homeButton.TabIndex = 10;
+            this.homeButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.homeButton.UseVisualStyleBackColor = false;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
+            // 
+            // assignmentsButton
+            // 
+            this.assignmentsButton.BackColor = System.Drawing.Color.Red;
+            this.assignmentsButton.FlatAppearance.BorderSize = 0;
+            this.assignmentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.assignmentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.assignmentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_assignments;
+            this.assignmentsButton.Location = new System.Drawing.Point(5, 368);
+            this.assignmentsButton.Name = "assignmentsButton";
+            this.assignmentsButton.Size = new System.Drawing.Size(168, 85);
+            this.assignmentsButton.TabIndex = 11;
+            this.assignmentsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.assignmentsButton.UseVisualStyleBackColor = false;
+            this.assignmentsButton.Click += new System.EventHandler(this.assignmentsButton_Click);
+            // 
+            // studentsButton
+            // 
+            this.studentsButton.BackColor = System.Drawing.Color.Red;
+            this.studentsButton.FlatAppearance.BorderSize = 0;
+            this.studentsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.studentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.studentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_students2;
+            this.studentsButton.Location = new System.Drawing.Point(2, 97);
+            this.studentsButton.Name = "studentsButton";
+            this.studentsButton.Size = new System.Drawing.Size(168, 85);
+            this.studentsButton.TabIndex = 12;
+            this.studentsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.studentsButton.UseVisualStyleBackColor = false;
+            this.studentsButton.Click += new System.EventHandler(this.studentsButton_Click);
+            // 
+            // meetingsButton
+            // 
+            this.meetingsButton.BackColor = System.Drawing.Color.Red;
+            this.meetingsButton.FlatAppearance.BorderSize = 0;
+            this.meetingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.meetingsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.meetingsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_meetings;
+            this.meetingsButton.Location = new System.Drawing.Point(5, 186);
+            this.meetingsButton.Name = "meetingsButton";
+            this.meetingsButton.Size = new System.Drawing.Size(166, 85);
+            this.meetingsButton.TabIndex = 13;
+            this.meetingsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.meetingsButton.UseVisualStyleBackColor = false;
+            this.meetingsButton.Click += new System.EventHandler(this.meetingsButton_Click);
+            // 
+            // questionsButton
+            // 
+            this.questionsButton.BackColor = System.Drawing.Color.Red;
+            this.questionsButton.FlatAppearance.BorderSize = 0;
+            this.questionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.questionsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.questionsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_questions;
+            this.questionsButton.Location = new System.Drawing.Point(5, 277);
+            this.questionsButton.Name = "questionsButton";
+            this.questionsButton.Size = new System.Drawing.Size(166, 85);
+            this.questionsButton.TabIndex = 14;
+            this.questionsButton.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.questionsButton.UseVisualStyleBackColor = false;
+            this.questionsButton.Click += new System.EventHandler(this.questionsButton_Click);
+            // 
+            // Menu
+            // 
+            this.Menu.BackColor = System.Drawing.Color.Red;
+            this.Menu.Controls.Add(this.questionsButton);
+            this.Menu.Controls.Add(this.meetingsButton);
+            this.Menu.Controls.Add(this.studentsButton);
+            this.Menu.Controls.Add(this.assignmentsButton);
+            this.Menu.Controls.Add(this.homeButton);
+            this.Menu.Controls.Add(this.connectedId);
+            this.Menu.Controls.Add(this.admin_image);
+            this.Menu.Controls.Add(this.student_image);
+            this.Menu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Menu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Menu.Location = new System.Drawing.Point(0, 0);
+            this.Menu.Name = "Menu";
+            this.Menu.Size = new System.Drawing.Size(173, 681);
+            this.Menu.TabIndex = 0;
+            // 
             // CZUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1319, 681);
+            this.Controls.Add(this.studentsPanelNoData);
             this.Controls.Add(this.studentsMainPanel);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.Menu);
+            this.Controls.Add(this.homeMainPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1197,22 +1209,16 @@
             this.Text = "CZU University of LifeSciences";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CZUMain_FormClosed);
             this.Load += new System.EventHandler(this.CZUMain_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.admin_image)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.student_image)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.statisticsGroupBox.ResumeLayout(false);
+            this.statisticsGroupBox.PerformLayout();
             this.studentsMainPanel.ResumeLayout(false);
             this.studentMainGB.ResumeLayout(false);
             this.studentMainGB.PerformLayout();
-            this.studentsPanelNoData.ResumeLayout(false);
-            this.studentsPanelNoData.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentConnected5)).EndInit();
             this.studentGB5.ResumeLayout(false);
@@ -1232,25 +1238,22 @@
             this.studentGB4.PerformLayout();
             this.studentGB3.ResumeLayout(false);
             this.studentGB3.PerformLayout();
+            this.studentsPanelNoData.ResumeLayout(false);
+            this.studentsPanelNoData.PerformLayout();
+            this.homeMainPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.student_image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.admin_image)).EndInit();
+            this.Menu.ResumeLayout(false);
+            this.Menu.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label connectedId;
         private System.Windows.Forms.PictureBox user_image;
-        private System.Windows.Forms.PictureBox student_image;
-        private System.Windows.Forms.PictureBox admin_image;
-        private System.Windows.Forms.Button meetingsButton;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button assignmentsButton;
-        private System.Windows.Forms.Button homeButton;
-        private System.Windows.Forms.Button questionsButton;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox homeMainPanelLogo;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button studentsButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -1259,7 +1262,7 @@
         private System.Windows.Forms.Label statisticsMeetings;
         private System.Windows.Forms.Label statisticsQuestions;
         private System.Windows.Forms.Label statisticsAssignments;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox statisticsGroupBox;
         public System.Windows.Forms.Panel studentsMainPanel;
         private System.Windows.Forms.PictureBox studentConnected3;
         private System.Windows.Forms.GroupBox studentGB3;
@@ -1331,9 +1334,19 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel studentPanel4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label classIDLabel;
         private System.Windows.Forms.ListBox selectClassID;
         private System.Windows.Forms.Panel studentsPanelNoData;
         private System.Windows.Forms.Label noDataInStudentPanelMessage;
+        private System.Windows.Forms.Panel homeMainPanel;
+        private System.Windows.Forms.PictureBox student_image;
+        private System.Windows.Forms.PictureBox admin_image;
+        private System.Windows.Forms.Label connectedId;
+        private System.Windows.Forms.Button homeButton;
+        private System.Windows.Forms.Button assignmentsButton;
+        private System.Windows.Forms.Button studentsButton;
+        private System.Windows.Forms.Button meetingsButton;
+        private System.Windows.Forms.Button questionsButton;
+        private System.Windows.Forms.Panel Menu;
     }
 }

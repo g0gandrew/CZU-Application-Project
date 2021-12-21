@@ -1,13 +1,13 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 
 namespace CZU_APPLICATION
@@ -15,7 +15,7 @@ namespace CZU_APPLICATION
     static class StudentsPanel
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
-        public static string studentClassID(string t_connectedUser)
+        public static string getStudentClassID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
             string t_classID = null;
@@ -34,7 +34,45 @@ namespace CZU_APPLICATION
             }
             return t_classID;
         }
-        public static List <string> teachedClasses(string t_connectedUser, out string t_teacherID)
+        public static string getTeacherID(string t_connectedUser)
+        {
+            // Pseudo Assign in case of data not found
+            string teacherID = null;
+            //
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            cmd.CommandText = $"select id from teacher where username = '{t_connectedUser}'";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                teacherID = dataReader.GetString(0);
+            }
+            return teacherID;
+        }
+        public static string getStudentID(string t_connectedUser)
+        {
+            // Pseudo Assign in case of data not found
+            string studentID = null;
+            //
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            cmd.CommandText = $"select id from student where username = '{t_connectedUser}'";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                studentID = dataReader.GetString(0);
+            }
+            return studentID;
+        }
+        public static List<string> teachedClasses(string t_connectedUser)
         {
             // Opening MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
@@ -46,20 +84,16 @@ namespace CZU_APPLICATION
             //
             // Variables
             List<string> teachedClasses = new List<string>();
-            t_teacherID = null; // pseudo assign
-            //
+            string teacherID = null; // pseudo assign
+                                     //
 
             // getting connected teacher ID
-            cmd.CommandText = $"select ID from teacher where username = '{t_connectedUser}'";
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
-                t_teacherID = dataReader.GetString(0);
-            dataReader.Close();
+            teacherID = getTeacherID(t_connectedUser);
             //
 
             // getting course teached by teacher
-            string teachedCourse = null; 
-            cmd.CommandText = $"select id from course where teacherID = {t_teacherID}";
+            string teachedCourse = null;
+            cmd.CommandText = $"select id from course where teacherID = {teacherID}";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
                 teachedCourse = dataReader.GetString(0);
@@ -80,6 +114,7 @@ namespace CZU_APPLICATION
             //
             return teachedClasses; // returning the list of classes teached by teacher x     
         }
+
         public static void updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, string t_connectedUser)
         {
             // Pseudo-Assignments until proven different
@@ -103,17 +138,18 @@ namespace CZU_APPLICATION
 
             // Commands list
             string[] command = new string[2];
-            string classID = studentClassID(t_connectedUser);
+            string classID = getStudentClassID(t_connectedUser);
             //
 
             /// Command 0 - Updating students connection status, image, and the displayed users in main panel amount based on students colleagues
-            command[0] = $"select connected from student where classID = {classID} && username != '{t_connectedUser}'";
+            command[0] = $"select connected, username from student where classID = {classID} && username != '{t_connectedUser}'";
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read()) // for as long it finds data, maximum 6.
             {
                 if (i <= 5)
                 {
+                    MessageBox.Show("ASDASDASDASD");
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
                         t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
@@ -179,7 +215,7 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
-        public static void updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, List<Label> t_studentQuestion, List<Label> t_studentAssignment, List<Label> t_studentMeeting,  string t_selectedClass, string t_teacherID)
+        public static void updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, List<Label> t_studentQuestion, List<Label> t_studentAssignment, List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -191,7 +227,7 @@ namespace CZU_APPLICATION
             string[] studentsIDs = new string[6];
             int i = 0, tempI;
             //
-    
+
             /// Setting up MYSQL CONNECTION (1)
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
@@ -207,10 +243,10 @@ namespace CZU_APPLICATION
 
             /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
             command[0] = $"select connected from student where classID = {t_selectedClass}"; //  
-           
+
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-           
+
             while (dataReader.Read()) // for as long it finds data, maximum 6.
             {
                 if (i <= 5)
@@ -274,45 +310,45 @@ namespace CZU_APPLICATION
             dataReader.Close();
             ///
             // Command 2 - Student --> Questions
-                for (int z = 0; z <= loopLength; z++)
+            for (int z = 0; z <= loopLength; z++)
+            {
+                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID};";
+                cmd.CommandText = command[2];
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID};";
-                    cmd.CommandText = command[2];
-                    dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        t_studentQuestion[z].Text = dataReader.GetString(0);
-                    }
-                    dataReader.Close();
+                    t_studentQuestion[z].Text = dataReader.GetString(0);
                 }
+                dataReader.Close();
+            }
             //
 
             // Command 3 - Student --> Meetings
-                command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+            command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
             for (int z = 0; z <= loopLength; z++)
+            {
+                cmd.CommandText = command[3];
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    cmd.CommandText = command[3];
-                    dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
                     t_studentMeeting[z].Text = dataReader.GetString(0);
-                    }
-                    dataReader.Close();
                 }
+                dataReader.Close();
+            }
             //
 
             // Command 4 - Student --> Assignments
-                command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
-                for (int z = 0; z <= loopLength; z++)
+            command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+            for (int z = 0; z <= loopLength; z++)
+            {
+                cmd.CommandText = command[4];
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    cmd.CommandText = command[4];
-                    dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
                     t_studentAssignment[z].Text = dataReader.GetString(0);
-                    }
-                    dataReader.Close();
                 }
+                dataReader.Close();
+            }
             //
             t_startingFrom += tempI; // We increase the start value by the users that we could display.
             t_recordsOnPage = tempI;
@@ -324,5 +360,108 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+
+        public static bool updateTeachedClassesList(ListBox t_teachedClassesControl, ref List<string> t_teachedClasses, string t_connectedUser)
+        {
+            t_teachedClasses = teachedClasses(t_connectedUser);
+            t_teachedClassesControl.DataSource = t_teachedClasses;
+            if (t_teachedClasses.Count != 0) // if there are elements in the list
+            {
+                return true;
+            }
+            return false; // if there aren't elements in the list
+        }
+
+        public static void refreshStudentData(List <string> t_actions)
+        {
+
+            // related to action, do it.
+        }
+     
+        public static List <string> studentTriggerNewRefresh(string t_connectedUser, out int t_studentLastMeeting, out int t_studentLastAssignment, out int t_studentLastColleague, out int t_studentLastCourse)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // Variables
+            string studentID = getStudentID(t_connectedUser);
+            string classID = getStudentClassID(t_connectedUser);
+            List<string> actions = new List<string>();
+            //
+            
+            // Pseudo Attrib until proven wrong
+            t_studentLastMeeting = 0;
+            t_studentLastAssignment = 0;
+            t_studentLastColleague = 0;
+            t_studentLastCourse = 0;
+            
+            //
+
+
+            // Meeting new data
+            cmd.CommandText = $"select id from classmeetinglog where classID = {classID} && studentID = {studentID} && id > {t_studentLastMeeting}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_studentLastMeeting = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if(t_studentLastMeeting != 0)
+                actions.Add("refreshmeeting");
+
+
+            //
+
+            // Assignment new data
+            cmd.CommandText = $"select id from classassignmentlog where classID = {classID} && studentID = {studentID} && id > {t_studentLastAssignment}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_studentLastAssignment = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (t_studentLastAssignment != 0)
+                actions.Add("refreshassignment");
+            //
+
+            // Course new data 
+            cmd.CommandText = $"select id from classcourselog where classID = {classID} && studentID = {studentID} && id > {t_studentLastCourse}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_studentLastColleague = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (t_studentLastColleague != 0)
+                actions.Add("refreshcourse");
+            //
+
+            // Colleague new data 
+            cmd.CommandText = $"select id from classcolleagueslog where classID = {classID} && studentID = {studentID} && id > {t_studentLastMeeting}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_studentLastCourse = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (t_studentLastColleague != 0)
+                actions.Add("refreshcolleagues");
+            //
+            connection.Close();
+            return actions;
+        }
+
+
+
+
     }
 }
