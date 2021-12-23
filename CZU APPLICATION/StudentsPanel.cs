@@ -84,8 +84,8 @@ namespace CZU_APPLICATION
             //
             // Variables
             List<string> teachedClasses = new List<string>();
-            string teacherID = null; // pseudo assign
-                                     //
+            string teacherID; 
+            //
 
             // getting connected teacher ID
             teacherID = getTeacherID(t_connectedUser);
@@ -372,14 +372,9 @@ namespace CZU_APPLICATION
             return false; // if there aren't elements in the list
         }
 
-        public static void refreshStudentData(List <string> t_actions)
+        public static List <string> studentTriggerNewRefresh(string t_connectedUser, ref int t_studentLastMeeting, ref int t_studentLastAssignment, ref int t_studentLastColleague, ref int t_studentLastCourse)
         {
 
-            // related to action, do it.
-        }
-     
-        public static List <string> studentTriggerNewRefresh(string t_connectedUser, out int t_studentLastMeeting, out int t_studentLastAssignment, out int t_studentLastColleague, out int t_studentLastCourse)
-        {
             // Opening MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
@@ -394,74 +389,80 @@ namespace CZU_APPLICATION
             string classID = getStudentClassID(t_connectedUser);
             List<string> actions = new List<string>();
             //
-            
+
             // Pseudo Attrib until proven wrong
-            t_studentLastMeeting = 0;
-            t_studentLastAssignment = 0;
-            t_studentLastColleague = 0;
-            t_studentLastCourse = 0;
-            
+            int value = 0;
             //
 
-
             // Meeting new data
-            cmd.CommandText = $"select id from classmeetinglog where classID = {classID} && studentID = {studentID} && id > {t_studentLastMeeting}";
+            cmd.CommandText = $"select id from classmeetinglog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastMeeting}";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_studentLastMeeting = Convert.ToInt32(dataReader.GetString(0));
+                value = Convert.ToInt32(dataReader.GetString(0));
             }
             dataReader.Close();
-            if(t_studentLastMeeting != 0)
+            if (value > t_studentLastMeeting)
+            {
+                t_studentLastMeeting = value;
                 actions.Add("refreshmeeting");
-
-
+            }
+            value = 0;
             //
 
             // Assignment new data
-            cmd.CommandText = $"select id from classassignmentlog where classID = {classID} && studentID = {studentID} && id > {t_studentLastAssignment}";
+            cmd.CommandText = $"select id from classassignmentlog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastAssignment}";
 
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_studentLastAssignment = Convert.ToInt32(dataReader.GetString(0));
+                value = Convert.ToInt32(dataReader.GetString(0));
             }
             dataReader.Close();
-            if (t_studentLastAssignment != 0)
+            if (value > t_studentLastAssignment)
+            {
+                t_studentLastAssignment = value;
                 actions.Add("refreshassignment");
+            }
+            value = 0;
             //
 
             // Course new data 
-            cmd.CommandText = $"select id from classcourselog where classID = {classID} && studentID = {studentID} && id > {t_studentLastCourse}";
+            cmd.CommandText = $"select id from classcourselog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastCourse}";
 
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_studentLastColleague = Convert.ToInt32(dataReader.GetString(0));
+                value = Convert.ToInt32(dataReader.GetString(0));
             }
             dataReader.Close();
-            if (t_studentLastColleague != 0)
+            if (value > t_studentLastCourse)
+            {
+                t_studentLastCourse = value;    
                 actions.Add("refreshcourse");
+            }
+            value = 0;
             //
 
             // Colleague new data 
-            cmd.CommandText = $"select id from classcolleagueslog where classID = {classID} && studentID = {studentID} && id > {t_studentLastMeeting}";
+            cmd.CommandText = $"select id from classcolleagueslog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastColleague}";
 
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_studentLastCourse = Convert.ToInt32(dataReader.GetString(0));
+                value = Convert.ToInt32(dataReader.GetString(0));
             }
             dataReader.Close();
-            if (t_studentLastColleague != 0)
+            if (value > t_studentLastColleague)
+            {
+                t_studentLastColleague = value;
                 actions.Add("refreshcolleagues");
+            }
+
             //
             connection.Close();
             return actions;
         }
-
-
-
 
     }
 }

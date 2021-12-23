@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace CZU_APPLICATION
 {
-    internal class Security
+    internal static class Security
     {
         public static void gender(CheckBox t_maleCheck, CheckBox t_femaleCheck, CheckBox t_unspecifiedCheck, ref string t_sexValue)
         {

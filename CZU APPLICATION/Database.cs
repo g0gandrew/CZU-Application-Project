@@ -61,5 +61,11 @@ namespace CZU_APPLICATION
             //
             return t_registrationToken;
         }
+
+    
+        public static void deleteLogs(string t_connectedPeople, string t_dataType)
+        {
+            // after all users are disconnected, delete data from logs
+        }
     }
 }
