@@ -124,6 +124,7 @@
             this.meetingsButton = new System.Windows.Forms.Button();
             this.questionsButton = new System.Windows.Forms.Button();
             this.Menu = new System.Windows.Forms.Panel();
+            this.triggerDataRefreshStudentPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -273,7 +274,6 @@
             this.studentsMainPanel.Size = new System.Drawing.Size(1145, 681);
             this.studentsMainPanel.TabIndex = 4;
             this.studentsMainPanel.Visible = false;
-            this.studentsMainPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.studentsMainPanel_MouseClick);
             // 
             // studentMainGB
             // 
@@ -334,30 +334,24 @@
             // 
             // studentPanel1
             // 
-            this.studentPanel1.Enabled = false;
             this.studentPanel1.Location = new System.Drawing.Point(72, 58);
             this.studentPanel1.Name = "studentPanel1";
             this.studentPanel1.Size = new System.Drawing.Size(243, 201);
             this.studentPanel1.TabIndex = 53;
-            this.studentPanel1.Visible = false;
             // 
             // studentPanel5
             // 
-            this.studentPanel5.Enabled = false;
             this.studentPanel5.Location = new System.Drawing.Point(441, 320);
             this.studentPanel5.Name = "studentPanel5";
             this.studentPanel5.Size = new System.Drawing.Size(243, 203);
             this.studentPanel5.TabIndex = 56;
-            this.studentPanel5.Visible = false;
             // 
             // studentPanel3
             // 
-            this.studentPanel3.Enabled = false;
             this.studentPanel3.Location = new System.Drawing.Point(811, 58);
             this.studentPanel3.Name = "studentPanel3";
             this.studentPanel3.Size = new System.Drawing.Size(243, 201);
             this.studentPanel3.TabIndex = 54;
-            this.studentPanel3.Visible = false;
             // 
             // studentConnected3
             // 
@@ -371,30 +365,24 @@
             // 
             // studentPanel4
             // 
-            this.studentPanel4.Enabled = false;
             this.studentPanel4.Location = new System.Drawing.Point(67, 320);
             this.studentPanel4.Name = "studentPanel4";
             this.studentPanel4.Size = new System.Drawing.Size(243, 203);
             this.studentPanel4.TabIndex = 55;
-            this.studentPanel4.Visible = false;
             // 
             // studentPanel6
             // 
-            this.studentPanel6.Enabled = false;
             this.studentPanel6.Location = new System.Drawing.Point(811, 320);
             this.studentPanel6.Name = "studentPanel6";
             this.studentPanel6.Size = new System.Drawing.Size(243, 203);
             this.studentPanel6.TabIndex = 57;
-            this.studentPanel6.Visible = false;
             // 
             // studentPanel2
             // 
-            this.studentPanel2.Enabled = false;
             this.studentPanel2.Location = new System.Drawing.Point(441, 58);
             this.studentPanel2.Name = "studentPanel2";
             this.studentPanel2.Size = new System.Drawing.Size(243, 201);
             this.studentPanel2.TabIndex = 52;
-            this.studentPanel2.Visible = false;
             // 
             // studentImage5
             // 
@@ -1191,11 +1179,23 @@
             this.Menu.Size = new System.Drawing.Size(173, 681);
             this.Menu.TabIndex = 0;
             // 
+            // triggerDataRefreshStudentPanel
+            // 
+            this.triggerDataRefreshStudentPanel.BackColor = System.Drawing.Color.Transparent;
+            this.triggerDataRefreshStudentPanel.Enabled = false;
+            this.triggerDataRefreshStudentPanel.ForeColor = System.Drawing.Color.Transparent;
+            this.triggerDataRefreshStudentPanel.Location = new System.Drawing.Point(174, 0);
+            this.triggerDataRefreshStudentPanel.Name = "triggerDataRefreshStudentPanel";
+            this.triggerDataRefreshStudentPanel.Size = new System.Drawing.Size(1146, 681);
+            this.triggerDataRefreshStudentPanel.TabIndex = 15;
+            this.triggerDataRefreshStudentPanel.Visible = false;
+            // 
             // CZUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1319, 681);
+            this.Controls.Add(this.triggerDataRefreshStudentPanel);
             this.Controls.Add(this.studentsPanelNoData);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.Menu);
@@ -1209,6 +1209,7 @@
             this.Text = "CZU University of LifeSciences";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CZUMain_FormClosed);
             this.Load += new System.EventHandler(this.CZUMain_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CZUMain_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -1348,5 +1349,6 @@
         private System.Windows.Forms.Button meetingsButton;
         private System.Windows.Forms.Button questionsButton;
         private System.Windows.Forms.Panel Menu;
+        private System.Windows.Forms.Panel triggerDataRefreshStudentPanel;
     }
 }

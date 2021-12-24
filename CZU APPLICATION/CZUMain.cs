@@ -158,6 +158,9 @@ namespace CZU_APPLICATION
         //
         /// 
 
+        // Refresh Data General 
+        List <Panel> triggerPanel = new List<Panel>();
+        //
 
         // Connected as Teacher 
         private string _teacherID;
@@ -178,26 +181,26 @@ namespace CZU_APPLICATION
                     case "refreshcourse":
                     {
                         MessageBox.Show("Refresh data for student courses");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
-                        break;
+                            StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                            break;
                     }
                     case "refreshcolleagues":
                     {
                         MessageBox.Show("Refresh data for student colleagues");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
-                        break;
+                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                            break;
                     }
                     case "refreshmeeting":
                     {
                         MessageBox.Show("Refresh data for student meetings");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
-                        break;
+                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                            break;
                     }
                     case "refreshassignment":
                     {
                         MessageBox.Show("Refresh data for student assignments");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
-                        break;
+                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                            break;
                     }
                     default:
                         {
@@ -221,6 +224,10 @@ namespace CZU_APPLICATION
             connectedId.Text = _connectedUser;
             //
 
+            // Initializing the list of Trigger Panel
+            initializeTriggerPanelList(triggerPanel);
+            //
+
             /// Critical functions related to connected User Type for data initialization
             if (connectedUserType == "student")
             {
@@ -231,7 +238,7 @@ namespace CZU_APPLICATION
                 //
 
                 // Introducing data in Home Panels statistics
-                Statistics.mainPanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser));
+                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
                 // 
             }
 
@@ -243,7 +250,7 @@ namespace CZU_APPLICATION
 
                 // Getting the list of classes where teacher teaches
                 teachedClassesIDs = StudentsPanel.teachedClasses(connectedUser); 
-                Statistics.mainPanelConnectedStudents(ref statisticsUsers, teachedClassesIDs);
+                Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs); // Actualizing the number of connected students
                 //
 
             }
@@ -260,15 +267,17 @@ namespace CZU_APPLICATION
         // Student and Colleagues Tab Methods and Events
         private void studentsButton_Click(object sender, EventArgs e)
         {
+            // Enable Refresh Data Trigger
+            // enableRefreshDataTrigger("student", triggerPanel); // TEMP DISABLED
+            // 
 
-       /*     // Disabling overlapped panels
-            homeMainPanelState(false);
-            studentMainPanelNoData(false, "teacherNoClasses");
-            studentMainPanelNoData(false, "studentNoColleagues");
-            studentMainPanelNoData(false, "teacherNoStudents");
+
+            // Disabling overlapped panels
+            homeMainPanelState(true);
             studentsMainPanelState(false);
-            //*/
-
+            studentMainPanelNoData(true, "disableAll");
+            // 
+            
 
             /// Show Student Panel related to connected user type (Teacher or Student)
             if (connectedUserType == "teacher") // Teacher connected
@@ -278,7 +287,7 @@ namespace CZU_APPLICATION
                 //
                 if (classesExists == true) { // if there is minimum one class teached by teacher
                     MessageBox.Show("Teacher has classes to teach");
-                    StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                    StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
                     studentsMainPanelState(true);
                 }
                 else // if there isn't minimum one class teached by teacher
@@ -290,6 +299,7 @@ namespace CZU_APPLICATION
             }
             else if (connectedUserType == "student") // Student connected 
             {
+
                 if (_times == 0) // One Time Operations
                 {
                     // Disabling Controls used for Teacher Interface
@@ -301,21 +311,20 @@ namespace CZU_APPLICATION
                     ++_times;
                 }
 
-                // Initializing and starting the GUI from student panel that shows connected colleagues
-                 StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName,  connectedUser);     
+                // Trying to initialize and start the GUI from student panel that shows connected colleagues. (Returns True for available data to be shown).
+                bool colleaguesExists = StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
                 //
 
                 /// Verifying if there are colleagues available to be shown
-                bool colleaguesExists = studentPanel[0].Enabled; // If the first panel is enabled, it means that there are no records from database matching the criteria, so, there are no colleagues.
                 if (colleaguesExists == true) 
                 {
-                    MessageBox.Show("No colleagues");
-                    studentMainPanelNoData(true, "studentNoColleagues");
+                    MessageBox.Show("Has colleagues");
+                    studentsMainPanelState(true); // The Student Tab Main Panel appears, showing students colleagues.
                 }
                 else
                 {
-                    MessageBox.Show("Has colleaguesasdasd");
-                    studentsMainPanelState(true);
+                    MessageBox.Show("He has NOT colleagues");
+                    studentMainPanelNoData(true, "studentNoColleagues"); // Showing the panel which says: "No connected colleagues"
                 }
                 ///
             }
@@ -333,29 +342,58 @@ namespace CZU_APPLICATION
         }
         private void studentMainPanelNoData(bool t_mode, string t_case)
         {
+            MessageBox.Show("AM RULAT MESAJE NO DATA");
+
+            if (t_case == "teacherClassNoStudents")
+            {
+                noDataInStudentPanelMessage.Text = "      Class has no students";
+                noDataInStudentPanelMessage.Enabled = t_mode;
+                noDataInStudentPanelMessage.Visible = t_mode;
+                studentsPanelNoData.Enabled = t_mode;
+                studentsPanelNoData.Visible = t_mode;
+            }
+            else
+            {
+                studentsPanelNoData.Enabled = !t_mode;
+                studentsPanelNoData.Visible = !t_mode;
+                noDataInStudentPanelMessage.Enabled = !t_mode;
+                noDataInStudentPanelMessage.Visible = !t_mode;
+
+            }
+
             if (t_case == "teacherNoClasses")
             {
+                MessageBox.Show("Am rulat");
                 studentsPanelNoData.Enabled = t_mode;
                 studentsPanelNoData.Visible = t_mode;
                 noDataInStudentPanelMessage.Enabled = t_mode;
                 noDataInStudentPanelMessage.Visible = t_mode;
             }
-            else if (t_case == "studentNoColleagues")
+            else
             {
+                studentsPanelNoData.Enabled = !t_mode;
+                studentsPanelNoData.Visible = !t_mode;
+                noDataInStudentPanelMessage.Enabled = !t_mode;
+                noDataInStudentPanelMessage.Visible = !t_mode;
+            } 
+
+           if(t_case == "studentNoColleagues")
+            {
+                MessageBox.Show("studentNoColleagues" + t_mode);
                 studentsPanelNoData.Enabled = t_mode;
                 studentsPanelNoData.Visible = t_mode;
                 noDataInStudentPanelMessage.Text = "      You have no colleagues";
                 noDataInStudentPanelMessage.Enabled = t_mode;
                 noDataInStudentPanelMessage.Visible = t_mode;
             }
-            else if (t_case == "teacherNoStudents")  {
-                noDataInStudentPanelMessage.Text = "     Class has no students";
-                studentsPanelNoData.Enabled = t_mode; 
-                studentsPanelNoData.Visible = t_mode;
-                studentsPanelNoData.Location = new Point(29, 50);
-                noDataInStudentPanelMessage.Enabled = t_mode;
-                noDataInStudentPanelMessage.Visible = t_mode;
+           else
+            {
+                studentsPanelNoData.Enabled = !t_mode;
+                studentsPanelNoData.Visible = !t_mode;
+                noDataInStudentPanelMessage.Enabled = !t_mode;
+                noDataInStudentPanelMessage.Visible = !t_mode;
             }
+
         }
 
         /// Panels state
@@ -377,12 +415,12 @@ namespace CZU_APPLICATION
             if (leftPossible && connectedUserType == "teacher")
             {
                 startingFrom -= recordsOnPage + 6;
-                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
             }
             else if (leftPossible && connectedUserType == "student")
             {
                 startingFrom -= recordsOnPage + 6;
-                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
+                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
             }
 
         }
@@ -390,9 +428,9 @@ namespace CZU_APPLICATION
         private void rightStudentList_Click(object sender, EventArgs e)
         {
             if (startingFrom % 6 == 0 && rightPossible == true && connectedUserType == "teacher")
-                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
             else if (startingFrom % 6 == 0 && rightPossible == true && connectedUserType == "student") { }
-                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, connectedUser);
+                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
         }
         //
 
@@ -452,35 +490,105 @@ namespace CZU_APPLICATION
         // Select Class ListBox
         private void selectClassID_SelectedValueChanged(object sender, EventArgs e)
         {
-            StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, studentPanel, studentGB, studentImage, studentConnected, studentName, studentQuestion, studentAssignment, studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
-            bool existsStudentsInClass = studentPanel[0].Enabled; // If the first panel is enabled, it means that there are no records from database matching the criteria, so, there are no students in class.
-            if (existsStudentsInClass == true)
+    
+
+            if (connectedUserType == "teacher")
             {
-                studentsMainPanelState(true);
-                MessageBox.Show("N-am studentisds");
-                studentMainPanelNoData(true, "teacherNoStudents");
+                bool existsStudentsInClass = StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                if (existsStudentsInClass == true)
+                {
+                    studentsMainPanelState(true);
+                    MessageBox.Show("Class HAS students");
+                }
+                else
+                {
+                    homeMainPanelState(false);
+                    studentsMainPanelState(false);
+                    MessageBox.Show("Class has NO students");
+                    studentMainPanelNoData(true, "teacherClassNoStudents");
+                }
             }
         }
         //
 
         // On Panel Triggers for Refreshing Data
-        private void studentsMainPanel_MouseClick(object sender, MouseEventArgs e)
+        private void initializeTriggerPanelList(List<Panel> t_triggerPanel) // Initializing the list of panels. (Adding them in a list)
         {
-            if (_connectedUserType == "student") // verify database for any new modifications 
+            t_triggerPanel.Add(triggerDataRefreshStudentPanel);
+            // Need to add the others
+        } 
+        private void enableRefreshDataTrigger(string t_currentTab, List <Panel> t_triggerPanel)
+        {
+            MessageBox.Show("Refresh Data Trigger");
+            void disableTriggers(ref Panel t_exceptThis)
             {
-                // verify database for any new modifications 
-                actions = StudentsPanel.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
-                refreshStudentData(actions);
-                //
+                foreach(Panel p in t_triggerPanel)
+                {
+                    if (p != t_exceptThis)
+                    {
+                        p.Enabled = false;
+                        p.Visible = false;
+                    }
+                }
+                t_exceptThis.Enabled = false;
+                t_exceptThis.Visible = false;
             }
-            else
+            switch (t_currentTab)
             {
-                StudentsPanel.updateTeachedClassesList(selectClassID, ref teachedClassesIDs, connectedUser); // updating Teacher Teached Classes List every time he clicks
-            } 
+                case "home":
+                {
+
+                    break;
+                }
+                case "student":
+                {
+                        MessageBox.Show("Refresh Data Trigger Student");
+                        disableTriggers(ref triggerDataRefreshStudentPanel);
+                    break;
+
+                }
+                case "assignment":
+                {
+                    break;
+
+                }
+                case "meeting":
+                {
+                    break;
+
+                }
+                case "question":
+                {
+                    break;
+
+                }
+            }
+
+       
+
+        } // Disables other trigger surfaces and enabling the right one related to active Tab.
+
+        private void CZUMain_MouseMove(object sender, MouseEventArgs e)
+        {
+           /* if (triggerDataRefreshStudentPanel.Bounds.Contains(e.Location))
+            {
+              *//*  MessageBox.Show("Run Test  - Trigger Student Panel");
+                if (_connectedUserType == "student") // verify database for any new modifications 
+                {
+                    // verify database for any new modifications 
+                    actions = StudentsPanel.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
+                    refreshStudentData(actions);
+                    //
+                }
+                else
+                {
+                    StudentsPanel.updateTeachedClassesList(selectClassID, ref teachedClassesIDs, connectedUser); // updating Teacher Teached Classes List every time he clicks
+                }*//*
+            }
+            */
         }
         //
-          
-        
+
         // Functions for showing data related to student
         private void studentImage1_Click_1(object sender, EventArgs e)
         {
@@ -524,32 +632,42 @@ namespace CZU_APPLICATION
         // Menu buttons
         private void homeButton_Click(object sender, EventArgs e)
         {
+            // Disabling overlapped panels
             homeMainPanelState(true);
+            studentsMainPanelState(false);
+            studentMainPanelNoData(true, "disableAll");
+            // 
+
             if (connectedUserType == "student")
             {
-                Statistics.mainPanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser));
+                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser));  // Actualizing the number of connected colleagues
             }
             else if (connectedUserType == "teacher")
             {
-                teachedClassesIDs = StudentsPanel.teachedClasses(connectedUser); // getting the classes where teacher teaches
-                Statistics.mainPanelConnectedStudents(ref statisticsUsers, teachedClassesIDs);
+                teachedClassesIDs = StudentsPanel.teachedClasses(connectedUser); // Getting and initializing a list of classes where teacher teaches
+                Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs);  // Actualizing the number of connected students
             }
-            studentsMainPanelState(false);
         }
 
         private void meetingsButton_Click(object sender, EventArgs e)
         {
+            homeMainPanelState(true); // need to be replaced.
             studentsMainPanelState(false);
+            studentMainPanelNoData(true, "disableAll");
         }
 
         private void questionsButton_Click(object sender, EventArgs e)
         {
+            homeMainPanelState(true); // need to be replaced.
             studentsMainPanelState(false);
+            studentMainPanelNoData(true, "disableAll");
         }
 
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
+            homeMainPanelState(true); // need to be replaced.
             studentsMainPanelState(false);
+            studentMainPanelNoData(true, "disableAll");
         }
         // 
 
@@ -563,7 +681,6 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
-
         //
 
     }

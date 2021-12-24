@@ -96,7 +96,6 @@ namespace CZU_APPLICATION
                 if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
                 {
                     CZUMain form2 = new CZUMain();
-                    CZURegister form3 = new CZURegister();
                     form2.connectedUser = $"{dataReader.GetValue(1)}";
                     form2.connectedUserType = "student";
                     string command = $"update student set connected = 'on' where id = {dataReader.GetValue(0)}";
@@ -124,7 +123,6 @@ namespace CZU_APPLICATION
                     if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
                     {
                         CZUMain form2 = new CZUMain();
-                        CZURegister form3 = new CZURegister();
                         form2.connectedUser = $"{dataReader.GetValue(1)}";
                         form2.connectedUserType = "teacher";
                         string command = $"update teacher set connected = 'on' where id = {dataReader.GetValue(0)}";

@@ -115,7 +115,7 @@ namespace CZU_APPLICATION
             return teachedClasses; // returning the list of classes teached by teacher x     
         }
 
-        public static void updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, string t_connectedUser)
+        public static bool updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -125,6 +125,7 @@ namespace CZU_APPLICATION
             // Variables
             int loopLength; // Updating the panel by the number of students;
             int i = 0, tempI;
+            bool dataAvailable = false;
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -149,7 +150,7 @@ namespace CZU_APPLICATION
             {
                 if (i <= 5)
                 {
-                    MessageBox.Show("ASDASDASDASD");
+                    MessageBox.Show("Am gasit" + dataReader.GetString(1));
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
                         t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
@@ -162,6 +163,10 @@ namespace CZU_APPLICATION
                 else
                     break;
             }
+            // If there is any data to be shown
+            if (i != 0)
+                dataAvailable = true;
+            //
             tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
             loopLength = i;
@@ -214,8 +219,9 @@ namespace CZU_APPLICATION
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
+            return dataAvailable;
         }
-        public static void updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, List<Panel> t_studentPanel, List<GroupBox> t_studentGB, List<Button> t_studentImage, List<PictureBox> t_studentConnected, List<Label> t_studentName, List<Label> t_studentQuestion, List<Label> t_studentAssignment, List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID)
+        public static bool updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -226,6 +232,7 @@ namespace CZU_APPLICATION
             int loopLength; // Updating the panel by the number of students;
             string[] studentsIDs = new string[6];
             int i = 0, tempI;
+            bool dataAvailable = false;
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -263,6 +270,8 @@ namespace CZU_APPLICATION
                 else
                     break;
             }
+            if (i != 0)
+                dataAvailable = true;
             tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
             loopLength = i;
@@ -359,6 +368,7 @@ namespace CZU_APPLICATION
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
+            return dataAvailable;
         }
 
         public static bool updateTeachedClassesList(ListBox t_teachedClassesControl, ref List<string> t_teachedClasses, string t_connectedUser)
@@ -458,11 +468,104 @@ namespace CZU_APPLICATION
                 t_studentLastColleague = value;
                 actions.Add("refreshcolleagues");
             }
+            dataReader.Close();
 
             //
             connection.Close();
             return actions;
         }
+       /* public static List<string> teacherTriggerNewRefresh(string t_connectedUser, ref int t_LastClass, ref int t_lastQuestion) // Will be extended
+        {
+
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // Variables
+            string studentID = getStudentID(t_connectedUser);
+            string classID = getStudentClassID(t_connectedUser);
+            List<string> actions = new List<string>();
+            //
+
+            // Pseudo Attrib until proven wrong
+            int value = 0;
+            //
+
+            // Meeting new data
+            cmd.CommandText = $"select id from classmeetinglog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastMeeting}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                value = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (value > t_studentLastMeeting)
+            {
+                t_studentLastMeeting = value;
+                actions.Add("refreshmeeting");
+            }
+            value = 0;
+            //
+
+            // Assignment new data
+            cmd.CommandText = $"select id from classassignmentlog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastAssignment}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                value = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (value > t_studentLastAssignment)
+            {
+                t_studentLastAssignment = value;
+                actions.Add("refreshassignment");
+            }
+            value = 0;
+            //
+
+            // Course new data 
+            cmd.CommandText = $"select id from classcourselog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastCourse}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                value = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (value > t_studentLastCourse)
+            {
+                t_studentLastCourse = value;
+                actions.Add("refreshcourse");
+            }
+            value = 0;
+            //
+
+            // Colleague new data 
+            cmd.CommandText = $"select id from classcolleagueslog where (classID = {classID} || oldClassID = {classID}) && id > {t_studentLastColleague}";
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                value = Convert.ToInt32(dataReader.GetString(0));
+            }
+            dataReader.Close();
+            if (value > t_studentLastColleague)
+            {
+                t_studentLastColleague = value;
+                actions.Add("refreshcolleagues");
+            }
+
+            //
+            connection.Close();
+            return actions;
+        }
+*/
 
     }
 }

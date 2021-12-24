@@ -33,7 +33,7 @@ namespace CZU_APPLICATION
             statisticCount = count;
         }
 
-        public static void mainPanelConnectedColleagues(ref Label t_statisticsUsers, string t_classID)
+        public static void homePanelConnectedColleagues(ref Label t_statisticsUsers, string t_classID)
         {
             // Variables
             int statisticCount = 0;
@@ -41,7 +41,7 @@ namespace CZU_APPLICATION
             command = $"select connected from student where classID = {t_classID} && connected =";
             update(ref t_statisticsUsers, command, "on", ref statisticCount);
         }
-        public static void mainPanelConnectedStudents(ref Label t_statisticsUsers, List <string> t_teachedClasses)
+        public static void homePanelConnectedStudents(ref Label t_statisticsUsers, List <string> t_teachedClasses)
         {
             // Variables
             int statisticCount = 0;
