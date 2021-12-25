@@ -23,6 +23,17 @@ namespace CZU_APPLICATION
         List<Panel> studentPanel = new List<Panel>();
         List<string> teachedClassesIDs = new List<string>();
         // 
+
+        // Question Panel Controls
+        List <Button> questionTitle = new List<Button>();
+        List <GroupBox> questionGB = new List<GroupBox>();
+        List <Label> questionStudentName = new List<Label>();
+        List <Label> questionPriorityLevel = new List<Label>();
+        List <Label> questionSubmitDate = new List<Label>();
+        List <Panel> questionPanel = new List<Panel>();
+        List <Label> questionState = new List<Label>();
+        //
+
         private string _connectedUserType;
         public string connectedUserType
         {
@@ -100,6 +111,7 @@ namespace CZU_APPLICATION
 
         private string _command { get; set; }
         private int _times { get; set; } = 0;
+        private int _timesQuestionsTab { get; set; } = 0;
 
         /// Connected as Student
         // Refresh Data
@@ -172,6 +184,7 @@ namespace CZU_APPLICATION
            
         }
 
+        // Critical Functions for Form
         private void refreshStudentData(List <string> t_actions) // hard coded function
         {
             foreach (string i in t_actions)
@@ -181,25 +194,25 @@ namespace CZU_APPLICATION
                     case "refreshcourse":
                     {
                         MessageBox.Show("Refresh data for student courses");
-                            StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                            StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
                             break;
                     }
                     case "refreshcolleagues":
                     {
                         MessageBox.Show("Refresh data for student colleagues");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                        StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
                             break;
                     }
                     case "refreshmeeting":
                     {
                         MessageBox.Show("Refresh data for student meetings");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                        StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
                             break;
                     }
                     case "refreshassignment":
                     {
                         MessageBox.Show("Refresh data for student assignments");
-                        StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                        StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
                             break;
                     }
                     default:
@@ -233,23 +246,23 @@ namespace CZU_APPLICATION
             {
 
                 // Initialization of latest students logs.
-                actions = StudentsPanel.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
+                actions = StudentsTab.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
                 refreshStudentData(actions);
                 //
 
                 // Introducing data in Home Panels statistics
-                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
+                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
                 // 
             }
 
             else if (connectedUserType == "teacher")
             {
                 // Getting teacher ID
-                _teacherID = StudentsPanel.getTeacherID(connectedUser);
+                _teacherID = StudentsTab.getTeacherID(connectedUser);
                 //
 
                 // Getting the list of classes where teacher teaches
-                teachedClassesIDs = StudentsPanel.teachedClasses(connectedUser); 
+                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser); 
                 Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs); // Actualizing the number of connected students
                 //
 
@@ -262,139 +275,7 @@ namespace CZU_APPLICATION
         {
             userDisconnectsSetOffline(connectedUserType, connectedUser); // sets connected user status to offline.
         }
-
-
-        // Student and Colleagues Tab Methods and Events
-        private void studentsButton_Click(object sender, EventArgs e)
-        {
-            // Enable Refresh Data Trigger
-            // enableRefreshDataTrigger("student", triggerPanel); // TEMP DISABLED
-            // 
-
-
-            // Disabling overlapped panels
-            homeMainPanelState(true);
-            studentsMainPanelState(false);
-            studentMainPanelNoData(true, "disableAll");
-            // 
-            
-
-            /// Show Student Panel related to connected user type (Teacher or Student)
-            if (connectedUserType == "teacher") // Teacher connected
-            {
-                // Verifying if there are classes in list and update the (ListBox) List Teacher teached classes 
-                bool classesExists = StudentsPanel.updateTeachedClassesList(selectClassID, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
-                //
-                if (classesExists == true) { // if there is minimum one class teached by teacher
-                    MessageBox.Show("Teacher has classes to teach");
-                    StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
-                    studentsMainPanelState(true);
-                }
-                else // if there isn't minimum one class teached by teacher
-                {
-                    MessageBox.Show("Teacher has NO classes to teach");
-                    studentMainPanelNoData(true, "teacherNoClasses");
-                }
-
-            }
-            else if (connectedUserType == "student") // Student connected 
-            {
-
-                if (_times == 0) // One Time Operations
-                {
-                    // Disabling Controls used for Teacher Interface
-                    selectClassID.Enabled = false;
-                    selectClassID.Visible = false;
-                    classIDLabel.Enabled = false;
-                    classIDLabel.Visible = false;
-                    //
-                    ++_times;
-                }
-
-                // Trying to initialize and start the GUI from student panel that shows connected colleagues. (Returns True for available data to be shown).
-                bool colleaguesExists = StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
-                //
-
-                /// Verifying if there are colleagues available to be shown
-                if (colleaguesExists == true) 
-                {
-                    MessageBox.Show("Has colleagues");
-                    studentsMainPanelState(true); // The Student Tab Main Panel appears, showing students colleagues.
-                }
-                else
-                {
-                    MessageBox.Show("He has NOT colleagues");
-                    studentMainPanelNoData(true, "studentNoColleagues"); // Showing the panel which says: "No connected colleagues"
-                }
-                ///
-            }
-            ///
-
-
-        }
-
-        private void cleanGUI()
-        {
-            selectClassID.Enabled = false;
-            selectClassID.Visible = false;
-            classIDLabel.Enabled = false;
-            classIDLabel.Visible = false;
-        }
-        private void studentMainPanelNoData(bool t_mode, string t_case)
-        {
-            MessageBox.Show("AM RULAT MESAJE NO DATA");
-
-            if (t_case == "teacherClassNoStudents")
-            {
-                noDataInStudentPanelMessage.Text = "      Class has no students";
-                noDataInStudentPanelMessage.Enabled = t_mode;
-                noDataInStudentPanelMessage.Visible = t_mode;
-                studentsPanelNoData.Enabled = t_mode;
-                studentsPanelNoData.Visible = t_mode;
-            }
-            else
-            {
-                studentsPanelNoData.Enabled = !t_mode;
-                studentsPanelNoData.Visible = !t_mode;
-                noDataInStudentPanelMessage.Enabled = !t_mode;
-                noDataInStudentPanelMessage.Visible = !t_mode;
-
-            }
-
-            if (t_case == "teacherNoClasses")
-            {
-                MessageBox.Show("Am rulat");
-                studentsPanelNoData.Enabled = t_mode;
-                studentsPanelNoData.Visible = t_mode;
-                noDataInStudentPanelMessage.Enabled = t_mode;
-                noDataInStudentPanelMessage.Visible = t_mode;
-            }
-            else
-            {
-                studentsPanelNoData.Enabled = !t_mode;
-                studentsPanelNoData.Visible = !t_mode;
-                noDataInStudentPanelMessage.Enabled = !t_mode;
-                noDataInStudentPanelMessage.Visible = !t_mode;
-            } 
-
-           if(t_case == "studentNoColleagues")
-            {
-                MessageBox.Show("studentNoColleagues" + t_mode);
-                studentsPanelNoData.Enabled = t_mode;
-                studentsPanelNoData.Visible = t_mode;
-                noDataInStudentPanelMessage.Text = "      You have no colleagues";
-                noDataInStudentPanelMessage.Enabled = t_mode;
-                noDataInStudentPanelMessage.Visible = t_mode;
-            }
-           else
-            {
-                studentsPanelNoData.Enabled = !t_mode;
-                studentsPanelNoData.Visible = !t_mode;
-                noDataInStudentPanelMessage.Enabled = !t_mode;
-                noDataInStudentPanelMessage.Visible = !t_mode;
-            }
-
-        }
+        //
 
         /// Panels state
         private void studentsMainPanelState(bool t_mode)
@@ -407,20 +288,60 @@ namespace CZU_APPLICATION
             homeMainPanel.Enabled = t_mode;
             homeMainPanel.Visible = t_mode;
         }
+        private void questionMainPanelState(bool t_mode)
+        {
+            questionsMainPanel.Enabled = t_mode;
+            questionsMainPanel.Visible = t_mode;
+
+        }
+        private void MainPanelNoData(bool t_mode, string t_case)
+        {
+            MessageBox.Show("NO DATA AVAILABLE");
+            // Disabling noDataInPanel  
+            noDataInPanel.Enabled = false;
+            noDataInPanel.Visible = false;
+            //
+
+            // Variables
+            string[] casesList = new string[] { "teacherClassNoStudents", "teacherNoClasses", "studentNoColleagues", "teacherClassNoQuestions"};
+            string[] casesMessage = new string[] { "Class has no students", "You teach no classes", "You have no colleagues", "Class has no questions"};
+            Point[] casesMessagesLocations = new Point[4];
+            //
+
+            // Setting Messages Location for better readability and positioning.
+            casesMessagesLocations[0] = new Point(271, 277);
+            casesMessagesLocations[1] = new Point(271, 277);
+            casesMessagesLocations[2] = new Point(252, 277);
+            casesMessagesLocations[3] = new Point(252, 277);
+            //
+
+
+            // Verifying each case with the case from parameters list, if it exists, we'll select it.
+            for(int i = 0; i < 4; ++i)
+            {
+                if(casesList[i] == t_case)
+                {
+                    noDataInPanel.Enabled = true;
+                    noDataInPanel.Visible = true;
+                    noDataInPanelMessage.Text = casesMessage[i];
+                }
+            }
+            //
+        }
         /// 
- 
+
         // Switching between lists of elements 
         private void leftStudentList_Click(object sender, EventArgs e)
         {
             if (leftPossible && connectedUserType == "teacher")
             {
                 startingFrom -= recordsOnPage + 6;
-                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                StudentsTab.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(studentsSelectClassListBox.SelectedValue), _teacherID);
             }
             else if (leftPossible && connectedUserType == "student")
             {
                 startingFrom -= recordsOnPage + 6;
-                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
             }
 
         }
@@ -428,13 +349,13 @@ namespace CZU_APPLICATION
         private void rightStudentList_Click(object sender, EventArgs e)
         {
             if (startingFrom % 6 == 0 && rightPossible == true && connectedUserType == "teacher")
-                StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
+                StudentsTab.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(studentsSelectClassListBox.SelectedValue), _teacherID);
             else if (startingFrom % 6 == 0 && rightPossible == true && connectedUserType == "student") { }
-                StudentsPanel.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
         }
         //
 
-
+        // Creates lists of controls
         private void studentTabDataInitialization()
         {
             studentConnected.Add(studentConnected1);
@@ -486,29 +407,106 @@ namespace CZU_APPLICATION
             studentPanel.Add(studentPanel5);
             studentPanel.Add(studentPanel6);
         }
-      
-        // Select Class ListBox
-        private void selectClassID_SelectedValueChanged(object sender, EventArgs e)
+        private void questionTabDataInitialization()
         {
-    
+            // Question Title
+            questionTitle.Add(questionTitle1);
+            questionTitle.Add(questionTitle2);
+            questionTitle.Add(questionTitle3);
+            questionTitle.Add(questionTitle4);
 
-            if (connectedUserType == "teacher")
+            // Question GroupBox
+            questionGB.Add(questionGB1);
+            questionGB.Add(questionGB2);
+            questionGB.Add(questionGB3);
+            questionGB.Add(questionGB4);
+
+            // Question Student Name
+            questionStudentName.Add(question1StudentName);
+            questionStudentName.Add(question2StudentName);
+            questionStudentName.Add(question3StudentName);
+            questionStudentName.Add(question4StudentName);
+
+            // Question Priority Level
+            questionPriorityLevel.Add(question1PriorityLevel);
+            questionPriorityLevel.Add(question2PriorityLevel);
+            questionPriorityLevel.Add(question3PriorityLevel);
+            questionPriorityLevel.Add(question4PriorityLevel);
+            
+            // Question Asked Date
+            questionSubmitDate.Add(question1SubmitDate);
+            questionSubmitDate.Add(question2SubmitDate);
+            questionSubmitDate.Add(question3SubmitDate);
+            questionSubmitDate.Add(question4SubmitDate);
+
+            // Question Panel that covers question (depends on availability)
+            questionPanel.Add(questionPanel1);
+            questionPanel.Add(questionPanel2);
+            questionPanel.Add(questionPanel3);
+            questionPanel.Add(questionPanel4);
+            
+            // Question state (answered, not answered)
+            questionState.Add(question1State);
+            questionState.Add(question2State);
+            questionState.Add(question3State);
+            questionState.Add(question4State);
+        }
+        //
+
+        // Select Class ListBox
+
+        private void studentsSelectClassID_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
             {
-                bool existsStudentsInClass = StudentsPanel.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, Convert.ToString(selectClassID.SelectedValue), _teacherID);
-                if (existsStudentsInClass == true)
-                {
-                    studentsMainPanelState(true);
-                    MessageBox.Show("Class HAS students");
-                }
-                else
-                {
-                    homeMainPanelState(false);
-                    studentsMainPanelState(false);
-                    MessageBox.Show("Class has NO students");
-                    studentMainPanelNoData(true, "teacherClassNoStudents");
-                }
+                case "teacher":
+                    {
+                        MessageBox.Show("AM RULAT CAZ DE STUDENTS MAIN PANEL");
+                        string selectedClassValue = Convert.ToString(studentsSelectClassListBox.SelectedValue);
+                        bool existsStudentsInClass = StudentsTab.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID);
+                        if (existsStudentsInClass == true)
+                        {
+                            studentsMainPanelState(true);
+                            MessageBox.Show("Class HAS students");
+                        }
+                        else
+                        {
+                            homeMainPanelState(false);
+                            studentsMainPanelState(false);
+                            MessageBox.Show("Class has NO students");
+                            MainPanelNoData(true, "teacherClassNoStudents");
+                        }
+                        break;
+
+                    }
+            }
+
+        }
+        private void questionsSelectClassListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        MessageBox.Show("AM RULAT CAZ DE QUESTIONS MAIN PANEL");
+                        string selectedClassValue = Convert.ToString(questionsSelectClassListBox.SelectedValue);
+                        bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID);
+                        if (existsQuestionsInClass == true)
+                        {
+                            questionMainPanelState(true);
+                            MessageBox.Show("Class HAS questions");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Class HAS NO QUESTIONS");
+                            MainPanelNoData(true, "teacherClassNoQuestions");
+                        }
+                    }
+                    break;
+
             }
         }
+
         //
 
         // On Panel Triggers for Refreshing Data
@@ -567,7 +565,6 @@ namespace CZU_APPLICATION
        
 
         } // Disables other trigger surfaces and enabling the right one related to active Tab.
-
         private void CZUMain_MouseMove(object sender, MouseEventArgs e)
         {
            /* if (triggerDataRefreshStudentPanel.Bounds.Contains(e.Location))
@@ -630,21 +627,100 @@ namespace CZU_APPLICATION
         //
 
         // Menu buttons
+        private void studentsButton_Click(object sender, EventArgs e)
+        {
+            // Enable Refresh Data Trigger
+            // enableRefreshDataTrigger("student", triggerPanel); // TEMP DISABLED
+            // 
+
+
+            // Disabling overlapped panels
+            questionMainPanelState(false);
+            homeMainPanelState(false);
+            studentsMainPanelState(false);
+            MainPanelNoData(true, "disableAll");
+            // 
+
+
+            /// Show Student Panel related to connected user type (Teacher or Student)
+            if (connectedUserType == "teacher") // Teacher connected
+            {
+                // Verifying if there are classes in list and update the (ListBox) List Teacher teached classes 
+                bool classesExists = StudentsTab.updateTeachedClassesList(studentsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                //
+                if (classesExists == true)
+                { // if there is minimum one class teached by teacher
+                    MessageBox.Show("Student Tab - Teacher has classes to teach");
+                    // Getting the first Class ID
+                    string selectedClass = Convert.ToString(studentsSelectClassListBox.SelectedValue);
+                    //
+
+                    // Initializing the data in panel
+                    StudentsTab.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClass, _teacherID);
+                    //
+
+                    // Showing the data
+                    studentsMainPanelState(true);
+                    //
+                }
+                else // if there isn't minimum one class teached by teacher
+                {
+                    MessageBox.Show("Student Tab - Teacher has NO classes to teach");
+                    MainPanelNoData(true, "teacherNoClasses");
+                }
+
+            }
+            else if (connectedUserType == "student") // Student connected 
+            {
+
+                if (_times == 0) // One Time Operations
+                {
+                    // Disabling Controls used for Teacher Interface
+                    studentsSelectClassListBox.Enabled = false;
+                    studentsSelectClassListBox.Visible = false;
+                    studentsClassIDLabel.Enabled = false;
+                    studentsClassIDLabel.Visible = false;
+                    //
+                    ++_times;
+                }
+
+                // Trying to initialize and start the GUI from student panel that shows connected colleagues. (Returns True for available data to be shown).
+                bool colleaguesExists = StudentsTab.updatePanelAsStudent(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser);
+                //
+
+                /// Verifying if there are colleagues available to be shown
+                if (colleaguesExists == true)
+                {
+                    MessageBox.Show("Has colleagues");
+                    studentsMainPanelState(true); // The Student Tab Main Panel appears, showing students colleagues.
+                }
+                else
+                {
+                    MessageBox.Show("He has NO colleagues");
+                    MainPanelNoData(true, "studentNoColleagues"); // Showing the panel which says: "No connected colleagues"
+                }
+                ///
+            }
+            ///
+
+
+        }
+
         private void homeButton_Click(object sender, EventArgs e)
         {
             // Disabling overlapped panels
             homeMainPanelState(true);
             studentsMainPanelState(false);
-            studentMainPanelNoData(true, "disableAll");
+            MainPanelNoData(true, "disableAll");
             // 
 
             if (connectedUserType == "student")
             {
-                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsPanel.getStudentClassID(_connectedUser));  // Actualizing the number of connected colleagues
+                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser));  // Actualizing the number of connected colleagues
             }
             else if (connectedUserType == "teacher")
             {
-                teachedClassesIDs = StudentsPanel.teachedClasses(connectedUser); // Getting and initializing a list of classes where teacher teaches
+                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser); // Getting and initializing a list of classes where teacher teaches
                 Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs);  // Actualizing the number of connected students
             }
         }
@@ -653,21 +729,67 @@ namespace CZU_APPLICATION
         {
             homeMainPanelState(true); // need to be replaced.
             studentsMainPanelState(false);
-            studentMainPanelNoData(true, "disableAll");
+            MainPanelNoData(true, "disableAll");
         }
 
         private void questionsButton_Click(object sender, EventArgs e)
         {
-            homeMainPanelState(true); // need to be replaced.
+
+            // Disabling overlapped panels
+            homeMainPanelState(false); // need to be replaced.
             studentsMainPanelState(false);
-            studentMainPanelNoData(true, "disableAll");
+            MainPanelNoData(true, "disableAll");
+            questionMainPanelState(false);
+
+            //
+            // Initializing the GUI elements for tab, just once. 
+            if (_timesQuestionsTab == 0)
+            {
+                questionTabDataInitialization(); // set to be execute only once.
+                ++_timesQuestionsTab;
+            }
+            //
+          
+
+            switch(connectedUserType)
+            {
+                case "teacher":
+                    {
+                        bool classesExists = StudentsTab.updateTeachedClassesList(questionsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                        if (classesExists == true) // If exists classes
+                        {
+                            MessageBox.Show("AM RULAT CAZ DE QUESTIONS MAIN PANEL");
+                            string selectedClassValue = Convert.ToString(questionsSelectClassListBox.SelectedValue);
+                            bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID);
+                            if (existsQuestionsInClass == true)
+                            {
+                                questionMainPanelState(true);
+                                MessageBox.Show("Class HAS questions");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Class HAS NO QUESTIONS");
+                                MainPanelNoData(true, "teacherClassNoQuestions");
+                            }
+                        }
+
+                        else // If there are no classes
+                        {
+                            MessageBox.Show("Question Tab - No teached classes");
+                            MainPanelNoData(true, "teacherNoClasses");
+                        }
+                        break;
+                    }
+
+            }
+            
         }
 
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
             homeMainPanelState(true); // need to be replaced.
             studentsMainPanelState(false);
-            studentMainPanelNoData(true, "disableAll");
+            MainPanelNoData(true, "disableAll");
         }
         // 
 
@@ -682,6 +804,6 @@ namespace CZU_APPLICATION
             Database.insert(command);
         }
         //
-
     }
 }
+

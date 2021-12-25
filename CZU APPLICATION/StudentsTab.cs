@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CZU_APPLICATION
 {
-    static class StudentsPanel
+    static class StudentsTab
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
         public static string getStudentClassID(string t_connectedUser)
@@ -143,14 +143,13 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating students connection status, image, and the displayed users in main panel amount based on students colleagues
-            command[0] = $"select connected, username from student where classID = {classID} && username != '{t_connectedUser}'";
+            command[0] = $"select connected from student where classID = {classID} && username != '{t_connectedUser}'";
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read()) // for as long it finds data, maximum 6.
             {
                 if (i <= 5)
                 {
-                    MessageBox.Show("Am gasit" + dataReader.GetString(1));
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
                         t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
