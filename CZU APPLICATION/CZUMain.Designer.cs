@@ -127,12 +127,9 @@
             this.triggerDataRefreshStudentPanel = new System.Windows.Forms.Panel();
             this.questionsMainPanel = new System.Windows.Forms.Panel();
             this.questionsPanelMainGB = new System.Windows.Forms.GroupBox();
+            this.questionPanel1 = new System.Windows.Forms.Panel();
             this.questionsSelectClassListBox = new System.Windows.Forms.ListBox();
             this.questionsClassIDLabel = new System.Windows.Forms.Label();
-            this.questionPanel4 = new System.Windows.Forms.Panel();
-            this.questionPanel3 = new System.Windows.Forms.Panel();
-            this.questionPanel2 = new System.Windows.Forms.Panel();
-            this.questionPanel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.questionTitle4 = new System.Windows.Forms.Button();
@@ -148,13 +145,13 @@
             this.questionTitle3 = new System.Windows.Forms.Button();
             this.questionTitle2 = new System.Windows.Forms.Button();
             this.questionTitle1 = new System.Windows.Forms.Button();
-            this.questionGB2 = new System.Windows.Forms.GroupBox();
+            this.questionGB1 = new System.Windows.Forms.GroupBox();
             this.question1State = new System.Windows.Forms.Label();
             this.label666 = new System.Windows.Forms.Label();
-            this.question2SubmitDate = new System.Windows.Forms.Label();
+            this.question1SubmitDate = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.question2StudentName = new System.Windows.Forms.Label();
-            this.question2PriorityLevel = new System.Windows.Forms.Label();
+            this.question1StudentName = new System.Windows.Forms.Label();
+            this.question1PriorityLevel = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.questionGB3 = new System.Windows.Forms.GroupBox();
@@ -166,15 +163,18 @@
             this.question3PriorityLevel = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.questionGB1 = new System.Windows.Forms.GroupBox();
+            this.questionGB2 = new System.Windows.Forms.GroupBox();
             this.question2State = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.question1SubmitDate = new System.Windows.Forms.Label();
+            this.question2SubmitDate = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.question1StudentName = new System.Windows.Forms.Label();
-            this.question1PriorityLevel = new System.Windows.Forms.Label();
+            this.question2StudentName = new System.Windows.Forms.Label();
+            this.question2PriorityLevel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.questionPanel2 = new System.Windows.Forms.Panel();
+            this.questionPanel4 = new System.Windows.Forms.Panel();
+            this.questionPanel3 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -196,7 +196,6 @@
             this.studentGB1.SuspendLayout();
             this.studentGB4.SuspendLayout();
             this.studentGB3.SuspendLayout();
-            this.noDataInPanel.SuspendLayout();
             this.homeMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.student_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_image)).BeginInit();
@@ -204,9 +203,9 @@
             this.questionsMainPanel.SuspendLayout();
             this.questionsPanelMainGB.SuspendLayout();
             this.questionGB4.SuspendLayout();
-            this.questionGB2.SuspendLayout();
-            this.questionGB3.SuspendLayout();
             this.questionGB1.SuspendLayout();
+            this.questionGB3.SuspendLayout();
+            this.questionGB2.SuspendLayout();
             this.SuspendLayout();
             // 
             // homeMainPanelLogo
@@ -1083,7 +1082,6 @@
             // 
             // noDataInPanel
             // 
-            this.noDataInPanel.Controls.Add(this.noDataInPanelMessage);
             this.noDataInPanel.Enabled = false;
             this.noDataInPanel.Location = new System.Drawing.Point(174, 0);
             this.noDataInPanel.Name = "noDataInPanel";
@@ -1094,12 +1092,14 @@
             // noDataInPanelMessage
             // 
             this.noDataInPanelMessage.AutoSize = true;
+            this.noDataInPanelMessage.Enabled = false;
             this.noDataInPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.noDataInPanelMessage.Location = new System.Drawing.Point(252, 277);
+            this.noDataInPanelMessage.Location = new System.Drawing.Point(400, 280);
             this.noDataInPanelMessage.Name = "noDataInPanelMessage";
             this.noDataInPanelMessage.Size = new System.Drawing.Size(655, 70);
             this.noDataInPanelMessage.TabIndex = 0;
             this.noDataInPanelMessage.Text = "Class has no questions";
+            this.noDataInPanelMessage.Visible = false;
             // 
             // homeMainPanel
             // 
@@ -1258,12 +1258,12 @@
             // 
             // questionsPanelMainGB
             // 
-            this.questionsPanelMainGB.Controls.Add(this.questionsSelectClassListBox);
-            this.questionsPanelMainGB.Controls.Add(this.questionsClassIDLabel);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel4);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel3);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel2);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel1);
+            this.questionsPanelMainGB.Controls.Add(this.questionsSelectClassListBox);
+            this.questionsPanelMainGB.Controls.Add(this.questionsClassIDLabel);
             this.questionsPanelMainGB.Controls.Add(this.button1);
             this.questionsPanelMainGB.Controls.Add(this.button2);
             this.questionsPanelMainGB.Controls.Add(this.questionTitle4);
@@ -1271,15 +1271,22 @@
             this.questionsPanelMainGB.Controls.Add(this.questionTitle3);
             this.questionsPanelMainGB.Controls.Add(this.questionTitle2);
             this.questionsPanelMainGB.Controls.Add(this.questionTitle1);
-            this.questionsPanelMainGB.Controls.Add(this.questionGB2);
-            this.questionsPanelMainGB.Controls.Add(this.questionGB3);
             this.questionsPanelMainGB.Controls.Add(this.questionGB1);
+            this.questionsPanelMainGB.Controls.Add(this.questionGB3);
+            this.questionsPanelMainGB.Controls.Add(this.questionGB2);
             this.questionsPanelMainGB.Location = new System.Drawing.Point(20, 28);
             this.questionsPanelMainGB.Name = "questionsPanelMainGB";
             this.questionsPanelMainGB.Size = new System.Drawing.Size(1113, 640);
             this.questionsPanelMainGB.TabIndex = 0;
             this.questionsPanelMainGB.TabStop = false;
             this.questionsPanelMainGB.Text = "Questions";
+            // 
+            // questionPanel1
+            // 
+            this.questionPanel1.Location = new System.Drawing.Point(72, 59);
+            this.questionPanel1.Name = "questionPanel1";
+            this.questionPanel1.Size = new System.Drawing.Size(391, 244);
+            this.questionPanel1.TabIndex = 55;
             // 
             // questionsSelectClassListBox
             // 
@@ -1299,34 +1306,6 @@
             this.questionsClassIDLabel.Size = new System.Drawing.Size(64, 20);
             this.questionsClassIDLabel.TabIndex = 59;
             this.questionsClassIDLabel.Text = "Class ID:";
-            // 
-            // questionPanel4
-            // 
-            this.questionPanel4.Location = new System.Drawing.Point(577, 337);
-            this.questionPanel4.Name = "questionPanel4";
-            this.questionPanel4.Size = new System.Drawing.Size(391, 256);
-            this.questionPanel4.TabIndex = 58;
-            // 
-            // questionPanel3
-            // 
-            this.questionPanel3.Location = new System.Drawing.Point(72, 337);
-            this.questionPanel3.Name = "questionPanel3";
-            this.questionPanel3.Size = new System.Drawing.Size(388, 256);
-            this.questionPanel3.TabIndex = 56;
-            // 
-            // questionPanel2
-            // 
-            this.questionPanel2.Location = new System.Drawing.Point(577, 59);
-            this.questionPanel2.Name = "questionPanel2";
-            this.questionPanel2.Size = new System.Drawing.Size(391, 244);
-            this.questionPanel2.TabIndex = 57;
-            // 
-            // questionPanel1
-            // 
-            this.questionPanel1.Location = new System.Drawing.Point(72, 59);
-            this.questionPanel1.Name = "questionPanel1";
-            this.questionPanel1.Size = new System.Drawing.Size(391, 244);
-            this.questionPanel1.TabIndex = 55;
             // 
             // button1
             // 
@@ -1483,21 +1462,21 @@
             this.questionTitle1.Text = "Question Title";
             this.questionTitle1.UseVisualStyleBackColor = true;
             // 
-            // questionGB2
+            // questionGB1
             // 
-            this.questionGB2.Controls.Add(this.question1State);
-            this.questionGB2.Controls.Add(this.label666);
-            this.questionGB2.Controls.Add(this.question2SubmitDate);
-            this.questionGB2.Controls.Add(this.label13);
-            this.questionGB2.Controls.Add(this.question2StudentName);
-            this.questionGB2.Controls.Add(this.question2PriorityLevel);
-            this.questionGB2.Controls.Add(this.label19);
-            this.questionGB2.Controls.Add(this.label20);
-            this.questionGB2.Location = new System.Drawing.Point(72, 149);
-            this.questionGB2.Name = "questionGB2";
-            this.questionGB2.Size = new System.Drawing.Size(391, 154);
-            this.questionGB2.TabIndex = 3;
-            this.questionGB2.TabStop = false;
+            this.questionGB1.Controls.Add(this.question1State);
+            this.questionGB1.Controls.Add(this.label666);
+            this.questionGB1.Controls.Add(this.question1SubmitDate);
+            this.questionGB1.Controls.Add(this.label13);
+            this.questionGB1.Controls.Add(this.question1StudentName);
+            this.questionGB1.Controls.Add(this.question1PriorityLevel);
+            this.questionGB1.Controls.Add(this.label19);
+            this.questionGB1.Controls.Add(this.label20);
+            this.questionGB1.Location = new System.Drawing.Point(72, 149);
+            this.questionGB1.Name = "questionGB1";
+            this.questionGB1.Size = new System.Drawing.Size(391, 154);
+            this.questionGB1.TabIndex = 3;
+            this.questionGB1.TabStop = false;
             // 
             // question1State
             // 
@@ -1517,14 +1496,14 @@
             this.label666.TabIndex = 6;
             this.label666.Text = "State:";
             // 
-            // question2SubmitDate
+            // question1SubmitDate
             // 
-            this.question2SubmitDate.AutoSize = true;
-            this.question2SubmitDate.Location = new System.Drawing.Point(98, 90);
-            this.question2SubmitDate.Name = "question2SubmitDate";
-            this.question2SubmitDate.Size = new System.Drawing.Size(95, 20);
-            this.question2SubmitDate.TabIndex = 5;
-            this.question2SubmitDate.Text = "hours passed";
+            this.question1SubmitDate.AutoSize = true;
+            this.question1SubmitDate.Location = new System.Drawing.Point(98, 90);
+            this.question1SubmitDate.Name = "question1SubmitDate";
+            this.question1SubmitDate.Size = new System.Drawing.Size(95, 20);
+            this.question1SubmitDate.TabIndex = 5;
+            this.question1SubmitDate.Text = "hours passed";
             // 
             // label13
             // 
@@ -1535,23 +1514,23 @@
             this.label13.TabIndex = 4;
             this.label13.Text = "Asked: ";
             // 
-            // question2StudentName
+            // question1StudentName
             // 
-            this.question2StudentName.AutoSize = true;
-            this.question2StudentName.Location = new System.Drawing.Point(145, 34);
-            this.question2StudentName.Name = "question2StudentName";
-            this.question2StudentName.Size = new System.Drawing.Size(49, 20);
-            this.question2StudentName.TabIndex = 3;
-            this.question2StudentName.Text = "Name";
+            this.question1StudentName.AutoSize = true;
+            this.question1StudentName.Location = new System.Drawing.Point(145, 34);
+            this.question1StudentName.Name = "question1StudentName";
+            this.question1StudentName.Size = new System.Drawing.Size(49, 20);
+            this.question1StudentName.TabIndex = 3;
+            this.question1StudentName.Text = "Name";
             // 
-            // question2PriorityLevel
+            // question1PriorityLevel
             // 
-            this.question2PriorityLevel.AutoSize = true;
-            this.question2PriorityLevel.Location = new System.Drawing.Point(100, 63);
-            this.question2PriorityLevel.Name = "question2PriorityLevel";
-            this.question2PriorityLevel.Size = new System.Drawing.Size(45, 20);
-            this.question2PriorityLevel.TabIndex = 2;
-            this.question2PriorityLevel.Text = "HIGH";
+            this.question1PriorityLevel.AutoSize = true;
+            this.question1PriorityLevel.Location = new System.Drawing.Point(100, 63);
+            this.question1PriorityLevel.Name = "question1PriorityLevel";
+            this.question1PriorityLevel.Size = new System.Drawing.Size(45, 20);
+            this.question1PriorityLevel.TabIndex = 2;
+            this.question1PriorityLevel.Text = "HIGH";
             // 
             // label19
             // 
@@ -1659,21 +1638,21 @@
             this.label26.TabIndex = 0;
             this.label26.Text = "Priority:";
             // 
-            // questionGB1
+            // questionGB2
             // 
-            this.questionGB1.Controls.Add(this.question2State);
-            this.questionGB1.Controls.Add(this.label14);
-            this.questionGB1.Controls.Add(this.question1SubmitDate);
-            this.questionGB1.Controls.Add(this.label5);
-            this.questionGB1.Controls.Add(this.question1StudentName);
-            this.questionGB1.Controls.Add(this.question1PriorityLevel);
-            this.questionGB1.Controls.Add(this.label4);
-            this.questionGB1.Controls.Add(this.label3);
-            this.questionGB1.Location = new System.Drawing.Point(577, 149);
-            this.questionGB1.Name = "questionGB1";
-            this.questionGB1.Size = new System.Drawing.Size(389, 154);
-            this.questionGB1.TabIndex = 1;
-            this.questionGB1.TabStop = false;
+            this.questionGB2.Controls.Add(this.question2State);
+            this.questionGB2.Controls.Add(this.label14);
+            this.questionGB2.Controls.Add(this.question2SubmitDate);
+            this.questionGB2.Controls.Add(this.label5);
+            this.questionGB2.Controls.Add(this.question2StudentName);
+            this.questionGB2.Controls.Add(this.question2PriorityLevel);
+            this.questionGB2.Controls.Add(this.label4);
+            this.questionGB2.Controls.Add(this.label3);
+            this.questionGB2.Location = new System.Drawing.Point(577, 149);
+            this.questionGB2.Name = "questionGB2";
+            this.questionGB2.Size = new System.Drawing.Size(389, 154);
+            this.questionGB2.TabIndex = 1;
+            this.questionGB2.TabStop = false;
             // 
             // question2State
             // 
@@ -1693,14 +1672,14 @@
             this.label14.TabIndex = 7;
             this.label14.Text = "State:";
             // 
-            // question1SubmitDate
+            // question2SubmitDate
             // 
-            this.question1SubmitDate.AutoSize = true;
-            this.question1SubmitDate.Location = new System.Drawing.Point(98, 90);
-            this.question1SubmitDate.Name = "question1SubmitDate";
-            this.question1SubmitDate.Size = new System.Drawing.Size(95, 20);
-            this.question1SubmitDate.TabIndex = 5;
-            this.question1SubmitDate.Text = "hours passed";
+            this.question2SubmitDate.AutoSize = true;
+            this.question2SubmitDate.Location = new System.Drawing.Point(98, 90);
+            this.question2SubmitDate.Name = "question2SubmitDate";
+            this.question2SubmitDate.Size = new System.Drawing.Size(95, 20);
+            this.question2SubmitDate.TabIndex = 5;
+            this.question2SubmitDate.Text = "hours passed";
             // 
             // label5
             // 
@@ -1711,23 +1690,23 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Asked: ";
             // 
-            // question1StudentName
+            // question2StudentName
             // 
-            this.question1StudentName.AutoSize = true;
-            this.question1StudentName.Location = new System.Drawing.Point(145, 34);
-            this.question1StudentName.Name = "question1StudentName";
-            this.question1StudentName.Size = new System.Drawing.Size(49, 20);
-            this.question1StudentName.TabIndex = 3;
-            this.question1StudentName.Text = "Name";
+            this.question2StudentName.AutoSize = true;
+            this.question2StudentName.Location = new System.Drawing.Point(145, 34);
+            this.question2StudentName.Name = "question2StudentName";
+            this.question2StudentName.Size = new System.Drawing.Size(49, 20);
+            this.question2StudentName.TabIndex = 3;
+            this.question2StudentName.Text = "Name";
             // 
-            // question1PriorityLevel
+            // question2PriorityLevel
             // 
-            this.question1PriorityLevel.AutoSize = true;
-            this.question1PriorityLevel.Location = new System.Drawing.Point(100, 63);
-            this.question1PriorityLevel.Name = "question1PriorityLevel";
-            this.question1PriorityLevel.Size = new System.Drawing.Size(45, 20);
-            this.question1PriorityLevel.TabIndex = 2;
-            this.question1PriorityLevel.Text = "HIGH";
+            this.question2PriorityLevel.AutoSize = true;
+            this.question2PriorityLevel.Location = new System.Drawing.Point(100, 63);
+            this.question2PriorityLevel.Name = "question2PriorityLevel";
+            this.question2PriorityLevel.Size = new System.Drawing.Size(45, 20);
+            this.question2PriorityLevel.TabIndex = 2;
+            this.question2PriorityLevel.Text = "HIGH";
             // 
             // label4
             // 
@@ -1747,17 +1726,39 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Priority:";
             // 
+            // questionPanel2
+            // 
+            this.questionPanel2.Location = new System.Drawing.Point(577, 59);
+            this.questionPanel2.Name = "questionPanel2";
+            this.questionPanel2.Size = new System.Drawing.Size(391, 244);
+            this.questionPanel2.TabIndex = 57;
+            // 
+            // questionPanel4
+            // 
+            this.questionPanel4.Location = new System.Drawing.Point(577, 337);
+            this.questionPanel4.Name = "questionPanel4";
+            this.questionPanel4.Size = new System.Drawing.Size(391, 256);
+            this.questionPanel4.TabIndex = 58;
+            // 
+            // questionPanel3
+            // 
+            this.questionPanel3.Location = new System.Drawing.Point(72, 337);
+            this.questionPanel3.Name = "questionPanel3";
+            this.questionPanel3.Size = new System.Drawing.Size(388, 256);
+            this.questionPanel3.TabIndex = 56;
+            // 
             // CZUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1319, 681);
-            this.Controls.Add(this.noDataInPanel);
+            this.Controls.Add(this.noDataInPanelMessage);
             this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.triggerDataRefreshStudentPanel);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.homeMainPanel);
+            this.Controls.Add(this.noDataInPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1797,8 +1798,6 @@
             this.studentGB4.PerformLayout();
             this.studentGB3.ResumeLayout(false);
             this.studentGB3.PerformLayout();
-            this.noDataInPanel.ResumeLayout(false);
-            this.noDataInPanel.PerformLayout();
             this.homeMainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.student_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.admin_image)).EndInit();
@@ -1809,13 +1808,14 @@
             this.questionsPanelMainGB.PerformLayout();
             this.questionGB4.ResumeLayout(false);
             this.questionGB4.PerformLayout();
-            this.questionGB2.ResumeLayout(false);
-            this.questionGB2.PerformLayout();
-            this.questionGB3.ResumeLayout(false);
-            this.questionGB3.PerformLayout();
             this.questionGB1.ResumeLayout(false);
             this.questionGB1.PerformLayout();
+            this.questionGB3.ResumeLayout(false);
+            this.questionGB3.PerformLayout();
+            this.questionGB2.ResumeLayout(false);
+            this.questionGB2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1937,18 +1937,18 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button questionTitle2;
-        private System.Windows.Forms.GroupBox questionGB2;
-        private System.Windows.Forms.Label question2SubmitDate;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label question2StudentName;
-        private System.Windows.Forms.Label question2PriorityLevel;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.GroupBox questionGB1;
         private System.Windows.Forms.Label question1SubmitDate;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label question1StudentName;
         private System.Windows.Forms.Label question1PriorityLevel;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.GroupBox questionGB2;
+        private System.Windows.Forms.Label question2SubmitDate;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label question2StudentName;
+        private System.Windows.Forms.Label question2PriorityLevel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;

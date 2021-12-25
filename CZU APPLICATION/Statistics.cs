@@ -48,7 +48,7 @@ namespace CZU_APPLICATION
             string command;
             foreach(string i in t_teachedClasses)
             {
-                command = $"select connected from student where classID = {Convert.ToInt32(i)} && connected =";
+                command = $"select connected from student where classID = {i} && connected =";
                 update(ref t_statisticsUsers, command, "on", ref statisticCount);
             }
         }

@@ -46,15 +46,15 @@ namespace CZU_APPLICATION
 
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-
             while (dataReader.Read()) // for as long it finds data, maximum 4.
             {
+
                 if (i <= 3)
                 {
                     // Setting up the list of students ids for further command
-                    studentsIDs[i] = dataReader.GetString(3);
+                    studentsIDs[i] = dataReader.GetString(4);
                     //
-
+                    MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
                     // Setting up question Title
                     t_questionTitle[i].Text = dataReader.GetString(0);
                     //
@@ -97,22 +97,19 @@ namespace CZU_APPLICATION
             /// Command 1 - First command for setting Student Name
             /// 
             ////////////// HERE IS THE PROBLEM
-            if (loopLength != 0)
+           
+            for (int z = 0; z <= loopLength; z++)
             {
-                MessageBox.Show(Convert.ToString(loopLength));
-                for (int z = 0; z <= loopLength; z++)
+                command[1] = $"select firstName, lastName from student where id = {studentsIDs[z]}";
+                cmd.CommandText = command[1];
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
                 {
-                    command[1] = $"select firstName, lastName from student where id = {studentsIDs[z]}";
-                    cmd.CommandText = command[1];
-                    dataReader = cmd.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        t_questionStudentName[i].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
-                    }
-                    dataReader.Close();
+                    t_questionStudentName[i].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
                 }
-
+                dataReader.Close();
             }
+            
             ///
 
             //

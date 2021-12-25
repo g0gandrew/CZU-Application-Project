@@ -296,10 +296,11 @@ namespace CZU_APPLICATION
         }
         private void MainPanelNoData(bool t_mode, string t_case)
         {
-            MessageBox.Show("NO DATA AVAILABLE");
             // Disabling noDataInPanel  
             noDataInPanel.Enabled = false;
             noDataInPanel.Visible = false;
+            noDataInPanelMessage.Enabled = false;
+            noDataInPanelMessage.Visible = false;
             //
 
             // Variables
@@ -309,10 +310,11 @@ namespace CZU_APPLICATION
             //
 
             // Setting Messages Location for better readability and positioning.
-            casesMessagesLocations[0] = new Point(271, 277);
-            casesMessagesLocations[1] = new Point(271, 277);
-            casesMessagesLocations[2] = new Point(252, 277);
-            casesMessagesLocations[3] = new Point(252, 277);
+            casesMessagesLocations[0] = new Point(400, 280);
+            casesMessagesLocations[1] = new Point(400, 280);
+            casesMessagesLocations[2] = new Point(400, 280);
+            casesMessagesLocations[3] = new Point(400, 280);
+ 
             //
 
 
@@ -321,8 +323,12 @@ namespace CZU_APPLICATION
             {
                 if(casesList[i] == t_case)
                 {
-                    noDataInPanel.Enabled = true;
-                    noDataInPanel.Visible = true;
+                    if (i == 1) {
+                        noDataInPanel.Enabled = true;
+                        noDataInPanel.Visible = true;
+                    }
+                    noDataInPanelMessage.Enabled = true;
+                    noDataInPanelMessage.Visible = true;
                     noDataInPanelMessage.Text = casesMessage[i];
                 }
             }
@@ -416,8 +422,8 @@ namespace CZU_APPLICATION
             questionTitle.Add(questionTitle4);
 
             // Question GroupBox
-            questionGB.Add(questionGB1);
             questionGB.Add(questionGB2);
+            questionGB.Add(questionGB1);
             questionGB.Add(questionGB3);
             questionGB.Add(questionGB4);
 
@@ -457,6 +463,7 @@ namespace CZU_APPLICATION
 
         private void studentsSelectClassID_SelectedValueChanged(object sender, EventArgs e)
         {
+            MainPanelNoData(true, "disableALL");
             switch (connectedUserType)
             {
                 case "teacher":
@@ -471,8 +478,7 @@ namespace CZU_APPLICATION
                         }
                         else
                         {
-                            homeMainPanelState(false);
-                            studentsMainPanelState(false);
+                            studentsMainPanelState(true);
                             MessageBox.Show("Class has NO students");
                             MainPanelNoData(true, "teacherClassNoStudents");
                         }
@@ -484,6 +490,7 @@ namespace CZU_APPLICATION
         }
         private void questionsSelectClassListBox_SelectedValueChanged(object sender, EventArgs e)
         {
+            MainPanelNoData(true, "disableALL");
             switch (connectedUserType)
             {
                 case "teacher":
@@ -736,12 +743,12 @@ namespace CZU_APPLICATION
         {
 
             // Disabling overlapped panels
-            homeMainPanelState(false); // need to be replaced.
+            homeMainPanelState(false); 
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);
-
             //
+
             // Initializing the GUI elements for tab, just once. 
             if (_timesQuestionsTab == 0)
             {
@@ -768,6 +775,7 @@ namespace CZU_APPLICATION
                             }
                             else
                             {
+                                questionMainPanelState(true);
                                 MessageBox.Show("Class HAS NO QUESTIONS");
                                 MainPanelNoData(true, "teacherClassNoQuestions");
                             }
