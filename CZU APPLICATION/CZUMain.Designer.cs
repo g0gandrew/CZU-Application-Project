@@ -127,6 +127,9 @@
             this.triggerDataRefreshStudentPanel = new System.Windows.Forms.Panel();
             this.questionsMainPanel = new System.Windows.Forms.Panel();
             this.questionsPanelMainGB = new System.Windows.Forms.GroupBox();
+            this.questionPanel4 = new System.Windows.Forms.Panel();
+            this.questionPanel3 = new System.Windows.Forms.Panel();
+            this.questionPanel2 = new System.Windows.Forms.Panel();
             this.questionPanel1 = new System.Windows.Forms.Panel();
             this.questionsSelectClassListBox = new System.Windows.Forms.ListBox();
             this.questionsClassIDLabel = new System.Windows.Forms.Label();
@@ -172,9 +175,6 @@
             this.question2PriorityLevel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.questionPanel2 = new System.Windows.Forms.Panel();
-            this.questionPanel4 = new System.Windows.Forms.Panel();
-            this.questionPanel3 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1281,6 +1281,27 @@
             this.questionsPanelMainGB.TabStop = false;
             this.questionsPanelMainGB.Text = "Questions";
             // 
+            // questionPanel4
+            // 
+            this.questionPanel4.Location = new System.Drawing.Point(577, 337);
+            this.questionPanel4.Name = "questionPanel4";
+            this.questionPanel4.Size = new System.Drawing.Size(391, 256);
+            this.questionPanel4.TabIndex = 58;
+            // 
+            // questionPanel3
+            // 
+            this.questionPanel3.Location = new System.Drawing.Point(72, 337);
+            this.questionPanel3.Name = "questionPanel3";
+            this.questionPanel3.Size = new System.Drawing.Size(388, 256);
+            this.questionPanel3.TabIndex = 56;
+            // 
+            // questionPanel2
+            // 
+            this.questionPanel2.Location = new System.Drawing.Point(577, 59);
+            this.questionPanel2.Name = "questionPanel2";
+            this.questionPanel2.Size = new System.Drawing.Size(391, 244);
+            this.questionPanel2.TabIndex = 57;
+            // 
             // questionPanel1
             // 
             this.questionPanel1.Location = new System.Drawing.Point(72, 59);
@@ -1725,27 +1746,6 @@
             this.label3.Size = new System.Drawing.Size(59, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "Priority:";
-            // 
-            // questionPanel2
-            // 
-            this.questionPanel2.Location = new System.Drawing.Point(577, 59);
-            this.questionPanel2.Name = "questionPanel2";
-            this.questionPanel2.Size = new System.Drawing.Size(391, 244);
-            this.questionPanel2.TabIndex = 57;
-            // 
-            // questionPanel4
-            // 
-            this.questionPanel4.Location = new System.Drawing.Point(577, 337);
-            this.questionPanel4.Name = "questionPanel4";
-            this.questionPanel4.Size = new System.Drawing.Size(391, 256);
-            this.questionPanel4.TabIndex = 58;
-            // 
-            // questionPanel3
-            // 
-            this.questionPanel3.Location = new System.Drawing.Point(72, 337);
-            this.questionPanel3.Name = "questionPanel3";
-            this.questionPanel3.Size = new System.Drawing.Size(388, 256);
-            this.questionPanel3.TabIndex = 56;
             // 
             // CZUMain
             // 
