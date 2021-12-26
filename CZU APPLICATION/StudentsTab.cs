@@ -252,7 +252,6 @@ namespace CZU_APPLICATION
 
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-
             while (dataReader.Read()) // for as long it finds data, maximum 6.
             {
                 if (i <= 5)

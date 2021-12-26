@@ -45,6 +45,7 @@ namespace CZU_APPLICATION
         {
             // Variables
             int statisticCount = 0;
+            t_statisticsUsers.Text = "0";
             string command;
             foreach(string i in t_teachedClasses)
             {

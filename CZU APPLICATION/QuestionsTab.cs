@@ -54,7 +54,7 @@ namespace CZU_APPLICATION
                     // Setting up the list of students ids for further command
                     studentsIDs[i] = dataReader.GetString(4);
                     //
-                    MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
+                    MessageBox.Show( dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
                     // Setting up question Title
                     t_questionTitle[i].Text = dataReader.GetString(0);
                     //
@@ -105,7 +105,8 @@ namespace CZU_APPLICATION
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    t_questionStudentName[i].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
+                   MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + " " + dataReader.GetString(1));
+                    t_questionStudentName[z].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
                 }
                 dataReader.Close();
             }

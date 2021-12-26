@@ -112,8 +112,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.noDataInPanel = new System.Windows.Forms.Panel();
-            this.noDataInPanelMessage = new System.Windows.Forms.Label();
             this.homeMainPanel = new System.Windows.Forms.Panel();
             this.student_image = new System.Windows.Forms.PictureBox();
             this.admin_image = new System.Windows.Forms.PictureBox();
@@ -175,6 +173,7 @@
             this.question2PriorityLevel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.noDataInPanelMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1080,27 +1079,6 @@
             this.label31.TabIndex = 3;
             this.label31.Text = "Q:";
             // 
-            // noDataInPanel
-            // 
-            this.noDataInPanel.Enabled = false;
-            this.noDataInPanel.Location = new System.Drawing.Point(174, 0);
-            this.noDataInPanel.Name = "noDataInPanel";
-            this.noDataInPanel.Size = new System.Drawing.Size(1145, 681);
-            this.noDataInPanel.TabIndex = 62;
-            this.noDataInPanel.Visible = false;
-            // 
-            // noDataInPanelMessage
-            // 
-            this.noDataInPanelMessage.AutoSize = true;
-            this.noDataInPanelMessage.Enabled = false;
-            this.noDataInPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.noDataInPanelMessage.Location = new System.Drawing.Point(400, 280);
-            this.noDataInPanelMessage.Name = "noDataInPanelMessage";
-            this.noDataInPanelMessage.Size = new System.Drawing.Size(655, 70);
-            this.noDataInPanelMessage.TabIndex = 0;
-            this.noDataInPanelMessage.Text = "Class has no questions";
-            this.noDataInPanelMessage.Visible = false;
-            // 
             // homeMainPanel
             // 
             this.homeMainPanel.Controls.Add(this.statisticsGroupBox);
@@ -1747,6 +1725,18 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Priority:";
             // 
+            // noDataInPanelMessage
+            // 
+            this.noDataInPanelMessage.AutoSize = true;
+            this.noDataInPanelMessage.Enabled = false;
+            this.noDataInPanelMessage.Font = new System.Drawing.Font("Leelawadee", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noDataInPanelMessage.Location = new System.Drawing.Point(400, 280);
+            this.noDataInPanelMessage.Name = "noDataInPanelMessage";
+            this.noDataInPanelMessage.Size = new System.Drawing.Size(655, 70);
+            this.noDataInPanelMessage.TabIndex = 0;
+            this.noDataInPanelMessage.Text = "Class has no questions";
+            this.noDataInPanelMessage.Visible = false;
+            // 
             // CZUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1758,7 +1748,6 @@
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.homeMainPanel);
-            this.Controls.Add(this.noDataInPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1904,8 +1893,6 @@
         private System.Windows.Forms.Panel studentPanel4;
         private System.Windows.Forms.Label studentsClassIDLabel;
         private System.Windows.Forms.ListBox studentsSelectClassListBox;
-        private System.Windows.Forms.Panel noDataInPanel;
-        private System.Windows.Forms.Label noDataInPanelMessage;
         private System.Windows.Forms.Panel homeMainPanel;
         private System.Windows.Forms.PictureBox student_image;
         private System.Windows.Forms.PictureBox admin_image;
@@ -1967,5 +1954,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label questionsClassIDLabel;
         private System.Windows.Forms.ListBox questionsSelectClassListBox;
+        private System.Windows.Forms.Label noDataInPanelMessage;
     }
 }
