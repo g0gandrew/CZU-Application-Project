@@ -34,6 +34,26 @@ namespace CZU_APPLICATION
             }
             return t_classID;
         }
+        public static string getTeacherCourse(string t_teacherID)
+        {
+            // Pseudo Assign in case of data not found
+            string teacherID = null;
+            //
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            cmd.CommandText = $"select course from teacher where username = '{t_teacherID}'";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                teacherID = dataReader.GetString(0);
+            }
+            return teacherID;
+        }
+
         public static string getTeacherID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
@@ -53,6 +73,26 @@ namespace CZU_APPLICATION
             }
             return teacherID;
         }
+        public static string getTeacherIDByCourse(string t_courseName)
+        {
+            // Pseudo Assign in case of data not found
+            string teacherID = null;
+            //
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            cmd.CommandText = $"select teacherID from course where name = '{t_courseName}'";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                teacherID = dataReader.GetString(0);
+            }
+            return teacherID;
+        }
+
         public static string getStudentID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
@@ -113,6 +153,55 @@ namespace CZU_APPLICATION
             connection.Close();
             //
             return teachedClasses; // returning the list of classes teached by teacher x     
+        }
+
+        public static List <string> studiedCourses(string t_connectedUser)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+            // Variables
+            List<string> studiedCourses = new List<string>();
+            List<string> studiedCoursesIDs = new List<string>();
+            string classID;
+            //
+
+            // Getting student class ID
+            classID = getStudentClassID(t_connectedUser);
+            //
+
+            // Getting course/s teached at class
+            string teachedCourse = null;
+            cmd.CommandText = $"select courseID from classcourse where classID = {classID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+                studiedCoursesIDs.Add(dataReader.GetString(0));
+            //
+            dataReader.Close();
+
+            if (studiedCoursesIDs.Count > 0)
+            {
+                // Getting courses name studied by student
+                foreach(string courseID in studiedCoursesIDs)
+                {
+                    cmd.CommandText = $"select name from course where ID = {courseID}";
+                    dataReader = cmd.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        studiedCourses.Add(dataReader.GetString(0));
+                    }
+                    dataReader.Close();
+                }
+                //
+            }
+            connection.Close();
+            //
+            return studiedCourses; // returning the list of classes teached by teacher x     
         }
 
         public static bool updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser)
@@ -369,7 +458,7 @@ namespace CZU_APPLICATION
             return dataAvailable;
         }
 
-        public static bool updateTeachedClassesList(ListBox t_teachedClassesControl, ref List<string> t_teachedClasses, string t_connectedUser)
+        public static bool updateTeachedClassesList(ref ListBox t_teachedClassesControl, ref List<string> t_teachedClasses, string t_connectedUser)
         {
             t_teachedClasses = teachedClasses(t_connectedUser);
             t_teachedClassesControl.DataSource = t_teachedClasses;
@@ -379,7 +468,16 @@ namespace CZU_APPLICATION
             }
             return false; // if there aren't elements in the list
         }
-
+        public static bool updateStudiedCoursesList(ref ListBox t_list, string t_connectedUser, ref List <string> t_studiedCourses)
+        {
+            t_studiedCourses = studiedCourses(t_connectedUser);
+            t_list.DataSource = t_studiedCourses;
+            if(t_studiedCourses.Count != 0)
+            {
+                return true; // there are courses 
+            }
+            return false;
+        }
         public static List <string> studentTriggerNewRefresh(string t_connectedUser, ref int t_studentLastMeeting, ref int t_studentLastAssignment, ref int t_studentLastColleague, ref int t_studentLastCourse)
         {
 

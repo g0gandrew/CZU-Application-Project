@@ -174,6 +174,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.noDataInPanelMessage = new System.Windows.Forms.Label();
+            this.addQuestions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1236,6 +1237,7 @@
             // 
             // questionsPanelMainGB
             // 
+            this.questionsPanelMainGB.Controls.Add(this.addQuestions);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel4);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel3);
             this.questionsPanelMainGB.Controls.Add(this.questionPanel2);
@@ -1291,16 +1293,16 @@
             // 
             this.questionsSelectClassListBox.FormattingEnabled = true;
             this.questionsSelectClassListBox.ItemHeight = 20;
-            this.questionsSelectClassListBox.Location = new System.Drawing.Point(978, 19);
+            this.questionsSelectClassListBox.Location = new System.Drawing.Point(948, 19);
             this.questionsSelectClassListBox.Name = "questionsSelectClassListBox";
-            this.questionsSelectClassListBox.Size = new System.Drawing.Size(93, 24);
+            this.questionsSelectClassListBox.Size = new System.Drawing.Size(150, 24);
             this.questionsSelectClassListBox.TabIndex = 60;
             this.questionsSelectClassListBox.SelectedValueChanged += new System.EventHandler(this.questionsSelectClassListBox_SelectedValueChanged);
             // 
             // questionsClassIDLabel
             // 
             this.questionsClassIDLabel.AutoSize = true;
-            this.questionsClassIDLabel.Location = new System.Drawing.Point(908, 23);
+            this.questionsClassIDLabel.Location = new System.Drawing.Point(878, 23);
             this.questionsClassIDLabel.Name = "questionsClassIDLabel";
             this.questionsClassIDLabel.Size = new System.Drawing.Size(64, 20);
             this.questionsClassIDLabel.TabIndex = 59;
@@ -1342,6 +1344,7 @@
             this.questionTitle4.TabIndex = 6;
             this.questionTitle4.Text = "Question Title";
             this.questionTitle4.UseVisualStyleBackColor = true;
+            this.questionTitle4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.questionTitle4_MouseClick);
             // 
             // questionGB4
             // 
@@ -1440,6 +1443,7 @@
             this.questionTitle3.TabIndex = 4;
             this.questionTitle3.Text = "Question Title";
             this.questionTitle3.UseVisualStyleBackColor = true;
+            this.questionTitle3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.questionTitle3_MouseClick);
             // 
             // questionTitle2
             // 
@@ -1450,6 +1454,7 @@
             this.questionTitle2.TabIndex = 2;
             this.questionTitle2.Text = "Question Title";
             this.questionTitle2.UseVisualStyleBackColor = true;
+            this.questionTitle2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.questionTitle2_MouseClick);
             // 
             // questionTitle1
             // 
@@ -1460,6 +1465,7 @@
             this.questionTitle1.TabIndex = 0;
             this.questionTitle1.Text = "Question Title";
             this.questionTitle1.UseVisualStyleBackColor = true;
+            this.questionTitle1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.questionTitle1_MouseClick);
             // 
             // questionGB1
             // 
@@ -1737,6 +1743,21 @@
             this.noDataInPanelMessage.Text = "Class has no questions";
             this.noDataInPanelMessage.Visible = false;
             // 
+            // addQuestions
+            // 
+            this.addQuestions.BackColor = System.Drawing.Color.Transparent;
+            this.addQuestions.FlatAppearance.BorderSize = 0;
+            this.addQuestions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addQuestions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addQuestions.ForeColor = System.Drawing.Color.Transparent;
+            this.addQuestions.Image = ((System.Drawing.Image)(resources.GetObject("addQuestions.Image")));
+            this.addQuestions.Location = new System.Drawing.Point(1007, 58);
+            this.addQuestions.Name = "addQuestions";
+            this.addQuestions.Size = new System.Drawing.Size(74, 71);
+            this.addQuestions.TabIndex = 61;
+            this.addQuestions.UseVisualStyleBackColor = false;
+            this.addQuestions.Click += new System.EventHandler(this.addQuestions_Click);
+            // 
             // CZUMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1955,5 +1976,6 @@
         private System.Windows.Forms.Label questionsClassIDLabel;
         private System.Windows.Forms.ListBox questionsSelectClassListBox;
         private System.Windows.Forms.Label noDataInPanelMessage;
+        private System.Windows.Forms.Button addQuestions;
     }
 }

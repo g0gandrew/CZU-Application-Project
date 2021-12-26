@@ -22,6 +22,7 @@ namespace CZU_APPLICATION
         List<Label> studentMeeting = new List<Label>();
         List<Panel> studentPanel = new List<Panel>();
         List<string> teachedClassesIDs = new List<string>();
+        List<string> studiedCourses = new List<string>();
         // 
 
         // Question Panel Controls
@@ -115,6 +116,18 @@ namespace CZU_APPLICATION
 
         /// Connected as Student
         // Refresh Data
+        private string _studentID;
+        public string studentID
+        {
+            get
+            {
+                return _studentID;  
+            }
+            set
+            {
+                _studentID = value;
+            }
+        }
         private int _studentLastCourse = 0;
         public int studentLastCourse
         {
@@ -168,10 +181,14 @@ namespace CZU_APPLICATION
         }
         List<string> actions; // List used for multiple tasks to do on refreshing data. (Stores what to refresh).
         //
+        // For Question Tab
+        List<string> questionID = new List<string>();
+        //
+
         /// 
 
         // Refresh Data General 
-        List <Panel> triggerPanel = new List<Panel>();
+        List<Panel> triggerPanel = new List<Panel>();
         //
 
         // Connected as Teacher 
@@ -231,10 +248,8 @@ namespace CZU_APPLICATION
 
             // Enabling Home Panel as Start
             homeMainPanelState(true);
-
-
-
             //
+
 
             // Setting (GUI) username in Menu for connected user
             connectedId.Text = _connectedUser;
@@ -248,14 +263,20 @@ namespace CZU_APPLICATION
             if (connectedUserType == "student")
             {
 
-              /*  // Initialization of latest students logs.
-                actions = StudentsTab.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
-                refreshStudentData(actions);
-                //*/
+                /*  // Initialization of latest students logs.
+                  actions = StudentsTab.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
+                  refreshStudentData(actions);
+                  //*/
+
+                // Getting studentID for further operations
+                _studentID = StudentsTab.getStudentID(_connectedUser);
+                //
 
                 // Introducing data in Home Panels statistics
                 Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
                 // 
+
+                // Getting the list of courses 
             }
 
             else if (connectedUserType == "teacher")
@@ -265,7 +286,10 @@ namespace CZU_APPLICATION
                 //
 
                 // Getting the list of classes where teacher teaches
-                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser); 
+                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
+                //
+
+                // Showing the number of connected students 
                 Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs); // Actualizing the number of connected students
                 //
 
@@ -293,9 +317,9 @@ namespace CZU_APPLICATION
         }
         private void questionMainPanelState(bool t_mode)
         {
+  
             questionsMainPanel.Enabled = t_mode;
             questionsMainPanel.Visible = t_mode;
-
         }
         private void MainPanelNoData(bool t_mode, string t_case)
         {
@@ -303,9 +327,9 @@ namespace CZU_APPLICATION
             noDataInPanelMessage.Enabled = false;
             noDataInPanelMessage.Visible = false;
             // Variables
-            string[] casesList = new string[] { "teacherClassNoStudents", "teacherNoClasses", "studentNoColleagues", "teacherClassNoQuestions"};
-            string[] casesMessage = new string[] { "Class has no students", "You teach no classes", "You have no colleagues", "Class has no questions"};
-            Point[] casesMessagesLocations = new Point[4];
+            string[] casesList = new string[] { "teacherClassNoStudents", "teacherNoClasses", "studentNoColleagues", "teacherClassNoQuestions", "studentNoCourses", "studentHasNoQuestions"};
+            string[] casesMessage = new string[] { "Class has no students", "You teach no classes", "You have no colleagues", "Class has no questions", "Class has no courses", "You have no questions"};
+            Point[] casesMessagesLocations = new Point[6];
             //
 
             // Setting Messages Location for better readability and positioning.
@@ -313,12 +337,14 @@ namespace CZU_APPLICATION
             casesMessagesLocations[1] = new Point(400, 280);
             casesMessagesLocations[2] = new Point(400, 280);
             casesMessagesLocations[3] = new Point(400, 280);
+            casesMessagesLocations[4] = new Point(400, 280);
+            casesMessagesLocations[5] = new Point(400, 280);
  
             //
 
 
             // Verifying each case with the case from parameters list, if it exists, we'll select it.
-            for(int i = 0; i < 4; ++i)
+            for(int i = 0; i < 6; ++i)
             {
                 if(casesList[i] == t_case)
                 {
@@ -331,7 +357,14 @@ namespace CZU_APPLICATION
         }
         /// 
 
-        // Switching between lists of elements 
+        // Switching between lists of elements, adding question
+        private void addQuestions_Click(object sender, EventArgs e)
+        {
+            string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
+            string teacherID = StudentsTab.getTeacherIDByCourse(selectedCourse);
+            QuestionDetails question1 = new QuestionDetails(_studentID, _teacherID); // take selected course teacher ID);
+            question1.Show();
+        }
         private void leftStudentList_Click(object sender, EventArgs e)
         {
             if (leftPossible && connectedUserType == "teacher")
@@ -410,6 +443,19 @@ namespace CZU_APPLICATION
         }
         private void questionTabDataInitialization()
         {
+            // Modifying GUI logic, to reuse code. 
+            if (connectedUserType == "teacher")
+            {
+                questionsClassIDLabel.Text = "Class ID: ";
+                addQuestions.Enabled = false;
+                addQuestions.Visible = false;
+            }
+            else if(connectedUserType == "student")
+            {
+                questionsClassIDLabel.Text = "Courses: ";
+            }
+            //
+
             // Question Title
             questionTitle.Add(questionTitle1);
             questionTitle.Add(questionTitle2);
@@ -495,7 +541,7 @@ namespace CZU_APPLICATION
                         MessageBox.Show("AM RULAT CAZ DE QUESTIONS MAIN PANEL");
 
                         string selectedClassValue = Convert.ToString(questionsSelectClassListBox.SelectedValue);
-                        bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID);
+                        bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref questionID);
                         if (existsQuestionsInClass == true)
                         {
                             questionMainPanelState(true);
@@ -632,6 +678,7 @@ namespace CZU_APPLICATION
         //
 
         // Menu buttons
+
         private void studentsButton_Click(object sender, EventArgs e)
         {
             // Enable Refresh Data Trigger
@@ -650,8 +697,13 @@ namespace CZU_APPLICATION
             /// Show Student Panel related to connected user type (Teacher or Student)
             if (connectedUserType == "teacher") // Teacher connected
             {
+
+                // Getting the list of classes where teacher teaches
+                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
+                //
+
                 // Verifying if there are classes in list and update the (ListBox) List Teacher teached classes 
-                bool classesExists = StudentsTab.updateTeachedClassesList(studentsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                bool classesExists = StudentsTab.updateTeachedClassesList(ref studentsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
                 //
 
                 if (classesExists == true)
@@ -711,7 +763,7 @@ namespace CZU_APPLICATION
 
 
         }
-
+   
         private void homeButton_Click(object sender, EventArgs e)
         {
             // Disabling overlapped panels
@@ -768,18 +820,19 @@ namespace CZU_APPLICATION
             }
             //
           
-
             switch(connectedUserType)
             {
                 case "teacher":
                     {
-                        bool classesExists = StudentsTab.updateTeachedClassesList(questionsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                       
+
+                        bool classesExists = StudentsTab.updateTeachedClassesList(ref questionsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
                         if (classesExists == true) // If exists classes
                         {
-                            MessageBox.Show("AM RULAT CAZ DE QUESTIONS MAIN PANEL");
+                            MessageBox.Show("Teacher - AM RULAT CAZ DE QUESTIONS MAIN PANEL");
                             string selectedClassValue = Convert.ToString(questionsSelectClassListBox.Items[0]);
-                            bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID);
-                            if (existsQuestionsInClass == true)
+                            bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref questionID);
+                            if(existsQuestionsInClass == true)
                             {
                                 questionMainPanelState(true);
                                 MessageBox.Show("Class HAS questions");
@@ -799,6 +852,41 @@ namespace CZU_APPLICATION
                         }
                         break;
                     }
+                case "student":
+                    {
+                        // Getting the list of courses studied by student class
+                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref questionsSelectClassListBox, _connectedUser, ref studiedCourses);
+                        if(coursesExists == true)
+                        {
+                            MessageBox.Show(" Student - AM RULAT CAZ DE QUESTIONS MAIN PANEL, COURSES EXISTS");
+                            string selectedCourse = Convert.ToString(questionsSelectClassListBox.Items[0]);
+                            bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID);
+                            if(hasQuestions == true)
+                            {
+                                MessageBox.Show("Student has questions");
+                                questionMainPanelState(true);
+
+                            }
+                            else
+                            {
+                                // Message doesn't appear, need to be fixed
+                                MessageBox.Show("Student has NO questions");
+                                questionMainPanelState(true);
+                                MainPanelNoData(true, "studentHasNoQuestions");
+
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Student - AM RULAT CAZ DE QUESTIONS, MAIN PANEL, COURSES DON T EXIST");
+                            MainPanelNoData(true, "studentNoCourses");
+                        }
+                        //
+
+                        break;
+
+
+                    }
 
             }
             
@@ -812,6 +900,93 @@ namespace CZU_APPLICATION
         }
         // 
 
+        // Question Tab Buttons for interacting with question
+        private void questionTitle1_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        string questionTitle, question;
+                        QuestionsTab.getQuestionData(questionID[0], out questionTitle, out question);
+                        QuestionDetails question1 = new QuestionDetails(questionTitle, question, questionID[0]);
+                        question1.Show();
+                        break;
+                    }
+                case "student":
+                    {
+                        string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
+                        string teacherID = StudentsTab.getTeacherIDByCourse(selectedCourse);
+                        QuestionDetails question1 = new QuestionDetails(_studentID, _teacherID); // take selected course teacher ID);
+                        question1.Show();
+                        break;
+                    }
+            }
+
+      
+
+        }
+
+        private void questionTitle2_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        string questionTitle, question;
+                        QuestionsTab.getQuestionData(questionID[1], out questionTitle, out question);
+                        QuestionDetails question2 = new QuestionDetails(questionTitle, question, questionID[1]);
+                        question2.Show();
+                        break;
+                    }
+                case "student":
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void questionTitle3_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        string questionTitle, question;
+                        QuestionsTab.getQuestionData(questionID[2], out questionTitle, out question);
+                        QuestionDetails question3 = new QuestionDetails(questionTitle, question, questionID[2]);
+                        question3.Show();
+                        break;
+                    }
+                case "student":
+                    {
+                        break;
+                    }
+            }
+
+        }
+        private void questionTitle4_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        string questionTitle, question;
+                        QuestionsTab.getQuestionData(questionID[3], out questionTitle, out question);
+                        QuestionDetails question4 = new QuestionDetails(questionTitle, question, questionID[3]);
+                        question4.Show();
+                        break;
+                    }
+                case "student":
+                    {
+                        break;
+                    }
+            }
+
+        }
+        //
+
+
         // General Application Methods
         private void userDisconnectsSetOffline(string t_connectedUserType, string t_connectedUser)
         {
@@ -822,6 +997,8 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
+
+      
         //
     }
 }
