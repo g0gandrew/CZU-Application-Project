@@ -6,6 +6,7 @@
     <RootNamespace>CZU_APPLICATION</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <BaseOutputPath>C:\Users\Andrew\Desktop\CBSD PROJECt</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

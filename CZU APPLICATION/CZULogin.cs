@@ -6,8 +6,17 @@ namespace CZU_APPLICATION
     
     public partial class CZULogin : Form
     {
-        int count = 0;
-        string path = "SERVER=localhost; PORT=3306;DATABASE=czu_app;UID=root;PASSWORD=Andrei123!?";
+        private int _count;
+        public int count
+        {
+            get {  
+                return _count; 
+            }
+            set
+            {
+                _count = value;
+            }
+        }
         public CZULogin()
         {
             InitializeComponent();
@@ -15,8 +24,7 @@ namespace CZU_APPLICATION
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            Security.login(inUsername, inPassword, inPinCode, ref count, this);
-            // text adaugat
+            Authentication.login(inUsername, inPassword, t_inAuthKey, ref _count, this);
         }
 
         private void signUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
