@@ -25,6 +25,10 @@ namespace CZU_APPLICATION
         List<string> studiedCourses = new List<string>();
         // 
 
+        // Home Panel Statistic Controls
+        List <Label> statisticsControls = new List<Label>();
+        //
+
         // Question Panel Controls
         List <Button> questionTitle = new List<Button>();
         List <GroupBox> questionGB = new List<GroupBox>();
@@ -126,6 +130,19 @@ namespace CZU_APPLICATION
             set
             {
                 _studentID = value;
+            }
+        }
+
+        private string _studentClassID;
+        public string studentClassID
+        {
+            get
+            {
+                return _studentClassID;
+            }
+            set
+            {
+                _studentClassID = value;
             }
         }
         private int _studentLastCourse = 0;
@@ -243,11 +260,12 @@ namespace CZU_APPLICATION
         private void CZUMain_Load(object sender, EventArgs e)
         {
             // Creating the GUI of Student Tab for Users shown in panel.
-            studentTabDataInitialization(); 
+            studentTabDataInitialization();
             // 
 
-            // Enabling Home Panel as Start
+            // Enabling Home Panel as start and initializing some data. 
             homeMainPanelState(true);
+            homeTabDataInitialization();
             //
 
 
@@ -268,12 +286,16 @@ namespace CZU_APPLICATION
                   refreshStudentData(actions);
                   //*/
 
-                // Getting studentID for further operations
+                // Getting student for further operations
                 _studentID = StudentsTab.getStudentID(_connectedUser);
                 //
 
-                // Introducing data in Home Panels statistics
-                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
+                // Getting student class id for further operations
+                _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
+                //
+
+                // Actualizing the data in statistics group for Home Panel
+                Statistics.homePanelUpdateDataAsStudent(ref statisticsControls, _studentClassID, _studentID); // Actualizing the number of connected colleagues
                 // 
 
                 // Getting the list of courses 
@@ -289,8 +311,8 @@ namespace CZU_APPLICATION
                 teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
                 //
 
-                // Showing the number of connected students 
-                Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs); // Actualizing the number of connected students
+                // Actualizing the data in statistics group for Home Panel
+                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, teachedClassesIDs, _teacherID);
                 //
 
             }
@@ -497,6 +519,13 @@ namespace CZU_APPLICATION
             questionState.Add(question2State);
             questionState.Add(question3State);
             questionState.Add(question4State);
+        }
+        private void homeTabDataInitialization()
+        {
+            statisticsControls.Add(statisticsUsers);
+            statisticsControls.Add(statisticsMeetings);
+            statisticsControls.Add(statisticsQuestions);
+            statisticsControls.Add(statisticsAssignments);
         }
         //
 
@@ -777,20 +806,22 @@ namespace CZU_APPLICATION
 
             if (connectedUserType == "student")
             {
-                // Refreshing the amount of connected colleagues
-                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser)); // Actualizing the number of connected colleagues
+
+                // Actualizing the data in statistics group for Home Panel
+                Statistics.homePanelUpdateDataAsStudent(ref statisticsControls, _studentClassID, _studentID); 
                 // 
-
-
-                Statistics.homePanelConnectedColleagues(ref statisticsUsers, StudentsTab.getStudentClassID(_connectedUser));  // Actualizing the number of connected colleagues
+           
             }
             else if (connectedUserType == "teacher")
             {
 
                 // Refreshing the amount of connected students
                 teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
-                Statistics.homePanelConnectedStudents(ref statisticsUsers, teachedClassesIDs); // Actualizing the number of connected students
                 //
+
+                // Actualizing the data in statistics group for Home Panel
+                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, teachedClassesIDs, _teacherID);
+                //               
 
             }
         }

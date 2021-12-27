@@ -125,6 +125,7 @@
             this.triggerDataRefreshStudentPanel = new System.Windows.Forms.Panel();
             this.questionsMainPanel = new System.Windows.Forms.Panel();
             this.questionsPanelMainGB = new System.Windows.Forms.GroupBox();
+            this.addQuestions = new System.Windows.Forms.Button();
             this.questionPanel4 = new System.Windows.Forms.Panel();
             this.questionPanel3 = new System.Windows.Forms.Panel();
             this.questionPanel2 = new System.Windows.Forms.Panel();
@@ -174,7 +175,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.noDataInPanelMessage = new System.Windows.Forms.Label();
-            this.addQuestions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1261,6 +1261,21 @@
             this.questionsPanelMainGB.TabStop = false;
             this.questionsPanelMainGB.Text = "Questions";
             // 
+            // addQuestions
+            // 
+            this.addQuestions.BackColor = System.Drawing.Color.Transparent;
+            this.addQuestions.FlatAppearance.BorderSize = 0;
+            this.addQuestions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addQuestions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addQuestions.ForeColor = System.Drawing.Color.Transparent;
+            this.addQuestions.Image = ((System.Drawing.Image)(resources.GetObject("addQuestions.Image")));
+            this.addQuestions.Location = new System.Drawing.Point(1007, 58);
+            this.addQuestions.Name = "addQuestions";
+            this.addQuestions.Size = new System.Drawing.Size(74, 71);
+            this.addQuestions.TabIndex = 61;
+            this.addQuestions.UseVisualStyleBackColor = false;
+            this.addQuestions.Click += new System.EventHandler(this.addQuestions_Click);
+            // 
             // questionPanel4
             // 
             this.questionPanel4.Location = new System.Drawing.Point(577, 337);
@@ -1742,21 +1757,6 @@
             this.noDataInPanelMessage.TabIndex = 0;
             this.noDataInPanelMessage.Text = "Class has no questions";
             this.noDataInPanelMessage.Visible = false;
-            // 
-            // addQuestions
-            // 
-            this.addQuestions.BackColor = System.Drawing.Color.Transparent;
-            this.addQuestions.FlatAppearance.BorderSize = 0;
-            this.addQuestions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addQuestions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addQuestions.ForeColor = System.Drawing.Color.Transparent;
-            this.addQuestions.Image = ((System.Drawing.Image)(resources.GetObject("addQuestions.Image")));
-            this.addQuestions.Location = new System.Drawing.Point(1007, 58);
-            this.addQuestions.Name = "addQuestions";
-            this.addQuestions.Size = new System.Drawing.Size(74, 71);
-            this.addQuestions.TabIndex = 61;
-            this.addQuestions.UseVisualStyleBackColor = false;
-            this.addQuestions.Click += new System.EventHandler(this.addQuestions_Click);
             // 
             // CZUMain
             // 

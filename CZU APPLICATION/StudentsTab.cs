@@ -408,7 +408,7 @@ namespace CZU_APPLICATION
             // Command 2 - Student --> Questions
             for (int z = 0; z <= loopLength; z++)
             {
-                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID};";
+                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID} && state = 'not answered';";
                 cmd.CommandText = command[2];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())

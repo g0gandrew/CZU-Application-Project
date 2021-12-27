@@ -78,6 +78,7 @@ namespace CZU_APPLICATION
 
                     // Disabling the panel that covers GUI Group for showing question
                     t_questionPanel[i].Enabled = false;
+
                     t_questionPanel[i++].Visible = false;
                     //
                 }

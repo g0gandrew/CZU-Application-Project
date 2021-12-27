@@ -100,7 +100,7 @@ namespace CZU_APPLICATION
                 case "teacher": {
                         if (teacherAnswer.Text.Length <= 1000)
                         {
-                            Database.insert($"update question set answer = '{teacherAnswer.Text}', state = 'answered' where ID = {_questionID}");
+                           Database.insert($"update question set answer = '{teacherAnswer.Text}', state = 'answered' where ID = {_questionID}");
                         }
                         else
                         {
@@ -111,15 +111,13 @@ namespace CZU_APPLICATION
                 case "student": {
                         if (studentQuestion.Text.Length <= 1000)
                         {
-                           Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{question.Text}', '{Convert.ToString(priority.SelectedValue)}', '{questionTitle.Text}')");
+                          // Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{question.Text}', '{Convert.ToString(priority.SelectedValue)}', '{questionTitle.Text}')");
 
                         }
                         else
                         {
                             MessageBox.Show("Your response is too long, it shouldn't exceed 1000 charffacters!");
                         }
-
-
                         break;
                     }
             }
