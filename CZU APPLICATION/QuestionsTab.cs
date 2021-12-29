@@ -139,7 +139,7 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
-        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID)
+        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID, ref List <string> t_questionIDs)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
@@ -206,7 +206,7 @@ namespace CZU_APPLICATION
                 else
                     break;
             }
-
+            t_questionIDs = questionIDs;
         
 
             // If there is any data that satisfies our conditions
@@ -238,7 +238,7 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
-        public static void getQuestionData(string t_questionID, out string t_title, out string t_question)  
+        public static void getQuestionDataAsTeacher(string t_questionID, out string t_title, out string t_question)  
         {
             /// Setting up MYSQL CONNECTION (1)
             MySqlConnection connection = new MySqlConnection();
@@ -263,6 +263,29 @@ namespace CZU_APPLICATION
             }
             dataReader.Close();
             connection.Close();
+
+        }
+        public static void getQuestionDataAsStudent(string t_command, ref RichTextBox t_teacherAnswer,  ref RichTextBox t_studentQuestion)
+        {
+            //  MYSQL connection
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand(t_command, connection);
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_teacherAnswer.Text = dataReader.GetString(0);
+                t_studentQuestion.Text = dataReader.GetString(1);
+            }
+            dataReader.Close();
+
+            // Closing MYSQL CONNECTION
+            connection.Close();
+            //
 
         }
     }

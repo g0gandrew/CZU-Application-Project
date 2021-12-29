@@ -20,8 +20,22 @@ namespace CZU_APPLICATION
         private string _questionID { get; set; }
         private string _connectedUserType { get; set; }
         private string _studentID { get; set; }
-        private string _selectedCourse { get; set; }
         private string _teacherID { get; set; }
+        private string _interfaceMode { get; set; }
+        public QuestionDetails(string t_questionID)
+        {
+            InitializeComponent();
+            _connectedUserType = "student";
+
+            // Inserting studentID for further operations
+            _questionID = t_questionID;
+            //
+
+            // Choosing the GUI to be shown, related to operation
+            _interfaceMode = "showquestion";
+            //
+
+        }
         public QuestionDetails(string t_studentID, string t_teacherID) // Constructor for student
         {
             InitializeComponent();
@@ -37,13 +51,12 @@ namespace CZU_APPLICATION
             // Setting up connection type (Student or Teacher) 
             _connectedUserType = "student";
             //
+
+            // Setting up the connection
         }
         public QuestionDetails(string t_Title, string t_question, string t_questionID) // Constructor for teacher
         {
             InitializeComponent();
-            // Setting up question title
-            questionTitleLabel.Text = t_Title;
-            //
 
             // Filling up question rich text box with the question
             studentQuestion.Text = t_question;
@@ -61,32 +74,56 @@ namespace CZU_APPLICATION
 
 
 
-        // Critical Functions
+        /// Critical Functions
         private void QuestionDetails_Load(object sender, EventArgs e)
         {
-            enableGB(true, _connectedUserType);
-        }
-        //
 
+            // Turning on the GUI interface related to the connected user type (teacher or student)
+            enableGB(_connectedUserType);
+            //
+
+            // If student wants to see the question details
+            if (_interfaceMode == "showquestion")
+            {
+                // Getting the data to update GUI Elements
+                QuestionsTab.getQuestionDataAsStudent($"select answer, title, description from question where id = {_questionID}", ref teacherAnswer1, ref studentQuestion1);
+                //
+            }
+            //
+        }
+        ///
+       
+    
         // Enabling GUI elements
-        private void enableGB(bool t_mode, string t_connectedUserType)
+        private void enableGB(string t_connectedUserType)
         {
             switch (t_connectedUserType)
             {
                 case "teacher": {
-                        // Enabling GB
-                        questionDetailsMainGB.Enabled = t_mode;
-                        questionDetailsMainGB.Visible = t_mode;
+                        // Enabling Teacher GB
+                        answerToQuestion.Enabled = true;
+                        answerToQuestion.Visible = true;
+                        submit.Text = "Submit";
                         break;
+                        //
                 }
                 case "student":
                     {
-                        // Enabling GB
-                        submitResponse.Text = "Ask";
-                        questionDetailsMainGB2.Enabled = t_mode;
-                        questionDetailsMainGB2.Visible = t_mode;
-                        questionTitleLabel.Enabled = false;
-                        questionTitleLabel.Visible = false;
+                        if (_interfaceMode != "showquestion") 
+                        {
+
+                            // Ask a question interface will appear
+                            displayAddQuestion.Enabled = true;
+                            displayAddQuestion.Visible = true;
+                            submit.Text = "Ask";
+                            //
+                        }
+                        else // Show question answer will appear
+                        {
+                            showQuestion.Enabled = true;
+                            showQuestion.Visible = true;
+                            submit.Text = "Ok";
+                        }
                         break;
                     }
             }
@@ -104,19 +141,34 @@ namespace CZU_APPLICATION
                         }
                         else
                         {
-                            MessageBox.Show("Your response is too long, it shouldn't exceed 1000 charffacters!");
+                            MessageBox.Show("Your response is too long, it shouldn't exceed 1000 characters!");
                         }
+                        this.Close();
                         break;
                     }
                 case "student": {
-                        if (studentQuestion.Text.Length <= 1000)
+                        if (_interfaceMode != "showquestion") // If student chosed to add a question
                         {
-                          // Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{question.Text}', '{Convert.ToString(priority.SelectedValue)}', '{questionTitle.Text}')");
+                            // Verifying if there minimum one priority mode was selected
+                            bool prioritySelected = questionPriority.SelectedIndex > -1;
+                            //
 
+                            if (studentQuestion.Text.Length <= 1000)
+                            {
+                                if (!prioritySelected)
+                                    MessageBox.Show("Select a priority mode before asking the question!");
+                                else
+                                {
+                                    Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{studentQuestion.Text}', '{questionPriority.SelectedItem.ToString()}', '{questionTitle.Text}')");
+                                    this.Close();
+                                }
+                            }
+                            else
+                                MessageBox.Show("Your response is too long, it shouldn't exceed 1000 characters!");
                         }
                         else
                         {
-                            MessageBox.Show("Your response is too long, it shouldn't exceed 1000 charffacters!");
+                            this.Close();
                         }
                         break;
                     }

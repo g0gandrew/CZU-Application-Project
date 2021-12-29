@@ -87,19 +87,18 @@ namespace CZU_APPLICATION
                         else if (i == 1)
                             command = $"select count(meetingID) from classmeeting where classId = {x} && meetingID in (select id from meeting where teacherID = {t_teacherID})";
                         else if(i == 2)
-                            command = $"select count(id) from question where teacherID = {t_teacherID} && state = 'not answered'";
+                            command = $"select count(id) from question where teacherID = {t_teacherID} && state = 'not answered' && studentId in (select id from student where classId = {x})";
                         else
                             command = $"select count(assignmentID) from classassignment where classId = {x} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
                         cmd.CommandText = command;
                         dataReader = cmd.ExecuteReader();
                         while (dataReader.Read())
                         {
-                            count += Convert.ToInt32(dataReader.GetString(0));
+                            count += Convert.ToInt32(dataReader.GetString(0));  
                         }
                         dataReader.Close();
                     }
                     t_labels[i].Text = Convert.ToString(count);
-                    count = 0;
                 }
             }
             // 

@@ -53,8 +53,10 @@
             // 
             this.inPassword.Location = new System.Drawing.Point(375, 209);
             this.inPassword.Name = "inPassword";
+            this.inPassword.PasswordChar = '*';
             this.inPassword.Size = new System.Drawing.Size(205, 27);
             this.inPassword.TabIndex = 3;
+            this.inPassword.TextChanged += new System.EventHandler(this.inPassword_TextChanged);
             // 
             // label2
             // 
@@ -97,6 +99,7 @@
             // 
             this.t_inAuthKey.Location = new System.Drawing.Point(375, 259);
             this.t_inAuthKey.Name = "t_inAuthKey";
+            this.t_inAuthKey.PasswordChar = '*';
             this.t_inAuthKey.Size = new System.Drawing.Size(205, 27);
             this.t_inAuthKey.TabIndex = 8;
             // 
@@ -152,13 +155,13 @@
             this.Controls.Add(this.inPassword);
             this.Controls.Add(this.inUsername);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CZULogin";
-            this.Text = "CZU University of LifeScience";
+            this.Text = "CZU University of LifeScience - Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

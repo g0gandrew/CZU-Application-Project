@@ -1769,7 +1769,7 @@
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.homeMainPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

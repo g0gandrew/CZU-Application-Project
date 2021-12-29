@@ -13,30 +13,30 @@ namespace CZU_APPLICATION
     public partial class CZUMain : Form
     {
         // Student Panel Controls
-        List<GroupBox> studentGB = new List<GroupBox>();
-        List<PictureBox> studentConnected = new List<PictureBox>();
-        List<Button> studentImage = new List<Button>();
-        List<Label> studentName = new List<Label>();
-        List<Label> studentQuestion = new List<Label>();
-        List<Label> studentAssignment = new List<Label>();
-        List<Label> studentMeeting = new List<Label>();
-        List<Panel> studentPanel = new List<Panel>();
+        List<GroupBox> studentGB = new();
+        List<PictureBox> studentConnected = new();
+        List<Button> studentImage = new();
+        List<Label> studentName = new();
+        List<Label> studentQuestion = new();
+        List<Label> studentAssignment = new();
+        List<Label> studentMeeting = new();
+        List<Panel> studentPanel = new();
         List<string> teachedClassesIDs = new List<string>();
         List<string> studiedCourses = new List<string>();
         // 
 
         // Home Panel Statistic Controls
-        List <Label> statisticsControls = new List<Label>();
+        List <Label> statisticsControls = new();
         //
 
         // Question Panel Controls
-        List <Button> questionTitle = new List<Button>();
-        List <GroupBox> questionGB = new List<GroupBox>();
-        List <Label> questionStudentName = new List<Label>();
-        List <Label> questionPriorityLevel = new List<Label>();
-        List <Label> questionSubmitDate = new List<Label>();
-        List <Panel> questionPanel = new List<Panel>();
-        List <Label> questionState = new List<Label>();
+        List <Button> questionTitle = new();
+        List <GroupBox> questionGB = new();
+        List <Label> questionStudentName = new();
+        List <Label> questionPriorityLevel = new();
+        List <Label> questionSubmitDate = new();
+        List <Panel> questionPanel = new();
+        List <Label> questionState = new();
         //
 
         private string _connectedUserType;
@@ -205,7 +205,7 @@ namespace CZU_APPLICATION
         /// 
 
         // Refresh Data General 
-        List<Panel> triggerPanel = new List<Panel>();
+        List<Panel> triggerPanel = new();
         //
 
         // Connected as Teacher 
@@ -384,8 +384,8 @@ namespace CZU_APPLICATION
         {
             string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
             string teacherID = StudentsTab.getTeacherIDByCourse(selectedCourse);
-            QuestionDetails question1 = new QuestionDetails(_studentID, _teacherID); // take selected course teacher ID);
-            question1.Show();
+            QuestionDetails addQuestion = new QuestionDetails(_studentID, teacherID); // take selected course teacher ID);
+            addQuestion.Show();
         }
         private void leftStudentList_Click(object sender, EventArgs e)
         {
@@ -539,14 +539,10 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         MessageBox.Show("AM RULAT CAZ DE STUDENTS MAIN PANEL");
-
-
-
                         string selectedClassValue = Convert.ToString(studentsSelectClassListBox.SelectedValue);
                         bool existsStudentsInClass = StudentsTab.updatePanelAsTeacher(out _recordsOnPage, out _rightPossible, out _leftPossible, ref _startingFrom, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID);
                         if (existsStudentsInClass == true)
                         {
-                            studentsMainPanelState(true);
                             MessageBox.Show("Class HAS students");
                         }
                         else
@@ -573,17 +569,33 @@ namespace CZU_APPLICATION
                         bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref questionID);
                         if (existsQuestionsInClass == true)
                         {
-                            questionMainPanelState(true);
                             MessageBox.Show("Class HAS questions");
                         }
                         else
                         {
-                            MessageBox.Show("Class HAS NO QUESTIONS");
                             MainPanelNoData(true, "teacherClassNoQuestions");
+                            MessageBox.Show("Class HAS NO QUESTIONS");
                         }
+                        break;
                     }
-                    break;
+                case "student":
+                    {
+                        string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
+                        bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref questionID);
+                        if (hasQuestions == true)
+                        {
+                            MessageBox.Show("Student has questions");
 
+                        }
+                        else
+                        {
+                            // Message doesn't appear, need to be fixed
+                            MessageBox.Show("Student has NO questions");
+                            MainPanelNoData(true, "studentHasNoQuestions");
+                        }
+                        break;
+
+                    }
             }
         }
 
@@ -871,8 +883,8 @@ namespace CZU_APPLICATION
                             else
                             {
                                 questionMainPanelState(true);
-                                MessageBox.Show("Class HAS NO QUESTIONS");
                                 MainPanelNoData(true, "teacherClassNoQuestions");
+                                MessageBox.Show("Class HAS NO QUESTIONS");
                             }
                         }
 
@@ -891,7 +903,7 @@ namespace CZU_APPLICATION
                         {
                             MessageBox.Show(" Student - AM RULAT CAZ DE QUESTIONS MAIN PANEL, COURSES EXISTS");
                             string selectedCourse = Convert.ToString(questionsSelectClassListBox.Items[0]);
-                            bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID);
+                            bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref questionID);
                             if(hasQuestions == true)
                             {
                                 MessageBox.Show("Student has questions");
@@ -939,16 +951,15 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionData(questionID[0], out questionTitle, out question);
+                        QuestionsTab.getQuestionDataAsTeacher(questionID[0], out questionTitle, out question);
                         QuestionDetails question1 = new QuestionDetails(questionTitle, question, questionID[0]);
                         question1.Show();
                         break;
                     }
                 case "student":
                     {
-                        string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
-                        string teacherID = StudentsTab.getTeacherIDByCourse(selectedCourse);
-                        QuestionDetails question1 = new QuestionDetails(_studentID, _teacherID); // take selected course teacher ID);
+
+                        QuestionDetails question1 = new QuestionDetails(questionID[0]); // take selected course teacher ID);
                         question1.Show();
                         break;
                     }
@@ -965,13 +976,15 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionData(questionID[1], out questionTitle, out question);
+                        QuestionsTab.getQuestionDataAsTeacher(questionID[1], out questionTitle, out question);
                         QuestionDetails question2 = new QuestionDetails(questionTitle, question, questionID[1]);
                         question2.Show();
                         break;
                     }
                 case "student":
                     {
+                        QuestionDetails question2 = new QuestionDetails(questionID[1]); // take selected course teacher ID);
+                        question2.Show();
                         break;
                     }
             }
@@ -984,13 +997,15 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionData(questionID[2], out questionTitle, out question);
+                        QuestionsTab.getQuestionDataAsTeacher(questionID[2], out questionTitle, out question);
                         QuestionDetails question3 = new QuestionDetails(questionTitle, question, questionID[2]);
                         question3.Show();
                         break;
                     }
                 case "student":
                     {
+                        QuestionDetails question3 = new QuestionDetails(questionID[2]); // take selected course teacher ID);
+                        question3.Show();
                         break;
                     }
             }
@@ -1003,13 +1018,15 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionData(questionID[3], out questionTitle, out question);
+                        QuestionsTab.getQuestionDataAsTeacher(questionID[3], out questionTitle, out question);
                         QuestionDetails question4 = new QuestionDetails(questionTitle, question, questionID[3]);
                         question4.Show();
                         break;
                     }
                 case "student":
                     {
+                        QuestionDetails question4 = new QuestionDetails(questionID[3]); // take selected course teacher ID);
+                        question4.Show();
                         break;
                     }
             }

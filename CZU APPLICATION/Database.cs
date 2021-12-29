@@ -61,7 +61,6 @@ namespace CZU_APPLICATION
             //
             return t_registrationToken;
         }
-
     
         public static void deleteLogs(string t_connectedPeople, string t_dataType)
         {

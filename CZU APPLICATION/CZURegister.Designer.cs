@@ -45,16 +45,14 @@
             this.register_button = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.birthday = new System.Windows.Forms.Label();
-            this.maleCheck = new System.Windows.Forms.CheckBox();
-            this.femaleCheck = new System.Windows.Forms.CheckBox();
-            this.unspecifiedCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.birthDateControl = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.selectSex = new System.Windows.Forms.CheckedListBox();
             this.inLastName = new System.Windows.Forms.TextBox();
             this.inAuthKey = new System.Windows.Forms.TextBox();
-            this.birthDateControl = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -136,6 +134,7 @@
             // 
             this.inPassword.Location = new System.Drawing.Point(344, 77);
             this.inPassword.Name = "inPassword";
+            this.inPassword.PasswordChar = '*';
             this.inPassword.Size = new System.Drawing.Size(169, 30);
             this.inPassword.TabIndex = 11;
             // 
@@ -143,6 +142,7 @@
             // 
             this.inEmail.Location = new System.Drawing.Point(591, 77);
             this.inEmail.Name = "inEmail";
+            this.inEmail.PlaceholderText = "email@domain.com";
             this.inEmail.Size = new System.Drawing.Size(169, 30);
             this.inEmail.TabIndex = 12;
             // 
@@ -197,36 +197,6 @@
             this.birthday.TabIndex = 19;
             this.birthday.Text = "Birth Date";
             // 
-            // maleCheck
-            // 
-            this.maleCheck.AutoSize = true;
-            this.maleCheck.Location = new System.Drawing.Point(19, 29);
-            this.maleCheck.Name = "maleCheck";
-            this.maleCheck.Size = new System.Drawing.Size(69, 27);
-            this.maleCheck.TabIndex = 20;
-            this.maleCheck.Text = "Male";
-            this.maleCheck.UseVisualStyleBackColor = true;
-            // 
-            // femaleCheck
-            // 
-            this.femaleCheck.AutoSize = true;
-            this.femaleCheck.Location = new System.Drawing.Point(19, 53);
-            this.femaleCheck.Name = "femaleCheck";
-            this.femaleCheck.Size = new System.Drawing.Size(86, 27);
-            this.femaleCheck.TabIndex = 21;
-            this.femaleCheck.Text = "Female";
-            this.femaleCheck.UseVisualStyleBackColor = true;
-            // 
-            // unspecifiedCheck
-            // 
-            this.unspecifiedCheck.AutoSize = true;
-            this.unspecifiedCheck.Location = new System.Drawing.Point(19, 84);
-            this.unspecifiedCheck.Name = "unspecifiedCheck";
-            this.unspecifiedCheck.Size = new System.Drawing.Size(120, 27);
-            this.unspecifiedCheck.TabIndex = 23;
-            this.unspecifiedCheck.Text = "Unspecified";
-            this.unspecifiedCheck.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.birthDateControl);
@@ -255,6 +225,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Account Details";
             // 
+            // birthDateControl
+            // 
+            this.birthDateControl.Location = new System.Drawing.Point(85, 304);
+            this.birthDateControl.Name = "birthDateControl";
+            this.birthDateControl.Size = new System.Drawing.Size(279, 30);
+            this.birthDateControl.TabIndex = 30;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -275,15 +252,27 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.unspecifiedCheck);
-            this.groupBox2.Controls.Add(this.maleCheck);
-            this.groupBox2.Controls.Add(this.femaleCheck);
-            this.groupBox2.Location = new System.Drawing.Point(425, 267);
+            this.groupBox2.Controls.Add(this.selectSex);
+            this.groupBox2.Location = new System.Drawing.Point(425, 261);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(134, 117);
+            this.groupBox2.Size = new System.Drawing.Size(136, 123);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sex";
+            // 
+            // selectSex
+            // 
+            this.selectSex.BackColor = System.Drawing.SystemColors.Control;
+            this.selectSex.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.selectSex.FormattingEnabled = true;
+            this.selectSex.Items.AddRange(new object[] {
+            "Male\t",
+            "Female",
+            "Custom"});
+            this.selectSex.Location = new System.Drawing.Point(16, 29);
+            this.selectSex.Name = "selectSex";
+            this.selectSex.Size = new System.Drawing.Size(114, 75);
+            this.selectSex.TabIndex = 25;
             // 
             // inLastName
             // 
@@ -296,15 +285,9 @@
             // 
             this.inAuthKey.Location = new System.Drawing.Point(344, 146);
             this.inAuthKey.Name = "inAuthKey";
+            this.inAuthKey.PasswordChar = '*';
             this.inAuthKey.Size = new System.Drawing.Size(169, 30);
             this.inAuthKey.TabIndex = 26;
-            // 
-            // birthDateControl
-            // 
-            this.birthDateControl.Location = new System.Drawing.Point(85, 304);
-            this.birthDateControl.Name = "birthDateControl";
-            this.birthDateControl.Size = new System.Drawing.Size(279, 30);
-            this.birthDateControl.TabIndex = 30;
             // 
             // CZURegister
             // 
@@ -318,17 +301,16 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CZURegister";
-            this.Text = "Form3";
+            this.Text = "CZU University of LifeScience - Register";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,9 +334,6 @@
         private System.Windows.Forms.Button register_button;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label birthday;
-        private System.Windows.Forms.CheckBox maleCheck;
-        private System.Windows.Forms.CheckBox femaleCheck;
-        private System.Windows.Forms.CheckBox unspecifiedCheck;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label9;
@@ -362,5 +341,6 @@
         private System.Windows.Forms.TextBox inLastName;
         private System.Windows.Forms.TextBox inAuthKey;
         private System.Windows.Forms.DateTimePicker birthDateControl;
+        private System.Windows.Forms.CheckedListBox selectSex;
     }
 }

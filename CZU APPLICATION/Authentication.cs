@@ -13,9 +13,7 @@ namespace CZU_APPLICATION
         {
             string nonquery = null;
             string registrationType = null;
-            registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student)
-            MessageBox.Show(registrationType);
-            MessageBox.Show(t_birthDate);
+            registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student), if it is valid.
             switch (registrationType)
             {
                 case "teacher":
@@ -23,7 +21,15 @@ namespace CZU_APPLICATION
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
                     connection.Open();
-                    nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
+                    try
+                    {
+                        nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
+                    }
+                    catch(MySqlException unique)
+                    {
+                            MessageBox.Show(unique.Message);
+                    }
+
                     MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
                     connection.Close();
@@ -32,7 +38,6 @@ namespace CZU_APPLICATION
 
                 case "student":
                 {
-
                     string studyingYear = null, classID = null;
                     // Getting data for updating student studying year and classID related to registration token 
                     MySqlConnection connection = new MySqlConnection();

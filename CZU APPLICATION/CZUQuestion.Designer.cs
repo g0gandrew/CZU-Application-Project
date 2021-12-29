@@ -30,85 +30,57 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuestionDetails));
             this.studentQuestion = new System.Windows.Forms.RichTextBox();
-            this.submitResponse = new System.Windows.Forms.Button();
+            this.submit = new System.Windows.Forms.Button();
             this.teacherAnswer = new System.Windows.Forms.RichTextBox();
-            this.questionDetailsMainGB = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.exit = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.questionDetailsMainGB2 = new System.Windows.Forms.GroupBox();
+            this.logo = new System.Windows.Forms.PictureBox();
+            this.questionPriority = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.priority = new System.Windows.Forms.CheckedListBox();
             this.questionTitle = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.question = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.questionTitleLabel = new System.Windows.Forms.Label();
-            this.questionDetailsMainGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.questionDetailsMainGB2.SuspendLayout();
+            this.answerToQuestion = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.displayAddQuestion = new System.Windows.Forms.Panel();
+            this.showQuestion = new System.Windows.Forms.Panel();
+            this.studentQuestion1 = new System.Windows.Forms.RichTextBox();
+            this.teacherAnswer1 = new System.Windows.Forms.RichTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            this.answerToQuestion.SuspendLayout();
+            this.displayAddQuestion.SuspendLayout();
+            this.showQuestion.SuspendLayout();
             this.SuspendLayout();
             // 
             // studentQuestion
             // 
-            this.studentQuestion.Location = new System.Drawing.Point(104, 47);
+            this.studentQuestion.Location = new System.Drawing.Point(141, 93);
             this.studentQuestion.Name = "studentQuestion";
             this.studentQuestion.ReadOnly = true;
             this.studentQuestion.Size = new System.Drawing.Size(745, 178);
             this.studentQuestion.TabIndex = 1;
             this.studentQuestion.Text = "";
             // 
-            // submitResponse
+            // submit
             // 
-            this.submitResponse.Location = new System.Drawing.Point(374, 677);
-            this.submitResponse.Name = "submitResponse";
-            this.submitResponse.Size = new System.Drawing.Size(145, 53);
-            this.submitResponse.TabIndex = 3;
-            this.submitResponse.Text = "Response";
-            this.submitResponse.UseVisualStyleBackColor = true;
-            this.submitResponse.Click += new System.EventHandler(this.submitResponse_Click);
+            this.submit.Location = new System.Drawing.Point(374, 677);
+            this.submit.Name = "submit";
+            this.submit.Size = new System.Drawing.Size(145, 53);
+            this.submit.TabIndex = 3;
+            this.submit.Text = "Response";
+            this.submit.UseVisualStyleBackColor = true;
+            this.submit.Click += new System.EventHandler(this.submitResponse_Click);
             // 
             // teacherAnswer
             // 
-            this.teacherAnswer.Location = new System.Drawing.Point(104, 268);
+            this.teacherAnswer.Location = new System.Drawing.Point(137, 328);
             this.teacherAnswer.Name = "teacherAnswer";
-            this.teacherAnswer.Size = new System.Drawing.Size(745, 168);
+            this.teacherAnswer.Size = new System.Drawing.Size(745, 188);
             this.teacherAnswer.TabIndex = 4;
             this.teacherAnswer.Text = "";
-            // 
-            // questionDetailsMainGB
-            // 
-            this.questionDetailsMainGB.Controls.Add(this.label2);
-            this.questionDetailsMainGB.Controls.Add(this.label1);
-            this.questionDetailsMainGB.Controls.Add(this.teacherAnswer);
-            this.questionDetailsMainGB.Controls.Add(this.studentQuestion);
-            this.questionDetailsMainGB.Enabled = false;
-            this.questionDetailsMainGB.Location = new System.Drawing.Point(53, 157);
-            this.questionDetailsMainGB.Name = "questionDetailsMainGB";
-            this.questionDetailsMainGB.Size = new System.Drawing.Size(951, 505);
-            this.questionDetailsMainGB.TabIndex = 5;
-            this.questionDetailsMainGB.TabStop = false;
-            this.questionDetailsMainGB.Text = "Question";
-            this.questionDetailsMainGB.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 268);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Response:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 20);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Question:";
             // 
             // exit
             // 
@@ -120,58 +92,40 @@
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
-            // pictureBox1
+            // logo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, -1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(381, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.logo.Image = ((System.Drawing.Image)(resources.GetObject("logo.Image")));
+            this.logo.Location = new System.Drawing.Point(-1, -1);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(381, 90);
+            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logo.TabIndex = 7;
+            this.logo.TabStop = false;
             // 
-            // questionDetailsMainGB2
+            // questionPriority
             // 
-            this.questionDetailsMainGB2.Controls.Add(this.label5);
-            this.questionDetailsMainGB2.Controls.Add(this.priority);
-            this.questionDetailsMainGB2.Controls.Add(this.questionTitle);
-            this.questionDetailsMainGB2.Controls.Add(this.label4);
-            this.questionDetailsMainGB2.Controls.Add(this.question);
-            this.questionDetailsMainGB2.Controls.Add(this.label3);
-            this.questionDetailsMainGB2.Enabled = false;
-            this.questionDetailsMainGB2.Location = new System.Drawing.Point(53, 157);
-            this.questionDetailsMainGB2.Name = "questionDetailsMainGB2";
-            this.questionDetailsMainGB2.Size = new System.Drawing.Size(951, 505);
-            this.questionDetailsMainGB2.TabIndex = 8;
-            this.questionDetailsMainGB2.TabStop = false;
-            this.questionDetailsMainGB2.Text = "Question";
-            this.questionDetailsMainGB2.Visible = false;
+            this.questionPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.questionPriority.FormattingEnabled = true;
+            this.questionPriority.Items.AddRange(new object[] {
+            "Urgent",
+            "Minor"});
+            this.questionPriority.Location = new System.Drawing.Point(134, 106);
+            this.questionPriority.Name = "questionPriority";
+            this.questionPriority.Size = new System.Drawing.Size(100, 28);
+            this.questionPriority.TabIndex = 6;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(410, 228);
+            this.label5.Location = new System.Drawing.Point(462, 182);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 20);
             this.label5.TabIndex = 5;
             this.label5.Text = "Your Question:";
             // 
-            // priority
-            // 
-            this.priority.BackColor = System.Drawing.SystemColors.Control;
-            this.priority.FormattingEnabled = true;
-            this.priority.Items.AddRange(new object[] {
-            "High",
-            "Medium",
-            "Low"});
-            this.priority.Location = new System.Drawing.Point(104, 95);
-            this.priority.Name = "priority";
-            this.priority.Size = new System.Drawing.Size(149, 70);
-            this.priority.TabIndex = 4;
-            // 
             // questionTitle
             // 
-            this.questionTitle.Location = new System.Drawing.Point(99, 45);
+            this.questionTitle.Location = new System.Drawing.Point(0, 0);
             this.questionTitle.Name = "questionTitle";
             this.questionTitle.Size = new System.Drawing.Size(652, 27);
             this.questionTitle.TabIndex = 3;
@@ -179,7 +133,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 47);
+            this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 20);
             this.label4.TabIndex = 2;
@@ -187,75 +141,166 @@
             // 
             // question
             // 
-            this.question.Location = new System.Drawing.Point(99, 268);
+            this.question.Location = new System.Drawing.Point(134, 237);
             this.question.Name = "question";
-            this.question.Size = new System.Drawing.Size(691, 169);
+            this.question.Size = new System.Drawing.Size(768, 256);
             this.question.TabIndex = 1;
             this.question.Text = "";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 95);
+            this.label3.Location = new System.Drawing.Point(46, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 20);
             this.label3.TabIndex = 0;
             this.label3.Text = "Priority:";
             // 
-            // questionTitleLabel
+            // answerToQuestion
             // 
-            this.questionTitleLabel.AutoSize = true;
-            this.questionTitleLabel.Font = new System.Drawing.Font("Impact", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.questionTitleLabel.Location = new System.Drawing.Point(433, 117);
-            this.questionTitleLabel.Name = "questionTitleLabel";
-            this.questionTitleLabel.Size = new System.Drawing.Size(200, 28);
-            this.questionTitleLabel.TabIndex = 9;
-            this.questionTitleLabel.Text = "Title of the question";
+            this.answerToQuestion.Controls.Add(this.studentQuestion);
+            this.answerToQuestion.Controls.Add(this.teacherAnswer);
+            this.answerToQuestion.Controls.Add(this.label2);
+            this.answerToQuestion.Controls.Add(this.label1);
+            this.answerToQuestion.Enabled = false;
+            this.answerToQuestion.Location = new System.Drawing.Point(33, 95);
+            this.answerToQuestion.Name = "answerToQuestion";
+            this.answerToQuestion.Size = new System.Drawing.Size(1028, 573);
+            this.answerToQuestion.TabIndex = 10;
+            this.answerToQuestion.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(443, 295);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Your Answer:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(443, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(126, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Student Question:";
+            // 
+            // displayAddQuestion
+            // 
+            this.displayAddQuestion.Controls.Add(this.questionPriority);
+            this.displayAddQuestion.Controls.Add(this.questionTitle);
+            this.displayAddQuestion.Controls.Add(this.question);
+            this.displayAddQuestion.Controls.Add(this.label5);
+            this.displayAddQuestion.Controls.Add(this.label3);
+            this.displayAddQuestion.Controls.Add(this.label4);
+            this.displayAddQuestion.Enabled = false;
+            this.displayAddQuestion.Location = new System.Drawing.Point(33, 95);
+            this.displayAddQuestion.Name = "displayAddQuestion";
+            this.displayAddQuestion.Size = new System.Drawing.Size(1025, 576);
+            this.displayAddQuestion.TabIndex = 11;
+            this.displayAddQuestion.Visible = false;
+            // 
+            // showQuestion
+            // 
+            this.showQuestion.Controls.Add(this.studentQuestion1);
+            this.showQuestion.Controls.Add(this.teacherAnswer1);
+            this.showQuestion.Controls.Add(this.label6);
+            this.showQuestion.Controls.Add(this.label7);
+            this.showQuestion.Enabled = false;
+            this.showQuestion.Location = new System.Drawing.Point(33, 95);
+            this.showQuestion.Name = "showQuestion";
+            this.showQuestion.Size = new System.Drawing.Size(1028, 573);
+            this.showQuestion.TabIndex = 11;
+            this.showQuestion.Visible = false;
+            // 
+            // studentQuestion1
+            // 
+            this.studentQuestion1.Location = new System.Drawing.Point(141, 93);
+            this.studentQuestion1.Name = "studentQuestion1";
+            this.studentQuestion1.ReadOnly = true;
+            this.studentQuestion1.Size = new System.Drawing.Size(745, 178);
+            this.studentQuestion1.TabIndex = 1;
+            this.studentQuestion1.Text = "";
+            // 
+            // teacherAnswer1
+            // 
+            this.teacherAnswer1.Location = new System.Drawing.Point(137, 328);
+            this.teacherAnswer1.Name = "teacherAnswer1";
+            this.teacherAnswer1.ReadOnly = true;
+            this.teacherAnswer1.Size = new System.Drawing.Size(745, 188);
+            this.teacherAnswer1.TabIndex = 4;
+            this.teacherAnswer1.Text = "";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(443, 295);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(115, 20);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Teacher Answer:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(443, 60);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(104, 20);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Your Question:";
             // 
             // QuestionDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1079, 742);
-            this.Controls.Add(this.questionDetailsMainGB2);
-            this.Controls.Add(this.questionTitleLabel);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.showQuestion);
+            this.Controls.Add(this.answerToQuestion);
+            this.Controls.Add(this.displayAddQuestion);
+            this.Controls.Add(this.logo);
             this.Controls.Add(this.exit);
-            this.Controls.Add(this.submitResponse);
-            this.Controls.Add(this.questionDetailsMainGB);
+            this.Controls.Add(this.submit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "QuestionDetails";
-            this.Text = "Czech University Of LifeSciences";
+            this.Text = "CZU University of LifeScience - Question";
             this.Load += new System.EventHandler(this.QuestionDetails_Load);
-            this.questionDetailsMainGB.ResumeLayout(false);
-            this.questionDetailsMainGB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.questionDetailsMainGB2.ResumeLayout(false);
-            this.questionDetailsMainGB2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            this.answerToQuestion.ResumeLayout(false);
+            this.answerToQuestion.PerformLayout();
+            this.displayAddQuestion.ResumeLayout(false);
+            this.displayAddQuestion.PerformLayout();
+            this.showQuestion.ResumeLayout(false);
+            this.showQuestion.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.RichTextBox studentQuestion;
-        private System.Windows.Forms.Button submitResponse;
+        private System.Windows.Forms.Button submit;
         private System.Windows.Forms.RichTextBox teacherAnswer;
-        private System.Windows.Forms.GroupBox questionDetailsMainGB;
         private System.Windows.Forms.Button exit;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox questionDetailsMainGB2;
+        private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckedListBox priority;
         private System.Windows.Forms.TextBox questionTitle;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox question;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label questionTitleLabel;
+        private System.Windows.Forms.ComboBox questionPriority;
+        private System.Windows.Forms.Panel answerToQuestion;
+        private System.Windows.Forms.Panel displayAddQuestion;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel showQuestion;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RichTextBox studentQuestion1;
+        private System.Windows.Forms.RichTextBox teacherAnswer1;
     }
 }

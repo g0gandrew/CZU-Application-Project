@@ -32,5 +32,10 @@ namespace CZU_APPLICATION
             CZURegister register = new CZURegister();
             register.Show();
         }
-    }
+
+        private void inPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+     }
 }
