@@ -9,7 +9,7 @@ namespace CZU_APPLICATION
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
         // Registration
-        public static void registration(string t_username, string t_firstName, string t_lastName, string t_password, string t_authKey, string t_email, string t_phoneNumber, string t_sex, string t_birthDate, string t_regKey)
+        public static bool registration(string t_username, string t_firstName, string t_lastName, string t_password, string t_authKey, string t_email, string t_phoneNumber, string t_sex, string t_birthDate, string t_regKey)
         {
             string nonquery = null;
             string registrationType = null;
@@ -33,7 +33,7 @@ namespace CZU_APPLICATION
                     MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
                     connection.Close();
-                    break;
+                    return true;
                 }
 
                 case "student":
@@ -71,12 +71,12 @@ namespace CZU_APPLICATION
                     cmd.ExecuteNonQuery();
                     connection.Close();
                     //
-                    break;
+                    return true;
                 }
                 default:
                 {
                     MessageBox.Show("Registration Token is invalid");
-                    break;
+                    return false;
                 }
             }
 

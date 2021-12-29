@@ -9,7 +9,7 @@ namespace CZU_APPLICATION
 {
     internal static class Security
     {
-        public static bool registrationFormatVerifier(ref List<TextBox> textBoxes, ref CheckedListBox t_selectSex)
+        public static bool registrationFormatVerifier(ref List<TextBox> textBoxes, ref CheckedListBox t_selectSex, ref string t_sexValue)
         {
             // List of errors
             List<string> errors = new List<string>();
@@ -56,9 +56,9 @@ namespace CZU_APPLICATION
             //
 
             // Verifying the phone number
-            int phoneNumber;
+             ulong phoneNumber;
             // Trying to convert the phone number (string), into an int value, to see if it's compound only from digits.
-            if (int.TryParse(textBoxes[3].Text.Substring(0), out phoneNumber))
+            if (ulong.TryParse(textBoxes[3].Text.Substring(0), out phoneNumber))
             {
                 if (textBoxes[3].Text.Length > 15)
                 {
@@ -138,6 +138,11 @@ namespace CZU_APPLICATION
             {
                 errors.Add("Select just one gender!");
                 t_selectSex.ClearSelected();
+            }
+            else if(count == 1)
+            {
+                string gender = t_selectSex.GetItemText(t_selectSex.SelectedItem).Substring(0,1); 
+                t_sexValue = gender;
             }
             //
             ///

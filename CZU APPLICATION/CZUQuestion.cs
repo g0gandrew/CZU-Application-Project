@@ -122,7 +122,8 @@ namespace CZU_APPLICATION
                         {
                             showQuestion.Enabled = true;
                             showQuestion.Visible = true;
-                            submit.Text = "Ok";
+                            submit.Text = "Exit";
+                            exit.Text = "Delete Question";
                         }
                         break;
                     }
@@ -166,7 +167,7 @@ namespace CZU_APPLICATION
                             else
                                 MessageBox.Show("Your response is too long, it shouldn't exceed 1000 characters!");
                         }
-                        else
+                        else 
                         {
                             this.Close();
                         }
@@ -176,7 +177,16 @@ namespace CZU_APPLICATION
         }
         private void exit_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            if (_interfaceMode == "showquestion")
+            {
+                Database.insert($"delete from question where id = {_questionID};");
+                MessageBox.Show("Your question was deleted!");
+                this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
         }
         //
 

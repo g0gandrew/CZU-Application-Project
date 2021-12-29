@@ -219,6 +219,16 @@ namespace CZU_APPLICATION
         }
 
         // Critical Functions for Form
+        private void disableMenu(string t_message)
+        {
+            studentsButton.Enabled = false;
+            meetingsButton.Enabled = false;
+            homeButton.Enabled = false;
+            assignmentsButton.Enabled = false;
+            questionsButton.Enabled = false;
+            MessageBox.Show(t_message);
+
+        }
         private void refreshStudentData(List <string> t_actions) // hard coded function
         {
             foreach (string i in t_actions)
@@ -294,11 +304,22 @@ namespace CZU_APPLICATION
                 _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
                 //
 
-                // Actualizing the data in statistics group for Home Panel
-                Statistics.homePanelUpdateDataAsStudent(ref statisticsControls, _studentClassID, _studentID); // Actualizing the number of connected colleagues
-                // 
+                /// Verifying if the student is assigned to a class
 
-                // Getting the list of courses 
+                if (_studentClassID == null)  // If it is not assigned to a class
+                {
+                    string message = "You are not assigned to a class yet!";
+                    // Disable all buttons
+                    disableMenu(message);
+                    //
+                }
+                else // If it is assigned to a class
+                {
+                    // Actualizing the data in statistics group for Home Panel
+                    Statistics.homePanelUpdateDataAsStudent(ref statisticsControls, _studentClassID, _studentID); 
+                    //
+                }
+                ///
             }
 
             else if (connectedUserType == "teacher")
@@ -818,6 +839,9 @@ namespace CZU_APPLICATION
 
             if (connectedUserType == "student")
             {
+                // Getting student class until create trigger
+                _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
+                //
 
                 // Actualizing the data in statistics group for Home Panel
                 Statistics.homePanelUpdateDataAsStudent(ref statisticsControls, _studentClassID, _studentID); 
@@ -882,8 +906,8 @@ namespace CZU_APPLICATION
                             }
                             else
                             {
-                                questionMainPanelState(true);
                                 MainPanelNoData(true, "teacherClassNoQuestions");
+                                questionMainPanelState(true);
                                 MessageBox.Show("Class HAS NO QUESTIONS");
                             }
                         }
@@ -916,7 +940,6 @@ namespace CZU_APPLICATION
                                 MessageBox.Show("Student has NO questions");
                                 questionMainPanelState(true);
                                 MainPanelNoData(true, "studentHasNoQuestions");
-
                             }
                         }
                         else
@@ -1045,8 +1068,6 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
-
-      
         //
     }
 }

@@ -125,7 +125,7 @@
             // 
             // questionTitle
             // 
-            this.questionTitle.Location = new System.Drawing.Point(0, 0);
+            this.questionTitle.Location = new System.Drawing.Point(134, 57);
             this.questionTitle.Name = "questionTitle";
             this.questionTitle.Size = new System.Drawing.Size(652, 27);
             this.questionTitle.TabIndex = 3;
@@ -133,7 +133,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Location = new System.Drawing.Point(82, 60);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 20);
             this.label4.TabIndex = 2;
@@ -150,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 109);
+            this.label3.Location = new System.Drawing.Point(64, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 20);
             this.label3.TabIndex = 0;
@@ -256,9 +256,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1079, 742);
+            this.Controls.Add(this.displayAddQuestion);
             this.Controls.Add(this.showQuestion);
             this.Controls.Add(this.answerToQuestion);
-            this.Controls.Add(this.displayAddQuestion);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.exit);
             this.Controls.Add(this.submit);

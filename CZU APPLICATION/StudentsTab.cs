@@ -30,8 +30,12 @@ namespace CZU_APPLICATION
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_classID = dataReader.GetString(0);
+                if (!dataReader.IsDBNull(0))
+                    t_classID = dataReader.GetString(0);
+                else
+                    return null;
             }
+      
             return t_classID;
         }
         public static string getTeacherCourse(string t_teacherID)

@@ -18,7 +18,7 @@ namespace CZU_APPLICATION
         // Creating a list for TextBoxes
         List <TextBox> textBoxes = new List <TextBox> ();   
         //
-        public  CZURegister()
+        public CZURegister()
         {
             InitializeComponent();
         }
@@ -38,9 +38,16 @@ namespace CZU_APPLICATION
             textBoxesInitialization();
             string birthDate, sexValue = null;
             birthDate = birthDateControl.Value.Date.ToString("yyyy.MM.dd");
-            bool formatValid = Security.registrationFormatVerifier(ref textBoxes, ref selectSex);
-            if(formatValid)
-                Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
-        }
+            bool formatValid = Security.registrationFormatVerifier(ref textBoxes, ref selectSex, ref sexValue);
+            if (formatValid == true)
+            {
+                bool sucesfullReg = Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
+                if (sucesfullReg == true)
+                {
+                    MessageBox.Show("Your account has been created, you can log in!");
+                    this.Close();
+                }
+            }
+            }
     }
 }
