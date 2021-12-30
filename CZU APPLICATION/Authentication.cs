@@ -21,15 +21,7 @@ namespace CZU_APPLICATION
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
                     connection.Open();
-                    try
-                    {
-                        nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
-                    }
-                    catch(MySqlException unique)
-                    {
-                            MessageBox.Show(unique.Message);
-                    }
-
+                    nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
                     MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
                     connection.Close();

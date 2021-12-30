@@ -22,7 +22,7 @@ namespace CZU_APPLICATION
         private string _studentID { get; set; }
         private string _teacherID { get; set; }
         private string _interfaceMode { get; set; }
-        public QuestionDetails(string t_questionID)
+        public QuestionDetails(string t_questionID) // Constructor for student, to initlialize the data for showing question.
         {
             InitializeComponent();
             _connectedUserType = "student";
@@ -34,6 +34,7 @@ namespace CZU_APPLICATION
             // Choosing the GUI to be shown, related to operation
             _interfaceMode = "showquestion";
             //
+
 
         }
         public QuestionDetails(string t_studentID, string t_teacherID) // Constructor for student
@@ -86,7 +87,7 @@ namespace CZU_APPLICATION
             if (_interfaceMode == "showquestion")
             {
                 // Getting the data to update GUI Elements
-                QuestionsTab.getQuestionDataAsStudent($"select answer, title, description from question where id = {_questionID}", ref teacherAnswer1, ref studentQuestion1);
+                QuestionsTab.getQuestionDataAsStudent($"select answer, description from question where id = {_questionID}", ref teacherAnswer1, ref studentQuestion1);
                 //
             }
             //
@@ -135,7 +136,7 @@ namespace CZU_APPLICATION
         private void submitResponse_Click(object sender, EventArgs e)
         {
             switch (_connectedUserType) {
-                case "teacher": {
+                case "teacher": { // If teacher is connected (The teacher constructor was called)
                         if (teacherAnswer.Text.Length <= 1000)
                         {
                            Database.insert($"update question set answer = '{teacherAnswer.Text}', state = 'answered' where ID = {_questionID}");
@@ -148,28 +149,39 @@ namespace CZU_APPLICATION
                         break;
                     }
                 case "student": {
-                        if (_interfaceMode != "showquestion") // If student chosed to add a question
+                        if (_interfaceMode != "showquestion") // If student chosed to add a question (The student constructor was called, the one which initialize the GUI for displaying question details).
                         {
                             // Verifying if there minimum one priority mode was selected
                             bool prioritySelected = questionPriority.SelectedIndex > -1;
                             //
-
-                            if (studentQuestion.Text.Length <= 1000)
+                            if(questionTitle.Text.Length < 5)
+                            {
+                                MessageBox.Show("Your question title is too short, minimum 5 characters needed!");
+                            }
+                            else if(questionTitle.Text.Length > 170)
+                            {
+                                MessageBox.Show("Your question title is too long, maximum 170 characters are allowed!");
+                            }
+                            else if(question.Text.Length < 10)
+                            {
+                                MessageBox.Show("Your question is too short, minimum 10 characters are needed!");
+                            }
+                            else if (question.Text.Length <= 1000)
                             {
                                 if (!prioritySelected)
                                     MessageBox.Show("Select a priority mode before asking the question!");
                                 else
                                 {
-                                    Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{studentQuestion.Text}', '{questionPriority.SelectedItem.ToString()}', '{questionTitle.Text}')");
+                                    MessageBox.Show("Your question was added!");
+                                    Database.insert($"insert into question(studentID, teacherID, description, priority, title) values({_studentID}, {_teacherID}, '{question.Text}', '{questionPriority.SelectedItem.ToString()}', '{questionTitle.Text}')");
                                     this.Close();
                                 }
                             }
-                            else
-                                MessageBox.Show("Your response is too long, it shouldn't exceed 1000 characters!");
                         }
-                        else 
+                        else // If student haven't chosed to add a question, this button will serve for quiting the form.
                         {
                             this.Close();
+
                         }
                         break;
                     }
@@ -177,8 +189,9 @@ namespace CZU_APPLICATION
         }
         private void exit_Click(object sender, EventArgs e)
         {
-            if (_interfaceMode == "showquestion")
+            if (_interfaceMode == "showquestion") // Button will serve as "Delete question for Showing Question Interface"
             {
+                // The question will be deleted from database
                 Database.insert($"delete from question where id = {_questionID};");
                 MessageBox.Show("Your question was deleted!");
                 this.Close();

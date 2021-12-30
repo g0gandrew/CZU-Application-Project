@@ -67,6 +67,54 @@ namespace CZU_APPLICATION
             // after all users are disconnected, delete data from logs
         }
 
-      
+        public static bool recordExists(string t_query)
+        {
+
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                return true;
+            }
+            //
+            connection.Close();
+
+            return false;
+        }
+
+        public static void recordExists(string t_query, ref int t_availableRecords)
+        {
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                ++t_availableRecords;
+            }
+            --t_availableRecords; // Solving the +1 because of the dataReader
+            //
+            connection.Close();
+        }
     }
 }

@@ -9,13 +9,99 @@ namespace CZU_APPLICATION
 {
     internal static class Security
     {
+        private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
+
         public static bool registrationFormatVerifier(ref List<TextBox> textBoxes, ref CheckedListBox t_selectSex, ref string t_sexValue)
         {
+            // MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection(_path);
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            connection.Open();
+            MySqlDataReader dataReader;
+            //
+
             // List of errors
             List<string> errors = new List<string>();
             int count = 0;
             //
 
+            /// Veryifing the unicity of the email and username
+
+            // Verifing from student table
+            cmd.CommandText = "select username from student;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if(textBoxes[0].Text == dataReader.GetString(0))
+                    errors.Add("Username is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+
+            // Verifying from teacher table
+            cmd.CommandText = "select username from teacher;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (textBoxes[0].Text == dataReader.GetString(0))
+                    errors.Add("Username is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+
+            // Verifying from admin table
+            cmd.CommandText = "select username from admin;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (textBoxes[0].Text == dataReader.GetString(0))
+                    errors.Add("Username is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+
+            // Verifing from student table
+            cmd.CommandText = "select email from student;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (textBoxes[2].Text == dataReader.GetString(0))
+                    errors.Add("Email is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+
+            // Verifying from teacher table
+            cmd.CommandText = "select email from teacher;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (textBoxes[2].Text == dataReader.GetString(0))
+                    errors.Add("Email is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+          
+            // Verifying from admin table
+            cmd.CommandText = "select email from admin;";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (textBoxes[2].Text == dataReader.GetString(0))
+                    errors.Add("Email is already taken, choose another one!");
+            }
+            dataReader.Close();
+            //
+
+            // CLOSING MYSQL CONNECTION
+            connection.Close();
+            //
+
+            ///
+
+
+      
             // Verifying the username
             if (textBoxes[0].Text.Length > 15)
             {
@@ -73,7 +159,7 @@ namespace CZU_APPLICATION
             }
             else // If conversion fails, it means that format is invalid, it contains characters
             {
-                MessageBox.Show("Invalid format, phone number should contain only digits!");
+                errors.Add("Invalid format, phone number should contain only digits!");
             }
             //
 

@@ -20,12 +20,16 @@ namespace CZU_APPLICATION
             // Pseudo Assign in case of data not found
             string t_classID = null;
             //
+
+            // OPENING MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+            
             cmd.CommandText = $"select classID from student where username = '{t_connectedUser}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -105,12 +109,16 @@ namespace CZU_APPLICATION
             // Pseudo Assign in case of data not found
             string studentID = null;
             //
+
+            // OPENING MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+
             cmd.CommandText = $"select id from student where username = '{t_connectedUser}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -129,6 +137,7 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             //
+
             // Variables
             List<string> teachedClasses = new List<string>();
             string teacherID; 
@@ -172,6 +181,7 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             //
+
             // Variables
             List<string> studiedCourses = new List<string>();
             List<string> studiedCoursesIDs = new List<string>();
@@ -211,7 +221,7 @@ namespace CZU_APPLICATION
             return studiedCourses; // returning the list of classes teached by teacher x     
         }
 
-        public static bool updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser)
+        public static bool updatePanelAsStudent(ref int t_recordsOnPage, ref bool t_rightPossible, ref bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser, string t_extraConstraint)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -222,6 +232,7 @@ namespace CZU_APPLICATION
             int loopLength; // Updating the panel by the number of students;
             int i = 0, tempI;
             bool dataAvailable = false;
+            int lastStudentID = 0;
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -239,13 +250,17 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating students connection status, image, and the displayed users in main panel amount based on students colleagues
-            command[0] = $"select connected from student where classID = {classID} && username != '{t_connectedUser}'";
+            command[0] = $"select connected, id from student where classID = {classID} && username != '{t_connectedUser}' {t_extraConstraint}";
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-            while (dataReader.Read()) // for as long it finds data, maximum 6.
+            while (dataReader.Read()) // For as long it finds data, maximum 6.
             {
                 if (i <= 5)
                 {
+                    // Getting the last student ID
+                    lastStudentID = dataReader.GetInt32(1);
+                    //
+
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
                         t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
@@ -258,25 +273,35 @@ namespace CZU_APPLICATION
                 else
                     break;
             }
+            dataReader.Close();
+            ///
+
+
             // If there is any data to be shown
             if (i != 0)
                 dataAvailable = true;
             //
+
+            // Statements to modify data use  
             tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
             loopLength = i;
-            for (int z = i + 1; z <= 5; ++z) // When there are less than 6 connected users, from the remained number, update panel
+            //
+
+            // When there are less than 6 connected users, from the remained number, update panel
+            for (int z = i + 1; z <= 5; ++z)
             {
                 t_studentPanel[z].Enabled = true;
                 t_studentPanel[z].Visible = true;
             }
-            dataReader.Close();
-            ///
+            //
+
+           
             /// Command 1 - First command, 
-            command[1] = $"select firstName, lastname, sex from student where classID = {classID} && username != '{t_connectedUser}'"; // need to modify it aswell       
+            command[1] = $"select firstName, lastname, sex, id from student where classID = {classID} && username != '{t_connectedUser}' {t_extraConstraint}"; // need to modify it aswell       
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
-            i = 0; // restarting the value for being used further
+            i = 0; // Restarting the value for being used further
             while (dataReader.Read()) // --> One time operation
             {
                 if (i <= loopLength)
@@ -305,18 +330,26 @@ namespace CZU_APPLICATION
             }
             dataReader.Close();
             ///
-            t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }
-            // Closing MYSQL Connection, and DataReader
+
+            /// Left And Right Button
+          
+            // Pseudo-Assignments until proven different
+            t_rightPossible = false;
+            t_leftPossible = false;
+            //
+
+            t_startingFrom = lastStudentID; // We save the record from database last ID.
+            t_recordsOnPage = tempI + 1; // We save the amount of records available to be shown in Panel - We set +1,  because we saved in tempI maximum 5, because of indexing from 0 in the previous statements
+            ///                    
+
+
+            // Closing MYSQL Connection
             connection.Close();
             //
+
             return dataAvailable;
         }
-        public static bool updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID)
+        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref bool t_rightPossible, ref bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID, string t_extraConstraint)
         {
             // Pseudo-Assignments until proven different
             t_rightPossible = false;
@@ -344,7 +377,7 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
-            command[0] = $"select connected from student where classID = {t_selectedClass}"; //  
+            command[0] = $"select connected from student where classID = {t_selectedClass} {t_extraConstraint}"; //  
 
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
@@ -366,8 +399,8 @@ namespace CZU_APPLICATION
             }
             if (i != 0)
                 dataAvailable = true;
-            tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
+            tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             loopLength = i;
             for (int z = i + 1; z <= 5; ++z) // When there are less than 6 connected users, from the remained number, update panel
             {
@@ -379,7 +412,7 @@ namespace CZU_APPLICATION
 
 
             /// Command 1 - First command, for gatthering the studentID + others
-            command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where classID = {t_selectedClass}"; // need to modify it aswell       
+            command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where classID = {t_selectedClass} {t_extraConstraint}"; // need to modify it aswell       
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
             i = 0; // restarting the value for being used further
@@ -411,11 +444,19 @@ namespace CZU_APPLICATION
                 }
             }
             dataReader.Close();
-            ///
+
+            //  
+            t_startingFrom = Convert.ToInt32(studentsIDs[tempI]); // We save the record from database last ID.
+            t_recordsOnPage = tempI + 1; // We save the amount of records available to be shown in Panel - We set +1,
+                                         // because we saved in tempI maximum 5, because of indexing from 0 in the previous statements
+            //
+
+
+
             // Command 2 - Student --> Questions
             for (int z = 0; z <= loopLength; z++)
             {
-                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID} && state = 'not answered';";
+                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID} && state = 'not answered' {t_extraConstraint};";
                 cmd.CommandText = command[2];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -427,7 +468,7 @@ namespace CZU_APPLICATION
             //
 
             // Command 3 - Student --> Meetings
-            command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+            command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass} {t_extraConstraint};";
             for (int z = 0; z <= loopLength; z++)
             {
                 cmd.CommandText = command[3];
@@ -441,7 +482,7 @@ namespace CZU_APPLICATION
             //
 
             // Command 4 - Student --> Assignments
-            command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+            command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass} {t_extraConstraint}";
             for (int z = 0; z <= loopLength; z++)
             {
                 cmd.CommandText = command[4];
@@ -452,13 +493,7 @@ namespace CZU_APPLICATION
                 }
                 dataReader.Close();
             }
-            //
-            t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }
+      
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //

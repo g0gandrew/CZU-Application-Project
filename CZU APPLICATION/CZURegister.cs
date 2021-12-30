@@ -24,6 +24,7 @@ namespace CZU_APPLICATION
         }
 
         private void textBoxesInitialization()
+
         {
             textBoxes.Add(inUsername);
             textBoxes.Add(inPassword);

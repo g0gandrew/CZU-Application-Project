@@ -44,11 +44,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.displayAddQuestion = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.showQuestion = new System.Windows.Forms.Panel();
             this.studentQuestion1 = new System.Windows.Forms.RichTextBox();
             this.teacherAnswer1 = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.answerToQuestion.SuspendLayout();
             this.displayAddQuestion.SuspendLayout();
@@ -162,6 +165,7 @@
             this.answerToQuestion.Controls.Add(this.teacherAnswer);
             this.answerToQuestion.Controls.Add(this.label2);
             this.answerToQuestion.Controls.Add(this.label1);
+            this.answerToQuestion.Controls.Add(this.groupBox3);
             this.answerToQuestion.Enabled = false;
             this.answerToQuestion.Location = new System.Drawing.Point(33, 95);
             this.answerToQuestion.Name = "answerToQuestion";
@@ -195,12 +199,22 @@
             this.displayAddQuestion.Controls.Add(this.label5);
             this.displayAddQuestion.Controls.Add(this.label3);
             this.displayAddQuestion.Controls.Add(this.label4);
+            this.displayAddQuestion.Controls.Add(this.groupBox1);
             this.displayAddQuestion.Enabled = false;
             this.displayAddQuestion.Location = new System.Drawing.Point(33, 95);
             this.displayAddQuestion.Name = "displayAddQuestion";
-            this.displayAddQuestion.Size = new System.Drawing.Size(1025, 576);
+            this.displayAddQuestion.Size = new System.Drawing.Size(1040, 576);
             this.displayAddQuestion.TabIndex = 11;
             this.displayAddQuestion.Visible = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1016, 544);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ask a Question ";
             // 
             // showQuestion
             // 
@@ -208,6 +222,7 @@
             this.showQuestion.Controls.Add(this.teacherAnswer1);
             this.showQuestion.Controls.Add(this.label6);
             this.showQuestion.Controls.Add(this.label7);
+            this.showQuestion.Controls.Add(this.groupBox2);
             this.showQuestion.Enabled = false;
             this.showQuestion.Location = new System.Drawing.Point(33, 95);
             this.showQuestion.Name = "showQuestion";
@@ -251,13 +266,31 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Your Question:";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(6, 14);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1016, 544);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Question Details:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(6, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1016, 544);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Student Question:";
+            // 
             // QuestionDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1079, 742);
-            this.Controls.Add(this.displayAddQuestion);
             this.Controls.Add(this.showQuestion);
+            this.Controls.Add(this.displayAddQuestion);
             this.Controls.Add(this.answerToQuestion);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.exit);
@@ -302,5 +335,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox studentQuestion1;
         private System.Windows.Forms.RichTextBox teacherAnswer1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
