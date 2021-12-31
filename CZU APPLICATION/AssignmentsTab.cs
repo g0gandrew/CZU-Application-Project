@@ -11,14 +11,15 @@ using System.Threading.Tasks;
 
 namespace CZU_APPLICATION
 {
-    internal static class QuestionsTab
+    internal static class AssignmentsTab
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
-        public static bool updatePanelAsTeacher(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionStudentName, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List <Label> t_questionState, string t_selectedClass, string t_teacherID, ref List <string> t_questionID) 
+/*        public static bool updatePanelAsTeacher(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentSubmitDate, ref List<Label> t_assignmentState, string t_selectedClass, string t_teacherID, ref List<string> t_assignmentID)
         {
             // Pseudo-Assignments until proven different
-           /* t_rightPossible = false;
-            t_leftPossible = false*/;
+            *//* t_rightPossible = false;
+             t_leftPossible = false*//*
+            ;
             //
 
             // Variables
@@ -39,7 +40,7 @@ namespace CZU_APPLICATION
             // Commands list
             string[] command = new string[2];
             string[] studentsIDs = new string[4];
-            List <string> questionIDs = new List<string>();
+            List<string> questionIDs = new List<string>();
             //
 
 
@@ -53,17 +54,17 @@ namespace CZU_APPLICATION
                 if (i <= 3)
                 {
                     // Inserting the ID of question in list
-                         questionIDs.Add(dataReader.GetString(5));
+                    questionIDs.Add(dataReader.GetString(5));
                     //
 
                     // Setting up the list of students ids for further command
                     studentsIDs[i] = dataReader.GetString(4);
                     //
-                    MessageBox.Show( dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
+                    MessageBox.Show(dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
                     // Setting up question Title
                     t_questionTitle[i].Text = dataReader.GetString(0);
                     //
-                    
+
                     // Setting up priority Level
                     t_questionPriorityLevel[i].Text = dataReader.GetString(1);
                     //
@@ -71,7 +72,7 @@ namespace CZU_APPLICATION
                     // Setting up submit date
                     t_questionSubmitDate[i].Text = dataReader.GetString(2);
                     //
-                    
+
                     // Setting up question state
                     t_questionState[i].Text = dataReader.GetString(3);
                     //
@@ -110,7 +111,7 @@ namespace CZU_APPLICATION
             /// Command 1 - First command for setting Student Name
             /// 
             ////////////// HERE IS THE PROBLEM
-           
+
             for (int z = 0; z <= loopLength; z++)
             {
                 command[1] = $"select firstName, lastName from student where id = {studentsIDs[z]}";
@@ -118,34 +119,61 @@ namespace CZU_APPLICATION
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                   MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + " " + dataReader.GetString(1));
+                    MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + " " + dataReader.GetString(1));
                     t_questionStudentName[z].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
                 }
                 dataReader.Close();
             }
-            
+
             ///
 
             //
-          /*  t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }*/
+            *//*  t_startingFrom += tempI; // We increase the start value by the users that we could display.
+              t_recordsOnPage = tempI;
+              if (t_startingFrom >= 7)
+              {
+                  t_leftPossible = true;
+              }*//*
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
             return dataAvailable;
         }
-        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID, ref List <string> t_questionIDs)
+*/       
+        
+
+        public static void getAssignmentSolutionData(string t_command,  string t_state,  string t_grade) 
+        {
+            /// Setting up MYSQL CONNECTION (1)
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            ///
+            cmd.CommandText = t_command;
+            dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                t_state = dataReader.GetString(0);
+                t_grade = dataReader.GetString(1);
+            }
+            dataReader.Close();
+
+            // Closing MYSQL connection
+            connection.Close();
+            //
+        }
+
+        public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID, ref List<string> t_assignmentID, string t_classID)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
              t_leftPossible = false*/
             //
 
-            // Variables
+            // Variablesh-
             int loopLength; // Updating the panel by the number of students;
             int i = 0, tempI;
             bool dataAvailable = false;
@@ -162,50 +190,83 @@ namespace CZU_APPLICATION
 
             // Commands list
             string command;
-            string teacherID = StudentsTab.getTeacherIDByCourse(t_selectedCourse);
-            List<string> questionIDs = new List<string>();
+            string teacherID = StudentsTab.getTeacherIDByCourse(t_selectedCourse); // Getting the teacher id for the selected course                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             //
 
-
-            /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
-            command = $"select title, priority, date, state, studentID, ID from question where studentID = {t_studentID} && teacherID = {teacherID}"; //  
-
+            /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            command = $"select assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {teacherID})";
             cmd.CommandText = command;
             dataReader = cmd.ExecuteReader();
+
+            // Getting the IDs of the assignments which satisfies our conditions
             while (dataReader.Read()) // for as long it finds data, maximum 4.
             {
-                if (i <= 3)
-                {
-                    // Inserting the ID of question in list
-                    questionIDs.Add(dataReader.GetString(5));
-                    //
-
-                    // Setting up question Title
-                    t_questionTitle[i].Text = dataReader.GetString(0);
-                    //
-
-                    // Setting up priority Level
-                    t_questionPriorityLevel[i].Text = dataReader.GetString(1);
-                    //
-
-                    // Setting up submit date
-                    t_questionSubmitDate[i].Text = dataReader.GetString(2);
-                    //
-
-                    // Setting up question state
-                    t_questionState[i].Text = dataReader.GetString(3);
-                    //
-
-                    // Enabling the panel for showing the question.
-                    t_questionPanel[i].Enabled = true;
-                    t_questionPanel[i++].Visible = true;
-                    //
+                if (i <= 3) {
+                    t_assignmentID.Add(dataReader.GetString(0));
                 }
                 else
                     break;
             }
-            t_questionIDs = questionIDs;
-        
+            dataReader.Close();
+            //
+
+            // Getting and inserting data about assignments/
+            for (int z = 0; z <= t_assignmentID.Count; z++) 
+            {
+                command = $"select title, deadline from assignment where id = {t_assignmentID[z]}";
+                cmd.CommandText = command;
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read()) // for as long it finds data, maximum 4.
+                {
+                    // Setting up question Title
+                    t_assignmentTitle[z].Text = dataReader.GetString(0);
+                    //
+
+
+                    // Setting up deadline date
+                    t_assignmentDeadline[z].Text = dataReader.GetString(1);
+                    //
+
+
+                    // Getting assignment state, and grade, if exists
+                    getAssignmentSolutionData($"select state, grade from StudentAssignmentSolution where assignmentID = {t_assignmentID[z]} && studentID = {t_studentID}", t_assignmentState[z].Text, t_assignmentGrade[z].Text);
+                    //
+
+
+                    /* // Setting up assignment state
+                      t_assignmentState[i].Text = dataReader.GetString(3);
+                      //
+
+                      // Setting up assignment grade
+                      t_assignmentGrade[i].Text = dataReader.GetString();
+                      //*/
+
+                    // Enabling the panel for showing the question.
+                    t_assignmentPanel[z].Enabled = true;
+                    t_assignmentPanel[z++].Visible = true;
+                    //
+                }
+                dataReader.Close();
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // If there is any data that satisfies our conditions
             if (i != 0)
@@ -217,74 +278,19 @@ namespace CZU_APPLICATION
             loopLength = i;
             for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
             {
-                t_questionPanel[z].Enabled = false;
-                t_questionPanel[z].Visible = false;
+                t_assignmentPanel[z].Enabled = false;
+                t_assignmentPanel[z].Visible = false;
             }
             dataReader.Close();
             ///
 
             i = 0; // restarting the value for being used further
             //
-            /*  t_startingFrom += tempI; // We increase the start value by the users that we could display.
-              t_recordsOnPage = tempI;
-              if (t_startingFrom >= 7)
-              {
-                  t_leftPossible = true;
-              }*/
+          
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
             return dataAvailable;
-        }
-        public static void getQuestionDataAsTeacher(string t_questionID, out string t_title, out string t_question)  
-        {
-            /// Setting up MYSQL CONNECTION (1)
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _path;
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = connection;
-            MySqlDataReader dataReader;
-            connection.Open();
-            ///
-
-            // Pseudo-Assign
-            t_title = "";
-            t_question = "";
-            //
-
-            cmd.CommandText = $"select title, description from question where id = {t_questionID}";
-            dataReader = cmd.ExecuteReader();
-            while(dataReader.Read())
-            {
-                t_title = dataReader.GetString(0);
-                t_question = dataReader.GetString(1);
-            }
-            dataReader.Close();
-            connection.Close();
-
-        }
-        public static void getQuestionDataAsStudent(string t_command, ref RichTextBox t_teacherAnswer,  ref RichTextBox t_studentQuestion)
-        {
-            //  MYSQL connection
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _path;
-            MySqlCommand cmd = new MySqlCommand(t_command, connection);
-            MySqlDataReader dataReader;
-            connection.Open();
-            //
-
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
-            {
-                t_teacherAnswer.Text = dataReader.GetString(0);
-                t_studentQuestion.Text = dataReader.GetString(1);
-            }
-            dataReader.Close();
-
-            // Closing MYSQL CONNECTION
-            connection.Close();
-            //
-
         }
     }
 }

@@ -32,12 +32,19 @@ namespace CZU_APPLICATION
 
         // Question Panel Controls
         List <Button> questionTitle = new();
-        List <GroupBox> questionGB = new();
         List <Label> questionStudentName = new();
         List <Label> questionPriorityLevel = new();
         List <Label> questionSubmitDate = new();
         List <Panel> questionPanel = new();
         List <Label> questionState = new();
+        //
+
+        // Assignment Panel Controls
+        List<Panel> assignmentPanel = new();
+        List<Button> assignmentTitle = new();
+        List<Label> assignmentDeadline = new();
+        List<Label> assignmentState = new();
+        List<Label> assignmentGrade = new();
         //
 
         // Left And Right Buttons
@@ -112,7 +119,10 @@ namespace CZU_APPLICATION
         //
 
         // Question Tab
-        private int _timesQuestionsTab { get; set; } = 0;
+        private bool _QuestionsTabInitialized { get; set; } = false;
+        private bool _StudentsTabInitialized { get; set; } = false;
+        private bool _AssignmentsTabInitialized { get; set; } = false;
+        private bool _GradesTabInitialized { get; set; } = false;
         //
 
         /// Connected as Student
@@ -197,6 +207,7 @@ namespace CZU_APPLICATION
         //
         // For Question Tab
         List<string> questionID = new List<string>();
+        List<string> assignmentID = new List<string>();
         //
 
         /// 
@@ -266,13 +277,10 @@ namespace CZU_APPLICATION
         }
         private void CZUMain_Load(object sender, EventArgs e)
         {
-            // Creating the GUI of Student Tab for Users shown in panel.
-            studentTabDataInitialization();
-            // 
-
+         
             // Enabling Home Panel as start and initializing some data. 
             homeMainPanelState(true);
-            homeTabDataInitialization();
+            homeTabGUIInitialization();
             //
 
 
@@ -345,6 +353,11 @@ namespace CZU_APPLICATION
         //
 
         /// Panels state
+        private void assignmentsMainPanelState(bool t_mode)
+        {
+            assignmentsMainPanel.Enabled = t_mode;
+            assignmentsMainPanel.Visible = t_mode;
+        }
         private void studentsMainPanelState(bool t_mode)
         {
             studentsMainPanel.Enabled = t_mode;
@@ -367,9 +380,9 @@ namespace CZU_APPLICATION
             noDataInPanelMessage.Enabled = false;
             noDataInPanelMessage.Visible = false;
             // Variables
-            string[] casesList = new string[] { "teacherClassNoStudents", "teacherNoClasses", "studentNoColleagues", "teacherClassNoQuestions", "studentNoCourses", "studentHasNoQuestions"};
-            string[] casesMessage = new string[] { "Class has no students", "You teach no classes", "You have no colleagues", "Class has no questions", "Class has no courses", "You have no questions"};
-            Point[] casesMessagesLocations = new Point[6];
+            string[] casesList = new string[] { "teacherClassNoStudents", "teacherNoClasses", "studentNoColleagues", "teacherClassNoQuestions", "studentNoCourses", "studentHasNoQuestions", "studentHasNoAssignments"};
+            string[] casesMessage = new string[] { "Class has no students", "You teach no classes", "You have no colleagues", "Class has no questions", "Class has no courses", "You have no questions", "You have no assignments"};
+            Point[] casesMessagesLocations = new Point[7];
             //
 
             // Setting Messages Location for better readability and positioning.
@@ -379,11 +392,12 @@ namespace CZU_APPLICATION
             casesMessagesLocations[3] = new Point(400, 280);
             casesMessagesLocations[4] = new Point(400, 280);
             casesMessagesLocations[5] = new Point(400, 280);
+            casesMessagesLocations[6] = new Point(400, 280);
             //
 
 
             // Verifying each case with the case from parameters list, if it exists, we'll select it.
-            for(int i = 0; i < 6; ++i)
+            for(int i = 0; i < 7; ++i)
             {
                 if(casesList[i] == t_case)
                 {
@@ -407,88 +421,140 @@ namespace CZU_APPLICATION
         }
         private void leftStudentList_Click(object sender, EventArgs e)
         {
-            // We use tempI variable declared in StudentsTab
-            // Showing the next list of student colleagues
+
+            // Showing the previous list of colleagues 
             if (connectedUserType == "student")
             {
-                // Verifying if there are more records available from the current Student ID
+                int output = 0;
+                string query;
+                int records, startFromId = 0;
 
-                string query = $"select id from student where id < {_lastID} && classID = {_studentClassID} && id <> {_studentID} limit 6";
-                int records = 0, startAt = 0;
-                Database.recordExists(query, ref records);
-                // 
+                /* Verifying, if, from this list of records, if we take out all its elements + 1, there exists a record.
+                 If there exists a record, it means that there is a full list available. If not, there is no more data available.
+                 Because, from the begging, the list is populated with six elements. (Take a look at button algorithm from files.
+                */
 
-                MessageBox.Show("Available recorddsdss = " + records);
-                MessageBox.Show("Last  id = " + _lastID);
-                if (records == 6) // FULL LIST
+                // From the last id, verfiy the previous explanation, and get the record ID
+                query = $"select id from student where id < {_lastID} && classID = {_studentClassID} && id <> {_studentID} order by id desc limit {_recordsOnPage}";
+                Database.getData(query, ref output);
+                //
+                
+                // From the record we have, verify if there are 5 more available, to populate the list, if not, do nothing.
+                query = $"select id from student where id < {output} && classID = {_studentClassID} && id <> {_studentID} order by id desc limit 5";
+                records = Database.getDataAndNoOfRecords(query, 1, ref startFromId);
+                //
+        
+                if (records == 5) // FULL LIST
                 {
                     // Activate right button
                     studentsRightList.Enabled = true;
                     //
-                    StudentsTab.updatePanelAsStudent(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"&& id < {_lastID}");
-                }
-                else if(records > 0 && records < 6) // Partial list, from 1 - 5 
-                {
-                    int neededRecords = 6 - records; // Number of records needed to make a full list
-                    /*
-                     We got a partial list, now, for making the list full, we have to take n more elements from the next page, to make it full.
-                     We will deactivate this button, because, having less than a full list, means that there are no more records to update our panel
-                     The button will be activate again when the right button is trigger.
-                     */
-                    query = $"select id from student where id > {_lastID} && classID = {_studentClassID} && id <> {_studentID} limit {neededRecords}";
-                    _lastID = Database.recordExists(query, _lastID); 
-                    StudentsTab.updatePanelAsStudent(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"&& id < {_lastID}");
 
-                    // Deactivate button
-                    studentsLeftList.Enabled = false;
-                    //
-
-                    // Activate right button
-                    studentsRightList.Enabled = true;
+                    // Repopulate the list
+                    StudentsTab.updatePanelAsStudent(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"&& id >= {startFromId} limit 6");
                     //
                 }
                 else // No elements in list
                 {
                     studentsLeftList.Enabled = false;
                 }
-
-
-
             }
-            //
-        }
+            else if(connectedUserType == "teacher")
+            {
+                // Variables
+                int output = 0;
+                string query;
+                int records, startFromId = 0;
+                string selectedClassValue = Convert.ToString(studentsSelectClassListBox.SelectedValue);
+                //
 
+                /* Verifying, if, from this list of records, if we take out all its elements + 1, there exists a record.
+                 If there exists a record, it means that there is a full list available. If not, there is no more data available.
+                 Because, from the begging, the list is populated with six elements. (Take a look at button algorithm from files.
+                */
+                // From the last id, verfiy the previous explanation, and get the record ID
+                query = $"select id from student where id < {_lastID} && classID = {selectedClassValue} order by id desc limit {_recordsOnPage}";
+                Database.getData(query, ref output);
+                //
+
+                // From the record we have, verify if there are 5 more available, to populate the list, if not, do nothing.
+                query = $"select id from student where id < {output} && classID = {selectedClassValue} order by id desc limit 5";
+                records = Database.getDataAndNoOfRecords(query, 1, ref startFromId);
+                //
+
+                if (records == 5) // FULL LIST
+                {
+                    // Activate right button
+                    studentsRightList.Enabled = true;
+                    //
+
+                    // Repopulate the list
+                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID, $"&& id >= {startFromId} limit 6");
+                    //
+                }
+                else // No elements in list
+                {
+                    studentsLeftList.Enabled = false;
+                }
+            }
+
+        }
         private void rightStudentList_Click(object sender, EventArgs e)
         {
             // * The list is already initialized, because we pressed the Students Button
-
-            // Showing the next list of student colleagues
+            // Showing the next list of colleagues
             if (connectedUserType == "student") {
+
+                // Variables
+                int records = 0;
+                //
+
                 // Verifying if there are more records available from the current Student ID
                 string query = $"select id from student where id > {_lastID} && classID = {_studentClassID} limit 6";
-                int records = 0;
                 Database.recordExists(query, ref records);
-                // 
+                //
+
                 if (records > 0)
                 {  // There are available records 
                     StudentsTab.updatePanelAsStudent(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"&& id > {_lastID}");
-                    // Because there are available records, it means that we can swipe to the next list, and, we can go back to the first list.
+                    // Because there are available records, it means that we can swipe to the next list, and, we can also go back
                     // Because of that, we activate left button
                     studentsLeftList.Enabled = true;
                 }
                 else
                 {
                     studentsRightList.Enabled = false;
-                    MessageBox.Show("You have no more colleagues!");
                 }
-            
             }
             //
+
+            else if(connectedUserType == "teacher")
+            {
+                // Variables
+                int records = 0;
+                //
+                string selectedClassValue = Convert.ToString(studentsSelectClassListBox.SelectedValue);
+                // Verifying if there are more records available from the current Student ID
+                string query = $"select id from student where classID = {selectedClassValue} && id > {_lastID} limit 6";
+                Database.recordExists(query, ref records);
+                //
+                if (records > 0)
+                {  // There are available records 
+                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID, $"&& id > {_lastID} limit 6");
+                    // Because there are available records, it means that we can swipe to the next list, and, we can also go back
+                    // Because of that, we activate left button
+                    studentsLeftList.Enabled = true;
+                }
+                else
+                {
+                    studentsRightList.Enabled = false;
+                }
+            }
         }
         //
 
         // Creates lists of controls
-        private void studentTabDataInitialization()
+        private void studentTabGUInitialization()
         {
             studentConnected.Add(studentConnected1);
             studentConnected.Add(studentConnected2);
@@ -539,7 +605,7 @@ namespace CZU_APPLICATION
             studentPanel.Add(studentPanel5);
             studentPanel.Add(studentPanel6);
         }
-        private void questionTabDataInitialization()
+        private void questionTabGUIInitialization()
         {
             // Modifying GUI logic, to reuse code. 
             if (connectedUserType == "teacher")
@@ -560,11 +626,6 @@ namespace CZU_APPLICATION
             questionTitle.Add(questionTitle3);
             questionTitle.Add(questionTitle4);
 
-            // Question GroupBox
-            questionGB.Add(questionGB2);
-            questionGB.Add(questionGB1);
-            questionGB.Add(questionGB3);
-            questionGB.Add(questionGB4);
 
             // Question Student Name
             questionStudentName.Add(question1StudentName);
@@ -596,12 +657,50 @@ namespace CZU_APPLICATION
             questionState.Add(question3State);
             questionState.Add(question4State);
         }
-        private void homeTabDataInitialization()
+        private void homeTabGUIInitialization()
         {
             statisticsControls.Add(statisticsUsers);
             statisticsControls.Add(statisticsMeetings);
             statisticsControls.Add(statisticsQuestions);
             statisticsControls.Add(statisticsAssignments);
+        }
+        private void assignmentTabGUIInitialization()
+        {
+
+            // Panel
+            assignmentPanel.Add(assignment1Panel);
+            assignmentPanel.Add(assignment2Panel);
+            assignmentPanel.Add(assignment3Panel);
+            assignmentPanel.Add(assignment4Panel);
+            //
+
+            // Title
+            assignmentTitle.Add(assignment1Button);
+            assignmentTitle.Add(assignment2Button);
+            assignmentTitle.Add(assignment3Button);
+            assignmentTitle.Add(assignment4Button);
+            //
+
+            // Deadline
+            assignmentDeadline.Add(assignment1DeadLine);
+            assignmentDeadline.Add(assignment2Deadline);
+            assignmentDeadline.Add(assignment3Deadline);
+            assignmentDeadline.Add(assignment4Deadline);
+            //
+
+            // State
+            assignmentState.Add(assignment1State);
+            assignmentState.Add(assignment2State);
+            assignmentState.Add(assignment3State);
+            assignmentState.Add(assignment4State);
+            //
+
+            // Grade
+            assignmentGrade.Add(assignment1Grade);
+            assignmentGrade.Add(assignment2Grade);
+            assignmentGrade.Add(assignment3Grade);
+            assignmentGrade.Add(assignment4Grade);
+            //
         }
         //
 
@@ -609,6 +708,10 @@ namespace CZU_APPLICATION
 
         private void studentsSelectClassID_SelectedValueChanged(object sender, EventArgs e)
         {
+            // Enabling right button 
+            studentsRightList.Enabled = true;
+            //
+
             MainPanelNoData(true, "disableALL");
             switch (connectedUserType)
             {
@@ -624,6 +727,7 @@ namespace CZU_APPLICATION
                         else
                         {
                             MessageBox.Show("Class has NO students");
+                            MainPanelNoData(true, "disableALL");
                             MainPanelNoData(true, "teacherClassNoStudents");
                         }
                         break;
@@ -801,10 +905,21 @@ namespace CZU_APPLICATION
             // enableRefreshDataTrigger("student", triggerPanel); // TEMP DISABLED
             // 
 
-            // Reset Left And Right buttons, by setting everything to initial state
+            // Initializing the GUI elements for tab, just once. 
+            if (_StudentsTabInitialized == false)
+            {
+                studentTabGUInitialization();
+                _StudentsTabInitialized = true;
+            }
             //
 
 
+            // Reset Left And Right buttons, by setting everything to initial state
+            //
+
+            // Enabling right button
+            studentsRightList.Enabled = true;
+            //
 
             // Disabling overlapped panels
             questionMainPanelState(false);
@@ -947,10 +1062,10 @@ namespace CZU_APPLICATION
             //
 
             // Initializing the GUI elements for tab, just once. 
-            if (_timesQuestionsTab == 0)
+            if (_QuestionsTabInitialized == false)
             {
-                questionTabDataInitialization(); // set to be execute only once.
-                ++_timesQuestionsTab;
+                questionTabGUIInitialization(); // set to be execute only once.
+                _QuestionsTabInitialized = true;
             }
             //
           
@@ -958,8 +1073,6 @@ namespace CZU_APPLICATION
             {
                 case "teacher":
                     {
-                       
-
                         bool classesExists = StudentsTab.updateTeachedClassesList(ref questionsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
                         if (classesExists == true) // If exists classes
                         {
@@ -1019,10 +1132,7 @@ namespace CZU_APPLICATION
                             MainPanelNoData(true, "studentNoCourses");
                         }
                         //
-
                         break;
-
-
                     }
 
             }
@@ -1031,9 +1141,72 @@ namespace CZU_APPLICATION
 
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
-            homeMainPanelState(true); // need to be replaced.
+            // Disabling overlapped panels
+            homeMainPanelState(false);
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
+            questionMainPanelState(false);
+            assignmentsMainPanelState(false);
+            //
+
+
+            // Initializing the GUI elements for tab, just once. 
+            if (_AssignmentsTabInitialized == false)
+            {
+                assignmentTabGUIInitialization();
+                _AssignmentsTabInitialized = true;
+            }
+            //
+            switch (connectedUserType)
+            {
+
+                case "student":
+                    {
+                        // Getting student class id for further operations
+                        _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
+                        //
+
+                        // Getting the list of courses studied by student class
+                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref assignmentSelectClassIDListBox, _connectedUser, ref studiedCourses);
+                        //
+
+                        if (coursesExists == true)
+                        {
+                            MessageBox.Show(" student - AM RULAT CAZ DE ASSIGNMENT MAIN PANEL, ASSIGNMENTS EXISTS");
+                            string selectedCourse = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
+                            bool hasAssignments = AssignmentsTab.updatePanelAsStudent(ref assignmentPanel, ref assignmentTitle, ref assignmentDeadline, ref assignmentState, ref assignmentGrade, selectedCourse, _studentID, ref assignmentID, _studentClassID);
+                            if (hasAssignments == true)
+                            {
+                                MessageBox.Show("Student has assignments");
+                                assignmentsMainPanelState(true);
+
+                            }
+                            else
+                            {
+                                // Message doesn't appear, need to be fixed
+                                MessageBox.Show("Student has NO assignments");
+                                assignmentsMainPanelState(true);
+                                MainPanelNoData(true, "studentHasNoAssignments");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Student - AM RULAT CAZ DE ASSIGNMENT, MAIN PANEL, COURSES DON T EXIST");
+                            MainPanelNoData(true, "studentNoCourses");
+                        }
+
+
+
+                        break;
+                    }
+                case "teacher":
+                    {
+                        break;
+
+                    }
+            }
+
+
         }
         // 
 
@@ -1136,6 +1309,7 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
+     
         //
     }
 }
