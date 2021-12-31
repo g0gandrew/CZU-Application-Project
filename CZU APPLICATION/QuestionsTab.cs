@@ -144,7 +144,6 @@ namespace CZU_APPLICATION
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
              t_leftPossible = false*/
-            
             //
 
             // Variables

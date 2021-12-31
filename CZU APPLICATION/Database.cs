@@ -92,7 +92,31 @@ namespace CZU_APPLICATION
 
             return false;
         }
+        public static int recordExists(string t_query, int t_lastID)
+        {
 
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_lastID = dataReader.GetInt32(0);
+            }
+            //
+            connection.Close();
+            return t_lastID;
+            
+        }
         public static void recordExists(string t_query, ref int t_availableRecords)
         {
             // OPENING MYSQL CONNECTION
@@ -112,7 +136,6 @@ namespace CZU_APPLICATION
             {
                 ++t_availableRecords;
             }
-            --t_availableRecords; // Solving the +1 because of the dataReader
             //
             connection.Close();
         }

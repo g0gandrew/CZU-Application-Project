@@ -93,8 +93,7 @@ namespace CZU_APPLICATION
             //
         }
         ///
-       
-    
+
         // Enabling GUI elements
         private void enableGB(string t_connectedUserType)
         {

@@ -221,13 +221,8 @@ namespace CZU_APPLICATION
             return studiedCourses; // returning the list of classes teached by teacher x     
         }
 
-        public static bool updatePanelAsStudent(ref int t_recordsOnPage, ref bool t_rightPossible, ref bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser, string t_extraConstraint)
+        public static bool updatePanelAsStudent(ref int t_recordsOnPage, ref int t_lastID, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser, string t_extraConstraint)
         {
-            // Pseudo-Assignments until proven different
-            t_rightPossible = false;
-            t_leftPossible = false;
-            //
-
             // Variables
             int loopLength; // Updating the panel by the number of students;
             int i = 0, tempI;
@@ -321,27 +316,13 @@ namespace CZU_APPLICATION
                     //
                     ++i;
                 }
-                else
-                {
-                    // Verifying if there exists one more record, so, we can utilize right button to display further students in panel.
-                    // If this else runs, it means that dataReader has found a record in table, so, there exists one more record which satisfy our button condition.
-                    t_rightPossible = true;
-                }
             }
             dataReader.Close();
             ///
 
             /// Left And Right Button
-          
-            // Pseudo-Assignments until proven different
-            t_rightPossible = false;
-            t_leftPossible = false;
+            t_lastID = lastStudentID; // We save the record from database last ID.
             //
-
-            t_startingFrom = lastStudentID; // We save the record from database last ID.
-            t_recordsOnPage = tempI + 1; // We save the amount of records available to be shown in Panel - We set +1,  because we saved in tempI maximum 5, because of indexing from 0 in the previous statements
-            ///                    
-
 
             // Closing MYSQL Connection
             connection.Close();
@@ -349,13 +330,9 @@ namespace CZU_APPLICATION
 
             return dataAvailable;
         }
-        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref bool t_rightPossible, ref bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID, string t_extraConstraint)
-        {
-            // Pseudo-Assignments until proven different
-            t_rightPossible = false;
-            t_leftPossible = false;
-            //
 
+        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID, string t_extraConstraint)
+        {
             // Variables
             int loopLength; // Updating the panel by the number of students;
             string[] studentsIDs = new string[6];
@@ -435,13 +412,7 @@ namespace CZU_APPLICATION
                     // Need to be implemented, linked with image
                     //
                     ++i;
-                }
-                else
-                {
-                    // Verifying if there exists one more record, so, we can utilize right button to display further students in panel.
-                    // If this else runs, it means that dataReader has found a record in table, so, there exists one more record which satisfy our button condition.
-                    t_rightPossible = true;
-                }
+                }           
             }
             dataReader.Close();
 
