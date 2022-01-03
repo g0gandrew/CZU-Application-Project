@@ -2020,7 +2020,7 @@
             // assignment1Grade
             // 
             this.assignment1Grade.AutoSize = true;
-            this.assignment1Grade.Location = new System.Drawing.Point(87, 84);
+            this.assignment1Grade.Location = new System.Drawing.Point(85, 83);
             this.assignment1Grade.Name = "assignment1Grade";
             this.assignment1Grade.Size = new System.Drawing.Size(17, 20);
             this.assignment1Grade.TabIndex = 9;
@@ -2824,8 +2824,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1319, 681);
-            this.Controls.Add(this.assignmentsMainPanel);
             this.Controls.Add(this.noDataInPanelMessage);
+            this.Controls.Add(this.assignmentsMainPanel);
             this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.meetingsMainPanel);

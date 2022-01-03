@@ -28,7 +28,6 @@ namespace CZU_APPLICATION
             List<string> command = new List<string>();
             int x = 0;
             //
-
             // Initializing the list of commands
             command.Add($"select count(connected) from student where classID = {t_classID} && connected = 'on' && id != {t_studentID}"); // Update number of connected colleagues
             command.Add($"select count(meetingID) from classmeeting where classID = {t_classID}"); // Update the number of meetings that student have to join

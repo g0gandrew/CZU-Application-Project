@@ -922,6 +922,7 @@ namespace CZU_APPLICATION
             //
 
             // Disabling overlapped panels
+            assignmentsMainPanelState(false);
             questionMainPanelState(false);
             homeMainPanelState(false);
             studentsMainPanelState(false);
@@ -1008,6 +1009,7 @@ namespace CZU_APPLICATION
         {
             // Disabling overlapped panels
             homeMainPanelState(true);
+            assignmentsMainPanelState(false);
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);
@@ -1042,7 +1044,10 @@ namespace CZU_APPLICATION
 
         private void meetingsButton_Click(object sender, EventArgs e)
         {
-            homeMainPanelState(true); // need to be replaced.
+
+
+            assignmentsMainPanelState(false);
+            homeMainPanelState(false); // need to be replaced.
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
         }
@@ -1055,7 +1060,8 @@ namespace CZU_APPLICATION
 
 
             // Disabling overlapped panels
-            homeMainPanelState(false); 
+            homeMainPanelState(false);
+            assignmentsMainPanelState(false);
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);

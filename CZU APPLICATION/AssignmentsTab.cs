@@ -142,7 +142,7 @@ namespace CZU_APPLICATION
 */       
         
 
-        public static void getAssignmentSolutionData(string t_command,  string t_state,  string t_grade) 
+        public static void getAssignmentSolutionData(string t_command,  ref string t_state,  ref string t_grade, ref DateTime t_solutionSubmitDate) 
         {
             /// Setting up MYSQL CONNECTION (1)
             MySqlConnection connection = new MySqlConnection();
@@ -156,11 +156,13 @@ namespace CZU_APPLICATION
             dataReader = cmd.ExecuteReader();
             while(dataReader.Read())
             {
+
                 t_state = dataReader.GetString(0);
                 t_grade = dataReader.GetString(1);
+                t_solutionSubmitDate = Convert.ToDateTime(dataReader.GetString(2));
+                MessageBox.Show($"AM GASIT INFORMATIA: grade --> {t_grade}, --> state {t_state})");
             }
             dataReader.Close();
-
             // Closing MYSQL connection
             connection.Close();
             //
@@ -191,6 +193,8 @@ namespace CZU_APPLICATION
             // Commands list
             string command;
             string teacherID = StudentsTab.getTeacherIDByCourse(t_selectedCourse); // Getting the teacher id for the selected course                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            List<string> assignmentsIds = new();
+            
             //
 
             /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
@@ -202,7 +206,8 @@ namespace CZU_APPLICATION
             while (dataReader.Read()) // for as long it finds data, maximum 4.
             {
                 if (i <= 3) {
-                    t_assignmentID.Add(dataReader.GetString(0));
+                    assignmentsIds.Add(dataReader.GetString(0));
+                    ++i;
                 }
                 else
                     break;
@@ -210,8 +215,14 @@ namespace CZU_APPLICATION
             dataReader.Close();
             //
 
+
+            // Assigning the list of assignments
+            t_assignmentID = assignmentsIds;
+            //
+
+
             // Getting and inserting data about assignments/
-            for (int z = 0; z <= t_assignmentID.Count; z++) 
+            for (int z = 0; z < t_assignmentID.Count; z++) 
             {
                 command = $"select title, deadline from assignment where id = {t_assignmentID[z]}";
                 cmd.CommandText = command;
@@ -225,12 +236,55 @@ namespace CZU_APPLICATION
 
                     // Setting up deadline date
                     t_assignmentDeadline[z].Text = dataReader.GetString(1);
-                    //
+
+                    /// Verifying if the assignment haven't passed the deadline
+
+                    DateTime deadlineDate = Convert.ToDateTime(dataReader.GetString(1));
+                    DateTime assignmentSolutionDate = new();
+                    string assignmentState = null, assignmentGrade = null;
 
 
-                    // Getting assignment state, and grade, if exists
-                    getAssignmentSolutionData($"select state, grade from StudentAssignmentSolution where assignmentID = {t_assignmentID[z]} && studentID = {t_studentID}", t_assignmentState[z].Text, t_assignmentGrade[z].Text);
-                    //
+                    // Getting assignment state, and grade, submitdate, if exists
+
+                    MessageBox.Show($"ASSIGNMENT ID =  {t_assignmentID[z]}, student id = {t_studentID}");
+                    getAssignmentSolutionData($"select state, grade, solutiondate from StudentAssignmentSolution where assignmentID = {t_assignmentID[z]} && studentID = {t_studentID}", ref assignmentState, ref assignmentGrade, ref assignmentSolutionDate);
+
+                    // If the deadline is passed, set deadline date with red and deactivate button.
+
+                    if (deadlineDate > assignmentSolutionDate)
+                    {
+                        // Deactivating the button for submiting assignment
+                        t_assignmentTitle[z].Enabled = false;
+                        //
+
+                        // Changing deadline color to red
+                        t_assignmentDeadline[z].ForeColor = Color.Red;
+                        //
+
+                        // Modiyfing displayed text, grade
+                        t_assignmentState[z].Text = "Deadline Missed";
+                        //
+
+                        // Displaying the grade 
+                        t_assignmentGrade[z].Text = assignmentGrade;
+
+                        //
+
+
+                    }
+                    else
+                    {
+
+                        //
+                        t_assignmentState[z].Text = assignmentState;
+                        t_assignmentGrade[z].Text = assignmentGrade;
+                        t_assignmentDeadline[z].ForeColor = Color.Green;
+                        ///
+                    }
+
+
+
+
 
 
                     /* // Setting up assignment state
@@ -248,23 +302,6 @@ namespace CZU_APPLICATION
                 }
                 dataReader.Close();
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
