@@ -334,7 +334,7 @@
             // 
             this.homeMainPanelLogo.Image = global::CZU_APPLICATION.Properties.Resources.logofem1;
             this.homeMainPanelLogo.Location = new System.Drawing.Point(322, 34);
-            this.homeMainPanelLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homeMainPanelLogo.Margin = new System.Windows.Forms.Padding(4);
             this.homeMainPanelLogo.Name = "homeMainPanelLogo";
             this.homeMainPanelLogo.Size = new System.Drawing.Size(730, 166);
             this.homeMainPanelLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -345,7 +345,7 @@
             // 
             this.pictureBox2.Image = global::CZU_APPLICATION.Properties.Resources.users_statistics_logo;
             this.pictureBox2.Location = new System.Drawing.Point(80, 50);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(180, 173);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -356,7 +356,7 @@
             // 
             this.pictureBox3.Image = global::CZU_APPLICATION.Properties.Resources.checklist_logo;
             this.pictureBox3.Location = new System.Drawing.Point(1084, 50);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(178, 173);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -367,7 +367,7 @@
             // 
             this.pictureBox4.Image = global::CZU_APPLICATION.Properties.Resources.questions_logo;
             this.pictureBox4.Location = new System.Drawing.Point(727, 38);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(221, 196);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -378,7 +378,7 @@
             // 
             this.pictureBox5.Image = global::CZU_APPLICATION.Properties.Resources.meetings_logo1;
             this.pictureBox5.Location = new System.Drawing.Point(379, 28);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(251, 221);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -445,9 +445,9 @@
             this.statisticsGroupBox.Controls.Add(this.pictureBox2);
             this.statisticsGroupBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statisticsGroupBox.Location = new System.Drawing.Point(17, 223);
-            this.statisticsGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statisticsGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.statisticsGroupBox.Name = "statisticsGroupBox";
-            this.statisticsGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statisticsGroupBox.Padding = new System.Windows.Forms.Padding(4);
             this.statisticsGroupBox.Size = new System.Drawing.Size(1332, 578);
             this.statisticsGroupBox.TabIndex = 2;
             this.statisticsGroupBox.TabStop = false;
@@ -458,7 +458,7 @@
             this.studentsMainPanel.Controls.Add(this.studentMainGB);
             this.studentsMainPanel.Enabled = false;
             this.studentsMainPanel.Location = new System.Drawing.Point(209, 0);
-            this.studentsMainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsMainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.studentsMainPanel.Name = "studentsMainPanel";
             this.studentsMainPanel.Size = new System.Drawing.Size(1374, 817);
             this.studentsMainPanel.TabIndex = 4;
@@ -477,9 +477,9 @@
             this.studentMainGB.Controls.Add(this.studentPanel2);
             this.studentMainGB.Controls.Add(this.studentPanel1);
             this.studentMainGB.Location = new System.Drawing.Point(24, 14);
-            this.studentMainGB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentMainGB.Margin = new System.Windows.Forms.Padding(4);
             this.studentMainGB.Name = "studentMainGB";
-            this.studentMainGB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentMainGB.Padding = new System.Windows.Forms.Padding(4);
             this.studentMainGB.Size = new System.Drawing.Size(1325, 787);
             this.studentMainGB.TabIndex = 5;
             this.studentMainGB.TabStop = false;
@@ -493,7 +493,7 @@
             this.studentsRightList.FlatAppearance.BorderSize = 0;
             this.studentsRightList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentsRightList.Location = new System.Drawing.Point(1236, 713);
-            this.studentsRightList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsRightList.Margin = new System.Windows.Forms.Padding(4);
             this.studentsRightList.Name = "studentsRightList";
             this.studentsRightList.Size = new System.Drawing.Size(73, 66);
             this.studentsRightList.TabIndex = 51;
@@ -509,7 +509,7 @@
             this.studentsLeftList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentsLeftList.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.studentsLeftList.Location = new System.Drawing.Point(1156, 713);
-            this.studentsLeftList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsLeftList.Margin = new System.Windows.Forms.Padding(4);
             this.studentsLeftList.Name = "studentsLeftList";
             this.studentsLeftList.Size = new System.Drawing.Size(73, 66);
             this.studentsLeftList.TabIndex = 50;
@@ -521,7 +521,7 @@
             this.studentsSelectClassListBox.FormattingEnabled = true;
             this.studentsSelectClassListBox.ItemHeight = 25;
             this.studentsSelectClassListBox.Location = new System.Drawing.Point(1190, 28);
-            this.studentsSelectClassListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsSelectClassListBox.Margin = new System.Windows.Forms.Padding(4);
             this.studentsSelectClassListBox.Name = "studentsSelectClassListBox";
             this.studentsSelectClassListBox.Size = new System.Drawing.Size(106, 29);
             this.studentsSelectClassListBox.TabIndex = 61;
@@ -543,17 +543,15 @@
             this.studentPanel5.Controls.Add(this.studentImage5);
             this.studentPanel5.Controls.Add(this.studentGB5);
             this.studentPanel5.Location = new System.Drawing.Point(529, 366);
-            this.studentPanel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel5.Name = "studentPanel5";
             this.studentPanel5.Size = new System.Drawing.Size(328, 299);
             this.studentPanel5.TabIndex = 56;
             // 
             // studentConnected5
             // 
-            this.studentConnected5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected5.BackgroundImage")));
-            this.studentConnected5.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected5.Image")));
-            this.studentConnected5.Location = new System.Drawing.Point(276, 241);
-            this.studentConnected5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected5.Location = new System.Drawing.Point(272, 241);
+            this.studentConnected5.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected5.Name = "studentConnected5";
             this.studentConnected5.Size = new System.Drawing.Size(29, 25);
             this.studentConnected5.TabIndex = 56;
@@ -565,7 +563,7 @@
             this.studentImage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage5.Location = new System.Drawing.Point(13, 24);
-            this.studentImage5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage5.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage5.Name = "studentImage5";
             this.studentImage5.Size = new System.Drawing.Size(278, 160);
             this.studentImage5.TabIndex = 58;
@@ -583,9 +581,9 @@
             this.studentGB5.Controls.Add(this.label11);
             this.studentGB5.Controls.Add(this.label12);
             this.studentGB5.Location = new System.Drawing.Point(13, 167);
-            this.studentGB5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB5.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB5.Name = "studentGB5";
-            this.studentGB5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB5.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB5.Size = new System.Drawing.Size(278, 94);
             this.studentGB5.TabIndex = 57;
             this.studentGB5.TabStop = false;
@@ -667,17 +665,15 @@
             this.studentPanel3.Controls.Add(this.studentImage3);
             this.studentPanel3.Controls.Add(this.studentGB3);
             this.studentPanel3.Location = new System.Drawing.Point(948, 70);
-            this.studentPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel3.Name = "studentPanel3";
             this.studentPanel3.Size = new System.Drawing.Size(317, 271);
             this.studentPanel3.TabIndex = 54;
             // 
             // studentConnected3
             // 
-            this.studentConnected3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected3.BackgroundImage")));
-            this.studentConnected3.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected3.Image")));
-            this.studentConnected3.Location = new System.Drawing.Point(277, 232);
-            this.studentConnected3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected3.Location = new System.Drawing.Point(277, 230);
+            this.studentConnected3.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected3.Name = "studentConnected3";
             this.studentConnected3.Size = new System.Drawing.Size(29, 25);
             this.studentConnected3.TabIndex = 39;
@@ -689,7 +685,7 @@
             this.studentImage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage3.Location = new System.Drawing.Point(17, 8);
-            this.studentImage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage3.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage3.Name = "studentImage3";
             this.studentImage3.Size = new System.Drawing.Size(278, 160);
             this.studentImage3.TabIndex = 46;
@@ -707,9 +703,9 @@
             this.studentGB3.Controls.Add(this.label30);
             this.studentGB3.Controls.Add(this.label31);
             this.studentGB3.Location = new System.Drawing.Point(17, 155);
-            this.studentGB3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB3.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB3.Name = "studentGB3";
-            this.studentGB3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB3.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB3.Size = new System.Drawing.Size(278, 94);
             this.studentGB3.TabIndex = 40;
             this.studentGB3.TabStop = false;
@@ -791,17 +787,15 @@
             this.studentPanel4.Controls.Add(this.studentImage4);
             this.studentPanel4.Controls.Add(this.studentGB4);
             this.studentPanel4.Location = new System.Drawing.Point(80, 366);
-            this.studentPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel4.Name = "studentPanel4";
             this.studentPanel4.Size = new System.Drawing.Size(305, 299);
             this.studentPanel4.TabIndex = 55;
             // 
             // studentConnected4
             // 
-            this.studentConnected4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected4.BackgroundImage")));
-            this.studentConnected4.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected4.Image")));
             this.studentConnected4.Location = new System.Drawing.Point(272, 236);
-            this.studentConnected4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected4.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected4.Name = "studentConnected4";
             this.studentConnected4.Size = new System.Drawing.Size(29, 25);
             this.studentConnected4.TabIndex = 33;
@@ -813,7 +807,7 @@
             this.studentImage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage4.Location = new System.Drawing.Point(13, 24);
-            this.studentImage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage4.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage4.Name = "studentImage4";
             this.studentImage4.Size = new System.Drawing.Size(278, 160);
             this.studentImage4.TabIndex = 47;
@@ -831,9 +825,9 @@
             this.studentGB4.Controls.Add(this.label16);
             this.studentGB4.Controls.Add(this.label17);
             this.studentGB4.Location = new System.Drawing.Point(13, 160);
-            this.studentGB4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB4.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB4.Name = "studentGB4";
-            this.studentGB4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB4.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB4.Size = new System.Drawing.Size(278, 94);
             this.studentGB4.TabIndex = 34;
             this.studentGB4.TabStop = false;
@@ -915,17 +909,15 @@
             this.studentPanel6.Controls.Add(this.studentImage6);
             this.studentPanel6.Controls.Add(this.studentGB6);
             this.studentPanel6.Location = new System.Drawing.Point(948, 366);
-            this.studentPanel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel6.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel6.Name = "studentPanel6";
             this.studentPanel6.Size = new System.Drawing.Size(361, 299);
             this.studentPanel6.TabIndex = 57;
             // 
             // studentConnected6
             // 
-            this.studentConnected6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected6.BackgroundImage")));
-            this.studentConnected6.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected6.Image")));
-            this.studentConnected6.Location = new System.Drawing.Point(277, 242);
-            this.studentConnected6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected6.Location = new System.Drawing.Point(280, 242);
+            this.studentConnected6.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected6.Name = "studentConnected6";
             this.studentConnected6.Size = new System.Drawing.Size(29, 25);
             this.studentConnected6.TabIndex = 42;
@@ -937,7 +929,7 @@
             this.studentImage6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage6.Location = new System.Drawing.Point(20, 25);
-            this.studentImage6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage6.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage6.Name = "studentImage6";
             this.studentImage6.Size = new System.Drawing.Size(278, 160);
             this.studentImage6.TabIndex = 49;
@@ -955,9 +947,9 @@
             this.studentGB6.Controls.Add(this.label37);
             this.studentGB6.Controls.Add(this.label38);
             this.studentGB6.Location = new System.Drawing.Point(20, 167);
-            this.studentGB6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB6.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB6.Name = "studentGB6";
-            this.studentGB6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB6.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB6.Size = new System.Drawing.Size(278, 94);
             this.studentGB6.TabIndex = 43;
             this.studentGB6.TabStop = false;
@@ -1039,17 +1031,15 @@
             this.studentPanel2.Controls.Add(this.studentImage2);
             this.studentPanel2.Controls.Add(this.studentGB2);
             this.studentPanel2.Location = new System.Drawing.Point(529, 70);
-            this.studentPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel2.Name = "studentPanel2";
             this.studentPanel2.Size = new System.Drawing.Size(310, 276);
             this.studentPanel2.TabIndex = 52;
             // 
             // studentConnected2
             // 
-            this.studentConnected2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected2.BackgroundImage")));
-            this.studentConnected2.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected2.Image")));
-            this.studentConnected2.Location = new System.Drawing.Point(276, 232);
-            this.studentConnected2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected2.Location = new System.Drawing.Point(272, 224);
+            this.studentConnected2.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected2.Name = "studentConnected2";
             this.studentConnected2.Size = new System.Drawing.Size(29, 25);
             this.studentConnected2.TabIndex = 30;
@@ -1061,7 +1051,7 @@
             this.studentImage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage2.Location = new System.Drawing.Point(13, 6);
-            this.studentImage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage2.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage2.Name = "studentImage2";
             this.studentImage2.Size = new System.Drawing.Size(278, 160);
             this.studentImage2.TabIndex = 45;
@@ -1079,9 +1069,9 @@
             this.studentGB2.Controls.Add(this.label8);
             this.studentGB2.Controls.Add(this.label10);
             this.studentGB2.Location = new System.Drawing.Point(13, 150);
-            this.studentGB2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB2.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB2.Name = "studentGB2";
-            this.studentGB2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB2.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB2.Size = new System.Drawing.Size(278, 94);
             this.studentGB2.TabIndex = 31;
             this.studentGB2.TabStop = false;
@@ -1163,17 +1153,15 @@
             this.studentPanel1.Controls.Add(this.studentImage1);
             this.studentPanel1.Controls.Add(this.studentGB1);
             this.studentPanel1.Location = new System.Drawing.Point(86, 70);
-            this.studentPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.studentPanel1.Name = "studentPanel1";
-            this.studentPanel1.Size = new System.Drawing.Size(299, 260);
+            this.studentPanel1.Size = new System.Drawing.Size(327, 260);
             this.studentPanel1.TabIndex = 53;
             // 
             // studentConnected1
             // 
-            this.studentConnected1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("studentConnected1.BackgroundImage")));
-            this.studentConnected1.Image = ((System.Drawing.Image)(resources.GetObject("studentConnected1.Image")));
-            this.studentConnected1.Location = new System.Drawing.Point(270, 223);
-            this.studentConnected1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentConnected1.Location = new System.Drawing.Point(266, 223);
+            this.studentConnected1.Margin = new System.Windows.Forms.Padding(4);
             this.studentConnected1.Name = "studentConnected1";
             this.studentConnected1.Size = new System.Drawing.Size(29, 25);
             this.studentConnected1.TabIndex = 1;
@@ -1185,7 +1173,7 @@
             this.studentImage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.studentImage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentImage1.Location = new System.Drawing.Point(7, 6);
-            this.studentImage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentImage1.Margin = new System.Windows.Forms.Padding(4);
             this.studentImage1.Name = "studentImage1";
             this.studentImage1.Size = new System.Drawing.Size(278, 160);
             this.studentImage1.TabIndex = 44;
@@ -1203,9 +1191,9 @@
             this.studentGB1.Controls.Add(this.label1);
             this.studentGB1.Controls.Add(this.studentQ1);
             this.studentGB1.Location = new System.Drawing.Point(7, 150);
-            this.studentGB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB1.Margin = new System.Windows.Forms.Padding(4);
             this.studentGB1.Name = "studentGB1";
-            this.studentGB1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentGB1.Padding = new System.Windows.Forms.Padding(4);
             this.studentGB1.Size = new System.Drawing.Size(278, 94);
             this.studentGB1.TabIndex = 2;
             this.studentGB1.TabStop = false;
@@ -1287,7 +1275,7 @@
             this.homeMainPanel.Controls.Add(this.homeMainPanelLogo);
             this.homeMainPanel.Enabled = false;
             this.homeMainPanel.Location = new System.Drawing.Point(209, 0);
-            this.homeMainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homeMainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.homeMainPanel.Name = "homeMainPanel";
             this.homeMainPanel.Size = new System.Drawing.Size(1375, 816);
             this.homeMainPanel.TabIndex = 5;
@@ -1297,7 +1285,7 @@
             // 
             this.student_image.Image = global::CZU_APPLICATION.Properties.Resources.student;
             this.student_image.Location = new System.Drawing.Point(26, 562);
-            this.student_image.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.student_image.Margin = new System.Windows.Forms.Padding(4);
             this.student_image.Name = "student_image";
             this.student_image.Size = new System.Drawing.Size(161, 162);
             this.student_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1308,7 +1296,7 @@
             // 
             this.admin_image.Image = global::CZU_APPLICATION.Properties.Resources.administrator_image;
             this.admin_image.Location = new System.Drawing.Point(26, 564);
-            this.admin_image.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.admin_image.Margin = new System.Windows.Forms.Padding(4);
             this.admin_image.Name = "admin_image";
             this.admin_image.Size = new System.Drawing.Size(161, 160);
             this.admin_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1334,7 +1322,7 @@
             this.homeButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.homeButton.Image = global::CZU_APPLICATION.Properties.Resources.button_home3;
             this.homeButton.Location = new System.Drawing.Point(0, 14);
-            this.homeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homeButton.Margin = new System.Windows.Forms.Padding(4);
             this.homeButton.Name = "homeButton";
             this.homeButton.Size = new System.Drawing.Size(202, 106);
             this.homeButton.TabIndex = 10;
@@ -1350,7 +1338,7 @@
             this.assignmentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.assignmentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_assignments;
             this.assignmentsButton.Location = new System.Drawing.Point(6, 442);
-            this.assignmentsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignmentsButton.Margin = new System.Windows.Forms.Padding(4);
             this.assignmentsButton.Name = "assignmentsButton";
             this.assignmentsButton.Size = new System.Drawing.Size(202, 102);
             this.assignmentsButton.TabIndex = 11;
@@ -1366,7 +1354,7 @@
             this.studentsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.studentsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_students2;
             this.studentsButton.Location = new System.Drawing.Point(2, 116);
-            this.studentsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.studentsButton.Margin = new System.Windows.Forms.Padding(4);
             this.studentsButton.Name = "studentsButton";
             this.studentsButton.Size = new System.Drawing.Size(202, 102);
             this.studentsButton.TabIndex = 12;
@@ -1382,7 +1370,7 @@
             this.meetingsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.meetingsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_meetings;
             this.meetingsButton.Location = new System.Drawing.Point(6, 223);
-            this.meetingsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.meetingsButton.Margin = new System.Windows.Forms.Padding(4);
             this.meetingsButton.Name = "meetingsButton";
             this.meetingsButton.Size = new System.Drawing.Size(199, 102);
             this.meetingsButton.TabIndex = 13;
@@ -1398,7 +1386,7 @@
             this.questionsButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.questionsButton.Image = global::CZU_APPLICATION.Properties.Resources.button_questions;
             this.questionsButton.Location = new System.Drawing.Point(6, 332);
-            this.questionsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionsButton.Margin = new System.Windows.Forms.Padding(4);
             this.questionsButton.Name = "questionsButton";
             this.questionsButton.Size = new System.Drawing.Size(199, 102);
             this.questionsButton.TabIndex = 14;
@@ -1420,7 +1408,7 @@
             this.Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.Menu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Menu.Margin = new System.Windows.Forms.Padding(4);
             this.Menu.Name = "Menu";
             this.Menu.Size = new System.Drawing.Size(208, 817);
             this.Menu.TabIndex = 0;
@@ -1431,7 +1419,7 @@
             this.triggerDataRefreshStudentPanel.Enabled = false;
             this.triggerDataRefreshStudentPanel.ForeColor = System.Drawing.Color.Transparent;
             this.triggerDataRefreshStudentPanel.Location = new System.Drawing.Point(209, 0);
-            this.triggerDataRefreshStudentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.triggerDataRefreshStudentPanel.Margin = new System.Windows.Forms.Padding(4);
             this.triggerDataRefreshStudentPanel.Name = "triggerDataRefreshStudentPanel";
             this.triggerDataRefreshStudentPanel.Size = new System.Drawing.Size(1375, 817);
             this.triggerDataRefreshStudentPanel.TabIndex = 15;
@@ -1442,7 +1430,7 @@
             this.questionsMainPanel.Controls.Add(this.questionsPanelMainGB);
             this.questionsMainPanel.Enabled = false;
             this.questionsMainPanel.Location = new System.Drawing.Point(209, 0);
-            this.questionsMainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionsMainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.questionsMainPanel.Name = "questionsMainPanel";
             this.questionsMainPanel.Size = new System.Drawing.Size(1375, 817);
             this.questionsMainPanel.TabIndex = 63;
@@ -1460,9 +1448,9 @@
             this.questionsPanelMainGB.Controls.Add(this.button1);
             this.questionsPanelMainGB.Controls.Add(this.button2);
             this.questionsPanelMainGB.Location = new System.Drawing.Point(24, 34);
-            this.questionsPanelMainGB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionsPanelMainGB.Margin = new System.Windows.Forms.Padding(4);
             this.questionsPanelMainGB.Name = "questionsPanelMainGB";
-            this.questionsPanelMainGB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionsPanelMainGB.Padding = new System.Windows.Forms.Padding(4);
             this.questionsPanelMainGB.Size = new System.Drawing.Size(1336, 768);
             this.questionsPanelMainGB.TabIndex = 0;
             this.questionsPanelMainGB.TabStop = false;
@@ -1477,7 +1465,7 @@
             this.addQuestions.ForeColor = System.Drawing.Color.Transparent;
             this.addQuestions.Image = ((System.Drawing.Image)(resources.GetObject("addQuestions.Image")));
             this.addQuestions.Location = new System.Drawing.Point(1208, 70);
-            this.addQuestions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addQuestions.Margin = new System.Windows.Forms.Padding(4);
             this.addQuestions.Name = "addQuestions";
             this.addQuestions.Size = new System.Drawing.Size(89, 85);
             this.addQuestions.TabIndex = 61;
@@ -1489,7 +1477,7 @@
             this.questionPanel4.Controls.Add(this.questionTitle4);
             this.questionPanel4.Controls.Add(this.questionGB4);
             this.questionPanel4.Location = new System.Drawing.Point(692, 404);
-            this.questionPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.questionPanel4.Name = "questionPanel4";
             this.questionPanel4.Size = new System.Drawing.Size(490, 325);
             this.questionPanel4.TabIndex = 58;
@@ -1498,7 +1486,7 @@
             // 
             this.questionTitle4.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.questionTitle4.Location = new System.Drawing.Point(2, 0);
-            this.questionTitle4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionTitle4.Margin = new System.Windows.Forms.Padding(4);
             this.questionTitle4.Name = "questionTitle4";
             this.questionTitle4.Size = new System.Drawing.Size(467, 126);
             this.questionTitle4.TabIndex = 6;
@@ -1517,9 +1505,9 @@
             this.questionGB4.Controls.Add(this.label34);
             this.questionGB4.Controls.Add(this.label35);
             this.questionGB4.Location = new System.Drawing.Point(2, 109);
-            this.questionGB4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB4.Margin = new System.Windows.Forms.Padding(4);
             this.questionGB4.Name = "questionGB4";
-            this.questionGB4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB4.Padding = new System.Windows.Forms.Padding(4);
             this.questionGB4.Size = new System.Drawing.Size(467, 198);
             this.questionGB4.TabIndex = 7;
             this.questionGB4.TabStop = false;
@@ -1609,7 +1597,7 @@
             this.questionPanel3.Controls.Add(this.questionTitle3);
             this.questionPanel3.Controls.Add(this.questionGB3);
             this.questionPanel3.Location = new System.Drawing.Point(86, 404);
-            this.questionPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.questionPanel3.Name = "questionPanel3";
             this.questionPanel3.Size = new System.Drawing.Size(481, 325);
             this.questionPanel3.TabIndex = 56;
@@ -1618,7 +1606,7 @@
             // 
             this.questionTitle3.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.questionTitle3.Location = new System.Drawing.Point(2, 4);
-            this.questionTitle3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionTitle3.Margin = new System.Windows.Forms.Padding(4);
             this.questionTitle3.Name = "questionTitle3";
             this.questionTitle3.Size = new System.Drawing.Size(466, 126);
             this.questionTitle3.TabIndex = 4;
@@ -1637,9 +1625,9 @@
             this.questionGB3.Controls.Add(this.label25);
             this.questionGB3.Controls.Add(this.label26);
             this.questionGB3.Location = new System.Drawing.Point(2, 109);
-            this.questionGB3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB3.Margin = new System.Windows.Forms.Padding(4);
             this.questionGB3.Name = "questionGB3";
-            this.questionGB3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB3.Padding = new System.Windows.Forms.Padding(4);
             this.questionGB3.Size = new System.Drawing.Size(463, 198);
             this.questionGB3.TabIndex = 5;
             this.questionGB3.TabStop = false;
@@ -1729,7 +1717,7 @@
             this.questionPanel2.Controls.Add(this.questionTitle2);
             this.questionPanel2.Controls.Add(this.questionGB2);
             this.questionPanel2.Location = new System.Drawing.Point(692, 71);
-            this.questionPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.questionPanel2.Name = "questionPanel2";
             this.questionPanel2.Size = new System.Drawing.Size(476, 304);
             this.questionPanel2.TabIndex = 57;
@@ -1738,7 +1726,7 @@
             // 
             this.questionTitle2.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.questionTitle2.Location = new System.Drawing.Point(2, 1);
-            this.questionTitle2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionTitle2.Margin = new System.Windows.Forms.Padding(4);
             this.questionTitle2.Name = "questionTitle2";
             this.questionTitle2.Size = new System.Drawing.Size(467, 128);
             this.questionTitle2.TabIndex = 2;
@@ -1757,9 +1745,9 @@
             this.questionGB2.Controls.Add(this.label4);
             this.questionGB2.Controls.Add(this.label3);
             this.questionGB2.Location = new System.Drawing.Point(0, 112);
-            this.questionGB2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB2.Margin = new System.Windows.Forms.Padding(4);
             this.questionGB2.Name = "questionGB2";
-            this.questionGB2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB2.Padding = new System.Windows.Forms.Padding(4);
             this.questionGB2.Size = new System.Drawing.Size(467, 181);
             this.questionGB2.TabIndex = 1;
             this.questionGB2.TabStop = false;
@@ -1849,7 +1837,7 @@
             this.questionPanel1.Controls.Add(this.questionTitle1);
             this.questionPanel1.Controls.Add(this.questionGB1);
             this.questionPanel1.Location = new System.Drawing.Point(86, 71);
-            this.questionPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.questionPanel1.Name = "questionPanel1";
             this.questionPanel1.Size = new System.Drawing.Size(481, 304);
             this.questionPanel1.TabIndex = 55;
@@ -1858,7 +1846,7 @@
             // 
             this.questionTitle1.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.questionTitle1.Location = new System.Drawing.Point(0, 0);
-            this.questionTitle1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionTitle1.Margin = new System.Windows.Forms.Padding(4);
             this.questionTitle1.Name = "questionTitle1";
             this.questionTitle1.Size = new System.Drawing.Size(469, 130);
             this.questionTitle1.TabIndex = 0;
@@ -1877,9 +1865,9 @@
             this.questionGB1.Controls.Add(this.label19);
             this.questionGB1.Controls.Add(this.label20);
             this.questionGB1.Location = new System.Drawing.Point(1, 112);
-            this.questionGB1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB1.Margin = new System.Windows.Forms.Padding(4);
             this.questionGB1.Name = "questionGB1";
-            this.questionGB1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionGB1.Padding = new System.Windows.Forms.Padding(4);
             this.questionGB1.Size = new System.Drawing.Size(469, 185);
             this.questionGB1.TabIndex = 3;
             this.questionGB1.TabStop = false;
@@ -1969,7 +1957,7 @@
             this.questionsSelectClassListBox.FormattingEnabled = true;
             this.questionsSelectClassListBox.ItemHeight = 25;
             this.questionsSelectClassListBox.Location = new System.Drawing.Point(1138, 23);
-            this.questionsSelectClassListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.questionsSelectClassListBox.Margin = new System.Windows.Forms.Padding(4);
             this.questionsSelectClassListBox.Name = "questionsSelectClassListBox";
             this.questionsSelectClassListBox.Size = new System.Drawing.Size(179, 29);
             this.questionsSelectClassListBox.TabIndex = 60;
@@ -1993,7 +1981,7 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(1259, 695);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 65);
             this.button1.TabIndex = 52;
@@ -2008,7 +1996,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button2.Location = new System.Drawing.Point(1194, 695);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(58, 65);
             this.button2.TabIndex = 53;
@@ -2032,7 +2020,7 @@
             this.assignmentsMainPanel.Controls.Add(this.assignmentsMainPanelGB);
             this.assignmentsMainPanel.Enabled = false;
             this.assignmentsMainPanel.Location = new System.Drawing.Point(204, 0);
-            this.assignmentsMainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignmentsMainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.assignmentsMainPanel.Name = "assignmentsMainPanel";
             this.assignmentsMainPanel.Size = new System.Drawing.Size(1375, 817);
             this.assignmentsMainPanel.TabIndex = 64;
@@ -2050,9 +2038,9 @@
             this.assignmentsMainPanelGB.Controls.Add(this.button4);
             this.assignmentsMainPanelGB.Controls.Add(this.button5);
             this.assignmentsMainPanelGB.Location = new System.Drawing.Point(24, 34);
-            this.assignmentsMainPanelGB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignmentsMainPanelGB.Margin = new System.Windows.Forms.Padding(4);
             this.assignmentsMainPanelGB.Name = "assignmentsMainPanelGB";
-            this.assignmentsMainPanelGB.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignmentsMainPanelGB.Padding = new System.Windows.Forms.Padding(4);
             this.assignmentsMainPanelGB.Size = new System.Drawing.Size(1336, 768);
             this.assignmentsMainPanelGB.TabIndex = 0;
             this.assignmentsMainPanelGB.TabStop = false;
@@ -2063,7 +2051,7 @@
             this.assignment4Panel.Controls.Add(this.assignment4Button);
             this.assignment4Panel.Controls.Add(this.groupBox4);
             this.assignment4Panel.Location = new System.Drawing.Point(692, 404);
-            this.assignment4Panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment4Panel.Margin = new System.Windows.Forms.Padding(4);
             this.assignment4Panel.Name = "assignment4Panel";
             this.assignment4Panel.Size = new System.Drawing.Size(494, 307);
             this.assignment4Panel.TabIndex = 58;
@@ -2072,7 +2060,7 @@
             // 
             this.assignment4Button.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.assignment4Button.Location = new System.Drawing.Point(0, 1);
-            this.assignment4Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment4Button.Margin = new System.Windows.Forms.Padding(4);
             this.assignment4Button.Name = "assignment4Button";
             this.assignment4Button.Size = new System.Drawing.Size(467, 126);
             this.assignment4Button.TabIndex = 6;
@@ -2088,9 +2076,9 @@
             this.groupBox4.Controls.Add(this.assignment4Deadline);
             this.groupBox4.Controls.Add(this.label32);
             this.groupBox4.Location = new System.Drawing.Point(2, 109);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(462, 168);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
@@ -2160,7 +2148,7 @@
             this.assignment1Panel.Controls.Add(this.assignment1Button);
             this.assignment1Panel.Controls.Add(this.groupBox1);
             this.assignment1Panel.Location = new System.Drawing.Point(86, 71);
-            this.assignment1Panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment1Panel.Margin = new System.Windows.Forms.Padding(4);
             this.assignment1Panel.Name = "assignment1Panel";
             this.assignment1Panel.Size = new System.Drawing.Size(486, 293);
             this.assignment1Panel.TabIndex = 55;
@@ -2169,7 +2157,7 @@
             // 
             this.assignment1Button.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.assignment1Button.Location = new System.Drawing.Point(0, 0);
-            this.assignment1Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment1Button.Margin = new System.Windows.Forms.Padding(4);
             this.assignment1Button.Name = "assignment1Button";
             this.assignment1Button.Size = new System.Drawing.Size(469, 130);
             this.assignment1Button.TabIndex = 0;
@@ -2185,9 +2173,9 @@
             this.groupBox1.Controls.Add(this.assignment1DeadLine);
             this.groupBox1.Controls.Add(this.label45);
             this.groupBox1.Location = new System.Drawing.Point(0, 119);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(468, 150);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -2261,7 +2249,7 @@
             this.addAssignment.ForeColor = System.Drawing.Color.Transparent;
             this.addAssignment.Image = ((System.Drawing.Image)(resources.GetObject("addAssignment.Image")));
             this.addAssignment.Location = new System.Drawing.Point(1208, 70);
-            this.addAssignment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addAssignment.Margin = new System.Windows.Forms.Padding(4);
             this.addAssignment.Name = "addAssignment";
             this.addAssignment.Size = new System.Drawing.Size(89, 85);
             this.addAssignment.TabIndex = 61;
@@ -2272,7 +2260,7 @@
             this.assignment3Panel.Controls.Add(this.assignment3Button);
             this.assignment3Panel.Controls.Add(this.groupBox3);
             this.assignment3Panel.Location = new System.Drawing.Point(86, 404);
-            this.assignment3Panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment3Panel.Margin = new System.Windows.Forms.Padding(4);
             this.assignment3Panel.Name = "assignment3Panel";
             this.assignment3Panel.Size = new System.Drawing.Size(486, 307);
             this.assignment3Panel.TabIndex = 56;
@@ -2281,7 +2269,7 @@
             // 
             this.assignment3Button.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.assignment3Button.Location = new System.Drawing.Point(-1, 1);
-            this.assignment3Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment3Button.Margin = new System.Windows.Forms.Padding(4);
             this.assignment3Button.Name = "assignment3Button";
             this.assignment3Button.Size = new System.Drawing.Size(466, 126);
             this.assignment3Button.TabIndex = 4;
@@ -2297,9 +2285,9 @@
             this.groupBox3.Controls.Add(this.assignment3Deadline);
             this.groupBox3.Controls.Add(this.label53);
             this.groupBox3.Location = new System.Drawing.Point(0, 109);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(463, 168);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
@@ -2369,7 +2357,7 @@
             this.assignment2Panel.Controls.Add(this.assignment2Button);
             this.assignment2Panel.Controls.Add(this.groupBox2);
             this.assignment2Panel.Location = new System.Drawing.Point(692, 71);
-            this.assignment2Panel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment2Panel.Margin = new System.Windows.Forms.Padding(4);
             this.assignment2Panel.Name = "assignment2Panel";
             this.assignment2Panel.Size = new System.Drawing.Size(481, 293);
             this.assignment2Panel.TabIndex = 57;
@@ -2378,7 +2366,7 @@
             // 
             this.assignment2Button.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.assignment2Button.Location = new System.Drawing.Point(0, 1);
-            this.assignment2Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignment2Button.Margin = new System.Windows.Forms.Padding(4);
             this.assignment2Button.Name = "assignment2Button";
             this.assignment2Button.Size = new System.Drawing.Size(467, 128);
             this.assignment2Button.TabIndex = 2;
@@ -2394,9 +2382,9 @@
             this.groupBox2.Controls.Add(this.assignment2Deadline);
             this.groupBox2.Controls.Add(this.label61);
             this.groupBox2.Location = new System.Drawing.Point(5, 119);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(462, 150);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -2466,7 +2454,7 @@
             this.assignmentSelectClassIDListBox.FormattingEnabled = true;
             this.assignmentSelectClassIDListBox.ItemHeight = 25;
             this.assignmentSelectClassIDListBox.Location = new System.Drawing.Point(1138, 23);
-            this.assignmentSelectClassIDListBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.assignmentSelectClassIDListBox.Margin = new System.Windows.Forms.Padding(4);
             this.assignmentSelectClassIDListBox.Name = "assignmentSelectClassIDListBox";
             this.assignmentSelectClassIDListBox.Size = new System.Drawing.Size(179, 29);
             this.assignmentSelectClassIDListBox.TabIndex = 60;
@@ -2489,7 +2477,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Location = new System.Drawing.Point(1259, 695);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(58, 65);
             this.button4.TabIndex = 52;
@@ -2504,7 +2492,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button5.Location = new System.Drawing.Point(1194, 695);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(58, 65);
             this.button5.TabIndex = 53;
@@ -2515,7 +2503,7 @@
             this.meetingsMainPanel.Controls.Add(this.groupBox5);
             this.meetingsMainPanel.Enabled = false;
             this.meetingsMainPanel.Location = new System.Drawing.Point(209, 0);
-            this.meetingsMainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.meetingsMainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.meetingsMainPanel.Name = "meetingsMainPanel";
             this.meetingsMainPanel.Size = new System.Drawing.Size(1375, 817);
             this.meetingsMainPanel.TabIndex = 65;
@@ -2533,9 +2521,9 @@
             this.groupBox5.Controls.Add(this.button10);
             this.groupBox5.Controls.Add(this.button11);
             this.groupBox5.Location = new System.Drawing.Point(24, 34);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(1336, 768);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
@@ -2546,7 +2534,7 @@
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.groupBox6);
             this.panel2.Location = new System.Drawing.Point(692, 404);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(469, 307);
             this.panel2.TabIndex = 58;
@@ -2555,7 +2543,7 @@
             // 
             this.button3.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.button3.Location = new System.Drawing.Point(0, 1);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(467, 126);
             this.button3.TabIndex = 6;
@@ -2573,9 +2561,9 @@
             this.groupBox6.Controls.Add(this.label71);
             this.groupBox6.Controls.Add(this.label72);
             this.groupBox6.Location = new System.Drawing.Point(2, 109);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox6.Size = new System.Drawing.Size(467, 198);
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
@@ -2665,7 +2653,7 @@
             this.panel3.Controls.Add(this.button6);
             this.panel3.Controls.Add(this.groupBox7);
             this.panel3.Location = new System.Drawing.Point(86, 71);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(469, 293);
             this.panel3.TabIndex = 55;
@@ -2674,7 +2662,7 @@
             // 
             this.button6.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.button6.Location = new System.Drawing.Point(0, 0);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(469, 130);
             this.button6.TabIndex = 0;
@@ -2692,9 +2680,9 @@
             this.groupBox7.Controls.Add(this.label79);
             this.groupBox7.Controls.Add(this.label80);
             this.groupBox7.Location = new System.Drawing.Point(0, 119);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox7.Size = new System.Drawing.Size(470, 185);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
@@ -2788,7 +2776,7 @@
             this.button7.ForeColor = System.Drawing.Color.Transparent;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.Location = new System.Drawing.Point(1208, 70);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(89, 85);
             this.button7.TabIndex = 61;
@@ -2799,7 +2787,7 @@
             this.panel4.Controls.Add(this.button8);
             this.panel4.Controls.Add(this.groupBox8);
             this.panel4.Location = new System.Drawing.Point(86, 404);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(466, 307);
             this.panel4.TabIndex = 56;
@@ -2808,7 +2796,7 @@
             // 
             this.button8.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.button8.Location = new System.Drawing.Point(-1, 1);
-            this.button8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(466, 126);
             this.button8.TabIndex = 4;
@@ -2826,9 +2814,9 @@
             this.groupBox8.Controls.Add(this.label87);
             this.groupBox8.Controls.Add(this.label88);
             this.groupBox8.Location = new System.Drawing.Point(0, 109);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox8.Size = new System.Drawing.Size(463, 198);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
@@ -2918,7 +2906,7 @@
             this.panel5.Controls.Add(this.button9);
             this.panel5.Controls.Add(this.groupBox9);
             this.panel5.Location = new System.Drawing.Point(692, 71);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(469, 293);
             this.panel5.TabIndex = 57;
@@ -2927,7 +2915,7 @@
             // 
             this.button9.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.button9.Location = new System.Drawing.Point(0, 1);
-            this.button9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(467, 128);
             this.button9.TabIndex = 2;
@@ -2945,9 +2933,9 @@
             this.groupBox9.Controls.Add(this.label95);
             this.groupBox9.Controls.Add(this.label96);
             this.groupBox9.Location = new System.Drawing.Point(5, 119);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox9.Size = new System.Drawing.Size(462, 185);
             this.groupBox9.TabIndex = 1;
             this.groupBox9.TabStop = false;
@@ -3037,7 +3025,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 25;
             this.listBox1.Location = new System.Drawing.Point(1138, 23);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(179, 29);
             this.listBox1.TabIndex = 60;
@@ -3060,7 +3048,7 @@
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Location = new System.Drawing.Point(1259, 695);
-            this.button10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(58, 65);
             this.button10.TabIndex = 52;
@@ -3075,7 +3063,7 @@
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button11.Location = new System.Drawing.Point(1194, 695);
-            this.button11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button11.Margin = new System.Windows.Forms.Padding(4);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(58, 65);
             this.button11.TabIndex = 53;
@@ -3086,17 +3074,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1583, 817);
+            this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.noDataInPanelMessage);
             this.Controls.Add(this.assignmentsMainPanel);
             this.Controls.Add(this.homeMainPanel);
             this.Controls.Add(this.meetingsMainPanel);
-            this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.triggerDataRefreshStudentPanel);
             this.Controls.Add(this.Menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CZUMain";

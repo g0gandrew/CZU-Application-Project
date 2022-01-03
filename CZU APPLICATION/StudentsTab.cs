@@ -258,9 +258,9 @@ namespace CZU_APPLICATION
 
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
+                        t_studentConnected[i].Image = Properties.Resources.on;
                     else
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\off.png");
+                        t_studentConnected[i].Image = Properties.Resources.off;
                     // // Enabling the panel with data
                     t_studentPanel[i].Enabled = true;
                     t_studentPanel[i++].Visible = true;
@@ -368,10 +368,11 @@ namespace CZU_APPLICATION
                     lastStudentID = dataReader.GetInt32(1);
                     //
                     // Setting up online/offline status
-                    if (dataReader.GetString(0) == "on")
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
+                    if (dataReader.GetString(0) == "on") {
+                        t_studentConnected[i].Image = Properties.Resources.on;
+                    }
                     else
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\off.png");
+                        t_studentConnected[i].Image = Properties.Resources.off;
                     // Enabling the panel with data
                     t_studentPanel[i].Enabled = true;
                     t_studentPanel[i++].Visible = true;
