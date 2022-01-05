@@ -12,8 +12,12 @@ namespace CZU_APPLICATION
 {
     public partial class CZUUserDetails : Form
     {
-        public CZUUserDetails()
+
+        private string _studentID { get; set; }
+
+        public CZUUserDetails(string t_studentID)
         {
+            _studentID = t_studentID;
             InitializeComponent();
         }
 

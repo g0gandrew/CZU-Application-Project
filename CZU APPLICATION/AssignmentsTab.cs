@@ -246,12 +246,10 @@ namespace CZU_APPLICATION
 
                     // Getting assignment state, and grade, submitdate, if exists
 
-                    MessageBox.Show($"ASSIGNMENT ID =  {t_assignmentID[z]}, student id = {t_studentID}");
                     getAssignmentSolutionData($"select state, grade, solutiondate from StudentAssignmentSolution where assignmentID = {t_assignmentID[z]} && studentID = {t_studentID}", ref assignmentState, ref assignmentGrade, ref assignmentSolutionDate);
-
+                   
                     // If the deadline is passed, set deadline date with red and deactivate button.
-
-                    if (deadlineDate > assignmentSolutionDate)
+                    if (deadlineDate < assignmentSolutionDate)
                     {
                         // Deactivating the button for submiting assignment
                         t_assignmentTitle[z].Enabled = false;
@@ -267,35 +265,42 @@ namespace CZU_APPLICATION
 
                         // Displaying the grade 
                         t_assignmentGrade[z].Text = assignmentGrade;
-
                         //
-
-
                     }
-                    else
+                    // If the deadline isn't passed, verify the scenarios, and do so related to the valid one
+                    else 
                     {
-
-                        //
-                        t_assignmentState[z].Text = assignmentState;
-                        t_assignmentGrade[z].Text = assignmentGrade;
                         t_assignmentDeadline[z].ForeColor = Color.Green;
-                        ///
+
+                        // Setting up the state of the assignment
+                        t_assignmentState[z].Text = assignmentState;
+                        //
+
+                        // If the assignment state appears as 'solved' (Automatically setted when student submit the solution) 
+                        if (assignmentState == "Solved")
+                        {
+                            t_assignmentTitle[z].Enabled = false; // We deactivate the button
+                            t_assignmentGrade[z].Text = "Not graded yet";
+                        }
+                        //
+
+                        // If the assignment state appears as 'graded' (Automatically setted when the teacher have graded student assignment)
+                        else if (assignmentState == "Graded")
+                        {
+                            t_assignmentTitle[z].Enabled = false; // We deactivate the button
+                            t_assignmentGrade[z].Text = assignmentGrade; // We display the grade.
+
+                        }
+                        else if(assignmentState == "Not solved")
+                        {
+                            t_assignmentTitle[z].Enabled = true; // We deactivate the button
+                            t_assignmentGrade[z].Text = "Not graded yet"; // We display the grade.
+                        }
+                        //
                     }
+                    //
 
-
-
-
-
-
-                    /* // Setting up assignment state
-                      t_assignmentState[i].Text = dataReader.GetString(3);
-                      //
-
-                      // Setting up assignment grade
-                      t_assignmentGrade[i].Text = dataReader.GetString();
-                      //*/
-
-                    // Enabling the panel for showing the question.
+                    // Enabling the panel for showing the assignment.
                     t_assignmentPanel[z].Enabled = true;
                     t_assignmentPanel[z++].Visible = true;
                     //
@@ -321,8 +326,6 @@ namespace CZU_APPLICATION
             dataReader.Close();
             ///
 
-            i = 0; // restarting the value for being used further
-            //
           
             // Closing MYSQL Connection, and DataReader
             connection.Close();

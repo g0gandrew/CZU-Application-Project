@@ -230,7 +230,7 @@ namespace CZU_APPLICATION
         private void disableMenu(string t_message)
         {
             studentsButton.Enabled = false;
-            meetingsButton.Enabled = false;
+            gradesButton.Enabled = false;
             homeButton.Enabled = false;
             assignmentsButton.Enabled = false;
             questionsButton.Enabled = false;
@@ -355,6 +355,14 @@ namespace CZU_APPLICATION
         /// Panels state
         private void assignmentsMainPanelState(bool t_mode)
         {
+            if(_connectedUserType == "student")
+            {
+                // Disabling add assignment button (it is for teacher)
+                addAssignment.Enabled = false;
+                addAssignment.Visible = false;
+                // Modify control name to reuse code
+                assignmentSelectClassID.Text = "Course:";
+            }
             assignmentsMainPanel.Enabled = t_mode;
             assignmentsMainPanel.Visible = t_mode;
         }
@@ -374,6 +382,12 @@ namespace CZU_APPLICATION
             questionsMainPanel.Enabled = t_mode;
             questionsMainPanel.Visible = t_mode;
         }
+        private void gradesMainPanelState(bool t_mode)
+        {
+            gradesMainPanel.Enabled = t_mode;
+            gradesMainPanel.Visible = t_mode;
+        }
+
         private void MainPanelNoData(bool t_mode, string t_case)
         {
 
@@ -510,7 +524,7 @@ namespace CZU_APPLICATION
                 //
 
                 // Verifying if there are more records available from the current Student ID
-                string query = $"select id from student where id > {_lastID} && classID = {_studentClassID} limit 6";
+                string query = $"select id from student where id > {_lastID} && classID = {_studentClassID} && id <> {_studentID} limit 6";
                 Database.recordExists(query, ref records);
                 //
 
@@ -860,39 +874,44 @@ namespace CZU_APPLICATION
         // Functions for showing data related to student
         private void studentImage1_Click_1(object sender, EventArgs e)
         {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+            // NEED TO MODIFY
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
-
         }
 
         private void studentImage2_Click(object sender, EventArgs e)
-        {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+        {            // NEED TO MODIFY
+
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
         }
 
         private void studentImage3_Click(object sender, EventArgs e)
-        {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+        {            // NEED TO MODIFY
+
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
         }
 
         private void studentImage4_Click(object sender, EventArgs e)
-        {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+        {            // NEED TO MODIFY
+
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
 
         }
 
         private void studentImage5_Click(object sender, EventArgs e)
-        {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+        {            // NEED TO MODIFY
+
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
         }
 
         private void studentImage6_Click(object sender, EventArgs e)
-        {
-            CZUUserDetails studentDetails = new CZUUserDetails();
+        {            // NEED TO MODIFY
+
+            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
             studentDetails.Show();
         }
         //
@@ -1013,9 +1032,10 @@ namespace CZU_APPLICATION
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);
+            gradesMainPanelState(false);
             // 
 
-       
+
 
             if (connectedUserType == "student")
             {
@@ -1041,17 +1061,6 @@ namespace CZU_APPLICATION
 
             }
         }
-
-        private void meetingsButton_Click(object sender, EventArgs e)
-        {
-
-
-            assignmentsMainPanelState(false);
-            homeMainPanelState(false); // need to be replaced.
-            studentsMainPanelState(false);
-            MainPanelNoData(true, "disableAll");
-        }
-
         private void questionsButton_Click(object sender, EventArgs e)
         {
 
@@ -1061,6 +1070,7 @@ namespace CZU_APPLICATION
 
             // Disabling overlapped panels
             homeMainPanelState(false);
+            gradesMainPanelState(false);
             assignmentsMainPanelState(false);
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
@@ -1144,7 +1154,6 @@ namespace CZU_APPLICATION
             }
             
         }
-
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
             // Disabling overlapped panels
@@ -1152,6 +1161,7 @@ namespace CZU_APPLICATION
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);
+            gradesMainPanelState(false);
             assignmentsMainPanelState(false);
             //
 
@@ -1214,6 +1224,23 @@ namespace CZU_APPLICATION
 
 
         }
+        private void gradesButton_Click(object sender, EventArgs e)
+        {
+            // Disabling overlapped panels
+            homeMainPanelState(false);
+            assignmentsMainPanelState(false);
+            studentsMainPanelState(false);
+            MainPanelNoData(true, "disableAll");
+            questionMainPanelState(false);
+            gradesMainPanelState(false);
+            //
+
+            // Need to delete after implementing
+            gradesMainPanelState(true);
+            //
+
+        }
+
         // 
 
         // Question Tab Buttons for interacting with question
@@ -1315,7 +1342,7 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
-     
+
         //
     }
 }

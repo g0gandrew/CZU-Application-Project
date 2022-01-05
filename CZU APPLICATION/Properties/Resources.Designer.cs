@@ -93,99 +93,9 @@ namespace CZU_APPLICATION.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap button_assignments {
+        internal static System.Drawing.Bitmap assignmentsButton {
             get {
-                object obj = ResourceManager.GetObject("button_assignments", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_home {
-            get {
-                object obj = ResourceManager.GetObject("button_home", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_home1 {
-            get {
-                object obj = ResourceManager.GetObject("button_home1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_home2 {
-            get {
-                object obj = ResourceManager.GetObject("button_home2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_home3 {
-            get {
-                object obj = ResourceManager.GetObject("button_home3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_meetings {
-            get {
-                object obj = ResourceManager.GetObject("button_meetings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_questions {
-            get {
-                object obj = ResourceManager.GetObject("button_questions", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_students {
-            get {
-                object obj = ResourceManager.GetObject("button_students", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_students1 {
-            get {
-                object obj = ResourceManager.GetObject("button_students1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap button_students2 {
-            get {
-                object obj = ResourceManager.GetObject("button_students2", resourceCulture);
+                object obj = ResourceManager.GetObject("assignmentsButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,9 +123,19 @@ namespace CZU_APPLICATION.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap home_button {
+        internal static System.Drawing.Bitmap gradesButton {
             get {
-                object obj = ResourceManager.GetObject("home_button", resourceCulture);
+                object obj = ResourceManager.GetObject("gradesButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap homeButton {
+            get {
+                object obj = ResourceManager.GetObject("homeButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

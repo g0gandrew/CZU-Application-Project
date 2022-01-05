@@ -308,12 +308,10 @@ namespace CZU_APPLICATION
                     else if (dataReader.GetString(2) == "M")
                         t_studentGB[i].BackColor = System.Drawing.Color.DodgerBlue;
                     else
-                    { // Need to implement custom SEX} 
+                    {
+                        t_studentGB[i].BackColor = System.Drawing.Color.MediumSlateBlue;
                     }
-                    //-
-                    // Changing studentConnected image status
-                    // Need to be implemented, linked with image
-                    //
+
                     ++i;
                 }
             }
@@ -411,12 +409,10 @@ namespace CZU_APPLICATION
                     else if (dataReader.GetString(3) == "M")
                         t_studentGB[i].BackColor = System.Drawing.Color.DodgerBlue;
                     else
-                    { // Need to implement custom SEX} 
+                    {
+                        t_studentGB[i].BackColor = System.Drawing.Color.MediumSlateBlue;
+
                     }
-                    //-
-                    // Changing studentConnected image status
-                    // Need to be implemented, linked with image
-                    //
                     ++i;
                 }           
             }

@@ -32,7 +32,7 @@ namespace CZU_APPLICATION
             command.Add($"select count(connected) from student where classID = {t_classID} && connected = 'on' && id != {t_studentID}"); // Update number of connected colleagues
             command.Add($"select count(meetingID) from classmeeting where classID = {t_classID}"); // Update the number of meetings that student have to join
             command.Add($"select count(id) from question where state = 'not answered' && studentID = '{t_studentID}'"); // Update student number of questions still not answered
-            command.Add($"select count(assignmentID) from classassignment where classID = {t_classID}"); // Update the number of assignments that student must do
+            command.Add($"select count(assignmentID) from studentassignmentsolution where studentID = {t_studentID} && state = 'Not solved' && assignmentID in (select id from assignment where teacherID in (select teacherID from course where id in (select courseID from classcourse where classID = {t_classID})))"); // Update the number of assignments that student must do
             //
             foreach (string i in command)
             {
