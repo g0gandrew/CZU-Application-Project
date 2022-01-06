@@ -21,8 +21,8 @@ namespace CZU_APPLICATION
         List<Label> studentAssignment = new();
         List<Label> studentMeeting = new();
         List<Panel> studentPanel = new();
-        List<string> teachedClassesIDs = new List<string>();
-        List<string> studiedCourses = new List<string>();
+        List <string> _teachedClassesIDs = new();
+        List <string> _studiedCourses = new();
         // 
 
 
@@ -206,8 +206,12 @@ namespace CZU_APPLICATION
         List<string> actions; // List used for multiple tasks to do on refreshing data. (Stores what to refresh).
         //
         // For Question Tab
-        List<string> questionID = new List<string>();
-        List<string> assignmentID = new List<string>();
+        List<string> _questionID = new List<string>();
+
+        List<string> _assignmentID = new List<string>();
+
+        List<string> _studentIDS = new List<string>();  
+    
         //
 
         /// 
@@ -333,12 +337,16 @@ namespace CZU_APPLICATION
                 _teacherID = StudentsTab.getTeacherID(connectedUser);
                 //
 
+                // Disabling Grades button
+                gradesButton.Enabled = false;
+                //
+
                 // Getting the list of classes where teacher teaches
-                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
+                _teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
                 //
 
                 // Actualizing the data in statistics group for Home Panel
-                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, teachedClassesIDs, _teacherID);
+                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, _teachedClassesIDs, _teacherID);
                 //
 
             }
@@ -503,7 +511,7 @@ namespace CZU_APPLICATION
                     //
 
                     // Repopulate the list
-                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID, $"&& id >= {startFromId} limit 6");
+                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment,   selectedClassValue, _teacherID, $"&& id >= {startFromId} limit 6", ref _studentIDS);
                     //
                 }
                 else // No elements in list
@@ -554,7 +562,7 @@ namespace CZU_APPLICATION
                 //
                 if (records > 0)
                 {  // There are available records 
-                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID, $"&& id > {_lastID} limit 6");
+                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage, ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment,   selectedClassValue, _teacherID, $"&& id > {_lastID} limit 6", ref _studentIDS);
                     // Because there are available records, it means that we can swipe to the next list, and, we can also go back
                     // Because of that, we activate left button
                     studentsLeftList.Enabled = true;
@@ -606,12 +614,6 @@ namespace CZU_APPLICATION
             studentAssignment.Add(studentAssignment4);
             studentAssignment.Add(studentAssignment5);
             studentAssignment.Add(studentAssignment6);
-            studentMeeting.Add(studentMeeting1);
-            studentMeeting.Add(studentMeeting2);
-            studentMeeting.Add(studentMeeting3);
-            studentMeeting.Add(studentMeeting4);
-            studentMeeting.Add(studentMeeting5);
-            studentMeeting.Add(studentMeeting6);
             studentPanel.Add(studentPanel1);
             studentPanel.Add(studentPanel2);
             studentPanel.Add(studentPanel3);
@@ -674,7 +676,6 @@ namespace CZU_APPLICATION
         private void homeTabGUIInitialization()
         {
             statisticsControls.Add(statisticsUsers);
-            statisticsControls.Add(statisticsMeetings);
             statisticsControls.Add(statisticsQuestions);
             statisticsControls.Add(statisticsAssignments);
         }
@@ -733,7 +734,7 @@ namespace CZU_APPLICATION
                     {
                         MessageBox.Show("AM RULAT CAZ DE STUDENTS MAIN PANEL");
                         string selectedClassValue = Convert.ToString(studentsSelectClassListBox.SelectedValue);
-                        bool existsStudentsInClass = StudentsTab.updatePanelAsTeacher(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClassValue, _teacherID, "");
+                        bool existsStudentsInClass = StudentsTab.updatePanelAsTeacher(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment,   selectedClassValue, _teacherID, "", ref _studentIDS);
                         if (existsStudentsInClass == true)
                         {
                             MessageBox.Show("Class HAS students");
@@ -760,7 +761,7 @@ namespace CZU_APPLICATION
                         MessageBox.Show("AM RULAT CAZ DE QUESTIONS MAIN PANEL");
 
                         string selectedClassValue = Convert.ToString(questionsSelectClassListBox.SelectedValue);
-                        bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref questionID);
+                        bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref _questionID);
                         if (existsQuestionsInClass == true)
                         {
                             MessageBox.Show("Class HAS questions");
@@ -775,7 +776,7 @@ namespace CZU_APPLICATION
                 case "student":
                     {
                         string selectedCourse = Convert.ToString(questionsSelectClassListBox.SelectedValue);
-                        bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref questionID);
+                        bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref _questionID);
                         if (hasQuestions == true)
                         {
                             MessageBox.Show("Student has questions");
@@ -791,7 +792,65 @@ namespace CZU_APPLICATION
                     }
             }
         }
+        private void assignmentSelectClassIDListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            MainPanelNoData(true, "disableALL");
+            switch (connectedUserType)
+            {
+                case "teacher":
+                    {
+                        break;
+                    }
+                case "student":
+                    {
+                        MessageBox.Show(" student - AM RULAT CAZ DE ASSIGNMENT MAIN PANEL, ASSIGNMENTS EXISTS");
+                        string selectedCourse = Convert.ToString(assignmentSelectClassIDListBox.SelectedValue);
+                        bool hasAssignments = AssignmentsTab.updatePanelAsStudent(ref assignmentPanel, ref assignmentTitle, ref assignmentDeadline, ref assignmentState, ref assignmentGrade, selectedCourse, _studentID, ref _assignmentID, _studentClassID);
+                        if (hasAssignments == true)
+                        {
+                            MessageBox.Show("Student has assignments");
 
+                        }
+                        else
+                        {
+                            // Message doesn't appear, need to be fixed
+                            MessageBox.Show("Student has NO assignments");
+                            MainPanelNoData(true, "studentHasNoAssignments");
+                        }
+                        break;
+                    }
+            }
+        }
+        private void gradesSelectCourse_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string selectedCourse = StudentsTab.getCourseIDbyName(Convert.ToString(gradesSelectCourse.SelectedValue));
+            StudentsTab.studentGradesData($"select assignmentTitle as 'Assignment Title', grade as 'Your Grade' from grade where studentId = {_studentID} && courseID = {selectedCourse}", ref studentGrades);
+
+            // Displaying the student final grade
+            int finalGrade = 0, count = 0;
+            for (int i = 0; i < studentGrades.Rows.Count; ++i)
+            {
+                ++count;
+                finalGrade += Convert.ToInt32(studentGrades.Rows[i].Cells[1].Value);
+            }
+            if (count != 0)
+            {
+                finalGrade /= count;
+                // If the grade is greater then 4, set its color green
+                if(finalGrade > 4)
+                    gradesSituation.ForeColor = Color.Green;
+                else
+                    gradesSituation.ForeColor = Color.Red;
+
+                //
+            }
+            else
+            {
+                gradesSituation.ForeColor = Color.Red;
+            }
+            gradesSituation.Text = Convert.ToString(finalGrade);
+            //
+        }
         //
 
         // On Panel Triggers for Refreshing Data
@@ -864,7 +923,7 @@ namespace CZU_APPLICATION
                 }
                 else
                 {
-                    StudentsPanel.updateTeachedClassesList(selectClassID, ref teachedClassesIDs, connectedUser); // updating Teacher Teached Classes List every time he clicks
+                    StudentsPanel.updateTeachedClassesList(selectClassID, _teachedClassesIDs, connectedUser); // updating Teacher Teached Classes List every time he clicks
                 }*//*
             }
             */
@@ -872,47 +931,46 @@ namespace CZU_APPLICATION
         //
 
         // Functions for showing data related to student
-        private void studentImage1_Click_1(object sender, EventArgs e)
-        {
-            // NEED TO MODIFY
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
-        }
 
+        private void studentImage1_Click(object sender, EventArgs e)
+        {
+            CZUUserDetails studentDetails1 = new CZUUserDetails(_studentIDS[0], _teacherID);
+            studentDetails1.Show();
+        }
         private void studentImage2_Click(object sender, EventArgs e)
         {            // NEED TO MODIFY
 
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
+            CZUUserDetails studentDetails2 = new CZUUserDetails(_studentIDS[1], _teacherID);
+            studentDetails2.Show();
         }
 
         private void studentImage3_Click(object sender, EventArgs e)
         {            // NEED TO MODIFY
 
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
+            CZUUserDetails studentDetails3 = new CZUUserDetails(_studentIDS[2], _teacherID);
+            studentDetails3.Show();
         }
 
         private void studentImage4_Click(object sender, EventArgs e)
         {            // NEED TO MODIFY
 
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
+            CZUUserDetails studentDetails4 = new CZUUserDetails(_studentIDS[3], _teacherID);
+            studentDetails4.Show();
 
         }
 
         private void studentImage5_Click(object sender, EventArgs e)
         {            // NEED TO MODIFY
 
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
+            CZUUserDetails studentDetails5 = new CZUUserDetails(_studentIDS[4], _teacherID);
+            studentDetails5.Show();
         }
 
         private void studentImage6_Click(object sender, EventArgs e)
         {            // NEED TO MODIFY
 
-            CZUUserDetails studentDetails = new CZUUserDetails(_studentID);
-            studentDetails.Show();
+            CZUUserDetails studentDetails6 = new CZUUserDetails(_studentIDS[5], _teacherID);
+            studentDetails6.Show();
         }
         //
 
@@ -954,11 +1012,11 @@ namespace CZU_APPLICATION
             {
 
                 // Getting the list of classes where teacher teaches
-                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
+                _teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
                 //
 
                 // Verifying if there are classes in list and update the (ListBox) List Teacher teached classes 
-                bool classesExists = StudentsTab.updateTeachedClassesList(ref studentsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                bool classesExists = StudentsTab.updateTeachedClassesList(ref studentsSelectClassListBox, ref _teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
                 //
 
                 if (classesExists == true)
@@ -969,7 +1027,7 @@ namespace CZU_APPLICATION
                     //
 
                     // Initializing the data in panel
-                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment, ref studentMeeting, selectedClass, _teacherID, "");
+                    StudentsTab.updatePanelAsTeacher(ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, ref studentQuestion, ref studentAssignment,  selectedClass, _teacherID, "", ref _studentIDS);
                     //
 
                     // Showing the data
@@ -985,6 +1043,9 @@ namespace CZU_APPLICATION
             }
             else if (connectedUserType == "student") // Student connected 
             {
+                // Disabling overlapped panels
+                gradesMainPanelState(false);
+                //
 
                 if (_times == 0) // One Time Operations
                 {
@@ -1032,13 +1093,17 @@ namespace CZU_APPLICATION
             studentsMainPanelState(false);
             MainPanelNoData(true, "disableAll");
             questionMainPanelState(false);
-            gradesMainPanelState(false);
             // 
 
 
 
             if (connectedUserType == "student")
             {
+
+                // Disabling overlapped panels
+                gradesMainPanelState(false);
+                //
+
                 // Getting student class until create trigger
                 _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
                 //
@@ -1052,11 +1117,11 @@ namespace CZU_APPLICATION
             {
 
                 // Refreshing the amount of connected students
-                teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
+                _teachedClassesIDs = StudentsTab.teachedClasses(connectedUser);
                 //
 
                 // Actualizing the data in statistics group for Home Panel
-                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, teachedClassesIDs, _teacherID);
+                Statistics.homePanelUpdateDataAsTeacher(ref statisticsControls, _teachedClassesIDs, _teacherID);
                 //               
 
             }
@@ -1089,12 +1154,12 @@ namespace CZU_APPLICATION
             {
                 case "teacher":
                     {
-                        bool classesExists = StudentsTab.updateTeachedClassesList(ref questionsSelectClassListBox, ref teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                        bool classesExists = StudentsTab.updateTeachedClassesList(ref questionsSelectClassListBox, ref _teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
                         if (classesExists == true) // If exists classes
                         {
                             MessageBox.Show("Teacher - AM RULAT CAZ DE QUESTIONS MAIN PANEL");
                             string selectedClassValue = Convert.ToString(questionsSelectClassListBox.Items[0]);
-                            bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref questionID);
+                            bool existsQuestionsInClass = QuestionsTab.updatePanelAsTeacher(ref questionPanel, ref questionTitle, ref questionStudentName, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedClassValue, _teacherID, ref _questionID);
                             if(existsQuestionsInClass == true)
                             {
                                 questionMainPanelState(true);
@@ -1117,17 +1182,21 @@ namespace CZU_APPLICATION
                     }
                 case "student":
                     {
+                        // Disabling overlapped panels
+                        gradesMainPanelState(false);
+                        //
+
                         // Getting again student class id until we make the trigger
                         _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
                         //
 
                         // Getting the list of courses studied by student class
-                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref questionsSelectClassListBox, _connectedUser, ref studiedCourses);
+                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref questionsSelectClassListBox, _connectedUser,  ref _studiedCourses);
                         if(coursesExists == true)
                         {
                             MessageBox.Show(" Student - AM RULAT CAZ DE QUESTIONS MAIN PANEL, COURSES EXISTS");
                             string selectedCourse = Convert.ToString(questionsSelectClassListBox.Items[0]);
-                            bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref questionID);
+                            bool hasQuestions = QuestionsTab.updatePanelAsStudent(ref questionPanel, ref questionTitle, ref questionPriorityLevel, ref questionSubmitDate, ref questionState, selectedCourse, studentID, ref _questionID);
                             if(hasQuestions == true)
                             {
                                 MessageBox.Show("Student has questions");
@@ -1178,19 +1247,22 @@ namespace CZU_APPLICATION
 
                 case "student":
                     {
+                        // Disabling overlapped panels
+                        gradesMainPanelState(false);
+                        //
                         // Getting student class id for further operations
                         _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
                         //
 
                         // Getting the list of courses studied by student class
-                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref assignmentSelectClassIDListBox, _connectedUser, ref studiedCourses);
+                        bool coursesExists = StudentsTab.updateStudiedCoursesList(ref assignmentSelectClassIDListBox, _connectedUser, ref _studiedCourses);
                         //
 
                         if (coursesExists == true)
                         {
                             MessageBox.Show(" student - AM RULAT CAZ DE ASSIGNMENT MAIN PANEL, ASSIGNMENTS EXISTS");
                             string selectedCourse = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
-                            bool hasAssignments = AssignmentsTab.updatePanelAsStudent(ref assignmentPanel, ref assignmentTitle, ref assignmentDeadline, ref assignmentState, ref assignmentGrade, selectedCourse, _studentID, ref assignmentID, _studentClassID);
+                            bool hasAssignments = AssignmentsTab.updatePanelAsStudent(ref assignmentPanel, ref assignmentTitle, ref assignmentDeadline, ref assignmentState, ref assignmentGrade, selectedCourse, _studentID, ref _assignmentID, _studentClassID);
                             if (hasAssignments == true)
                             {
                                 MessageBox.Show("Student has assignments");
@@ -1235,10 +1307,52 @@ namespace CZU_APPLICATION
             gradesMainPanelState(false);
             //
 
-            // Need to delete after implementing
-            gradesMainPanelState(true);
+    
+            // Getting again student class id until we make the trigger
+            _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
             //
 
+            // Getting the list of courses studied by student class
+            bool coursesExists = StudentsTab.updateStudiedCoursesList(ref gradesSelectCourse, _connectedUser, ref _studiedCourses);
+            //
+
+            if (coursesExists == true)
+            {
+                gradesMainPanelState(true);
+                MessageBox.Show(" Student - AM RULAT CAZ DE Grades MAIN PANEL, COURSES EXISTS");
+                string selectedCourse = StudentsTab.getCourseIDbyName(Convert.ToString(gradesSelectCourse.Items[0]));
+                StudentsTab.studentGradesData($"select assignmentTitle as 'Assignment Title', grade as 'Your Grade' from grade where studentId = {_studentID} && courseID = {selectedCourse}", ref studentGrades);
+
+                // Displaying the student final grade
+                int finalGrade = 0, count = 0;
+                for(int i = 0; i < studentGrades.Rows.Count; ++i)
+                {
+                    ++count;
+                    finalGrade += Convert.ToInt32(studentGrades.Rows[i].Cells[1].Value);
+                }
+                MessageBox.Show($"Final grade = {finalGrade}, count = {count}");
+                if (count != 0)
+                {
+                    finalGrade /= count;
+                    // If the grade is greater then 4, set its color green
+                    if (finalGrade > 4)
+                        gradesSituation.ForeColor = Color.Green;
+                    else
+                        gradesSituation.ForeColor = Color.Red;
+
+                    //
+                }
+                else
+                    gradesSituation.ForeColor = Color.Red;
+                gradesSituation.Text = Convert.ToString(finalGrade);
+                //
+
+            }
+            else
+            {
+                MessageBox.Show(" Student - AM RULAT CAZ DE Grades MAIN PANEL, COURSES DON T EXIST");
+                MainPanelNoData(true, "studentNoCourses");
+            }
         }
 
         // 
@@ -1251,15 +1365,15 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionDataAsTeacher(questionID[0], out questionTitle, out question);
-                        QuestionDetails question1 = new QuestionDetails(questionTitle, question, questionID[0]);
+                        QuestionsTab.getQuestionDataAsTeacher(_questionID[0], out questionTitle, out question);
+                        QuestionDetails question1 = new QuestionDetails(questionTitle, question, _questionID[0]);
                         question1.Show();
                         break;
                     }
                 case "student":
                     {
 
-                        QuestionDetails question1 = new QuestionDetails(questionID[0]); // take selected course teacher ID);
+                        QuestionDetails question1 = new QuestionDetails(_questionID[0]); // take selected course teacher ID);
                         question1.Show();
                         break;
                     }
@@ -1273,14 +1387,14 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionDataAsTeacher(questionID[1], out questionTitle, out question);
-                        QuestionDetails question2 = new QuestionDetails(questionTitle, question, questionID[1]);
+                        QuestionsTab.getQuestionDataAsTeacher(_questionID[1], out questionTitle, out question);
+                        QuestionDetails question2 = new QuestionDetails(questionTitle, question, _questionID[1]);
                         question2.Show();
                         break;
                     }
                 case "student":
                     {
-                        QuestionDetails question2 = new QuestionDetails(questionID[1]); // take selected course teacher ID);
+                        QuestionDetails question2 = new QuestionDetails(_questionID[1]); // take selected course teacher ID);
                         question2.Show();
                         break;
                     }
@@ -1294,14 +1408,14 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionDataAsTeacher(questionID[2], out questionTitle, out question);
-                        QuestionDetails question3 = new QuestionDetails(questionTitle, question, questionID[2]);
+                        QuestionsTab.getQuestionDataAsTeacher(_questionID[2], out questionTitle, out question);
+                        QuestionDetails question3 = new QuestionDetails(questionTitle, question, _questionID[2]);
                         question3.Show();
                         break;
                     }
                 case "student":
                     {
-                        QuestionDetails question3 = new QuestionDetails(questionID[2]); // take selected course teacher ID);
+                        QuestionDetails question3 = new QuestionDetails(_questionID[2]); // take selected course teacher ID);
                         question3.Show();
                         break;
                     }
@@ -1315,14 +1429,14 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string questionTitle, question;
-                        QuestionsTab.getQuestionDataAsTeacher(questionID[3], out questionTitle, out question);
-                        QuestionDetails question4 = new QuestionDetails(questionTitle, question, questionID[3]);
+                        QuestionsTab.getQuestionDataAsTeacher(_questionID[3], out questionTitle, out question);
+                        QuestionDetails question4 = new QuestionDetails(questionTitle, question, _questionID[3]);
                         question4.Show();
                         break;
                     }
                 case "student":
                     {
-                        QuestionDetails question4 = new QuestionDetails(questionID[3]); // take selected course teacher ID);
+                        QuestionDetails question4 = new QuestionDetails(_questionID[3]); // take selected course teacher ID);
                         question4.Show();
                         break;
                     }
@@ -1342,7 +1456,6 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
-
         //
     }
 }

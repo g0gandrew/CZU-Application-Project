@@ -42,24 +42,41 @@ namespace CZU_APPLICATION
       
             return t_classID;
         }
-        public static string getTeacherCourse(string t_teacherID)
+        public static string getCourseIDbyName(string t_courseName)
         {
             // Pseudo Assign in case of data not found
-            string teacherID = null;
+            string courseID = null;
             //
+
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
-            cmd.CommandText = $"select course from teacher where username = '{t_teacherID}'";
+            cmd.CommandText = $"select id from course where name = '{t_courseName}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                teacherID = dataReader.GetString(0);
+                courseID = dataReader.GetString(0);
             }
-            return teacherID;
+            return courseID;
+        }
+        public static void studentGradesData(string t_command, ref DataGridView t_studentGrades)
+        {
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = t_command;
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+            dataAdapter.SelectCommand = cmd;
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            BindingSource bSource = new BindingSource();
+            bSource.DataSource = table;
+            t_studentGrades.DataSource = bSource;
+            connection.Close();
         }
 
         public static string getTeacherID(string t_connectedUser)
@@ -103,7 +120,6 @@ namespace CZU_APPLICATION
             return teacherID;
             connection.Close();
         }
-
         public static string getStudentID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
@@ -330,7 +346,7 @@ namespace CZU_APPLICATION
             return dataAvailable;
         }
 
-        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref int t_lastID, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID, string t_extraConstraint)
+        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref int t_lastID, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment,  string t_selectedClass, string t_teacherID, string t_extraConstraint, ref List <string> t_studentIDS)
         {
             // Variables
             int loopLength; // Updating the panel by the number of students;
@@ -350,8 +366,10 @@ namespace CZU_APPLICATION
             ///
 
             // Commands list
-            string[] command = new string[5];
+            string[] command = new string[4];
+            List<string> studentIDs = new List<string>();
             //
+
 
             /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
             command[0] = $"select connected, id  from student where classID = {t_selectedClass} {t_extraConstraint}"; //  
@@ -365,6 +383,11 @@ namespace CZU_APPLICATION
                     // Getting the last student ID
                     lastStudentID = dataReader.GetInt32(1);
                     //
+
+                    // Filling up the list of student IDS
+                    studentIDs.Add(dataReader.GetString(1));
+                    //
+
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on") {
                         t_studentConnected[i].Image = Properties.Resources.on;
@@ -378,6 +401,7 @@ namespace CZU_APPLICATION
                 else
                     break;
             }
+
             if (i != 0)
                 dataAvailable = true;
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
@@ -390,6 +414,10 @@ namespace CZU_APPLICATION
             }
             dataReader.Close();
             ///
+
+            // Filling up the list of student IDS
+            t_studentIDS = studentIDs;
+            //
 
 
             /// Command 1 - First command, for gatthering the studentID + others
@@ -439,25 +467,12 @@ namespace CZU_APPLICATION
             }
             //
 
-            // Command 3 - Student --> Meetings
-            command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+
+            // Command 3 - Student --> Assignments
+            command[3] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass}";
             for (int z = 0; z <= loopLength; z++)
             {
                 cmd.CommandText = command[3];
-                dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    t_studentMeeting[z].Text = dataReader.GetString(0);
-                }
-                dataReader.Close();
-            }
-            //
-
-            // Command 4 - Student --> Assignments
-            command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass}";
-            for (int z = 0; z <= loopLength; z++)
-            {
-                cmd.CommandText = command[4];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {

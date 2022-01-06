@@ -168,7 +168,7 @@ namespace CZU_APPLICATION
             //
         }
 
-        public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID, ref List<string> t_assignmentID, string t_classID)
+        public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;

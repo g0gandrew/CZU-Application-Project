@@ -33,9 +33,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.statisticsUsers = new System.Windows.Forms.Label();
-            this.statisticsMeetings = new System.Windows.Forms.Label();
             this.statisticsQuestions = new System.Windows.Forms.Label();
             this.statisticsAssignments = new System.Windows.Forms.Label();
             this.statisticsGroupBox = new System.Windows.Forms.GroupBox();
@@ -50,10 +48,8 @@
             this.studentImage5 = new System.Windows.Forms.Button();
             this.studentGB5 = new System.Windows.Forms.GroupBox();
             this.studentName5 = new System.Windows.Forms.Label();
-            this.studentMeeting5 = new System.Windows.Forms.Label();
             this.studentAssignment5 = new System.Windows.Forms.Label();
             this.studentQuestion5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.studentPanel3 = new System.Windows.Forms.Panel();
@@ -61,10 +57,8 @@
             this.studentImage3 = new System.Windows.Forms.Button();
             this.studentGB3 = new System.Windows.Forms.GroupBox();
             this.studentName3 = new System.Windows.Forms.Label();
-            this.studentMeeting3 = new System.Windows.Forms.Label();
             this.studentAssignment3 = new System.Windows.Forms.Label();
             this.studentQuestion3 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.studentPanel4 = new System.Windows.Forms.Panel();
@@ -72,10 +66,8 @@
             this.studentImage4 = new System.Windows.Forms.Button();
             this.studentGB4 = new System.Windows.Forms.GroupBox();
             this.studentName4 = new System.Windows.Forms.Label();
-            this.studentMeeting4 = new System.Windows.Forms.Label();
             this.studentAssignment4 = new System.Windows.Forms.Label();
             this.studentQuestion4 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.studentPanel6 = new System.Windows.Forms.Panel();
@@ -83,10 +75,8 @@
             this.studentImage6 = new System.Windows.Forms.Button();
             this.studentGB6 = new System.Windows.Forms.GroupBox();
             this.studentName6 = new System.Windows.Forms.Label();
-            this.studentMeeting6 = new System.Windows.Forms.Label();
             this.studentAssignment6 = new System.Windows.Forms.Label();
             this.studentQuestion6 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.studentPanel2 = new System.Windows.Forms.Panel();
@@ -94,10 +84,8 @@
             this.studentImage2 = new System.Windows.Forms.Button();
             this.studentGB2 = new System.Windows.Forms.GroupBox();
             this.studentName2 = new System.Windows.Forms.Label();
-            this.studentMeeting2 = new System.Windows.Forms.Label();
             this.studentAssignment2 = new System.Windows.Forms.Label();
             this.studentQuestion2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.studentPanel1 = new System.Windows.Forms.Panel();
@@ -105,10 +93,8 @@
             this.studentImage1 = new System.Windows.Forms.Button();
             this.studentGB1 = new System.Windows.Forms.GroupBox();
             this.studentName1 = new System.Windows.Forms.Label();
-            this.studentMeeting1 = new System.Windows.Forms.Label();
             this.studentAssignment1 = new System.Windows.Forms.Label();
             this.studentQuestion1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.studentQ1 = new System.Windows.Forms.Label();
             this.homeMainPanel = new System.Windows.Forms.Panel();
@@ -273,14 +259,13 @@
             this.gradesSituation = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.studentGrades = new System.Windows.Forms.DataGridView();
             this.gradesSelectCourse = new System.Windows.Forms.ListBox();
             this.label102 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.statisticsGroupBox.SuspendLayout();
             this.studentsMainPanel.SuspendLayout();
             this.studentMainGB.SuspendLayout();
@@ -338,7 +323,7 @@
             this.groupBox9.SuspendLayout();
             this.gradesMainPanel.SuspendLayout();
             this.gradesMainGB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentGrades)).BeginInit();
             this.SuspendLayout();
             // 
             // homeMainPanelLogo
@@ -354,7 +339,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::CZU_APPLICATION.Properties.Resources.users_statistics_logo;
-            this.pictureBox2.Location = new System.Drawing.Point(67, 42);
+            this.pictureBox2.Location = new System.Drawing.Point(196, 61);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(150, 144);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -364,7 +349,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::CZU_APPLICATION.Properties.Resources.checklist_logo;
-            this.pictureBox3.Location = new System.Drawing.Point(903, 42);
+            this.pictureBox3.Location = new System.Drawing.Point(786, 55);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(148, 144);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -374,50 +359,29 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::CZU_APPLICATION.Properties.Resources.questions_logo;
-            this.pictureBox4.Location = new System.Drawing.Point(606, 32);
+            this.pictureBox4.Location = new System.Drawing.Point(480, 45);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(184, 163);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 5;
             this.pictureBox4.TabStop = false;
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::CZU_APPLICATION.Properties.Resources.meetings_logo1;
-            this.pictureBox5.Location = new System.Drawing.Point(316, 23);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(209, 184);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 6;
-            this.pictureBox5.TabStop = false;
-            // 
             // statisticsUsers
             // 
             this.statisticsUsers.AutoSize = true;
             this.statisticsUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statisticsUsers.Location = new System.Drawing.Point(121, 201);
+            this.statisticsUsers.Location = new System.Drawing.Point(253, 224);
             this.statisticsUsers.Name = "statisticsUsers";
             this.statisticsUsers.Size = new System.Drawing.Size(39, 42);
             this.statisticsUsers.TabIndex = 7;
             this.statisticsUsers.Text = "0";
             this.statisticsUsers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // statisticsMeetings
-            // 
-            this.statisticsMeetings.AutoSize = true;
-            this.statisticsMeetings.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statisticsMeetings.Location = new System.Drawing.Point(406, 201);
-            this.statisticsMeetings.Name = "statisticsMeetings";
-            this.statisticsMeetings.Size = new System.Drawing.Size(39, 42);
-            this.statisticsMeetings.TabIndex = 8;
-            this.statisticsMeetings.Text = "0";
-            this.statisticsMeetings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // statisticsQuestions
             // 
             this.statisticsQuestions.AutoSize = true;
             this.statisticsQuestions.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statisticsQuestions.Location = new System.Drawing.Point(678, 196);
+            this.statisticsQuestions.Location = new System.Drawing.Point(554, 215);
             this.statisticsQuestions.Name = "statisticsQuestions";
             this.statisticsQuestions.Size = new System.Drawing.Size(39, 42);
             this.statisticsQuestions.TabIndex = 9;
@@ -428,7 +392,7 @@
             // 
             this.statisticsAssignments.AutoSize = true;
             this.statisticsAssignments.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statisticsAssignments.Location = new System.Drawing.Point(957, 196);
+            this.statisticsAssignments.Location = new System.Drawing.Point(846, 215);
             this.statisticsAssignments.Name = "statisticsAssignments";
             this.statisticsAssignments.Size = new System.Drawing.Size(39, 42);
             this.statisticsAssignments.TabIndex = 10;
@@ -439,9 +403,7 @@
             // 
             this.statisticsGroupBox.Controls.Add(this.statisticsAssignments);
             this.statisticsGroupBox.Controls.Add(this.statisticsQuestions);
-            this.statisticsGroupBox.Controls.Add(this.statisticsMeetings);
             this.statisticsGroupBox.Controls.Add(this.statisticsUsers);
-            this.statisticsGroupBox.Controls.Add(this.pictureBox5);
             this.statisticsGroupBox.Controls.Add(this.pictureBox4);
             this.statisticsGroupBox.Controls.Add(this.pictureBox3);
             this.statisticsGroupBox.Controls.Add(this.pictureBox2);
@@ -564,10 +526,8 @@
             // 
             this.studentGB5.BackColor = System.Drawing.Color.Violet;
             this.studentGB5.Controls.Add(this.studentName5);
-            this.studentGB5.Controls.Add(this.studentMeeting5);
             this.studentGB5.Controls.Add(this.studentAssignment5);
             this.studentGB5.Controls.Add(this.studentQuestion5);
-            this.studentGB5.Controls.Add(this.label9);
             this.studentGB5.Controls.Add(this.label11);
             this.studentGB5.Controls.Add(this.label12);
             this.studentGB5.Location = new System.Drawing.Point(11, 139);
@@ -585,19 +545,10 @@
             this.studentName5.TabIndex = 30;
             this.studentName5.Text = "label5";
             // 
-            // studentMeeting5
-            // 
-            this.studentMeeting5.AutoSize = true;
-            this.studentMeeting5.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting5.Name = "studentMeeting5";
-            this.studentMeeting5.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting5.TabIndex = 8;
-            this.studentMeeting5.Text = "0";
-            // 
             // studentAssignment5
             // 
             this.studentAssignment5.AutoSize = true;
-            this.studentAssignment5.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment5.Location = new System.Drawing.Point(164, 52);
             this.studentAssignment5.Name = "studentAssignment5";
             this.studentAssignment5.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment5.TabIndex = 7;
@@ -606,26 +557,16 @@
             // studentQuestion5
             // 
             this.studentQuestion5.AutoSize = true;
-            this.studentQuestion5.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion5.Location = new System.Drawing.Point(86, 52);
             this.studentQuestion5.Name = "studentQuestion5";
             this.studentQuestion5.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion5.TabIndex = 6;
             this.studentQuestion5.Text = "0";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(159, 52);
-            this.label9.Name = "label9";
-            this.label9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label9.Size = new System.Drawing.Size(25, 20);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "M:";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(86, 52);
+            this.label11.Location = new System.Drawing.Point(136, 52);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(22, 20);
             this.label11.TabIndex = 4;
@@ -634,7 +575,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 52);
+            this.label12.Location = new System.Drawing.Point(57, 52);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(23, 20);
             this.label12.TabIndex = 3;
@@ -674,10 +615,8 @@
             // 
             this.studentGB3.BackColor = System.Drawing.Color.Violet;
             this.studentGB3.Controls.Add(this.studentName3);
-            this.studentGB3.Controls.Add(this.studentMeeting3);
             this.studentGB3.Controls.Add(this.studentAssignment3);
             this.studentGB3.Controls.Add(this.studentQuestion3);
-            this.studentGB3.Controls.Add(this.label29);
             this.studentGB3.Controls.Add(this.label30);
             this.studentGB3.Controls.Add(this.label31);
             this.studentGB3.Location = new System.Drawing.Point(14, 129);
@@ -695,19 +634,10 @@
             this.studentName3.TabIndex = 13;
             this.studentName3.Text = "label11";
             // 
-            // studentMeeting3
-            // 
-            this.studentMeeting3.AutoSize = true;
-            this.studentMeeting3.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting3.Name = "studentMeeting3";
-            this.studentMeeting3.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting3.TabIndex = 8;
-            this.studentMeeting3.Text = "0";
-            // 
             // studentAssignment3
             // 
             this.studentAssignment3.AutoSize = true;
-            this.studentAssignment3.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment3.Location = new System.Drawing.Point(176, 50);
             this.studentAssignment3.Name = "studentAssignment3";
             this.studentAssignment3.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment3.TabIndex = 7;
@@ -716,26 +646,16 @@
             // studentQuestion3
             // 
             this.studentQuestion3.AutoSize = true;
-            this.studentQuestion3.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion3.Location = new System.Drawing.Point(87, 50);
             this.studentQuestion3.Name = "studentQuestion3";
             this.studentQuestion3.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion3.TabIndex = 6;
             this.studentQuestion3.Text = "0";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(159, 52);
-            this.label29.Name = "label29";
-            this.label29.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label29.Size = new System.Drawing.Size(25, 20);
-            this.label29.TabIndex = 5;
-            this.label29.Text = "M:";
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(86, 52);
+            this.label30.Location = new System.Drawing.Point(148, 50);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(22, 20);
             this.label30.TabIndex = 4;
@@ -744,7 +664,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(17, 52);
+            this.label31.Location = new System.Drawing.Point(58, 50);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(23, 20);
             this.label31.TabIndex = 3;
@@ -784,10 +704,8 @@
             // 
             this.studentGB4.BackColor = System.Drawing.Color.Violet;
             this.studentGB4.Controls.Add(this.studentName4);
-            this.studentGB4.Controls.Add(this.studentMeeting4);
             this.studentGB4.Controls.Add(this.studentAssignment4);
             this.studentGB4.Controls.Add(this.studentQuestion4);
-            this.studentGB4.Controls.Add(this.label15);
             this.studentGB4.Controls.Add(this.label16);
             this.studentGB4.Controls.Add(this.label17);
             this.studentGB4.Location = new System.Drawing.Point(11, 133);
@@ -805,19 +723,10 @@
             this.studentName4.TabIndex = 15;
             this.studentName4.Text = "label13";
             // 
-            // studentMeeting4
-            // 
-            this.studentMeeting4.AutoSize = true;
-            this.studentMeeting4.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting4.Name = "studentMeeting4";
-            this.studentMeeting4.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting4.TabIndex = 8;
-            this.studentMeeting4.Text = "0";
-            // 
             // studentAssignment4
             // 
             this.studentAssignment4.AutoSize = true;
-            this.studentAssignment4.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment4.Location = new System.Drawing.Point(169, 52);
             this.studentAssignment4.Name = "studentAssignment4";
             this.studentAssignment4.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment4.TabIndex = 7;
@@ -826,26 +735,16 @@
             // studentQuestion4
             // 
             this.studentQuestion4.AutoSize = true;
-            this.studentQuestion4.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion4.Location = new System.Drawing.Point(75, 52);
             this.studentQuestion4.Name = "studentQuestion4";
             this.studentQuestion4.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion4.TabIndex = 6;
             this.studentQuestion4.Text = "0";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(159, 52);
-            this.label15.Name = "label15";
-            this.label15.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label15.Size = new System.Drawing.Size(25, 20);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "M:";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(86, 52);
+            this.label16.Location = new System.Drawing.Point(141, 52);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(22, 20);
             this.label16.TabIndex = 4;
@@ -854,7 +753,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(17, 52);
+            this.label17.Location = new System.Drawing.Point(46, 52);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(23, 20);
             this.label17.TabIndex = 3;
@@ -894,10 +793,8 @@
             // 
             this.studentGB6.BackColor = System.Drawing.Color.Violet;
             this.studentGB6.Controls.Add(this.studentName6);
-            this.studentGB6.Controls.Add(this.studentMeeting6);
             this.studentGB6.Controls.Add(this.studentAssignment6);
             this.studentGB6.Controls.Add(this.studentQuestion6);
-            this.studentGB6.Controls.Add(this.label36);
             this.studentGB6.Controls.Add(this.label37);
             this.studentGB6.Controls.Add(this.label38);
             this.studentGB6.Location = new System.Drawing.Point(17, 139);
@@ -915,19 +812,10 @@
             this.studentName6.TabIndex = 30;
             this.studentName6.Text = "label5";
             // 
-            // studentMeeting6
-            // 
-            this.studentMeeting6.AutoSize = true;
-            this.studentMeeting6.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting6.Name = "studentMeeting6";
-            this.studentMeeting6.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting6.TabIndex = 8;
-            this.studentMeeting6.Text = "0";
-            // 
             // studentAssignment6
             // 
             this.studentAssignment6.AutoSize = true;
-            this.studentAssignment6.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment6.Location = new System.Drawing.Point(173, 55);
             this.studentAssignment6.Name = "studentAssignment6";
             this.studentAssignment6.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment6.TabIndex = 7;
@@ -936,26 +824,16 @@
             // studentQuestion6
             // 
             this.studentQuestion6.AutoSize = true;
-            this.studentQuestion6.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion6.Location = new System.Drawing.Point(84, 52);
             this.studentQuestion6.Name = "studentQuestion6";
             this.studentQuestion6.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion6.TabIndex = 6;
             this.studentQuestion6.Text = "0";
             // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(159, 52);
-            this.label36.Name = "label36";
-            this.label36.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label36.Size = new System.Drawing.Size(25, 20);
-            this.label36.TabIndex = 5;
-            this.label36.Text = "M:";
-            // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(86, 52);
+            this.label37.Location = new System.Drawing.Point(145, 55);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(22, 20);
             this.label37.TabIndex = 4;
@@ -964,7 +842,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(17, 52);
+            this.label38.Location = new System.Drawing.Point(55, 52);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(23, 20);
             this.label38.TabIndex = 3;
@@ -1004,10 +882,8 @@
             // 
             this.studentGB2.BackColor = System.Drawing.Color.DodgerBlue;
             this.studentGB2.Controls.Add(this.studentName2);
-            this.studentGB2.Controls.Add(this.studentMeeting2);
             this.studentGB2.Controls.Add(this.studentAssignment2);
             this.studentGB2.Controls.Add(this.studentQuestion2);
-            this.studentGB2.Controls.Add(this.label7);
             this.studentGB2.Controls.Add(this.label8);
             this.studentGB2.Controls.Add(this.label10);
             this.studentGB2.Location = new System.Drawing.Point(11, 125);
@@ -1019,25 +895,16 @@
             // studentName2
             // 
             this.studentName2.AutoSize = true;
-            this.studentName2.Location = new System.Drawing.Point(86, 23);
+            this.studentName2.Location = new System.Drawing.Point(96, 23);
             this.studentName2.Name = "studentName2";
             this.studentName2.Size = new System.Drawing.Size(50, 20);
             this.studentName2.TabIndex = 11;
             this.studentName2.Text = "label6";
             // 
-            // studentMeeting2
-            // 
-            this.studentMeeting2.AutoSize = true;
-            this.studentMeeting2.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting2.Name = "studentMeeting2";
-            this.studentMeeting2.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting2.TabIndex = 8;
-            this.studentMeeting2.Text = "0";
-            // 
             // studentAssignment2
             // 
             this.studentAssignment2.AutoSize = true;
-            this.studentAssignment2.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment2.Location = new System.Drawing.Point(164, 52);
             this.studentAssignment2.Name = "studentAssignment2";
             this.studentAssignment2.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment2.TabIndex = 7;
@@ -1046,26 +913,16 @@
             // studentQuestion2
             // 
             this.studentQuestion2.AutoSize = true;
-            this.studentQuestion2.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion2.Location = new System.Drawing.Point(86, 52);
             this.studentQuestion2.Name = "studentQuestion2";
             this.studentQuestion2.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion2.TabIndex = 6;
             this.studentQuestion2.Text = "0";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(159, 52);
-            this.label7.Name = "label7";
-            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label7.Size = new System.Drawing.Size(25, 20);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "M:";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(86, 52);
+            this.label8.Location = new System.Drawing.Point(136, 52);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(22, 20);
             this.label8.TabIndex = 4;
@@ -1074,7 +931,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 52);
+            this.label10.Location = new System.Drawing.Point(57, 52);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(23, 20);
             this.label10.TabIndex = 3;
@@ -1108,16 +965,14 @@
             this.studentImage1.Size = new System.Drawing.Size(232, 133);
             this.studentImage1.TabIndex = 44;
             this.studentImage1.UseVisualStyleBackColor = true;
-            this.studentImage1.Click += new System.EventHandler(this.studentImage1_Click_1);
+            this.studentImage1.Click += new System.EventHandler(this.studentImage1_Click);
             // 
             // studentGB1
             // 
             this.studentGB1.BackColor = System.Drawing.Color.Violet;
             this.studentGB1.Controls.Add(this.studentName1);
-            this.studentGB1.Controls.Add(this.studentMeeting1);
             this.studentGB1.Controls.Add(this.studentAssignment1);
             this.studentGB1.Controls.Add(this.studentQuestion1);
-            this.studentGB1.Controls.Add(this.label2);
             this.studentGB1.Controls.Add(this.label1);
             this.studentGB1.Controls.Add(this.studentQ1);
             this.studentGB1.Location = new System.Drawing.Point(6, 125);
@@ -1135,19 +990,10 @@
             this.studentName1.TabIndex = 10;
             this.studentName1.Text = "label4";
             // 
-            // studentMeeting1
-            // 
-            this.studentMeeting1.AutoSize = true;
-            this.studentMeeting1.Location = new System.Drawing.Point(190, 52);
-            this.studentMeeting1.Name = "studentMeeting1";
-            this.studentMeeting1.Size = new System.Drawing.Size(17, 20);
-            this.studentMeeting1.TabIndex = 8;
-            this.studentMeeting1.Text = "0";
-            // 
             // studentAssignment1
             // 
             this.studentAssignment1.AutoSize = true;
-            this.studentAssignment1.Location = new System.Drawing.Point(114, 52);
+            this.studentAssignment1.Location = new System.Drawing.Point(169, 52);
             this.studentAssignment1.Name = "studentAssignment1";
             this.studentAssignment1.Size = new System.Drawing.Size(17, 20);
             this.studentAssignment1.TabIndex = 7;
@@ -1156,26 +1002,16 @@
             // studentQuestion1
             // 
             this.studentQuestion1.AutoSize = true;
-            this.studentQuestion1.Location = new System.Drawing.Point(46, 52);
+            this.studentQuestion1.Location = new System.Drawing.Point(75, 52);
             this.studentQuestion1.Name = "studentQuestion1";
             this.studentQuestion1.Size = new System.Drawing.Size(17, 20);
             this.studentQuestion1.TabIndex = 6;
             this.studentQuestion1.Text = "0";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(159, 52);
-            this.label2.Name = "label2";
-            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label2.Size = new System.Drawing.Size(25, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "M:";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 52);
+            this.label1.Location = new System.Drawing.Point(141, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(22, 20);
             this.label1.TabIndex = 4;
@@ -1184,7 +1020,7 @@
             // studentQ1
             // 
             this.studentQ1.AutoSize = true;
-            this.studentQ1.Location = new System.Drawing.Point(17, 52);
+            this.studentQ1.Location = new System.Drawing.Point(46, 52);
             this.studentQ1.Name = "studentQ1";
             this.studentQ1.Size = new System.Drawing.Size(23, 20);
             this.studentQ1.TabIndex = 3;
@@ -2266,6 +2102,7 @@
             this.assignmentSelectClassIDListBox.Name = "assignmentSelectClassIDListBox";
             this.assignmentSelectClassIDListBox.Size = new System.Drawing.Size(150, 24);
             this.assignmentSelectClassIDListBox.TabIndex = 60;
+            this.assignmentSelectClassIDListBox.SelectedValueChanged += new System.EventHandler(this.assignmentSelectClassIDListBox_SelectedValueChanged);
             // 
             // assignmentSelectClassID
             // 
@@ -2835,7 +2672,7 @@
             this.gradesMainGB.Controls.Add(this.gradesSituation);
             this.gradesMainGB.Controls.Add(this.label41);
             this.gradesMainGB.Controls.Add(this.label40);
-            this.gradesMainGB.Controls.Add(this.dataGridView1);
+            this.gradesMainGB.Controls.Add(this.studentGrades);
             this.gradesMainGB.Location = new System.Drawing.Point(21, 54);
             this.gradesMainGB.Name = "gradesMainGB";
             this.gradesMainGB.Size = new System.Drawing.Size(1101, 615);
@@ -2846,11 +2683,11 @@
             // gradesSituation
             // 
             this.gradesSituation.AutoSize = true;
-            this.gradesSituation.Font = new System.Drawing.Font("Segoe UI Black", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.gradesSituation.Font = new System.Drawing.Font("Segoe UI Black", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gradesSituation.ForeColor = System.Drawing.Color.Red;
-            this.gradesSituation.Location = new System.Drawing.Point(645, 476);
+            this.gradesSituation.Location = new System.Drawing.Point(658, 472);
             this.gradesSituation.Name = "gradesSituation";
-            this.gradesSituation.Size = new System.Drawing.Size(51, 59);
+            this.gradesSituation.Size = new System.Drawing.Size(47, 54);
             this.gradesSituation.TabIndex = 3;
             this.gradesSituation.Text = "0";
             // 
@@ -2858,11 +2695,11 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label41.Location = new System.Drawing.Point(386, 483);
+            this.label41.Location = new System.Drawing.Point(332, 472);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(253, 50);
+            this.label41.Size = new System.Drawing.Size(333, 50);
             this.label41.TabIndex = 2;
-            this.label41.Text = "Your grade is: ";
+            this.label41.Text = "Your final grade is: ";
             // 
             // label40
             // 
@@ -2874,18 +2711,18 @@
             this.label40.TabIndex = 1;
             this.label40.Text = "Your current situation";
             // 
-            // dataGridView1
+            // studentGrades
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(103, 132);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(865, 313);
-            this.dataGridView1.TabIndex = 0;
+            this.studentGrades.AllowUserToAddRows = false;
+            this.studentGrades.AllowUserToDeleteRows = false;
+            this.studentGrades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.studentGrades.Location = new System.Drawing.Point(372, 138);
+            this.studentGrades.Name = "studentGrades";
+            this.studentGrades.ReadOnly = true;
+            this.studentGrades.RowHeadersWidth = 51;
+            this.studentGrades.RowTemplate.Height = 29;
+            this.studentGrades.Size = new System.Drawing.Size(304, 313);
+            this.studentGrades.TabIndex = 0;
             // 
             // gradesSelectCourse
             // 
@@ -2895,6 +2732,7 @@
             this.gradesSelectCourse.Name = "gradesSelectCourse";
             this.gradesSelectCourse.Size = new System.Drawing.Size(150, 24);
             this.gradesSelectCourse.TabIndex = 60;
+            this.gradesSelectCourse.SelectedValueChanged += new System.EventHandler(this.gradesSelectCourse_SelectedValueChanged);
             // 
             // label102
             // 
@@ -2910,11 +2748,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1319, 681);
-            this.Controls.Add(this.assignmentsMainPanel);
             this.Controls.Add(this.noDataInPanelMessage);
             this.Controls.Add(this.gradesMainPanel);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.homeMainPanel);
+            this.Controls.Add(this.assignmentsMainPanel);
             this.Controls.Add(this.meetingsMainPanel);
             this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.triggerDataRefreshStudentPanel);
@@ -2933,7 +2771,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.statisticsGroupBox.ResumeLayout(false);
             this.statisticsGroupBox.PerformLayout();
             this.studentsMainPanel.ResumeLayout(false);
@@ -3017,7 +2854,7 @@
             this.gradesMainPanel.PerformLayout();
             this.gradesMainGB.ResumeLayout(false);
             this.gradesMainGB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentGrades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3029,52 +2866,40 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label statisticsUsers;
-        private System.Windows.Forms.Label statisticsMeetings;
         private System.Windows.Forms.Label statisticsQuestions;
         private System.Windows.Forms.Label statisticsAssignments;
         private System.Windows.Forms.GroupBox statisticsGroupBox;
         public System.Windows.Forms.Panel studentsMainPanel;
         private System.Windows.Forms.PictureBox studentConnected3;
         private System.Windows.Forms.GroupBox studentGB3;
-        private System.Windows.Forms.Label studentMeeting3;
         private System.Windows.Forms.Label studentAssignment3;
         private System.Windows.Forms.Label studentQuestion3;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.PictureBox studentConnected2;
         private System.Windows.Forms.GroupBox studentGB2;
-        private System.Windows.Forms.Label studentMeeting2;
         private System.Windows.Forms.Label studentAssignment2;
         private System.Windows.Forms.Label studentQuestion2;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox studentMainGB;
         private System.Windows.Forms.PictureBox studentConnected6;
         private System.Windows.Forms.GroupBox studentGB6;
-        private System.Windows.Forms.Label studentMeeting6;
         private System.Windows.Forms.Label studentAssignment6;
         private System.Windows.Forms.Label studentQuestion6;
-        private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.PictureBox studentConnected4;
         private System.Windows.Forms.PictureBox studentConnected1;
         private System.Windows.Forms.GroupBox studentGB1;
-        private System.Windows.Forms.Label studentMeeting1;
         private System.Windows.Forms.Label studentAssignment1;
         private System.Windows.Forms.Label studentQuestion1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label studentQ1;
         private System.Windows.Forms.GroupBox studentGB4;
-        private System.Windows.Forms.Label studentMeeting4;
         private System.Windows.Forms.Label studentAssignment4;
         private System.Windows.Forms.Label studentQuestion4;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button studentImage6;
@@ -3098,10 +2923,8 @@
         private System.Windows.Forms.PictureBox studentConnected5;
         private System.Windows.Forms.GroupBox studentGB5;
         private System.Windows.Forms.Label studentName5;
-        private System.Windows.Forms.Label studentMeeting5;
         private System.Windows.Forms.Label studentAssignment5;
         private System.Windows.Forms.Label studentQuestion5;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel studentPanel4;
@@ -3271,6 +3094,6 @@
         private System.Windows.Forms.Label gradesSituation;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView studentGrades;
     }
 }

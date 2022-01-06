@@ -138,7 +138,7 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
-        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID, ref List <string> t_questionIDs)
+        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID,  ref List <string> t_questionIDs)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
@@ -288,3 +288,4 @@ namespace CZU_APPLICATION
         }
     }
 }
+

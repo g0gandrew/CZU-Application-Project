@@ -30,7 +30,6 @@ namespace CZU_APPLICATION
             //
             // Initializing the list of commands
             command.Add($"select count(connected) from student where classID = {t_classID} && connected = 'on' && id != {t_studentID}"); // Update number of connected colleagues
-            command.Add($"select count(meetingID) from classmeeting where classID = {t_classID}"); // Update the number of meetings that student have to join
             command.Add($"select count(id) from question where state = 'not answered' && studentID = '{t_studentID}'"); // Update student number of questions still not answered
             command.Add($"select count(assignmentID) from studentassignmentsolution where studentID = {t_studentID} && state = 'Not solved' && assignmentID in (select id from assignment where teacherID in (select teacherID from course where id in (select courseID from classcourse where classID = {t_classID})))"); // Update the number of assignments that student must do
             //
@@ -83,9 +82,7 @@ namespace CZU_APPLICATION
                     {
                         if (i == 0)
                             command = $"select count(connected) from student where classId = {x} && connected = 'on'";
-                        else if (i == 1)
-                            command = $"select count(meetingID) from classmeeting where classId = {x} && meetingID in (select id from meeting where teacherID = {t_teacherID})";
-                        else if(i == 2)
+                        else if(i == 1)
                             command = $"select count(id) from question where teacherID = {t_teacherID} && state = 'not answered' && studentId in (select id from student where classId = {x})";
                         else
                             command = $"select count(assignmentID) from classassignment where classId = {x} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
