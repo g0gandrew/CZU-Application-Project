@@ -934,43 +934,56 @@ namespace CZU_APPLICATION
 
         private void studentImage1_Click(object sender, EventArgs e)
         {
-            CZUUserDetails studentDetails1 = new CZUUserDetails(_studentIDS[0], _teacherID);
-            studentDetails1.Show();
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails1 = new CZUUserDetails(_studentIDS[0], _teacherID);
+                studentDetails1.Show();
+            }
         }
         private void studentImage2_Click(object sender, EventArgs e)
-        {            // NEED TO MODIFY
-
-            CZUUserDetails studentDetails2 = new CZUUserDetails(_studentIDS[1], _teacherID);
+        {            
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails2 = new CZUUserDetails(_studentIDS[1], _teacherID);
             studentDetails2.Show();
+            }
         }
 
         private void studentImage3_Click(object sender, EventArgs e)
-        {            // NEED TO MODIFY
-
-            CZUUserDetails studentDetails3 = new CZUUserDetails(_studentIDS[2], _teacherID);
-            studentDetails3.Show();
+        {
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails3 = new CZUUserDetails(_studentIDS[2], _teacherID);
+                studentDetails3.Show();
+            }
         }
 
         private void studentImage4_Click(object sender, EventArgs e)
-        {            // NEED TO MODIFY
-
-            CZUUserDetails studentDetails4 = new CZUUserDetails(_studentIDS[3], _teacherID);
-            studentDetails4.Show();
+        {
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails4 = new CZUUserDetails(_studentIDS[3], _teacherID);
+                studentDetails4.Show();
+            }
 
         }
 
         private void studentImage5_Click(object sender, EventArgs e)
-        {            // NEED TO MODIFY
-
-            CZUUserDetails studentDetails5 = new CZUUserDetails(_studentIDS[4], _teacherID);
-            studentDetails5.Show();
+        {
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails5 = new CZUUserDetails(_studentIDS[4], _teacherID);
+                studentDetails5.Show();
+            }
         }
 
         private void studentImage6_Click(object sender, EventArgs e)
-        {            // NEED TO MODIFY
-
-            CZUUserDetails studentDetails6 = new CZUUserDetails(_studentIDS[5], _teacherID);
-            studentDetails6.Show();
+        {
+            if (connectedUserType == "teacher")
+            {
+                CZUUserDetails studentDetails6 = new CZUUserDetails(_studentIDS[5], _teacherID);
+                studentDetails6.Show();
+            }
         }
         //
 
