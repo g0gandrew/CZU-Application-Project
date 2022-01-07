@@ -19,7 +19,6 @@ namespace CZU_APPLICATION
         List<Label> studentName = new();
         List<Label> studentQuestion = new();
         List<Label> studentAssignment = new();
-        List<Label> studentMeeting = new();
         List<Panel> studentPanel = new();
         List <string> _teachedClassesIDs = new();
         List <string> _studiedCourses = new();
@@ -118,7 +117,7 @@ namespace CZU_APPLICATION
         }
         //
 
-        // Question Tab
+        // Tabs state
         private bool _QuestionsTabInitialized { get; set; } = false;
         private bool _StudentsTabInitialized { get; set; } = false;
         private bool _AssignmentsTabInitialized { get; set; } = false;
@@ -216,7 +215,7 @@ namespace CZU_APPLICATION
 
         /// 
 
-        // Refresh Data General 
+        // Refresh  General Data
         List<Panel> triggerPanel = new();
         //
 
@@ -358,6 +357,10 @@ namespace CZU_APPLICATION
         {
             userDisconnectsSetOffline(connectedUserType, connectedUser); // sets connected user status to offline.
         }
+        //
+
+        // Cleaning useless data
+        
         //
 
         /// Panels state
@@ -576,7 +579,7 @@ namespace CZU_APPLICATION
         //
 
         // Creates lists of controls
-        private void studentTabGUInitialization()
+        private void studentTabGUInitialization(string t_connectedUserType)
         {
             studentConnected.Add(studentConnected1);
             studentConnected.Add(studentConnected2);
@@ -596,24 +599,37 @@ namespace CZU_APPLICATION
             studentImage.Add(studentImage4);
             studentImage.Add(studentImage5);
             studentImage.Add(studentImage6);
+            studentName.Add(studentName0);
             studentName.Add(studentName1);
             studentName.Add(studentName2);
             studentName.Add(studentName3);
             studentName.Add(studentName4);
             studentName.Add(studentName5);
-            studentName.Add(studentName6);
-            studentQuestion.Add(studentQuestion1);
-            studentQuestion.Add(studentQuestion2);
-            studentQuestion.Add(studentQuestion3);
-            studentQuestion.Add(studentQuestion4);
-            studentQuestion.Add(studentQuestion5);
-            studentQuestion.Add(studentQuestion6);
-            studentAssignment.Add(studentAssignment1);
-            studentAssignment.Add(studentAssignment2);
-            studentAssignment.Add(studentAssignment3);
-            studentAssignment.Add(studentAssignment4);
-            studentAssignment.Add(studentAssignment5);
-            studentAssignment.Add(studentAssignment6);
+            if (t_connectedUserType == "teacher")
+            {
+                studentQuestion.Add(studentQuestion1);
+                studentQuestion.Add(studentQuestion2);
+                studentQuestion.Add(studentQuestion3);
+                studentQuestion.Add(studentQuestion4);
+                studentQuestion.Add(studentQuestion5);
+                studentQuestion.Add(studentQuestion6);
+                studentAssignment.Add(studentAssignment1);
+                studentAssignment.Add(studentAssignment2);
+                studentAssignment.Add(studentAssignment3);
+                studentAssignment.Add(studentAssignment4);
+                studentAssignment.Add(studentAssignment5);
+                studentAssignment.Add(studentAssignment6);
+            }
+            else if(t_connectedUserType == "student")
+            {
+                for(int i = 0; i < 6; ++i)
+                    foreach(Control ctr in studentGB[i].Controls)
+                        if (ctr.Name != $"studentName{i}")
+                        {
+                            ctr.Enabled = false;
+                            ctr.Visible = false;
+                        }
+            }
             studentPanel.Add(studentPanel1);
             studentPanel.Add(studentPanel2);
             studentPanel.Add(studentPanel3);
@@ -998,7 +1014,7 @@ namespace CZU_APPLICATION
             // Initializing the GUI elements for tab, just once. 
             if (_StudentsTabInitialized == false)
             {
-                studentTabGUInitialization();
+                studentTabGUInitialization(connectedUserType);
                 _StudentsTabInitialized = true;
             }
             //

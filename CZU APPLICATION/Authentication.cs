@@ -11,8 +11,11 @@ namespace CZU_APPLICATION
         // Registration
         public static bool registration(string t_username, string t_firstName, string t_lastName, string t_password, string t_authKey, string t_email, string t_phoneNumber, string t_sex, string t_birthDate, string t_regKey)
         {
+            // Pseudo assign
             string nonquery = null;
             string registrationType = null;
+            //
+
             registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student), if it is valid.
             switch (registrationType)
             {
@@ -32,11 +35,14 @@ namespace CZU_APPLICATION
                 {
                     string studyingYear = null, classID = null;
                     // Getting data for updating student studying year and classID related to registration token 
+
+                    // Opening MYSQL connection
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
                     MySqlCommand cmd = new MySqlCommand($"select classID from StudentRegKey where regKey = '{t_regKey}'", connection);
                     MySqlDataReader dataReader;
                     connection.Open();
+                    //
 
                     // Getting classID
                     dataReader = cmd.ExecuteReader();

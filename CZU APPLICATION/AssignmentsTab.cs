@@ -141,7 +141,7 @@ namespace CZU_APPLICATION
         }
 */       
         
-
+        // Gets the information about the student assignment solution
         public static void getAssignmentSolutionData(string t_command,  ref string t_state,  ref string t_grade, ref DateTime t_solutionSubmitDate) 
         {
             /// Setting up MYSQL CONNECTION (1)
@@ -167,7 +167,9 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+        //
 
+        // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
         public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
         {
             // Pseudo-Assignments until proven different
@@ -175,8 +177,7 @@ namespace CZU_APPLICATION
              t_leftPossible = false*/
             //
 
-            // Variablesh-
-            int loopLength; // Updating the panel by the number of students;
+            // Variables
             int i = 0, tempI;
             bool dataAvailable = false;
             //
@@ -229,12 +230,12 @@ namespace CZU_APPLICATION
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read()) // for as long it finds data, maximum 4.
                 {
-                    // Setting up question Title
+                    // Setting up assignment Title
                     t_assignmentTitle[z].Text = dataReader.GetString(0);
                     //
 
 
-                    // Setting up deadline date
+                    // Setting up Deadline date
                     t_assignmentDeadline[z].Text = dataReader.GetString(1);
 
                     /// Verifying if the assignment haven't passed the deadline
@@ -270,7 +271,9 @@ namespace CZU_APPLICATION
                     // If the deadline isn't passed, verify the scenarios, and do so related to the valid one
                     else 
                     {
+                        // Changing deadline color to green
                         t_assignmentDeadline[z].ForeColor = Color.Green;
+                        //
 
                         // Setting up the state of the assignment
                         t_assignmentState[z].Text = assignmentState;
@@ -291,6 +294,7 @@ namespace CZU_APPLICATION
                             t_assignmentGrade[z].Text = assignmentGrade; // We display the grade.
 
                         }
+                        // If the assignmment state appears as 'Not Solved' (Student hasn't submit a solution to assignment yet)
                         else if(assignmentState == "Not solved")
                         {
                             t_assignmentTitle[z].Enabled = true; // We deactivate the button
@@ -315,9 +319,8 @@ namespace CZU_APPLICATION
                 dataAvailable = true;
             //
 
-            tempI = i; // We'll save the amount of question records that exist in database and are valid, so, we can go further from here to display others students questions in Question panel, if it is necessarily.
+            tempI = i; // We'll save the amount of question records that exist in database and are valid, so, we can go further from here to display others students assignment in Assignment panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
-            loopLength = i;
             for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
             {
                 t_assignmentPanel[z].Enabled = false;
@@ -332,5 +335,6 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
+        //
     }
 }
