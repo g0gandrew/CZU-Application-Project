@@ -21,9 +21,11 @@ namespace CZU_APPLICATION
             {
                 case "teacher":
                 {
+                    // OPENING MYSQL CONNECTION
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
                     connection.Open();
+                    //
                     nonquery = $"insert into teacher(username, firstName, phoneNumber, lastName, password, authKey, email, sex, birthDate) values('{t_username}', '{t_firstName}', {t_phoneNumber}, '{t_lastName}', '{t_password}', '{t_authKey}', '{t_email}', '{t_sex}', '{t_birthDate}')";
                     MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
@@ -33,7 +35,10 @@ namespace CZU_APPLICATION
 
                 case "student":
                 {
+                    // Variables
                     string studyingYear = null, classID = null;
+                    //
+
                     // Getting data for updating student studying year and classID related to registration token 
 
                     // Opening MYSQL connection
@@ -91,16 +96,20 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             dataReader = query.ExecuteReader();
+            //
+
+            // Variables
             bool loggedIn = false;
+            //
 
             // Student Table Data Verifying
             while (dataReader.Read())
             {
                 if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
                 {
-                    CZUMain form2 = new CZUMain();
-                    form2.connectedUser = $"{dataReader.GetValue(1)}";
-                    form2.connectedUserType = "student";
+                    CZUMain main = new CZUMain(); // Creating a new object (form) of the CZU Main class.
+                    main.connectedUser = $"{dataReader.GetValue(1)}"; // Updating the 'Main' form control which displays the username of connected user
+                    main.connectedUserType = "student";
                     string command = $"update student set connected = 'on' where id = {dataReader.GetValue(0)}";
                     dataReader.Close();
                     MySqlCommand nonquery = new MySqlCommand(command, connection);
@@ -108,7 +117,7 @@ namespace CZU_APPLICATION
                     loggedIn = true;
                     MessageBox.Show("Succesfully logged in");
                     Login.Hide();
-                    form2.Show();
+                    main.Show();
                     connection.Close();
                     // Closing SQL connection
                     break;
@@ -125,9 +134,9 @@ namespace CZU_APPLICATION
                 {
                     if (t_inUsername.Text == (string)dataReader.GetValue(1) && t_inPassword.Text == (string)dataReader.GetValue(2) && t_inAuthKey.Text == (string)dataReader.GetValue(3))
                     {
-                        CZUMain form2 = new CZUMain();
-                        form2.connectedUser = $"{dataReader.GetValue(1)}";
-                        form2.connectedUserType = "teacher";
+                        CZUMain main = new CZUMain(); // Creating a new object (form) of the CZU Main class.
+                        main.connectedUser = $"{dataReader.GetValue(1)}"; // Updating the 'Main' form control which displays the username of connected user
+                        main.connectedUserType = "teacher";
                         string command = $"update teacher set connected = 'on' where id = {dataReader.GetValue(0)}";
                         dataReader.Close();
                         MySqlCommand nonquery = new MySqlCommand(command, connection);
@@ -135,7 +144,7 @@ namespace CZU_APPLICATION
                         loggedIn = true;
                         MessageBox.Show("Succesfully logged in");
                         Login.Hide();
-                        form2.Show();
+                        main.Show();
                         connection.Close();
                         // Closing SQL connection
                         break;
@@ -144,7 +153,7 @@ namespace CZU_APPLICATION
             }
             //
 
-            // Too Many Attempts Security Feature
+            // Too Many Attempts Security Feature (It verifies and close the application for user that have inserted false login details more than 3 times)
             if (!loggedIn)
             {
                 t_count++;

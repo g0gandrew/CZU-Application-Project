@@ -144,14 +144,14 @@ namespace CZU_APPLICATION
         // Gets the information about the student assignment solution
         public static void getAssignmentSolutionData(string t_command,  ref string t_state,  ref string t_grade, ref DateTime t_solutionSubmitDate) 
         {
-            /// Setting up MYSQL CONNECTION (1)
+            // Opening MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
-            ///
+            //
 
             cmd.CommandText = t_command;
             dataReader = cmd.ExecuteReader();
@@ -167,6 +167,29 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+        public static void studentAssignmentSolutionState(string t_assignmentID, string t_studentID, ref string t_assignmentState)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+            cmd.CommandText = $"select state from studentassignmentsolution where assignmentID = {t_assignmentID} && studentID = {t_studentID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_assignmentState = dataReader.GetString(0);
+            }
+            dataReader.Close();
+
+            // Closing MYSQL connection
+            connection.Close();
+        }
+
+
         //
 
         // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
@@ -246,9 +269,9 @@ namespace CZU_APPLICATION
 
 
                     // Getting assignment state, and grade, submitdate, if exists
-
                     getAssignmentSolutionData($"select state, grade, solutiondate from StudentAssignmentSolution where assignmentID = {t_assignmentID[z]} && studentID = {t_studentID}", ref assignmentState, ref assignmentGrade, ref assignmentSolutionDate);
-                   
+                    //
+                    
                     // If the deadline is passed, set deadline date with red and deactivate button.
                     if (deadlineDate < assignmentSolutionDate)
                     {
@@ -332,7 +355,7 @@ namespace CZU_APPLICATION
             ///
 
           
-            // Closing MYSQL Connection, and DataReader
+            // Closing MYSQL Connection
             connection.Close();
             //
             return dataAvailable;

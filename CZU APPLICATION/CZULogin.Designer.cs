@@ -56,7 +56,6 @@
             this.inPassword.PasswordChar = '*';
             this.inPassword.Size = new System.Drawing.Size(205, 27);
             this.inPassword.TabIndex = 3;
-            this.inPassword.TextChanged += new System.EventHandler(this.inPassword_TextChanged);
             // 
             // label2
             // 

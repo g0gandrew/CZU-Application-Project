@@ -121,7 +121,6 @@ namespace CZU_APPLICATION
         private bool _QuestionsTabInitialized { get; set; } = false;
         private bool _StudentsTabInitialized { get; set; } = false;
         private bool _AssignmentsTabInitialized { get; set; } = false;
-        private bool _GradesTabInitialized { get; set; } = false;
         //
 
         /// Connected as Student
@@ -1464,7 +1463,6 @@ namespace CZU_APPLICATION
                             {
                                 MessageBox.Show("Student has assignments");
                                 assignmentsMainPanelState(true);
-
                             }
                             else
                             {
@@ -1486,8 +1484,13 @@ namespace CZU_APPLICATION
                     }
                 case "teacher":
                     {
-                        break;
 
+
+
+
+
+
+                        break;
                     }
             }
 
@@ -1504,7 +1507,6 @@ namespace CZU_APPLICATION
             gradesMainPanelState(false);
             //
 
-    
             // Getting again student class id until we make the trigger
             _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
             //
@@ -1729,6 +1731,97 @@ namespace CZU_APPLICATION
         }
         //
 
+        // Assignment Tab Buttons for interacting with assignments
+        private void assignment1Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "student":
+                    {
+                        // Variables
+                        string assignmentState = null;
+                        //
+
+                        // Getting the solution state
+                        AssignmentsTab.studentAssignmentSolutionState(_assignmentID[0], _studentID, ref assignmentState);
+                        //
+                        switch (assignmentState)
+                        {
+                            case "Not solved":
+                                {
+                                    CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID);
+                                    assignment1.Show();
+                                    break;
+                                }
+                            case "Solved":
+                                {
+                                    // Showing the solution interface
+                                    break;
+                                }
+                        }
+                        break;
+
+                    }
+                case "teacher":
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void assignment2Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "student":
+                    {
+                        CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID);
+                        assignment1.Show();
+                        break;
+                    }
+                case "teacher":
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void assignment3Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "student":
+                    {
+                        CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID);
+                        assignment1.Show();
+                        break;
+                    }
+                case "teacher":
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void assignment4Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "student":
+                    {
+                        CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID);
+                        assignment1.Show();
+                        break;
+                    }
+                case "teacher":
+                    {
+                        break;
+                    }
+            }
+        }
+        //
+
+
 
         // General Application Methods
         private void userDisconnectsSetOffline(string t_connectedUserType, string t_connectedUser) // This method sets the user status as disconnected
@@ -1743,7 +1836,6 @@ namespace CZU_APPLICATION
                 command = $"update teacher set connected = 'off' where username = '{t_connectedUser}'";
             Database.insert(command);
         }
-
         //
     }
 }
