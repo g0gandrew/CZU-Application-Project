@@ -140,7 +140,6 @@ namespace CZU_APPLICATION
             {
                 teacherID = dataReader.GetString(0);
             }
-            MessageBox.Show("teacher id for the studied course == " + teacherID);
             dataReader.Close();
             return teacherID;
             connection.Close();

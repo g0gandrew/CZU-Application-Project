@@ -152,17 +152,17 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             ///
+
             cmd.CommandText = t_command;
             dataReader = cmd.ExecuteReader();
             while(dataReader.Read())
             {
-
                 t_state = dataReader.GetString(0);
                 t_grade = dataReader.GetString(1);
                 t_solutionSubmitDate = Convert.ToDateTime(dataReader.GetString(2));
-                MessageBox.Show($"AM GASIT INFORMATIA: grade --> {t_grade}, --> state {t_state})");
             }
             dataReader.Close();
+
             // Closing MYSQL connection
             connection.Close();
             //
@@ -294,6 +294,8 @@ namespace CZU_APPLICATION
                             t_assignmentGrade[z].Text = assignmentGrade; // We display the grade.
 
                         }
+                        //
+
                         // If the assignmment state appears as 'Not Solved' (Student hasn't submit a solution to assignment yet)
                         else if(assignmentState == "Not solved")
                         {

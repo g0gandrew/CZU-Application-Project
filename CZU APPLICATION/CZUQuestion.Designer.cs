@@ -1,6 +1,6 @@
 ﻿namespace CZU_APPLICATION
 {
-    partial class QuestionDetails
+    partial class CZUQuestion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuestionDetails));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CZUQuestion));
             this.studentQuestion = new System.Windows.Forms.RichTextBox();
             this.submit = new System.Windows.Forms.Button();
             this.teacherAnswer = new System.Windows.Forms.RichTextBox();
@@ -43,6 +43,7 @@
             this.answerToQuestion = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.displayAddQuestion = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.showQuestion = new System.Windows.Forms.Panel();
@@ -51,7 +52,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.answerToQuestion.SuspendLayout();
             this.displayAddQuestion.SuspendLayout();
@@ -191,6 +191,15 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Student Question:";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(6, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1016, 544);
+            this.groupBox3.TabIndex = 14;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Student Question:";
+            // 
             // displayAddQuestion
             // 
             this.displayAddQuestion.Controls.Add(this.questionPriority);
@@ -275,16 +284,7 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Question Details:";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(6, 14);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1016, 544);
-            this.groupBox3.TabIndex = 14;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Student Question:";
-            // 
-            // QuestionDetails
+            // CZUQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -299,7 +299,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "QuestionDetails";
+            this.Name = "CZUQuestion";
             this.Text = "CZU University of LifeScience - Question";
             this.Load += new System.EventHandler(this.QuestionDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();

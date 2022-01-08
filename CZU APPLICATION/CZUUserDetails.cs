@@ -18,12 +18,6 @@ namespace CZU_APPLICATION
         private string _studentID { get; set; }
         private string _teacherID { get; set; }
         private List<Label> _labels = new List<Label>();
-        public List <Label> Labels
-        {
-            get { return _labels; }
-            set { _labels = value; } 
-        }
-
 
         public CZUUserDetails(string t_studentID, string t_teacherID)
         {
@@ -40,17 +34,22 @@ namespace CZU_APPLICATION
 
         private void initializePanel()
         {
+            // Creating a list of contros for further operations
             _labels.Add(studentID);
             _labels.Add(firstName);
             _labels.Add(lastName);
             _labels.Add(sex);
             _labels.Add(birthday);
             _labels.Add(finalGrade);
+            //
         }
         private void getAndSetData(string t_studentID, ref List <Label> t_labels, string t_teacherID)
         {
+            // Variables
             string path = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
             string query = $"select id, firstName, lastName, sex, birthDate from student where id = {t_studentID};";
+            //
+
             // Setting up MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = path;
@@ -59,7 +58,7 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             //
-            MessageBox.Show($"student id = {t_studentID}, teacherid = {t_teacherID}");
+
             cmd.CommandText = query;
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -91,13 +90,11 @@ namespace CZU_APPLICATION
                 else
                     t_labels[(t_labels.Count - 1)].ForeColor = Color.Red;
                 t_labels[(t_labels.Count - 1)].Text = Convert.ToString(finalGrade);
-            
-
             }
             //
 
             // Solving the datetime bug from mysql
-            t_labels[4].Text = t_labels[4].Text.Substring(0, 10);
+            t_labels[4].Text = t_labels[4].Text.Substring(0, (t_labels[4].Text.LastIndexOf('/')) + 5);
             //
 
             // Closing connection
@@ -109,7 +106,9 @@ namespace CZU_APPLICATION
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // Exit button
             this.Close();
+            //
         }
         private void CZUUserDetails_Load(object sender, EventArgs e)
         {
@@ -117,7 +116,9 @@ namespace CZU_APPLICATION
             initializePanel();
             //
          
+            // Gets data of student, and fills controls with it
             getAndSetData(_studentID, ref _labels, _teacherID);
+            //
         }
     }
 }

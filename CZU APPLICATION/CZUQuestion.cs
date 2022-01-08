@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CZU_APPLICATION
 {
-    public partial class QuestionDetails : Form
+    public partial class CZUQuestion : Form
     {
-        public QuestionDetails()
+        public CZUQuestion()
         {
             InitializeComponent();
         }
@@ -22,7 +22,7 @@ namespace CZU_APPLICATION
         private string _studentID { get; set; }
         private string _teacherID { get; set; }
         private string _interfaceMode { get; set; }
-        public QuestionDetails(string t_questionID) // Constructor for student, to initlialize the data for showing question.
+        public CZUQuestion(string t_questionID) // Constructor for student, to initlialize the data for showing question.
         {
             InitializeComponent();
             _connectedUserType = "student";
@@ -37,7 +37,7 @@ namespace CZU_APPLICATION
 
 
         }
-        public QuestionDetails(string t_studentID, string t_teacherID) // Constructor for student
+        public CZUQuestion(string t_studentID, string t_teacherID) // Constructor for student
         {
             InitializeComponent();
             // Inserting studentID for further operations
@@ -55,7 +55,7 @@ namespace CZU_APPLICATION
 
             // Setting up the connection
         }
-        public QuestionDetails(string t_Title, string t_question, string t_questionID) // Constructor for teacher
+        public CZUQuestion(string t_Title, string t_question, string t_questionID) // Constructor for teacher
         {
             InitializeComponent();
 

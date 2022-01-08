@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CZU_APPLICATION
 {
-    public partial class Form1 : Form
+    public partial class CZUAssignment : Form
     {
-        public Form1()
+        public CZUAssignment()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace CZU_APPLICATION
 {
-    partial class Form1
+    partial class CZUAssignment
     {
         /// <summary>
         /// Required designer variable.
@@ -30,21 +30,21 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.assignmentMainGB = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.solution = new System.Windows.Forms.RichTextBox();
+            this.assignment = new System.Windows.Forms.RichTextBox();
             this.submitAssignment = new System.Windows.Forms.Button();
             this.exitAssignment = new System.Windows.Forms.Button();
-            this.assignment = new System.Windows.Forms.RichTextBox();
             this.assignmentSolution = new System.Windows.Forms.Panel();
-            this.solution = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.addAssignment = new System.Windows.Forms.Panel();
             this.addAssignmentMainGB = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.assignmentGrade = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.deadline = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label666 = new System.Windows.Forms.Label();
-            this.deadline = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.assignmentGrade = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.assignmentMainGB.SuspendLayout();
             this.assignmentSolution.SuspendLayout();
@@ -76,6 +76,41 @@
             this.assignmentMainGB.TabStop = false;
             this.assignmentMainGB.Text = "Your Assignment";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(427, 203);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Your solution:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(430, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 20);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Assignment:";
+            // 
+            // solution
+            // 
+            this.solution.Location = new System.Drawing.Point(112, 243);
+            this.solution.Name = "solution";
+            this.solution.Size = new System.Drawing.Size(752, 144);
+            this.solution.TabIndex = 1;
+            this.solution.Text = "";
+            // 
+            // assignment
+            // 
+            this.assignment.Location = new System.Drawing.Point(112, 67);
+            this.assignment.Name = "assignment";
+            this.assignment.ReadOnly = true;
+            this.assignment.Size = new System.Drawing.Size(752, 113);
+            this.assignment.TabIndex = 0;
+            this.assignment.Text = "";
+            // 
             // submitAssignment
             // 
             this.submitAssignment.Location = new System.Drawing.Point(394, 549);
@@ -94,15 +129,6 @@
             this.exitAssignment.Text = "Exit";
             this.exitAssignment.UseVisualStyleBackColor = true;
             // 
-            // assignment
-            // 
-            this.assignment.Location = new System.Drawing.Point(112, 67);
-            this.assignment.Name = "assignment";
-            this.assignment.ReadOnly = true;
-            this.assignment.Size = new System.Drawing.Size(752, 113);
-            this.assignment.TabIndex = 0;
-            this.assignment.Text = "";
-            // 
             // assignmentSolution
             // 
             this.assignmentSolution.Controls.Add(this.assignmentMainGB);
@@ -110,32 +136,6 @@
             this.assignmentSolution.Name = "assignmentSolution";
             this.assignmentSolution.Size = new System.Drawing.Size(961, 454);
             this.assignmentSolution.TabIndex = 4;
-            // 
-            // solution
-            // 
-            this.solution.Location = new System.Drawing.Point(112, 243);
-            this.solution.Name = "solution";
-            this.solution.Size = new System.Drawing.Size(752, 144);
-            this.solution.TabIndex = 1;
-            this.solution.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(430, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Assignment:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(427, 203);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Your solution:";
             // 
             // addAssignment
             // 
@@ -160,50 +160,6 @@
             this.addAssignmentMainGB.TabStop = false;
             this.addAssignmentMainGB.Text = "Add Assignment";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(129, 76);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(752, 232);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(450, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 20);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Assignment";
-            // 
-            // label666
-            // 
-            this.label666.AutoSize = true;
-            this.label666.Location = new System.Drawing.Point(246, 349);
-            this.label666.Name = "label666";
-            this.label666.Size = new System.Drawing.Size(72, 20);
-            this.label666.TabIndex = 3;
-            this.label666.Text = "Deadline:";
-            this.label666.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // deadline
-            // 
-            this.deadline.Location = new System.Drawing.Point(154, 386);
-            this.deadline.Name = "deadline";
-            this.deadline.Size = new System.Drawing.Size(250, 27);
-            this.deadline.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(728, 349);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 20);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Minim Grade:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // assignmentGrade
             // 
             this.assignmentGrade.FormattingEnabled = true;
@@ -224,7 +180,51 @@
             this.assignmentGrade.Size = new System.Drawing.Size(54, 24);
             this.assignmentGrade.TabIndex = 6;
             // 
-            // Form1
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(728, 349);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 20);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Minim Grade:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // deadline
+            // 
+            this.deadline.Location = new System.Drawing.Point(154, 386);
+            this.deadline.Name = "deadline";
+            this.deadline.Size = new System.Drawing.Size(250, 27);
+            this.deadline.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(450, 44);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 20);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Assignment";
+            // 
+            // label666
+            // 
+            this.label666.AutoSize = true;
+            this.label666.Location = new System.Drawing.Point(246, 349);
+            this.label666.Name = "label666";
+            this.label666.Size = new System.Drawing.Size(72, 20);
+            this.label666.TabIndex = 3;
+            this.label666.Text = "Deadline:";
+            this.label666.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(129, 76);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(752, 232);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "";
+            // 
+            // CZUAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -234,7 +234,7 @@
             this.Controls.Add(this.exitAssignment);
             this.Controls.Add(this.submitAssignment);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "CZUAssignment";
             this.Text = "CZU University of LifeSciences - Assignment";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.assignmentMainGB.ResumeLayout(false);

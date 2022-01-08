@@ -72,8 +72,12 @@ namespace CZU_APPLICATION
                     t_questionSubmitDate[i].Text = dataReader.GetString(2);
                     //
                     
-                    // Setting up question state
+                    // Setting up question state and text color 
                     t_questionState[i].Text = dataReader.GetString(3);
+                    if (t_questionState[i].Text == "not answered") // If the question doesn't have an answer, set text color to red
+                        t_questionState[i].ForeColor = Color.Red;
+                    else
+                        t_questionState[i].ForeColor = Color.Green; // If the question has an answer, set text color to green.
                     //
 
                     // Enabling the panel for showing the question.
@@ -192,8 +196,13 @@ namespace CZU_APPLICATION
                     t_questionSubmitDate[i].Text = dataReader.GetString(2);
                     //
 
-                    // Setting up question state
+                    // Setting up question state and text color
                     t_questionState[i].Text = dataReader.GetString(3);
+
+                    if (t_questionState[i].Text == "not answered") // If the question doesn't have an answer, set text color to red
+                        t_questionState[i].ForeColor = Color.Red;
+                    else
+                        t_questionState[i].ForeColor = Color.Green; // If the question has an answer, set text color to green.
                     //
 
                     // Enabling the panel for showing the question.
