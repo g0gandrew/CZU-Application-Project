@@ -61,13 +61,140 @@ namespace CZU_APPLICATION
             //
             return t_registrationToken;
         }
-
     
         public static void deleteLogs(string t_connectedPeople, string t_dataType)
         {
             // after all users are disconnected, delete data from logs
         }
 
-      
+        public static bool recordExists(string t_query)
+        {
+
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                return true;
+            }
+            //
+            connection.Close();
+
+            return false;
+        }
+        public static int recordExists(string t_query, int t_lastID)
+        {
+
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_lastID = dataReader.GetInt32(0);
+            }
+            //
+            connection.Close();
+            return t_lastID;
+            
+        }
+        public static void recordExists(string t_query, ref int t_availableRecords)
+        {
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while(dataReader.Read())
+            {
+                ++t_availableRecords;
+            }
+            //
+            connection.Close();
+        }
+
+        public static void getData(string t_query,  ref int t_output)
+        {
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                    t_output = Convert.ToInt32(dataReader.GetString(0));
+                
+            }
+            //
+
+            connection.Close();
+        }
+        public static int getDataAndNoOfRecords(string t_query, int t_noOfColumns, ref int t_output)
+        {
+            // OPENING MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // Variables
+            int count = 0;
+            //
+
+            // Searching for records
+            cmd.CommandText = t_query;
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                for (int i = 0; i < t_noOfColumns; i++)
+                {
+                    t_output = Convert.ToInt32(dataReader.GetString(i));
+                }
+                ++count;
+            }
+            //
+
+            connection.Close();
+            return count;
+        }
+
+
     }
 }

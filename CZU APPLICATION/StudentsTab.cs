@@ -15,56 +15,99 @@ namespace CZU_APPLICATION
     static class StudentsTab
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
+        // Gets student class Id 
         public static string getStudentClassID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
             string t_classID = null;
             //
+
+            // OPENING MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+            
             cmd.CommandText = $"select classID from student where username = '{t_connectedUser}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                t_classID = dataReader.GetString(0);
+                if (!dataReader.IsDBNull(0))
+                    t_classID = dataReader.GetString(0);
+                else
+                    return null;
             }
+      
             return t_classID;
         }
-        public static string getTeacherCourse(string t_teacherID)
+        //
+
+        // Gets course id by name
+        public static string getCourseIDbyName(string t_courseName)
         {
             // Pseudo Assign in case of data not found
-            string teacherID = null;
+            string courseID = null;
             //
+
+            // Opening MYSQL connection
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
-            cmd.CommandText = $"select course from teacher where username = '{t_teacherID}'";
+            //
+
+            cmd.CommandText = $"select id from course where name = '{t_courseName}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                teacherID = dataReader.GetString(0);
+                courseID = dataReader.GetString(0);
             }
-            return teacherID;
+            return courseID;
         }
+        //
 
+        // Fills DataGridView from Grades tab with student grades
+        public static void studentGradesData(string t_command, ref DataGridView t_studentGrades)
+        {
+            // Opening MYSQL connection
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = t_command;
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+            connection.Open();
+            //
+            dataAdapter.SelectCommand = cmd;
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table); 
+            BindingSource bSource = new BindingSource();
+            bSource.DataSource = table;
+            t_studentGrades.DataSource = bSource;
+            connection.Close();
+        }
+        //
+        
+        // Gets teacher id
         public static string getTeacherID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
             string teacherID = null;
             //
+            // Opening MYSQL connection
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+
             cmd.CommandText = $"select id from teacher where username = '{t_connectedUser}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -73,37 +116,52 @@ namespace CZU_APPLICATION
             }
             return teacherID;
         }
+        //
+        
+        // Gets teacher id using the course name
         public static string getTeacherIDByCourse(string t_courseName)
         {
             // Pseudo Assign in case of data not found
             string teacherID = null;
             //
+
+            // Opening MYSQL connection
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+
             cmd.CommandText = $"select teacherID from course where name = '{t_courseName}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
                 teacherID = dataReader.GetString(0);
             }
+            dataReader.Close();
             return teacherID;
+            connection.Close();
         }
+        //
 
+        // Gets student id
         public static string getStudentID(string t_connectedUser)
         {
             // Pseudo Assign in case of data not found
             string studentID = null;
             //
+
+            // OPENING MYSQL CONNECTION
             MySqlConnection connection = new MySqlConnection();
             connection.ConnectionString = _path;
             MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = connection;
             MySqlDataReader dataReader;
             connection.Open();
+            //
+
             cmd.CommandText = $"select id from student where username = '{t_connectedUser}'";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -112,6 +170,9 @@ namespace CZU_APPLICATION
             }
             return studentID;
         }
+        //
+
+        // Returns a list of the classes that are teached by the connected teacher
         public static List<string> teachedClasses(string t_connectedUser)
         {
             // Opening MYSQL CONNECTION
@@ -122,6 +183,7 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             //
+
             // Variables
             List<string> teachedClasses = new List<string>();
             string teacherID; 
@@ -154,7 +216,9 @@ namespace CZU_APPLICATION
             //
             return teachedClasses; // returning the list of classes teached by teacher x     
         }
+        //
 
+        // Returns a list of the courses that are studied by the connected student
         public static List <string> studiedCourses(string t_connectedUser)
         {
             // Opening MYSQL CONNECTION
@@ -165,6 +229,7 @@ namespace CZU_APPLICATION
             MySqlDataReader dataReader;
             connection.Open();
             //
+
             // Variables
             List<string> studiedCourses = new List<string>();
             List<string> studiedCoursesIDs = new List<string>();
@@ -203,18 +268,16 @@ namespace CZU_APPLICATION
             //
             return studiedCourses; // returning the list of classes teached by teacher x     
         }
+        //
 
-        public static bool updatePanelAsStudent(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser)
+        // The Main function for updating 'Students' tab with related information to connected student (his colleagues), and initializing others fields with vital information for further operations 
+        public static bool updatePanelAsStudent(ref int t_recordsOnPage, ref int t_lastID, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, string t_connectedUser, string t_extraConstraint)
         {
-            // Pseudo-Assignments until proven different
-            t_rightPossible = false;
-            t_leftPossible = false;
-            //
-
             // Variables
             int loopLength; // Updating the panel by the number of students;
             int i = 0, tempI;
             bool dataAvailable = false;
+            int lastStudentID = 0;
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -232,44 +295,58 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating students connection status, image, and the displayed users in main panel amount based on students colleagues
-            command[0] = $"select connected from student where classID = {classID} && username != '{t_connectedUser}'";
+            command[0] = $"select connected, id from student where classID = {classID} && username != '{t_connectedUser}' {t_extraConstraint}";
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
-            while (dataReader.Read()) // for as long it finds data, maximum 6.
+            while (dataReader.Read()) // For as long it finds data, maximum 6.
             {
                 if (i <= 5)
                 {
+                    // Getting the last student ID
+                    lastStudentID = dataReader.GetInt32(1);
+                    //
+
                     // Setting up online/offline status
                     if (dataReader.GetString(0) == "on")
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
+                        t_studentConnected[i].Image = Properties.Resources.on;
                     else
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\off.png");
-                    // Disabling the panel that cover Student Interface x/6
-                    t_studentPanel[i].Enabled = false;
-                    t_studentPanel[i++].Visible = false;
+                        t_studentConnected[i].Image = Properties.Resources.off;
+                    // // Enabling the panel with data
+                    t_studentPanel[i].Enabled = true;
+                    t_studentPanel[i++].Visible = true;
                 }
                 else
                     break;
             }
+            dataReader.Close();
+            ///
+
+
             // If there is any data to be shown
             if (i != 0)
                 dataAvailable = true;
             //
+
+            // Statements to modify data use  
             tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
             loopLength = i;
-            for (int z = i + 1; z <= 5; ++z) // When there are less than 6 connected users, from the remained number, update panel
+            //
+
+            // When there are less than 6 connected users, from the remained number, update panel
+            for (int z = i + 1; z <= 5; ++z)
             {
-                t_studentPanel[z].Enabled = true;
-                t_studentPanel[z].Visible = true;
+                t_studentPanel[z].Enabled = false;
+                t_studentPanel[z].Visible = false;
             }
-            dataReader.Close();
-            ///
+            //
+
+           
             /// Command 1 - First command, 
-            command[1] = $"select firstName, lastname, sex from student where classID = {classID} && username != '{t_connectedUser}'"; // need to modify it aswell       
+            command[1] = $"select firstName, lastname, sex, id from student where classID = {classID} && username != '{t_connectedUser}' {t_extraConstraint}"; // need to modify it aswell       
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
-            i = 0; // restarting the value for being used further
+            i = 0; // Restarting the value for being used further
             while (dataReader.Read()) // --> One time operation
             {
                 if (i <= loopLength)
@@ -281,46 +358,38 @@ namespace CZU_APPLICATION
                     else if (dataReader.GetString(2) == "M")
                         t_studentGB[i].BackColor = System.Drawing.Color.DodgerBlue;
                     else
-                    { // Need to implement custom SEX} 
+                    {
+                        t_studentGB[i].BackColor = System.Drawing.Color.MediumSlateBlue;
                     }
-                    //-
-                    // Changing studentConnected image status
-                    // Need to be implemented, linked with image
-                    //
+
                     ++i;
-                }
-                else
-                {
-                    // Verifying if there exists one more record, so, we can utilize right button to display further students in panel.
-                    // If this else runs, it means that dataReader has found a record in table, so, there exists one more record which satisfy our button condition.
-                    t_rightPossible = true;
                 }
             }
             dataReader.Close();
             ///
-            t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }
-            // Closing MYSQL Connection, and DataReader
+
+            /// Left And Right Button
+            t_lastID = lastStudentID; // We save the record from database last ID.
+            t_recordsOnPage = tempI; // We save the amount of records available to be shown in Panel - We set -1,  because we saved in tempI maximum 5, because of indexing from 0 in the previous statements
+            ///                    
+
+            // Closing MYSQL Connection
             connection.Close();
             //
+
             return dataAvailable;
         }
-        public static bool updatePanelAsTeacher(out int t_recordsOnPage, out bool t_rightPossible, out bool t_leftPossible, ref int t_startingFrom, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment, ref List<Label> t_studentMeeting, string t_selectedClass, string t_teacherID)
-        {
-            // Pseudo-Assignments until proven different
-            t_rightPossible = false;
-            t_leftPossible = false;
-            //
+        //
 
+        // The Main function for updating 'Students' tab with related information to connected teacher (the students that are part of the class where teacher teaches), and initializing others field with vital information (Initializes a list of students ids for further operations)
+        public static bool updatePanelAsTeacher(ref int t_recordsOnPage, ref int t_lastID, ref List<Panel> t_studentPanel, ref List<GroupBox> t_studentGB, ref List<Button> t_studentImage, ref List<PictureBox> t_studentConnected, ref List<Label> t_studentName, ref List<Label> t_studentQuestion, ref List<Label> t_studentAssignment,  string t_selectedClass, string t_teacherID, string t_extraConstraint, ref List <string> t_studentIDS)
+        {
             // Variables
             int loopLength; // Updating the panel by the number of students;
             string[] studentsIDs = new string[6];
             int i = 0, tempI;
             bool dataAvailable = false;
+            int lastStudentID = 0;
             //
 
             /// Setting up MYSQL CONNECTION (1)
@@ -333,11 +402,13 @@ namespace CZU_APPLICATION
             ///
 
             // Commands list
-            string[] command = new string[5];
+            string[] command = new string[4];
+            List<string> studentIDs = new List<string>();
             //
 
+
             /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
-            command[0] = $"select connected from student where classID = {t_selectedClass}"; //  
+            command[0] = $"select connected, id  from student where classID = {t_selectedClass} {t_extraConstraint}"; //  
 
             cmd.CommandText = command[0];
             dataReader = cmd.ExecuteReader();
@@ -345,34 +416,48 @@ namespace CZU_APPLICATION
             {
                 if (i <= 5)
                 {
+                    // Getting the last student ID
+                    lastStudentID = dataReader.GetInt32(1);
+                    //
+
+                    // Filling up the list of student IDS
+                    studentIDs.Add(dataReader.GetString(1));
+                    //
+
                     // Setting up online/offline status
-                    if (dataReader.GetString(0) == "on")
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\on.png");
+                    if (dataReader.GetString(0) == "on") {
+                        t_studentConnected[i].Image = Properties.Resources.on;
+                    }
                     else
-                        t_studentConnected[i].Image = Image.FromFile(@"C:\Users\Andrew\source\repos\CZU APPLICATION\Images\off.png");
-                    // Disabling the panel that cover Student Interface x/6
-                    t_studentPanel[i].Enabled = false;
-                    t_studentPanel[i++].Visible = false;
+                        t_studentConnected[i].Image = Properties.Resources.off;
+                    // Enabling the panel with data
+                    t_studentPanel[i].Enabled = true;
+                    t_studentPanel[i++].Visible = true;
                 }
                 else
                     break;
             }
+
             if (i != 0)
                 dataAvailable = true;
-            tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
+            tempI = i; // We'll save the amount of students records that exist in database and are valid, so, we can go further from here to display others students in student panel, if it is necessarily.
             loopLength = i;
             for (int z = i + 1; z <= 5; ++z) // When there are less than 6 connected users, from the remained number, update panel
             {
-                t_studentPanel[z].Enabled = true;
-                t_studentPanel[z].Visible = true;
+                t_studentPanel[z].Enabled = false;
+                t_studentPanel[z].Visible = false;
             }
             dataReader.Close();
             ///
 
+            // Filling up the list of student IDS
+            t_studentIDS = studentIDs;
+            //
+
 
             /// Command 1 - First command, for gatthering the studentID + others
-            command[1] = $"select ID, firstName, lastname, sex, connected, classID from student where classID = {t_selectedClass}"; // need to modify it aswell       
+            command[1] = $"select ID, firstName, lastname, sex, connected, classID, id from student where classID = {t_selectedClass} {t_extraConstraint}"; // need to modify it aswell       
             cmd.CommandText = command[1];
             dataReader = cmd.ExecuteReader();
             i = 0; // restarting the value for being used further
@@ -388,27 +473,26 @@ namespace CZU_APPLICATION
                     else if (dataReader.GetString(3) == "M")
                         t_studentGB[i].BackColor = System.Drawing.Color.DodgerBlue;
                     else
-                    { // Need to implement custom SEX} 
+                    {
+                        t_studentGB[i].BackColor = System.Drawing.Color.MediumSlateBlue;
+
                     }
-                    //-
-                    // Changing studentConnected image status
-                    // Need to be implemented, linked with image
-                    //
                     ++i;
-                }
-                else
-                {
-                    // Verifying if there exists one more record, so, we can utilize right button to display further students in panel.
-                    // If this else runs, it means that dataReader has found a record in table, so, there exists one more record which satisfy our button condition.
-                    t_rightPossible = true;
-                }
+                }           
             }
             dataReader.Close();
-            ///
+
+              /// Left And Right Button
+            t_lastID = lastStudentID; // We save the record from database last ID.
+            t_recordsOnPage = tempI; // We save the amount of records available to be shown in Panel - We set -1,  because we saved in tempI maximum 5, because of indexing from 0 in the previous statements
+            ///   
+
+
+
             // Command 2 - Student --> Questions
             for (int z = 0; z <= loopLength; z++)
             {
-                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID};";
+                command[2] = $"select count(ID) from question where studentID = {studentsIDs[z]} && teacherID = {t_teacherID} && state = 'not answered';";
                 cmd.CommandText = command[2];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -419,25 +503,12 @@ namespace CZU_APPLICATION
             }
             //
 
-            // Command 3 - Student --> Meetings
-            command[3] = $"select count(meetingID) from classmeeting where meetingID = (select ID from meeting where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
+
+            // Command 3 - Student --> Assignments
+            command[3] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass}";
             for (int z = 0; z <= loopLength; z++)
             {
                 cmd.CommandText = command[3];
-                dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    t_studentMeeting[z].Text = dataReader.GetString(0);
-                }
-                dataReader.Close();
-            }
-            //
-
-            // Command 4 - Student --> Assignments
-            command[4] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass};";
-            for (int z = 0; z <= loopLength; z++)
-            {
-                cmd.CommandText = command[4];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
@@ -445,39 +516,56 @@ namespace CZU_APPLICATION
                 }
                 dataReader.Close();
             }
-            //
-            t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }
+      
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
             return dataAvailable;
         }
+        //
 
+        // This method verify if the teacher teach any class, and, fills the 'Select Class ID' list box with the found information
         public static bool updateTeachedClassesList(ref ListBox t_teachedClassesControl, ref List<string> t_teachedClasses, string t_connectedUser)
         {
+            // Fills the list of teached classes with related information
             t_teachedClasses = teachedClasses(t_connectedUser);
+            //
+            
+            // Updating the 'Select Class ID' list with the found information
             t_teachedClassesControl.DataSource = t_teachedClasses;
-            if (t_teachedClasses.Count != 0) // if there are elements in the list
+            //
+
+            // If there are teached classes in list
+            if (t_teachedClasses.Count != 0) 
             {
                 return true;
             }
-            return false; // if there aren't elements in the list
+            // If there aren't teached classes in the list
+            return false; 
         }
+        // 
+
+        // This method verify if the student class has any course to study, and, fills the 'Select Course' list box with the found information
         public static bool updateStudiedCoursesList(ref ListBox t_list, string t_connectedUser, ref List <string> t_studiedCourses)
         {
+            // Fills the list of studied courses with related information
             t_studiedCourses = studiedCourses(t_connectedUser);
+            //
+
+
+            // Updating the 'Select Course' list with the found information
             t_list.DataSource = t_studiedCourses;
+            //
+
+            // If there are studied courses in list
             if(t_studiedCourses.Count != 0)
             {
-                return true; // there are courses 
+                return true;
             }
+            // If there aren't studied courses in list
             return false;
         }
+        //
         public static List <string> studentTriggerNewRefresh(string t_connectedUser, ref int t_studentLastMeeting, ref int t_studentLastAssignment, ref int t_studentLastColleague, ref int t_studentLastCourse)
         {
 

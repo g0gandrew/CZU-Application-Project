@@ -9,13 +9,14 @@ namespace CZU_APPLICATION
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
         // Registration
-        public static void registration(string t_username, string t_firstName, string t_lastName, string t_password, string t_authKey, string t_email, string t_phoneNumber, string t_sex, string t_birthDate, string t_regKey)
+        public static bool registration(string t_username, string t_firstName, string t_lastName, string t_password, string t_authKey, string t_email, string t_phoneNumber, string t_sex, string t_birthDate, string t_regKey)
         {
+            // Pseudo assign
             string nonquery = null;
             string registrationType = null;
-            registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student)
-            MessageBox.Show(registrationType);
-            MessageBox.Show(t_birthDate);
+            //
+
+            registrationType = Database.registrationToken(t_regKey); // Getting token type (teacher or student), if it is valid.
             switch (registrationType)
             {
                 case "teacher":
@@ -27,19 +28,21 @@ namespace CZU_APPLICATION
                     MySqlCommand cmd = new MySqlCommand(nonquery, connection);
                     cmd.ExecuteNonQuery();
                     connection.Close();
-                    break;
+                    return true;
                 }
 
                 case "student":
                 {
-
                     string studyingYear = null, classID = null;
                     // Getting data for updating student studying year and classID related to registration token 
+
+                    // Opening MYSQL connection
                     MySqlConnection connection = new MySqlConnection();
                     connection.ConnectionString = _path;
                     MySqlCommand cmd = new MySqlCommand($"select classID from StudentRegKey where regKey = '{t_regKey}'", connection);
                     MySqlDataReader dataReader;
                     connection.Open();
+                    //
 
                     // Getting classID
                     dataReader = cmd.ExecuteReader();
@@ -66,12 +69,12 @@ namespace CZU_APPLICATION
                     cmd.ExecuteNonQuery();
                     connection.Close();
                     //
-                    break;
+                    return true;
                 }
                 default:
                 {
                     MessageBox.Show("Registration Token is invalid");
-                    break;
+                    return false;
                 }
             }
 

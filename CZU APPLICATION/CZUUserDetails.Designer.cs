@@ -30,24 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CZUUserDetails));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.finalGrade = new System.Windows.Forms.Label();
+            this.birthday = new System.Windows.Forms.Label();
+            this.sex = new System.Windows.Forms.Label();
+            this.lastName = new System.Windows.Forms.Label();
+            this.firstName = new System.Windows.Forms.Label();
+            this.studentID = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -56,32 +50,89 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Controls.Add(this.textBox9);
-            this.groupBox1.Controls.Add(this.textBox8);
-            this.groupBox1.Controls.Add(this.textBox7);
-            this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.finalGrade);
+            this.groupBox1.Controls.Add(this.birthday);
+            this.groupBox1.Controls.Add(this.sex);
+            this.groupBox1.Controls.Add(this.lastName);
+            this.groupBox1.Controls.Add(this.firstName);
+            this.groupBox1.Controls.Add(this.studentID);
             this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(400, 514);
+            this.groupBox1.Size = new System.Drawing.Size(400, 440);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Student Details";
+            // 
+            // finalGrade
+            // 
+            this.finalGrade.AutoSize = true;
+            this.finalGrade.Location = new System.Drawing.Point(176, 291);
+            this.finalGrade.Name = "finalGrade";
+            this.finalGrade.Size = new System.Drawing.Size(58, 20);
+            this.finalGrade.TabIndex = 27;
+            this.finalGrade.Text = "noData";
+            // 
+            // birthday
+            // 
+            this.birthday.AutoSize = true;
+            this.birthday.Location = new System.Drawing.Point(155, 259);
+            this.birthday.Name = "birthday";
+            this.birthday.Size = new System.Drawing.Size(58, 20);
+            this.birthday.TabIndex = 26;
+            this.birthday.Text = "noData";
+            // 
+            // sex
+            // 
+            this.sex.AutoSize = true;
+            this.sex.Location = new System.Drawing.Point(128, 228);
+            this.sex.Name = "sex";
+            this.sex.Size = new System.Drawing.Size(58, 20);
+            this.sex.TabIndex = 25;
+            this.sex.Text = "noData";
+            // 
+            // lastName
+            // 
+            this.lastName.AutoSize = true;
+            this.lastName.Location = new System.Drawing.Point(176, 195);
+            this.lastName.Name = "lastName";
+            this.lastName.Size = new System.Drawing.Size(58, 20);
+            this.lastName.TabIndex = 23;
+            this.lastName.Text = "noData";
+            // 
+            // firstName
+            // 
+            this.firstName.AutoSize = true;
+            this.firstName.Location = new System.Drawing.Point(176, 162);
+            this.firstName.Name = "firstName";
+            this.firstName.Size = new System.Drawing.Size(58, 20);
+            this.firstName.TabIndex = 22;
+            this.firstName.Text = "noData";
+            // 
+            // studentID
+            // 
+            this.studentID.AutoSize = true;
+            this.studentID.Location = new System.Drawing.Point(176, 129);
+            this.studentID.Name = "studentID";
+            this.studentID.Size = new System.Drawing.Size(58, 20);
+            this.studentID.TabIndex = 21;
+            this.studentID.Text = "noData";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(83, 291);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 20);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Final Grade:";
             // 
             // pictureBox1
             // 
@@ -93,109 +144,20 @@
             this.pictureBox1.TabIndex = 19;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(182, 415);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(125, 27);
-            this.textBox9.TabIndex = 18;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(182, 377);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(125, 27);
-            this.textBox8.TabIndex = 17;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(182, 336);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(125, 27);
-            this.textBox7.TabIndex = 16;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(182, 298);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(125, 27);
-            this.textBox6.TabIndex = 15;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(182, 261);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(125, 27);
-            this.textBox5.TabIndex = 14;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(182, 225);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(125, 27);
-            this.textBox4.TabIndex = 13;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(182, 192);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(125, 27);
-            this.textBox3.TabIndex = 12;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(182, 159);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
-            this.textBox2.TabIndex = 11;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(182, 126);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 10;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(161, 462);
+            this.button1.Location = new System.Drawing.Point(143, 362);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 46);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Modify";
+            this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(87, 418);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 20);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Meetings:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(83, 380);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 20);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Questions:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(82, 339);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 20);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Assignments:";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(82, 301);
+            this.label6.Location = new System.Drawing.Point(82, 259);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 20);
             this.label6.TabIndex = 5;
@@ -213,20 +175,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(83, 264);
+            this.label4.Location = new System.Drawing.Point(83, 228);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Sex:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(83, 228);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Age:";
             // 
             // label2
             // 
@@ -250,13 +203,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 538);
+            this.ClientSize = new System.Drawing.Size(424, 468);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MdiChildrenMinimizedAnchorBottom = false;
             this.MinimizeBox = false;
             this.Name = "CZUUserDetails";
-            this.Text = "CZU University of LifeScience";
+            this.Text = "CZU University of LifeScience - Student Details";
+            this.Load += new System.EventHandler(this.CZUUserDetails_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -268,24 +224,18 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label studentID;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label finalGrade;
+        private System.Windows.Forms.Label birthday;
+        private System.Windows.Forms.Label sex;
+        private System.Windows.Forms.Label lastName;
+        private System.Windows.Forms.Label firstName;
     }
 }

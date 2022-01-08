@@ -72,13 +72,17 @@ namespace CZU_APPLICATION
                     t_questionSubmitDate[i].Text = dataReader.GetString(2);
                     //
                     
-                    // Setting up question state
+                    // Setting up question state and text color 
                     t_questionState[i].Text = dataReader.GetString(3);
+                    if (t_questionState[i].Text == "not answered") // If the question doesn't have an answer, set text color to red
+                        t_questionState[i].ForeColor = Color.Red;
+                    else
+                        t_questionState[i].ForeColor = Color.Green; // If the question has an answer, set text color to green.
                     //
 
-                    // Disabling the panel that covers GUI Group for showing question
-                    t_questionPanel[i].Enabled = false;
-                    t_questionPanel[i++].Visible = false;
+                    // Enabling the panel for showing the question.
+                    t_questionPanel[i].Enabled = true;
+                    t_questionPanel[i++].Visible = true;
                     //
                 }
                 else
@@ -99,8 +103,8 @@ namespace CZU_APPLICATION
             loopLength = i;
             for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
             {
-                t_questionPanel[z].Enabled = true;
-                t_questionPanel[z].Visible = true;
+                t_questionPanel[z].Enabled = false;
+                t_questionPanel[z].Visible = false;
             }
             dataReader.Close();
             ///
@@ -138,12 +142,11 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
-        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID)
+        public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID,  ref List <string> t_questionIDs)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
              t_leftPossible = false*/
-            
             //
 
             // Variables
@@ -193,19 +196,24 @@ namespace CZU_APPLICATION
                     t_questionSubmitDate[i].Text = dataReader.GetString(2);
                     //
 
-                    // Setting up question state
+                    // Setting up question state and text color
                     t_questionState[i].Text = dataReader.GetString(3);
+
+                    if (t_questionState[i].Text == "not answered") // If the question doesn't have an answer, set text color to red
+                        t_questionState[i].ForeColor = Color.Red;
+                    else
+                        t_questionState[i].ForeColor = Color.Green; // If the question has an answer, set text color to green.
                     //
 
-                    // Disabling the panel that covers GUI Group for showing question
-                    t_questionPanel[i].Enabled = false;
-                    t_questionPanel[i++].Visible = false;
+                    // Enabling the panel for showing the question.
+                    t_questionPanel[i].Enabled = true;
+                    t_questionPanel[i++].Visible = true;
                     //
                 }
                 else
                     break;
             }
-
+            t_questionIDs = questionIDs;
         
 
             // If there is any data that satisfies our conditions
@@ -218,8 +226,8 @@ namespace CZU_APPLICATION
             loopLength = i;
             for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
             {
-                t_questionPanel[z].Enabled = true;
-                t_questionPanel[z].Visible = true;
+                t_questionPanel[z].Enabled = false;
+                t_questionPanel[z].Visible = false;
             }
             dataReader.Close();
             ///
@@ -237,7 +245,7 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
-        public static void getQuestionData(string t_questionID, out string t_title, out string t_question)  
+        public static void getQuestionDataAsTeacher(string t_questionID, out string t_title, out string t_question)  
         {
             /// Setting up MYSQL CONNECTION (1)
             MySqlConnection connection = new MySqlConnection();
@@ -264,5 +272,29 @@ namespace CZU_APPLICATION
             connection.Close();
 
         }
+        public static void getQuestionDataAsStudent(string t_command, ref RichTextBox t_teacherAnswer,  ref RichTextBox t_studentQuestion)
+        {
+            //  MYSQL connection
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand(t_command, connection);
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_teacherAnswer.Text = dataReader.GetString(0);
+                t_studentQuestion.Text = dataReader.GetString(1);
+            }
+            dataReader.Close();
+
+            // Closing MYSQL CONNECTION
+            connection.Close();
+            //
+
+        }
     }
 }
+

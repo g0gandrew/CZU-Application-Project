@@ -14,16 +14,41 @@ namespace CZU_APPLICATION
 {
     public partial class CZURegister : Form
     {
-        public  CZURegister()
+
+        // Creating a list for TextBoxes
+        List <TextBox> textBoxes = new List <TextBox> ();   
+        //
+        public CZURegister()
         {
             InitializeComponent();
         }
+
+        private void textBoxesInitialization()
+
+        {
+            textBoxes.Add(inUsername);
+            textBoxes.Add(inPassword);
+            textBoxes.Add(inEmail);
+            textBoxes.Add(inPhoneNumber);
+            textBoxes.Add(inAuthKey);
+            textBoxes.Add(inFirstName);
+            textBoxes.Add(inLastName);
+        }
         private void register_button_Click(object sender, EventArgs e)
         {
+            textBoxesInitialization();
             string birthDate, sexValue = null;
             birthDate = birthDateControl.Value.Date.ToString("yyyy.MM.dd");
-            Security.gender(maleCheck, femaleCheck, unspecifiedCheck, ref sexValue);
-            Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
-        }
+            bool formatValid = Security.registrationFormatVerifier(ref textBoxes, ref selectSex, ref sexValue);
+            if (formatValid == true)
+            {
+                bool sucesfullReg = Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
+                if (sucesfullReg == true)
+                {
+                    MessageBox.Show("Your account has been created, you can log in!");
+                    this.Close();
+                }
+            }
+            }
     }
 }

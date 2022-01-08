@@ -6,7 +6,8 @@
     <RootNamespace>CZU_APPLICATION</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <BaseOutputPath>C:\Users\Andrew\Desktop\CBSD PROJECt</BaseOutputPath>
+    <BaseOutputPath>C:\Users\lapto\Desktop\CBSD Project\SLN OF THE PROJECt\CZU APPLICATION\obj</BaseOutputPath>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
