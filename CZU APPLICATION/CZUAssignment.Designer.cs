@@ -140,6 +140,7 @@
             this.exitAssignment.TabIndex = 3;
             this.exitAssignment.Text = "Exit";
             this.exitAssignment.UseVisualStyleBackColor = true;
+            this.exitAssignment.Click += new System.EventHandler(this.exitAssignment_Click);
             // 
             // addAssignmentSolution
             // 
@@ -263,6 +264,17 @@
             // 
             this.gradeOfSolution.FormattingEnabled = true;
             this.gradeOfSolution.ItemHeight = 20;
+            this.gradeOfSolution.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
             this.gradeOfSolution.Location = new System.Drawing.Point(444, 387);
             this.gradeOfSolution.Name = "gradeOfSolution";
             this.gradeOfSolution.Size = new System.Drawing.Size(58, 24);
@@ -299,6 +311,7 @@
             // 
             this.studentSolution.Location = new System.Drawing.Point(112, 227);
             this.studentSolution.Name = "studentSolution";
+            this.studentSolution.ReadOnly = true;
             this.studentSolution.Size = new System.Drawing.Size(752, 120);
             this.studentSolution.TabIndex = 1;
             this.studentSolution.Text = "";
@@ -317,8 +330,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 605);
-            this.Controls.Add(this.addAssignmentSolution);
             this.Controls.Add(this.studentAssignmentSolution);
+            this.Controls.Add(this.addAssignmentSolution);
             this.Controls.Add(this.addAssignment);
             this.Controls.Add(this.exitAssignment);
             this.Controls.Add(this.submit);

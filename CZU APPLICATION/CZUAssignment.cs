@@ -22,19 +22,42 @@ namespace CZU_APPLICATION
         }
         public CZUAssignment(string t_assignmentID, string t_studentID, string t_interfaceMode) // For student, to add the assignment solution
         {
+            InitializeComponent();
+
             // Initializing the main variables
             _assignmentID = t_assignmentID;
             _studentID = t_studentID;
             //
 
             // Setting up interface mode
-                _interfaceMode = t_interfaceMode;
+            _interfaceMode = t_interfaceMode;
             //
 
-            InitializeComponent();
+            // Enabling the GUI Interface
+            switch(_interfaceMode)
+            {
+                case "teacherGradesSolution":
+                    {
+                        // Enabling the GUI Interface
+                        studentAssignmentSolution.Enabled = true;
+                        studentAssignmentSolution.Visible = true;
+                        //
+                        break;
+                    }
+                case "studentAddsSolution":
+                    {
+                        // Enabling the GUI Interface
+                        addAssignmentSolution.Enabled = true;
+                        addAssignmentSolution.Visible = true;
+                        //
+                        break;
+                    }
+
+            }
         }
 
-       
+      
+
 
 
 
@@ -63,6 +86,27 @@ namespace CZU_APPLICATION
                     }
                 case "teacherGradesSolution":
                     {
+                        // Variables
+                        string assignmentDescription = null, studentAssignmentSolution = null;
+                        //
+
+                        // Getting assignment description
+                        AssignmentsTab.assignmentText(_assignmentID, ref assignmentDescription);
+                        //
+
+                        // Inserting the assignment description in the control that shows it  
+                        assignmentDescription1.Text = assignmentDescription;
+                        //
+
+                        // Getting student assignment solution description
+                        AssignmentsTab.studentAssignmentSolution(_assignmentID, _studentID, ref studentAssignmentSolution);
+                        //
+
+                        // Inserting the student solution description in the control that shows it  
+                        studentSolution.Text = studentAssignmentSolution;
+                        //
+
+
                         break;
                     }
 
@@ -106,24 +150,25 @@ namespace CZU_APPLICATION
                     {
                         break;
                     }
-                case "studentViewsAssignment":
-                    {
-                        break;
-                    }
                 case "teacherGradesSolution":
                     {
-
-
-
-
-
-
-
-
+                        if(gradeOfSolution.SelectedIndex > -1) // If a grade was selected
+                        {
+                            string grade = Convert.ToString(gradeOfSolution.SelectedValue);
+                            string nonquery = $"update studentassignmenetsolution set grade = {grade} where assignmentID = {_assignmentID} && studentID = {_studentID}";
+                            Database.insert(nonquery);
+                            MessageBox.Show("Assignment was graded!");
+                            this.Close();
+                        }
                         break;
                     }
 
             }
+        }
+
+        private void exitAssignment_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -212,6 +212,8 @@ namespace CZU_APPLICATION
         List<string> _assignmentID = new List<string>();
 
         List<string> _studentIDS = new List<string>();  
+
+
         //
 
         /// 
@@ -410,6 +412,13 @@ namespace CZU_APPLICATION
 
                 // Modify 'Select Class ID' control name to reuse code
                 assignmentSelectClassID.Text = "Course:";
+                //
+
+                // Disabling some controls used for teacher interface
+                assignmentName.Enabled = false;
+                assignmentName.Visible = false;
+                selectAssignmentNameListBox.Enabled = false;
+                selectAssignmentNameListBox.Visible = false;
                 //
             }
             // Changing panel state, related to the parameter (ON/OFF)
@@ -741,7 +750,7 @@ namespace CZU_APPLICATION
                             c.Enabled = false;
                             c.Visible = false;
                         }
-                        //
+                        //  
 
                         else // Modifying other controls position in GroupBox for better Design and code reusability
                         {
@@ -1502,22 +1511,18 @@ namespace CZU_APPLICATION
                     }
                 case "teacher":
                     {
-                        assignmentInterfaceButtonsState(true);
-                        switch (_assignmentTeacherInterfaceMode)
-                        {
-                            case "manageAssignments":
-                                {
-                                    // Update panel in that way to permit adding/deleting/state changing for  assignments
-                                    break;
-                                }
-                            case "manageStudentsAssignments":
-                                {
-                                    // Update panel in that way to permit adding/deleting/state cbaning for assignments
-                                    break;
-                                }
+                        // Verifying and updating the list of teached classes
+                        bool classesExists = StudentsTab.updateTeachedClassesList(ref assignmentSelectClassIDListBox, ref _teachedClassesIDs, connectedUser); // returns true only if there is minimum one class
+                        // 
 
+                        if (classesExists) {
+                            MessageBox.Show("Assignments - Classes Exists");             
+                            assignmentInterfaceButtonsState(true);
+                            assignmentsMainPanelState(true);
                         }
-                        assignmentsMainPanelState(true);
+                        else
+                            MainPanelNoData(true, "teacherNoClasses");
+
                         break;
                     }
             }
@@ -1536,13 +1541,45 @@ namespace CZU_APPLICATION
         private void teacherAssignments_Click(object sender, EventArgs e) // Display teacher interface for managing assignments
         {
 
+            // Deactivating the buttons for interface mode choice as teacher on Assignment Tab
             assignmentInterfaceButtonsState(false);
-            _assignmentTeacherInterfaceMode = "manageAssignments";
+            //
+
+
+
         }
         private void studentsAssignments_Click(object sender, EventArgs e) // Display students assignments related to the selected class
         {
+
+            // Deactivating the buttons for interface mode choice as teacher on Assignment Tab
             assignmentInterfaceButtonsState(false);
-            _assignmentTeacherInterfaceMode = "manageStudentsAssignments";
+            //
+
+            /// Running the functions that updates Assignments Panel related to the made choice (Show students assignment or manage assignments)
+
+            // Selected class
+            string selectedClass = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
+            //
+
+            MessageBox.Show($"selected class = {selectedClass}");
+
+            // Updating the list of assignments related to the selected class
+            AssignmentsTab.classAssignments(selectedClass, ref selectAssignmentNameListBox, _teacherID);
+            //
+
+
+            // Selected assignment
+            string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
+            //
+
+
+            // Calling the method that shows the assignments who are satisfing our conditions from above
+            AssignmentsTab.updatePanelAsTeacher(ref assignmentPanel, ref assignmentTitle, ref _studentIDS, selectedClass, selectedAssignment);
+            //
+            ///
+
+
+
         }
         //
         private void gradesButton_Click(object sender, EventArgs e)
@@ -1794,25 +1831,14 @@ namespace CZU_APPLICATION
                         // Getting the solution state
                         AssignmentsTab.studentAssignmentSolutionState(_assignmentID[0], _studentID, ref assignmentState);
                         //
-                        switch (assignmentState)
-                        {
-                            case "Not solved":
-                                {
-                                    CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID, "studentAddsSolution");
-                                    assignment1.Show();
-                                    break;
-                                }
-                            case "Solved":
-                                {
-                                    // Showing the solution interface
-                                    break;
-                                }
-                        }
+                        CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID, "studentAddsSolution");
+                        assignment1.Show();
                         break;
-
                     }
                 case "teacher":
                     {
+                        CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID, "teacherGradesSolution");
+                        assignment1.Show();
                         break;
                     }
             }

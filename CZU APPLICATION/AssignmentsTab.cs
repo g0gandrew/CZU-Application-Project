@@ -212,11 +212,74 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+        public static void studentAssignmentSolution(string t_assignmentID, string t_studentID, ref string t_output)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            cmd.CommandText = $"select solutin from studentassignmentsolution where assignmentID = {t_assignmentID} && studentID = {t_studentID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_output = dataReader.GetString(0);
+
+            }
+            dataReader.Close();
+
+            // Closing MYSQL connection
+            connection.Close();
+            //
+        }
+        public static void classAssignments(string t_classID, ref ListBox t_classAssignmentsListBox, string t_teacherID)
+        {
+
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // List of assignments assigned to class
+            List<string> assignedAssignments = new List<string>();
+            //
+
+            // Getting the assignments assigned to a specified class
+            cmd.CommandText = $"select distinct assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                assignedAssignments.Add(Convert.ToString(dataReader.GetString(0)));
+            }
+            dataReader.Close();
+            //
+
+            MessageBox.Show("Functia a rulat");
+
+            // Filling up the Listbox with Assignments given to class
+            t_classAssignmentsListBox.DataSource = assignedAssignments;
+            //
+
+
+            // Closing MYSQL CONNECTION
+            connection.Close();
+            //
+        }
+
+
 
         //
 
-        // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
-        public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
+            // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
+            public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
@@ -384,5 +447,96 @@ namespace CZU_APPLICATION
             return dataAvailable;
         }
         //
+
+        public static bool updatePanelAsTeacher(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle,  ref List<string> t_studentIDs, string t_selectedClassID, string t_selectedAssignment)
+        {
+            // Pseudo-Assignments until proven different
+            /* t_rightPossible = false;
+             t_leftPossible = false*/
+            //
+
+            // Variables
+            int i = 0, tempI;
+            bool dataAvailable = false;
+            //
+
+            /// Setting up MYSQL CONNECTION (1)
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            ///
+
+            // Commands list
+            string command;
+            List<string> studentID = new();
+            //
+
+            /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            command = $"select studentID from studentassignmentsolution where assignmentID = {t_selectedAssignment} where studentID in (select id from student where classID = {t_selectedClassID})";
+            cmd.CommandText = command;
+            dataReader = cmd.ExecuteReader();
+
+            // Getting the IDs of the assignments which satisfies our conditions
+            while (dataReader.Read()) // for as long it finds data, maximum 4.
+            {
+                if (i <= 3)
+                {
+                    studentID.Add(dataReader.GetString(0));
+                    ++i;
+                }
+                else
+                    break;
+            }
+            dataReader.Close();
+            //
+
+            // Inserting the list of student IDS
+                t_studentIDs = studentID;
+            //
+
+            // Getting and inserting students name
+            for (int z = 0; z < studentID.Count; z++)
+            {
+                command = $"select firstName, lastName from student where id = {studentID[z]}";
+                cmd.CommandText = command;
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read()) // for as long it finds data, maximum 4.
+                {
+
+                    // Reusing the control to display student name
+                    t_assignmentTitle[z].Text = dataReader.GetString(1) + " " + dataReader.GetString(0); 
+                    //
+                }
+                dataReader.Close();
+            }
+            //
+
+
+            // If there is any data that satisfies our conditions
+            if (i != 0)
+                dataAvailable = true;
+            //
+
+            tempI = i; // We'll save the amount of question records that exist in database and are valid, so, we can go further from here to display others students assignment in Assignment panel, if it is necessarily.
+            --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
+            for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
+            {
+                t_assignmentPanel[z].Enabled = false;
+                t_assignmentPanel[z].Visible = false;
+            }
+            dataReader.Close();
+            ///
+
+
+            // Closing MYSQL Connection
+            connection.Close();
+            //
+            return dataAvailable;
+        }
+
+
     }
 }

@@ -161,9 +161,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.noDataInPanelMessage = new System.Windows.Forms.Label();
             this.assignmentsMainPanel = new System.Windows.Forms.Panel();
-            this.studentsAssignments = new System.Windows.Forms.Button();
-            this.teacherAssignments = new System.Windows.Forms.Button();
             this.assignmentsMainPanelGB = new System.Windows.Forms.GroupBox();
+            this.selectAssignmentNameListBox = new System.Windows.Forms.ListBox();
+            this.assignmentName = new System.Windows.Forms.Label();
             this.assignment4Panel = new System.Windows.Forms.Panel();
             this.assignment4Button = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -205,6 +205,8 @@
             this.assignmentSelectClassID = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.teacherAssignments = new System.Windows.Forms.Button();
+            this.studentsAssignments = new System.Windows.Forms.Button();
             this.gradesMainPanel = new System.Windows.Forms.Panel();
             this.gradesMainGB = new System.Windows.Forms.GroupBox();
             this.gradesSituation = new System.Windows.Forms.Label();
@@ -1659,35 +1661,10 @@
             this.assignmentsMainPanel.TabIndex = 64;
             this.assignmentsMainPanel.Visible = false;
             // 
-            // studentsAssignments
-            // 
-            this.studentsAssignments.BackColor = System.Drawing.Color.LightGray;
-            this.studentsAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.studentsAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.studentsAssignments.Location = new System.Drawing.Point(572, 0);
-            this.studentsAssignments.Name = "studentsAssignments";
-            this.studentsAssignments.Size = new System.Drawing.Size(577, 681);
-            this.studentsAssignments.TabIndex = 2;
-            this.studentsAssignments.Text = "Students Assignments";
-            this.studentsAssignments.UseVisualStyleBackColor = false;
-            this.studentsAssignments.Click += new System.EventHandler(this.studentsAssignments_Click);
-            // 
-            // teacherAssignments
-            // 
-            this.teacherAssignments.BackColor = System.Drawing.Color.LightGray;
-            this.teacherAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.teacherAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.teacherAssignments.ForeColor = System.Drawing.Color.Black;
-            this.teacherAssignments.Location = new System.Drawing.Point(0, 0);
-            this.teacherAssignments.Name = "teacherAssignments";
-            this.teacherAssignments.Size = new System.Drawing.Size(571, 681);
-            this.teacherAssignments.TabIndex = 1;
-            this.teacherAssignments.Text = "Manage Assignments";
-            this.teacherAssignments.UseVisualStyleBackColor = false;
-            this.teacherAssignments.Click += new System.EventHandler(this.teacherAssignments_Click);
-            // 
             // assignmentsMainPanelGB
             // 
+            this.assignmentsMainPanelGB.Controls.Add(this.selectAssignmentNameListBox);
+            this.assignmentsMainPanelGB.Controls.Add(this.assignmentName);
             this.assignmentsMainPanelGB.Controls.Add(this.assignment4Panel);
             this.assignmentsMainPanelGB.Controls.Add(this.assignment1Panel);
             this.assignmentsMainPanelGB.Controls.Add(this.addAssignment);
@@ -1703,6 +1680,24 @@
             this.assignmentsMainPanelGB.TabIndex = 0;
             this.assignmentsMainPanelGB.TabStop = false;
             this.assignmentsMainPanelGB.Text = "Assignments";
+            // 
+            // selectAssignmentNameListBox
+            // 
+            this.selectAssignmentNameListBox.FormattingEnabled = true;
+            this.selectAssignmentNameListBox.ItemHeight = 20;
+            this.selectAssignmentNameListBox.Location = new System.Drawing.Point(702, 19);
+            this.selectAssignmentNameListBox.Name = "selectAssignmentNameListBox";
+            this.selectAssignmentNameListBox.Size = new System.Drawing.Size(150, 24);
+            this.selectAssignmentNameListBox.TabIndex = 63;
+            // 
+            // assignmentName
+            // 
+            this.assignmentName.AutoSize = true;
+            this.assignmentName.Location = new System.Drawing.Point(607, 23);
+            this.assignmentName.Name = "assignmentName";
+            this.assignmentName.Size = new System.Drawing.Size(89, 20);
+            this.assignmentName.TabIndex = 62;
+            this.assignmentName.Text = "Assignment:";
             // 
             // assignment4Panel
             // 
@@ -2116,6 +2111,33 @@
             this.button5.TabIndex = 53;
             this.button5.UseVisualStyleBackColor = false;
             // 
+            // teacherAssignments
+            // 
+            this.teacherAssignments.BackColor = System.Drawing.Color.LightGray;
+            this.teacherAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.teacherAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.teacherAssignments.ForeColor = System.Drawing.Color.Black;
+            this.teacherAssignments.Location = new System.Drawing.Point(0, 0);
+            this.teacherAssignments.Name = "teacherAssignments";
+            this.teacherAssignments.Size = new System.Drawing.Size(571, 681);
+            this.teacherAssignments.TabIndex = 1;
+            this.teacherAssignments.Text = "Manage Assignments";
+            this.teacherAssignments.UseVisualStyleBackColor = false;
+            this.teacherAssignments.Click += new System.EventHandler(this.teacherAssignments_Click);
+            // 
+            // studentsAssignments
+            // 
+            this.studentsAssignments.BackColor = System.Drawing.Color.LightGray;
+            this.studentsAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.studentsAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.studentsAssignments.Location = new System.Drawing.Point(572, 0);
+            this.studentsAssignments.Name = "studentsAssignments";
+            this.studentsAssignments.Size = new System.Drawing.Size(577, 681);
+            this.studentsAssignments.TabIndex = 2;
+            this.studentsAssignments.Text = "Students Assignments";
+            this.studentsAssignments.UseVisualStyleBackColor = false;
+            this.studentsAssignments.Click += new System.EventHandler(this.studentsAssignments_Click);
+            // 
             // gradesMainPanel
             // 
             this.gradesMainPanel.Controls.Add(this.gradesMainGB);
@@ -2176,6 +2198,8 @@
             // 
             this.studentGrades.AllowUserToAddRows = false;
             this.studentGrades.AllowUserToDeleteRows = false;
+            this.studentGrades.AllowUserToResizeColumns = false;
+            this.studentGrades.AllowUserToResizeRows = false;
             this.studentGrades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.studentGrades.Location = new System.Drawing.Point(372, 138);
             this.studentGrades.Name = "studentGrades";
@@ -2219,8 +2243,8 @@
             this.ClientSize = new System.Drawing.Size(1319, 681);
             this.Controls.Add(this.noDataInPanel);
             this.Controls.Add(this.assignmentsMainPanel);
-            this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.gradesMainPanel);
+            this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.homeMainPanel);
             this.Controls.Add(this.triggerDataRefreshStudentPanel);
@@ -2501,5 +2525,7 @@
         private System.Windows.Forms.Panel noDataInPanel;
         private System.Windows.Forms.Button studentsAssignments;
         private System.Windows.Forms.Button teacherAssignments;
+        private System.Windows.Forms.ListBox selectAssignmentNameListBox;
+        private System.Windows.Forms.Label assignmentName;
     }
 }
