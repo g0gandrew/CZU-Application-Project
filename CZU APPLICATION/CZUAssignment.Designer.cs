@@ -318,12 +318,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 605);
             this.Controls.Add(this.addAssignmentSolution);
-            this.Controls.Add(this.addAssignment);
             this.Controls.Add(this.studentAssignmentSolution);
+            this.Controls.Add(this.addAssignment);
             this.Controls.Add(this.exitAssignment);
             this.Controls.Add(this.submit);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CZUAssignment";
             this.Text = "CZU University of LifeSciences - Assignment";
             this.Load += new System.EventHandler(this.CZUAssignment_Load);

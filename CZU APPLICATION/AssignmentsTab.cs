@@ -188,7 +188,30 @@ namespace CZU_APPLICATION
             // Closing MYSQL connection
             connection.Close();
         }
+        public static void assignmentText(string t_assignmentID, ref string t_output)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
 
+            cmd.CommandText = $"select description from assignment where id = {t_assignmentID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_output = dataReader.GetString(0);
+            
+            }
+            dataReader.Close();
+
+            // Closing MYSQL connection
+            connection.Close();
+            //
+        }
 
         //
 

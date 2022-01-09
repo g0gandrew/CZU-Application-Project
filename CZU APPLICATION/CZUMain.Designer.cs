@@ -161,6 +161,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.noDataInPanelMessage = new System.Windows.Forms.Label();
             this.assignmentsMainPanel = new System.Windows.Forms.Panel();
+            this.studentsAssignments = new System.Windows.Forms.Button();
+            this.teacherAssignments = new System.Windows.Forms.Button();
             this.assignmentsMainPanelGB = new System.Windows.Forms.GroupBox();
             this.assignment4Panel = new System.Windows.Forms.Panel();
             this.assignment4Button = new System.Windows.Forms.Button();
@@ -1647,6 +1649,8 @@
             // 
             // assignmentsMainPanel
             // 
+            this.assignmentsMainPanel.Controls.Add(this.studentsAssignments);
+            this.assignmentsMainPanel.Controls.Add(this.teacherAssignments);
             this.assignmentsMainPanel.Controls.Add(this.assignmentsMainPanelGB);
             this.assignmentsMainPanel.Enabled = false;
             this.assignmentsMainPanel.Location = new System.Drawing.Point(170, 0);
@@ -1654,6 +1658,33 @@
             this.assignmentsMainPanel.Size = new System.Drawing.Size(1146, 681);
             this.assignmentsMainPanel.TabIndex = 64;
             this.assignmentsMainPanel.Visible = false;
+            // 
+            // studentsAssignments
+            // 
+            this.studentsAssignments.BackColor = System.Drawing.Color.LightGray;
+            this.studentsAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.studentsAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.studentsAssignments.Location = new System.Drawing.Point(572, 0);
+            this.studentsAssignments.Name = "studentsAssignments";
+            this.studentsAssignments.Size = new System.Drawing.Size(577, 681);
+            this.studentsAssignments.TabIndex = 2;
+            this.studentsAssignments.Text = "Students Assignments";
+            this.studentsAssignments.UseVisualStyleBackColor = false;
+            this.studentsAssignments.Click += new System.EventHandler(this.studentsAssignments_Click);
+            // 
+            // teacherAssignments
+            // 
+            this.teacherAssignments.BackColor = System.Drawing.Color.LightGray;
+            this.teacherAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.teacherAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.teacherAssignments.ForeColor = System.Drawing.Color.Black;
+            this.teacherAssignments.Location = new System.Drawing.Point(0, 0);
+            this.teacherAssignments.Name = "teacherAssignments";
+            this.teacherAssignments.Size = new System.Drawing.Size(571, 681);
+            this.teacherAssignments.TabIndex = 1;
+            this.teacherAssignments.Text = "Manage Assignments";
+            this.teacherAssignments.UseVisualStyleBackColor = false;
+            this.teacherAssignments.Click += new System.EventHandler(this.teacherAssignments_Click);
             // 
             // assignmentsMainPanelGB
             // 
@@ -1728,7 +1759,7 @@
             // assignment4State
             // 
             this.assignment4State.AutoSize = true;
-            this.assignment4State.Location = new System.Drawing.Point(100, 62);
+            this.assignment4State.Location = new System.Drawing.Point(86, 62);
             this.assignment4State.Name = "assignment4State";
             this.assignment4State.Size = new System.Drawing.Size(55, 20);
             this.assignment4State.TabIndex = 59;
@@ -1765,7 +1796,7 @@
             // 
             this.assignment1Panel.Controls.Add(this.assignment1Button);
             this.assignment1Panel.Controls.Add(this.groupBox1);
-            this.assignment1Panel.Location = new System.Drawing.Point(72, 59);
+            this.assignment1Panel.Location = new System.Drawing.Point(72, 60);
             this.assignment1Panel.Name = "assignment1Panel";
             this.assignment1Panel.Size = new System.Drawing.Size(405, 244);
             this.assignment1Panel.TabIndex = 55;
@@ -1775,7 +1806,7 @@
             this.assignment1Button.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.assignment1Button.Location = new System.Drawing.Point(0, 0);
             this.assignment1Button.Name = "assignment1Button";
-            this.assignment1Button.Size = new System.Drawing.Size(391, 108);
+            this.assignment1Button.Size = new System.Drawing.Size(391, 107);
             this.assignment1Button.TabIndex = 0;
             this.assignment1Button.Text = "Assignment Title";
             this.assignment1Button.UseVisualStyleBackColor = true;
@@ -1789,9 +1820,9 @@
             this.groupBox1.Controls.Add(this.label43);
             this.groupBox1.Controls.Add(this.assignment1DeadLine);
             this.groupBox1.Controls.Add(this.label45);
-            this.groupBox1.Location = new System.Drawing.Point(0, 99);
+            this.groupBox1.Location = new System.Drawing.Point(0, 92);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(390, 125);
+            this.groupBox1.Size = new System.Drawing.Size(390, 131);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
@@ -1816,7 +1847,7 @@
             // assignment1State
             // 
             this.assignment1State.AutoSize = true;
-            this.assignment1State.Location = new System.Drawing.Point(93, 55);
+            this.assignment1State.Location = new System.Drawing.Point(81, 55);
             this.assignment1State.Name = "assignment1State";
             this.assignment1State.Size = new System.Drawing.Size(55, 20);
             this.assignment1State.TabIndex = 7;
@@ -1918,7 +1949,7 @@
             // assignment3State
             // 
             this.assignment3State.AutoSize = true;
-            this.assignment3State.Location = new System.Drawing.Point(85, 64);
+            this.assignment3State.Location = new System.Drawing.Point(81, 64);
             this.assignment3State.Name = "assignment3State";
             this.assignment3State.Size = new System.Drawing.Size(55, 20);
             this.assignment3State.TabIndex = 8;
@@ -1979,9 +2010,9 @@
             this.groupBox2.Controls.Add(this.assignment2State);
             this.groupBox2.Controls.Add(this.assignment2Deadline);
             this.groupBox2.Controls.Add(this.label61);
-            this.groupBox2.Location = new System.Drawing.Point(4, 99);
+            this.groupBox2.Location = new System.Drawing.Point(0, 93);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(385, 125);
+            this.groupBox2.Size = new System.Drawing.Size(387, 131);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -2015,7 +2046,7 @@
             // assignment2State
             // 
             this.assignment2State.AutoSize = true;
-            this.assignment2State.Location = new System.Drawing.Point(90, 57);
+            this.assignment2State.Location = new System.Drawing.Point(79, 54);
             this.assignment2State.Name = "assignment2State";
             this.assignment2State.Size = new System.Drawing.Size(55, 20);
             this.assignment2State.TabIndex = 8;
@@ -2468,5 +2499,7 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.DataGridView studentGrades;
         private System.Windows.Forms.Panel noDataInPanel;
+        private System.Windows.Forms.Button studentsAssignments;
+        private System.Windows.Forms.Button teacherAssignments;
     }
 }
