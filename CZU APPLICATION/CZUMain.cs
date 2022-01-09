@@ -1466,6 +1466,7 @@ namespace CZU_APPLICATION
         }
         private void teacherAssignments_Click(object sender, EventArgs e) // Display teacher interface for managing assignments
         {
+
             // Not done
         }
         private void studentsAssignments_Click(object sender, EventArgs e) // Display students assignments related to the selected class
@@ -1495,7 +1496,6 @@ namespace CZU_APPLICATION
             string selectedClass = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
             //
 
-
             // Updating the list of assignments related to the selected class
             AssignmentsTab.classAssignments(selectedClass, ref selectAssignmentNameListBox, _teacherID);
             //
@@ -1508,7 +1508,6 @@ namespace CZU_APPLICATION
             // Calling the method that shows the assignments that are satisfing our above conditions
             if (selectedAssignment != "No Assignments") // If there exists minimum one assignment  
             {
-
                 bool availableSolutions =  AssignmentsTab.updatePanelAsTeacher(ref assignmentPanel, ref assignmentTitle, ref _studentIDS, selectedClass, selectedAssignment);
                 if (!availableSolutions)
                     MainPanelNoData(true, "assignmentHasNoSolutions");

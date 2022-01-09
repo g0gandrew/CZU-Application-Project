@@ -138,6 +138,7 @@ namespace CZU_APPLICATION
             List<string> assignedAssignments = new List<string>();
             //
 
+
             // Getting the assignments assigned to a specified class
             cmd.CommandText = $"select distinct assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
             dataReader = cmd.ExecuteReader();
