@@ -167,6 +167,7 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+        //
         public static void studentAssignmentSolutionState(string t_assignmentID, string t_studentID, ref string t_assignmentState)
         {
             // Opening MYSQL CONNECTION
@@ -223,7 +224,7 @@ namespace CZU_APPLICATION
             connection.Open();
             //
 
-            cmd.CommandText = $"select solutin from studentassignmentsolution where assignmentID = {t_assignmentID} && studentID = {t_studentID}";
+            cmd.CommandText = $"select solution from studentassignmentsolution where assignmentID = {t_assignmentID} && studentID = {t_studentID}";
             dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
@@ -265,21 +266,22 @@ namespace CZU_APPLICATION
             MessageBox.Show("Functia a rulat");
 
             // Filling up the Listbox with Assignments given to class
-            t_classAssignmentsListBox.DataSource = assignedAssignments;
+            if (assignedAssignments.Count > 0)
+                t_classAssignmentsListBox.DataSource = assignedAssignments;
+            else {
+                assignedAssignments.Add("No Assignments");
+                t_classAssignmentsListBox.DataSource = assignedAssignments;
+            }
             //
 
 
-            // Closing MYSQL CONNECTION
+                // Closing MYSQL CONNECTION
             connection.Close();
             //
         }
 
-
-
-        //
-
-            // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
-            public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
+        // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
+        public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
         {
             // Pseudo-Assignments until proven different
             /* t_rightPossible = false;
@@ -308,7 +310,7 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-            command = $"select assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {teacherID})";
+            command = $"select assignmentID from studentassignmentsolution where studentID = {t_studentID} && assignmentID in (select id from assignment where teacherID = {teacherID})";
             cmd.CommandText = command;
             dataReader = cmd.ExecuteReader();
 
@@ -412,13 +414,13 @@ namespace CZU_APPLICATION
                             t_assignmentGrade[z].Text = "Not graded yet"; // We display the grade.
                         }
                         //
+                        // Enabling the panel for showing the assignment.
+                        t_assignmentPanel[z].Enabled = true;
+                        t_assignmentPanel[z].Visible = true;
+                        //
                     }
                     //
 
-                    // Enabling the panel for showing the assignment.
-                    t_assignmentPanel[z].Enabled = true;
-                    t_assignmentPanel[z++].Visible = true;
-                    //
                 }
                 dataReader.Close();
             }
@@ -475,7 +477,7 @@ namespace CZU_APPLICATION
             //
 
             /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-            command = $"select studentID from studentassignmentsolution where assignmentID = {t_selectedAssignment} where studentID in (select id from student where classID = {t_selectedClassID})";
+            command = $"select studentID from studentassignmentsolution where assignmentID = {t_selectedAssignment} && studentID in (select id from student where classID = {t_selectedClassID}) && state = 'Solved'";
             cmd.CommandText = command;
             dataReader = cmd.ExecuteReader();
 
@@ -485,7 +487,11 @@ namespace CZU_APPLICATION
                 if (i <= 3)
                 {
                     studentID.Add(dataReader.GetString(0));
-                    ++i;
+
+                    // Enabling the panel for showing the assignment.
+                    t_assignmentPanel[i].Enabled = true;
+                    t_assignmentPanel[i++].Visible = true;
+                    //
                 }
                 else
                     break;
@@ -520,7 +526,6 @@ namespace CZU_APPLICATION
                 dataAvailable = true;
             //
 
-            tempI = i; // We'll save the amount of question records that exist in database and are valid, so, we can go further from here to display others students assignment in Assignment panel, if it is necessarily.
             --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
             for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
             {

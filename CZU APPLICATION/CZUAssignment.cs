@@ -52,14 +52,12 @@ namespace CZU_APPLICATION
                         //
                         break;
                     }
-
+                case "teacherAddsAssignment":
+                    {
+                        break;
+                    }
             }
         }
-
-      
-
-
-
 
         private void CZUAssignment_Load(object sender, EventArgs e)
         {
@@ -154,11 +152,16 @@ namespace CZU_APPLICATION
                     {
                         if(gradeOfSolution.SelectedIndex > -1) // If a grade was selected
                         {
-                            string grade = Convert.ToString(gradeOfSolution.SelectedValue);
-                            string nonquery = $"update studentassignmenetsolution set grade = {grade} where assignmentID = {_assignmentID} && studentID = {_studentID}";
+                            string grade = Convert.ToString(gradeOfSolution.SelectedItem);
+                            MessageBox.Show($"grade == {grade}, studentid=  {_studentID} assignedd = {_assignmentID}");
+                            string nonquery = $"update studentassignmentsolution set grade = {grade}, state = 'Graded' where assignmentID = {_assignmentID} && studentID = {_studentID}";
                             Database.insert(nonquery);
                             MessageBox.Show("Assignment was graded!");
                             this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Select a grade!");
                         }
                         break;
                     }

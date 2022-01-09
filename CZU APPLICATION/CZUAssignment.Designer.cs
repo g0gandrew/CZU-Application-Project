@@ -145,18 +145,22 @@
             // addAssignmentSolution
             // 
             this.addAssignmentSolution.Controls.Add(this.assignmentMainGB);
+            this.addAssignmentSolution.Enabled = false;
             this.addAssignmentSolution.Location = new System.Drawing.Point(32, 67);
             this.addAssignmentSolution.Name = "addAssignmentSolution";
             this.addAssignmentSolution.Size = new System.Drawing.Size(974, 476);
             this.addAssignmentSolution.TabIndex = 4;
+            this.addAssignmentSolution.Visible = false;
             // 
             // addAssignment
             // 
             this.addAssignment.Controls.Add(this.addAssignmentMainGB);
+            this.addAssignment.Enabled = false;
             this.addAssignment.Location = new System.Drawing.Point(30, 67);
             this.addAssignment.Name = "addAssignment";
             this.addAssignment.Size = new System.Drawing.Size(976, 454);
             this.addAssignment.TabIndex = 5;
+            this.addAssignment.Visible = false;
             // 
             // addAssignmentMainGB
             // 
@@ -240,10 +244,12 @@
             // studentAssignmentSolution
             // 
             this.studentAssignmentSolution.Controls.Add(this.studentAssignmentSolutionMainGB);
+            this.studentAssignmentSolution.Enabled = false;
             this.studentAssignmentSolution.Location = new System.Drawing.Point(22, 64);
             this.studentAssignmentSolution.Name = "studentAssignmentSolution";
             this.studentAssignmentSolution.Size = new System.Drawing.Size(974, 476);
             this.studentAssignmentSolution.TabIndex = 6;
+            this.studentAssignmentSolution.Visible = false;
             // 
             // studentAssignmentSolutionMainGB
             // 

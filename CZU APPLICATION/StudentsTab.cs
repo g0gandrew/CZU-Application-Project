@@ -505,9 +505,9 @@ namespace CZU_APPLICATION
 
 
             // Command 3 - Student --> Assignments
-            command[3] = $"select count(assignmentID) from classassignment where assignmentID = (select ID from assignment where teacherID = {t_teacherID}) && classID = {t_selectedClass}";
             for (int z = 0; z <= loopLength; z++)
             {
+                command[3] = $"select count(assignmentID) from studentassignmentsolution where studentID = {studentsIDs[z]} && state = 'Solved' && assignmentID in (select id from assignment where teacherID = {t_teacherID})"; // Update the number of assignments that student must do
                 cmd.CommandText = command[3];
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())

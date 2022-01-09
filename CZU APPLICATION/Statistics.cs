@@ -85,7 +85,7 @@ namespace CZU_APPLICATION
                         else if(i == 1)
                             command = $"select count(id) from question where teacherID = {t_teacherID} && state = 'not answered' && studentId in (select id from student where classId = {x})";
                         else
-                            command = $"select count(assignmentID) from classassignment where classId = {x} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
+                            command = $"select count(assignmentID) from studentassignmentsolution where studentID in (select id from student where classId = {x}) && state = 'Solved' && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
                         cmd.CommandText = command;
                         dataReader = cmd.ExecuteReader();
                         while (dataReader.Read())
