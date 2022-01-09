@@ -14,132 +14,6 @@ namespace CZU_APPLICATION
     internal static class AssignmentsTab
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
-/*        public static bool updatePanelAsTeacher(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentSubmitDate, ref List<Label> t_assignmentState, string t_selectedClass, string t_teacherID, ref List<string> t_assignmentID)
-        {
-            // Pseudo-Assignments until proven different
-            *//* t_rightPossible = false;
-             t_leftPossible = false*//*
-            ;
-            //
-
-            // Variables
-            int loopLength; // Updating the panel by the number of students;
-            int i = 0, tempI;
-            bool dataAvailable = false;
-            //
-
-            /// Setting up MYSQL CONNECTION (1)
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _path;
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = connection;
-            MySqlDataReader dataReader;
-            connection.Open();
-            ///
-
-            // Commands list
-            string[] command = new string[2];
-            string[] studentsIDs = new string[4];
-            List<string> questionIDs = new List<string>();
-            //
-
-
-            /// Command 0 - Updating students connection status, image, and the displayed amount based on selected class
-            command[0] = $"select title, priority, date, state, studentID, ID from question where state != 'answered' && teacherID = {t_teacherID} && studentID in (select ID from student where classID = {t_selectedClass})"; //  
-
-            cmd.CommandText = command[0];
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read()) // for as long it finds data, maximum 4.
-            {
-                if (i <= 3)
-                {
-                    // Inserting the ID of question in list
-                    questionIDs.Add(dataReader.GetString(5));
-                    //
-
-                    // Setting up the list of students ids for further command
-                    studentsIDs[i] = dataReader.GetString(4);
-                    //
-                    MessageBox.Show(dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
-                    // Setting up question Title
-                    t_questionTitle[i].Text = dataReader.GetString(0);
-                    //
-
-                    // Setting up priority Level
-                    t_questionPriorityLevel[i].Text = dataReader.GetString(1);
-                    //
-
-                    // Setting up submit date
-                    t_questionSubmitDate[i].Text = dataReader.GetString(2);
-                    //
-
-                    // Setting up question state
-                    t_questionState[i].Text = dataReader.GetString(3);
-                    //
-
-                    // Enabling the panel for showing the question.
-                    t_questionPanel[i].Enabled = true;
-                    t_questionPanel[i++].Visible = true;
-                    //
-                }
-                else
-                    break;
-            }
-
-            // Inserting the list of question IDS in list
-            t_questionID = questionIDs;
-            //
-
-            // If there is any data that satisfies our conditions
-            if (i != 0)
-                dataAvailable = true;
-            //
-
-            tempI = i; // We'll save the amount of question records that exist in database and are valid, so, we can go further from here to display others students questions in Question panel, if it is necessarily.
-            --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
-            loopLength = i;
-            for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
-            {
-                t_questionPanel[z].Enabled = false;
-                t_questionPanel[z].Visible = false;
-            }
-            dataReader.Close();
-            ///
-
-            i = 0; // restarting the value for being used further
-
-            /// Command 1 - First command for setting Student Name
-            /// 
-            ////////////// HERE IS THE PROBLEM
-
-            for (int z = 0; z <= loopLength; z++)
-            {
-                command[1] = $"select firstName, lastName from student where id = {studentsIDs[z]}";
-                cmd.CommandText = command[1];
-                dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + " " + dataReader.GetString(1));
-                    t_questionStudentName[z].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
-                }
-                dataReader.Close();
-            }
-
-            ///
-
-            //
-            *//*  t_startingFrom += tempI; // We increase the start value by the users that we could display.
-              t_recordsOnPage = tempI;
-              if (t_startingFrom >= 7)
-              {
-                  t_leftPossible = true;
-              }*//*
-            // Closing MYSQL Connection, and DataReader
-            connection.Close();
-            //
-            return dataAvailable;
-        }
-*/       
         
         // Gets the information about the student assignment solution
         public static void getAssignmentSolutionData(string t_command,  ref string t_state,  ref string t_grade, ref DateTime t_solutionSubmitDate) 
@@ -167,6 +41,9 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
+        //
+
+        // Gets student solution state
         public static void studentAssignmentSolutionState(string t_assignmentID, string t_studentID, ref string t_assignmentState)
         {
             // Opening MYSQL CONNECTION
@@ -188,6 +65,9 @@ namespace CZU_APPLICATION
             // Closing MYSQL connection
             connection.Close();
         }
+        //
+
+        // Gets assignment state
         public static void assignmentText(string t_assignmentID, ref string t_output)
         {
             // Opening MYSQL CONNECTION
@@ -212,17 +92,84 @@ namespace CZU_APPLICATION
             connection.Close();
             //
         }
-
         //
+
+        // Gets student assignment solution
+        public static void studentAssignmentSolution(string t_assignmentID, string t_studentID, ref string t_output)
+        {
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            cmd.CommandText = $"select solution from studentassignmentsolution where assignmentID = {t_assignmentID} && studentID = {t_studentID}";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                t_output = dataReader.GetString(0);
+
+            }
+            dataReader.Close();
+
+            // Closing MYSQL connection
+            connection.Close();
+            //
+        }
+        //
+
+        // Gets and fills the list of assignment that is assigned to a particular class
+        public static void classAssignments(string t_classID, ref ListBox t_classAssignmentsListBox, string t_teacherID)
+        {
+
+            // Opening MYSQL CONNECTION
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            //
+
+            // List of assignments assigned to class
+            List<string> assignedAssignments = new List<string>();
+            //
+
+
+            // Getting the assignments assigned to a specified class
+            cmd.CommandText = $"select distinct assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {t_teacherID})";
+            dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                assignedAssignments.Add(Convert.ToString(dataReader.GetString(0)));
+            }
+            dataReader.Close();
+            //
+
+
+            // Filling up the Listbox with Assignments given to class
+            if (assignedAssignments.Count > 0)
+                t_classAssignmentsListBox.DataSource = assignedAssignments;
+            else {
+                assignedAssignments.Add("No Assignments");
+                t_classAssignmentsListBox.DataSource = assignedAssignments;
+            }
+            //
+
+
+                // Closing MYSQL CONNECTION
+            connection.Close();
+            //
+        }
+        //
+
 
         // The Main function for updating 'Assignment' tab with related information to connected student (his assignments), and initializing others fields with vital information for further operations 
         public static bool updatePanelAsStudent(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle, ref List<Label> t_assignmentDeadline, ref List<Label> t_assignmentState, ref List <Label> t_assignmentGrade, string t_selectedCourse, string t_studentID,  ref List<string> t_assignmentID, string t_classID)
         {
-            // Pseudo-Assignments until proven different
-            /* t_rightPossible = false;
-             t_leftPossible = false*/
-            //
-
             // Variables
             int i = 0, tempI;
             bool dataAvailable = false;
@@ -241,11 +188,10 @@ namespace CZU_APPLICATION
             string command;
             string teacherID = StudentsTab.getTeacherIDByCourse(t_selectedCourse); // Getting the teacher id for the selected course                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             List<string> assignmentsIds = new();
-            
             //
 
             /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-            command = $"select assignmentID from classassignment where classID = {t_classID} && assignmentID in (select id from assignment where teacherID = {teacherID})";
+            command = $"select assignmentID from studentassignmentsolution where studentID = {t_studentID} && assignmentID in (select id from assignment where teacherID = {teacherID})";
             cmd.CommandText = command;
             dataReader = cmd.ExecuteReader();
 
@@ -349,13 +295,13 @@ namespace CZU_APPLICATION
                             t_assignmentGrade[z].Text = "Not graded yet"; // We display the grade.
                         }
                         //
+                        // Enabling the panel for showing the assignment.
+                        t_assignmentPanel[z].Enabled = true;
+                        t_assignmentPanel[z].Visible = true;
+                        //
                     }
                     //
 
-                    // Enabling the panel for showing the assignment.
-                    t_assignmentPanel[z].Enabled = true;
-                    t_assignmentPanel[z++].Visible = true;
-                    //
                 }
                 dataReader.Close();
             }
@@ -384,5 +330,96 @@ namespace CZU_APPLICATION
             return dataAvailable;
         }
         //
+
+
+        // The Main function for updating 'Assignment' tab with related information to connected teacher, and initializing others fields with vital information for further operations 
+        public static bool updatePanelAsTeacher(ref List<Panel> t_assignmentPanel, ref List<Button> t_assignmentTitle,  ref List<string> t_studentIDs, string t_selectedClassID, string t_selectedAssignment)
+        {
+            // Variables
+            int i = 0, tempI;
+            bool dataAvailable = false;
+            //
+
+            /// Setting up MYSQL CONNECTION (1)
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _path;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            MySqlDataReader dataReader;
+            connection.Open();
+            ///
+
+            // Commands list
+            string command;
+            List<string> studentID = new();
+            //
+
+            /// Command 0 - Updating the panel with the list of assignments                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            command = $"select studentID from studentassignmentsolution where assignmentID = {t_selectedAssignment} && studentID in (select id from student where classID = {t_selectedClassID}) && state = 'Solved'";
+            cmd.CommandText = command;
+            dataReader = cmd.ExecuteReader();
+
+            // Getting the IDs of the assignments which satisfies our conditions
+            while (dataReader.Read()) // for as long it finds data, maximum 4.
+            {
+                if (i <= 3)
+                {
+                    studentID.Add(dataReader.GetString(0));
+
+                    // Enabling the panel for showing the assignment.
+                    t_assignmentPanel[i].Enabled = true;
+                    t_assignmentPanel[i++].Visible = true;
+                    //
+                }
+                else
+                    break;
+            }
+            dataReader.Close();
+            //
+
+            // Inserting the list of student IDS
+                t_studentIDs = studentID;
+            //
+
+            // Getting and inserting students name
+            for (int z = 0; z < studentID.Count; z++)
+            {
+                command = $"select firstName, lastName from student where id = {studentID[z]}";
+                cmd.CommandText = command;
+                dataReader = cmd.ExecuteReader();
+                while (dataReader.Read()) // for as long it finds data, maximum 4.
+                {
+
+                    // Reusing the control to display student name
+                    t_assignmentTitle[z].Text = dataReader.GetString(1) + " " + dataReader.GetString(0); 
+                    //
+                }
+                dataReader.Close();
+            }
+            //
+
+
+            // If there is any data that satisfies our conditions
+            if (i != 0)
+                dataAvailable = true;
+            //
+
+            --i; // Solving the +1, because if dataReader has no more record to read, we have +1, because we expected a record to be verified.
+            for (int z = i + 1; z <= 3; ++z) // When there are less than 4 questions asked, from the remained number, update panel
+            {
+                t_assignmentPanel[z].Enabled = false;
+                t_assignmentPanel[z].Visible = false;
+            }
+            dataReader.Close();
+            ///
+
+
+            // Closing MYSQL Connection
+            connection.Close();
+            //
+            return dataAvailable;
+        }
+        //
+
     }
 }

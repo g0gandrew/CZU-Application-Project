@@ -14,12 +14,11 @@ namespace CZU_APPLICATION
     internal static class QuestionsTab
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
+
+        // Main function to update Question panel as teacher
         public static bool updatePanelAsTeacher(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionStudentName, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List <Label> t_questionState, string t_selectedClass, string t_teacherID, ref List <string> t_questionID) 
         {
-            // Pseudo-Assignments until proven different
-           /* t_rightPossible = false;
-            t_leftPossible = false*/;
-            //
+          
 
             // Variables
             int loopLength; // Updating the panel by the number of students;
@@ -59,7 +58,6 @@ namespace CZU_APPLICATION
                     // Setting up the list of students ids for further command
                     studentsIDs[i] = dataReader.GetString(4);
                     //
-                    MessageBox.Show( dataReader.GetString(0) + dataReader.GetString(1) + dataReader.GetString(2) + dataReader.GetString(3) + dataReader.GetString(4));
                     // Setting up question Title
                     t_questionTitle[i].Text = dataReader.GetString(0);
                     //
@@ -112,9 +110,6 @@ namespace CZU_APPLICATION
             i = 0; // restarting the value for being used further
 
             /// Command 1 - First command for setting Student Name
-            /// 
-            ////////////// HERE IS THE PROBLEM
-           
             for (int z = 0; z <= loopLength; z++)
             {
                 command[1] = $"select firstName, lastName from student where id = {studentsIDs[z]}";
@@ -128,19 +123,16 @@ namespace CZU_APPLICATION
             }
             
             ///
-
-            //
-          /*  t_startingFrom += tempI; // We increase the start value by the users that we could display.
-            t_recordsOnPage = tempI;
-            if (t_startingFrom >= 7)
-            {
-                t_leftPossible = true;
-            }*/
+        
             // Closing MYSQL Connection, and DataReader
             connection.Close();
             //
             return dataAvailable;
         }
+        //
+
+
+        // Main function to update Question panel as student
         public static bool updatePanelAsStudent(ref List<Panel> t_questionPanel, ref List<Button> t_questionTitle, ref List<Label> t_questionPriorityLevel, ref List<Label> t_questionSubmitDate, ref List<Label> t_questionState, string t_selectedCourse, string t_studentID,  ref List <string> t_questionIDs)
         {
             // Pseudo-Assignments until proven different
@@ -244,6 +236,9 @@ namespace CZU_APPLICATION
             //
             return dataAvailable;
         }
+        //
+
+        // Method used to update controls from panel related to teacher connection type
         public static void getQuestionDataAsTeacher(string t_questionID, out string t_title, out string t_question)  
         {
             /// Setting up MYSQL CONNECTION (1)
@@ -271,6 +266,9 @@ namespace CZU_APPLICATION
             connection.Close();
 
         }
+        //
+
+        // Method used to update controls from panel related to student connection type
         public static void getQuestionDataAsStudent(string t_command, ref RichTextBox t_teacherAnswer,  ref RichTextBox t_studentQuestion)
         {
             //  MYSQL connection
@@ -294,6 +292,8 @@ namespace CZU_APPLICATION
             //
 
         }
+        //
+
     }
 }
 

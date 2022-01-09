@@ -11,6 +11,8 @@ namespace CZU_APPLICATION
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
+
+        // General method to insert in the database
         public static void insert(string command)
         {
             MySqlConnection connection = new MySqlConnection();
@@ -20,7 +22,9 @@ namespace CZU_APPLICATION
             cmd.ExecuteNonQuery();
             connection.Close();
         }
+        //
 
+        // Getting the type of registration token
         public static string registrationToken(string t_registrationToken)
         {
             //  MYSQL connection
@@ -61,57 +65,9 @@ namespace CZU_APPLICATION
             //
             return t_registrationToken;
         }
-   
-        public static bool recordExists(string t_query)
-        {
+        //
 
-            // OPENING MYSQL CONNECTION
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _path;
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = connection;
-            MySqlDataReader dataReader;
-            connection.Open();
-            //
-
-
-            // Searching for records
-            cmd.CommandText = t_query;
-            dataReader = cmd.ExecuteReader();
-            while(dataReader.Read())
-            {
-                return true;
-            }
-            //
-            connection.Close();
-
-            return false;
-        }
-        public static int recordExists(string t_query, int t_lastID)
-        {
-
-            // OPENING MYSQL CONNECTION
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _path;
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = connection;
-            MySqlDataReader dataReader;
-            connection.Open();
-            //
-
-
-            // Searching for records
-            cmd.CommandText = t_query;
-            dataReader = cmd.ExecuteReader();
-            while (dataReader.Read())
-            {
-                t_lastID = dataReader.GetInt32(0);
-            }
-            //
-            connection.Close();
-            return t_lastID;
-            
-        }
+        // Verifies if there exists records to the related query
         public static void recordExists(string t_query, ref int t_availableRecords)
         {
             // OPENING MYSQL CONNECTION
@@ -134,7 +90,9 @@ namespace CZU_APPLICATION
             //
             connection.Close();
         }
+        //
 
+        // Method to get maximum one output from a query given to DB
         public static void getData(string t_query,  ref int t_output)
         {
             // OPENING MYSQL CONNECTION
@@ -158,6 +116,10 @@ namespace CZU_APPLICATION
 
             connection.Close();
         }
+        //
+
+
+        // Method to get maximum n output from a query given to DB
         public static int getDataAndNoOfRecords(string t_query, int t_noOfColumns, ref int t_output)
         {
             // OPENING MYSQL CONNECTION
@@ -189,7 +151,7 @@ namespace CZU_APPLICATION
             connection.Close();
             return count;
         }
-
+        //
 
     }
 }
