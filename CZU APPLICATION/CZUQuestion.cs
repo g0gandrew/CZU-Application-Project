@@ -17,11 +17,14 @@ namespace CZU_APPLICATION
             InitializeComponent();
         }
 
+         // Properties
         private string _questionID { get; set; }
         private string _connectedUserType { get; set; }
         private string _studentID { get; set; }
         private string _teacherID { get; set; }
         private string _interfaceMode { get; set; }
+        //
+
         public CZUQuestion(string t_questionID) // Constructor for student, to initlialize the data for showing question.
         {
             InitializeComponent();
@@ -192,6 +195,8 @@ namespace CZU_APPLICATION
             {
                 // The question will be deleted from database
                 Database.insert($"delete from question where id = {_questionID};");
+                //
+
                 MessageBox.Show("Your question was deleted!");
                 this.Close();
             }

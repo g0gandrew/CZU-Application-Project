@@ -121,10 +121,11 @@ namespace CZU_APPLICATION
         private bool _QuestionsTabInitialized { get; set; } = false;
         private bool _StudentsTabInitialized { get; set; } = false;
         private bool _AssignmentsTabInitialized { get; set; } = false;
-        private bool _GradesTabInitialized { get; set; } = false;
+        private string _assignmentTeacherInterfaceMode { get; set; }
         //
 
         /// Connected as Student
+        /// 
         // Refresh Data
         private string _studentID;
         public string studentID
@@ -204,18 +205,18 @@ namespace CZU_APPLICATION
         }
         List<string> actions; // List used for multiple tasks to do on refreshing data. (Stores what to refresh).
         //
-        // For Question Tab
+
+        // List of main elements IDS
         List<string> _questionID = new List<string>();
 
         List<string> _assignmentID = new List<string>();
 
         List<string> _studentIDS = new List<string>();  
-    
         //
 
         /// 
 
-        // Refresh  General Data
+        // Refresh General Data
         List<Panel> triggerPanel = new();
         //
 
@@ -810,8 +811,22 @@ namespace CZU_APPLICATION
             statisticsControls.Add(statisticsAssignments);
             //
         }
-        private void assignmentTabGUIInitialization()
+        private void assignmentTabGUIInitialization(string t_connectedUserType)
         {
+            if(t_connectedUserType == "teacher")
+            {
+                //
+            }
+            else if(connectedUserType == "student")
+            {
+                // Disabling Controls for interface choice
+                teacherAssignments.Enabled = false;
+                teacherAssignments.Visible = false;
+                studentsAssignments.Enabled = false;
+                studentsAssignments.Visible = false;
+                //
+
+            }
 
             // Panel
             assignmentPanel.Add(assignment1Panel);
@@ -1178,7 +1193,7 @@ namespace CZU_APPLICATION
         }
         //
 
-        // Menu buttons
+        /// Menu buttons
         private void studentsButton_Click(object sender, EventArgs e)
         {
             // Enable Refresh Data Trigger
@@ -1420,6 +1435,7 @@ namespace CZU_APPLICATION
             }
             
         }
+        // Assignment Button
         private void assignmentsButton_Click(object sender, EventArgs e)
         {
             // Disabling overlapped panels
@@ -1435,7 +1451,7 @@ namespace CZU_APPLICATION
             // Initializing the GUI elements for tab, just once. 
             if (_AssignmentsTabInitialized == false)
             {
-                assignmentTabGUIInitialization();
+                assignmentTabGUIInitialization(connectedUserType);
                 _AssignmentsTabInitialized = true;
             }
             //
@@ -1447,6 +1463,7 @@ namespace CZU_APPLICATION
                         // Disabling overlapped panels
                         gradesMainPanelState(false);
                         //
+
                         // Getting student class id for further operations
                         _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
                         //
@@ -1464,7 +1481,6 @@ namespace CZU_APPLICATION
                             {
                                 MessageBox.Show("Student has assignments");
                                 assignmentsMainPanelState(true);
-
                             }
                             else
                             {
@@ -1486,13 +1502,49 @@ namespace CZU_APPLICATION
                     }
                 case "teacher":
                     {
-                        break;
+                        assignmentInterfaceButtonsState(true);
+                        switch (_assignmentTeacherInterfaceMode)
+                        {
+                            case "manageAssignments":
+                                {
+                                    // Update panel in that way to permit adding/deleting/state changing for  assignments
+                                    break;
+                                }
+                            case "manageStudentsAssignments":
+                                {
+                                    // Update panel in that way to permit adding/deleting/state cbaning for assignments
+                                    break;
+                                }
 
+                        }
+                        assignmentsMainPanelState(true);
+                        break;
                     }
             }
 
 
         }
+        private void assignmentInterfaceButtonsState(bool t_mode)
+        {
+            // Deactivating interface choice buttons
+            teacherAssignments.Enabled = t_mode;
+            teacherAssignments.Visible = t_mode;
+            studentsAssignments.Enabled = t_mode;
+            studentsAssignments.Visible = t_mode;
+            //
+        }
+        private void teacherAssignments_Click(object sender, EventArgs e) // Display teacher interface for managing assignments
+        {
+
+            assignmentInterfaceButtonsState(false);
+            _assignmentTeacherInterfaceMode = "manageAssignments";
+        }
+        private void studentsAssignments_Click(object sender, EventArgs e) // Display students assignments related to the selected class
+        {
+            assignmentInterfaceButtonsState(false);
+            _assignmentTeacherInterfaceMode = "manageStudentsAssignments";
+        }
+        //
         private void gradesButton_Click(object sender, EventArgs e)
         {
             // Disabling overlapped panels
@@ -1504,7 +1556,6 @@ namespace CZU_APPLICATION
             gradesMainPanelState(false);
             //
 
-    
             // Getting again student class id until we make the trigger
             _studentClassID = StudentsTab.getStudentClassID(_connectedUser);
             //
@@ -1572,7 +1623,7 @@ namespace CZU_APPLICATION
                 MainPanelNoData(true, "studentNoCourses"); // Display message 'Class has no courses'
         }
 
-        // 
+        /// 
 
         // Question Tab Buttons for interacting with question
         private void questionTitle1_MouseClick(object sender, MouseEventArgs e)
@@ -1729,6 +1780,69 @@ namespace CZU_APPLICATION
         }
         //
 
+        // Assignment Tab Buttons for interacting with assignments
+        private void assignment1Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+                case "student":
+                    {
+                        // Variables
+                        string assignmentState = null;
+                        //
+
+                        // Getting the solution state
+                        AssignmentsTab.studentAssignmentSolutionState(_assignmentID[0], _studentID, ref assignmentState);
+                        //
+                        switch (assignmentState)
+                        {
+                            case "Not solved":
+                                {
+                                    CZUAssignment assignment1 = new CZUAssignment(_assignmentID[0], _studentID, "studentAddsSolution");
+                                    assignment1.Show();
+                                    break;
+                                }
+                            case "Solved":
+                                {
+                                    // Showing the solution interface
+                                    break;
+                                }
+                        }
+                        break;
+
+                    }
+                case "teacher":
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void assignment2Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+            }
+        }
+
+        private void assignment3Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+
+            }
+        }
+
+        private void assignment4Button_Click(object sender, EventArgs e)
+        {
+            switch (connectedUserType)
+            {
+               
+            }
+        }
+        //
+
+
 
         // General Application Methods
         private void userDisconnectsSetOffline(string t_connectedUserType, string t_connectedUser) // This method sets the user status as disconnected
@@ -1744,6 +1858,7 @@ namespace CZU_APPLICATION
             Database.insert(command);
         }
 
+       
         //
     }
 }

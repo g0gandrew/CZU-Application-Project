@@ -16,13 +16,19 @@ namespace CZU_APPLICATION
     {
 
         // Creating a list for TextBoxes
-        List <TextBox> textBoxes = new List <TextBox> ();   
+        List <TextBox> textBoxes = new List <TextBox> ();
         //
+
+        // Properties
+        private bool guiInitialised { get; set; } = false;
+        //
+
         public CZURegister()
         {
             InitializeComponent();
         }
 
+        // Creates a list of the controls used, for further operations
         private void textBoxesInitialization()
 
         {
@@ -34,16 +40,36 @@ namespace CZU_APPLICATION
             textBoxes.Add(inFirstName);
             textBoxes.Add(inLastName);
         }
+        //
+
+
         private void register_button_Click(object sender, EventArgs e)
         {
-            textBoxesInitialization();
+            // One time operation for creating the list of GUI controls for further operations
+            if (guiInitialised == false)
+            {
+                textBoxesInitialization(); // Creating the list 
+                guiInitialised = true;
+            }
+            //
+
+            // Variables
             string birthDate, sexValue = null;
+            //
+
             birthDate = birthDateControl.Value.Date.ToString("yyyy.MM.dd");
+
+            // Verifying if the data introduced in controls are valid for registration process
             bool formatValid = Security.registrationFormatVerifier(ref textBoxes, ref selectSex, ref sexValue);
+            //
+
             if (formatValid == true)
             {
+                // Verifying if the registration was sucessfull
                 bool sucesfullReg = Authentication.registration(inUsername.Text, inFirstName.Text, inLastName.Text, inPassword.Text, inAuthKey.Text, inEmail.Text, inPhoneNumber.Text, sexValue, birthDate, inRegKey.Text);
-                if (sucesfullReg == true)
+                //
+
+                if (sucesfullReg == true) // If registration was sucessfull
                 {
                     MessageBox.Show("Your account has been created, you can log in!");
                     this.Close();

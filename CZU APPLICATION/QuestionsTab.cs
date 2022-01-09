@@ -122,7 +122,6 @@ namespace CZU_APPLICATION
                 dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                   MessageBox.Show("Nume student ce a intrebat" + dataReader.GetString(0) + " " + dataReader.GetString(1));
                     t_questionStudentName[z].Text = dataReader.GetString(0) + " " + dataReader.GetString(1); // concatinating for obtaining a full name to be displayed
                 }
                 dataReader.Close();

@@ -15,9 +15,14 @@ namespace CZU_APPLICATION
     public partial class CZUUserDetails : Form
     {
 
+        // Properties
         private string _studentID { get; set; }
         private string _teacherID { get; set; }
+        //
+
+        // List of controls used for further operations
         private List<Label> _labels = new List<Label>();
+        //
 
         public CZUUserDetails(string t_studentID, string t_teacherID)
         {
@@ -32,17 +37,20 @@ namespace CZU_APPLICATION
             InitializeComponent();
         }
 
+        // Creating a list of contros for further operations
+
         private void initializePanel()
         {
-            // Creating a list of contros for further operations
             _labels.Add(studentID);
             _labels.Add(firstName);
             _labels.Add(lastName);
             _labels.Add(sex);
             _labels.Add(birthday);
             _labels.Add(finalGrade);
-            //
         }
+        //
+
+        // The method takes the related student data from database and update the controls with it
         private void getAndSetData(string t_studentID, ref List <Label> t_labels, string t_teacherID)
         {
             // Variables
@@ -102,14 +110,14 @@ namespace CZU_APPLICATION
             //
         
         }
+        //
 
-
+        // Exit button
         private void button1_Click(object sender, EventArgs e)
         {
-            // Exit button
             this.Close();
-            //
         }
+        //
         private void CZUUserDetails_Load(object sender, EventArgs e)
         {
             // Creating the list of GUI elements
