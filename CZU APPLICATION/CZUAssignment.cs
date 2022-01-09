@@ -54,6 +54,8 @@ namespace CZU_APPLICATION
                     }
                 case "teacherAddsAssignment":
                     {
+                        addAssignment.Enabled = true;
+                        addAssignment.Visible = true;
                         break;
                     }
             }
@@ -80,6 +82,7 @@ namespace CZU_APPLICATION
                     }
                 case "teacherAddsAssignment":
                     {
+                        // Not done
                         break;
                     }
                 case "teacherGradesSolution":
@@ -146,6 +149,7 @@ namespace CZU_APPLICATION
                     }
                 case "teacherAddsAssignment":
                     {
+                        // not done
                         break;
                     }
                 case "teacherGradesSolution":
@@ -153,7 +157,6 @@ namespace CZU_APPLICATION
                         if(gradeOfSolution.SelectedIndex > -1) // If a grade was selected
                         {
                             string grade = Convert.ToString(gradeOfSolution.SelectedItem);
-                            MessageBox.Show($"grade == {grade}, studentid=  {_studentID} assignedd = {_assignmentID}");
                             string nonquery = $"update studentassignmentsolution set grade = {grade}, state = 'Graded' where assignmentID = {_assignmentID} && studentID = {_studentID}";
                             Database.insert(nonquery);
                             MessageBox.Show("Assignment was graded!");

@@ -11,6 +11,9 @@ namespace CZU_APPLICATION
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
+
+
+        // Verifies if the registration data satisfies our format criteria
         public static bool registrationFormatVerifier(ref List<TextBox> textBoxes, ref CheckedListBox t_selectSex, ref string t_sexValue)
         {
             // MYSQL CONNECTION
@@ -250,6 +253,8 @@ namespace CZU_APPLICATION
                 return true;
             //
         }
+        //
+
     }
 }
 

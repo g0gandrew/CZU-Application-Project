@@ -12,6 +12,7 @@ namespace CZU_APPLICATION
     {
         private static string _path { get; } = "SERVER=localhost; PORT=3306;DATABASE=czuapp;UID=root;PASSWORD=Andrei123!?";
 
+        // Updates the Home Panel Statistics
         public static void homePanelUpdateDataAsStudent(ref List <Label> t_labels, string t_classID, string t_studentID)
         {
 
@@ -99,5 +100,6 @@ namespace CZU_APPLICATION
             }
             // 
         }
+        //
     }
 }

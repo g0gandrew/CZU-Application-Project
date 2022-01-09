@@ -90,7 +90,6 @@ namespace CZU_APPLICATION
 
 
         // General Variables
-        private string _command { get; set; }
         private string _connectedUser;
         public string connectedUser
         {
@@ -126,8 +125,6 @@ namespace CZU_APPLICATION
         //
 
         /// Connected as Student
-        /// 
-        // Refresh Data
         private string _studentID;
         public string studentID
         {
@@ -142,70 +139,8 @@ namespace CZU_APPLICATION
         }
 
         private string _studentClassID;
-        public string studentClassID
-        {
-            get
-            {
-                return _studentClassID;
-            }
-            set
-            {
-                _studentClassID = value;
-            }
-        }
-        private int _studentLastCourse = 0;
-        public int studentLastCourse
-        {
-            get
-            {
-                return _studentLastCourse;
-            }
-            set
-            {
-                _studentLastCourse = value; 
-            }
-        }
+       /// 
 
-        private int _studentLastMeeting = 0;
-        public int studentLastMeeting
-        {
-            get
-            {
-                return _studentLastMeeting;
-            }
-            set
-            {
-                _studentLastMeeting = value;
-            }
-        }
-
-        private int _studentLastAssignment = 0;
-        public int studentLastAssignment
-        {
-            get
-            {
-                  return _studentLastAssignment;
-            }
-            set
-            {
-                _studentLastAssignment = value; 
-            }
-        }
-
-        private int _studentLastColleague = 0;
-        public int studentLastColleague
-        {
-            get
-            {
-                return _studentLastColleague;
-            }
-            set
-            {
-               _studentLastColleague = value;
-            }
-        }
-        List<string> actions; // List used for multiple tasks to do on refreshing data. (Stores what to refresh).
-        //
 
         // List of main elements IDS
         List<string> _questionID = new List<string>();
@@ -213,15 +148,9 @@ namespace CZU_APPLICATION
         List<string> _assignmentID = new List<string>();
 
         List<string> _studentIDS = new List<string>();  
-
-
         //
-
         /// 
 
-        // Refresh General Data
-        List<Panel> triggerPanel = new();
-        //
 
         // Connected as Teacher 
         private string _teacherID;
@@ -245,44 +174,6 @@ namespace CZU_APPLICATION
             //
             MessageBox.Show(t_message);
 
-        }
-        private void refreshStudentData(List <string> t_actions) // hard coded function
-        {
-            foreach (string i in t_actions)
-            {
-                switch (i)
-                {
-                    case "refreshcourse":
-                    {
-                        MessageBox.Show("Refresh data for student courses");
-                            StudentsTab.updatePanelAsStudent( ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"");
-                            break;
-                    }
-                    case "refreshcolleagues":
-                    {
-                        MessageBox.Show("Refresh data for student colleagues");
-                            StudentsTab.updatePanelAsStudent( ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"");
-                            break;
-                    }
-                    case "refreshmeeting":
-                    {
-                        MessageBox.Show("Refresh data for student meetings");
-                            StudentsTab.updatePanelAsStudent( ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"");
-                            break;
-                    }
-                    case "refreshassignment":
-                    {
-                        MessageBox.Show("Refresh data for student assignments");
-                            StudentsTab.updatePanelAsStudent( ref _recordsOnPage,  ref _lastID, ref studentPanel, ref studentGB, ref studentImage, ref studentConnected, ref studentName, connectedUser, $"");
-                            break;
-                    }
-                    default:
-                        {
-                            MessageBox.Show("No need to refresh - Test");
-                            break;
-                        }
-                }
-            }
         }
         private void CZUMain_Load(object sender, EventArgs e)
         {
@@ -389,7 +280,6 @@ namespace CZU_APPLICATION
             {
                 if(casesList[i] == t_case)
                 {
-                    MessageBox.Show("Am rulat, cazul este " + casesMessage[i]);
                     noDataInPanelMessage.Text = casesMessage[i];
                     noDataInPanelMessage.Enabled = true;
                     noDataInPanelMessage.Visible = true;
@@ -1049,7 +939,6 @@ namespace CZU_APPLICATION
                         // Disabling 
                         MainPanelNoData(true, "disableALL");
                         //
-                        MessageBox.Show(" student - AM RULAT CAZ DE ASSIGNMENT MAIN PANEL, ASSIGNMENTS EXISTS");
 
                         // Verifying if there are assignments for the course selected from listbox
                         string selectedCourse = Convert.ToString(assignmentSelectClassIDListBox.SelectedValue);
@@ -1061,13 +950,10 @@ namespace CZU_APPLICATION
 
                         if (hasAssignments == true)
                         {
-                            MessageBox.Show("Student has assignments");
-
+                            //
                         }
                         else
                         {
-                            // Message doesn't appear, need to be fixed
-                            MessageBox.Show("Student has NO assignments");
                             MainPanelNoData(true, "studentHasNoAssignments");
                         }
                         break;
@@ -1161,82 +1047,7 @@ namespace CZU_APPLICATION
         }
         //
 
-        // On Panel Triggers for Refreshing Data
-        private void initializeTriggerPanelList(List<Panel> t_triggerPanel) // Initializing the list of panels. (Adding them in a list)
-        {
-            t_triggerPanel.Add(triggerDataRefreshStudentPanel);
-            // Need to add the others
-        } 
-        private void enableRefreshDataTrigger(string t_currentTab, List <Panel> t_triggerPanel)
-        {
-            MessageBox.Show("Refresh Data Trigger");
-            void disableTriggers(ref Panel t_exceptThis)
-            {
-                foreach(Panel p in t_triggerPanel)
-                {
-                    if (p != t_exceptThis)
-                    {
-                        p.Enabled = false;
-                        p.Visible = false;
-                    }
-                }
-                t_exceptThis.Enabled = false;
-                t_exceptThis.Visible = false;
-            }
-            switch (t_currentTab)
-            {
-                case "home":
-                {
-
-                    break;
-                }
-                case "student":
-                {
-                        MessageBox.Show("Refresh Data Trigger Student");
-                        disableTriggers(ref triggerDataRefreshStudentPanel);
-                    break;
-
-                }
-                case "assignment":
-                {
-                    break;
-
-                }
-                case "meeting":
-                {
-                    break;
-
-                }
-                case "question":
-                {
-                    break;
-
-                }
-            }
-
-       
-
-        } // Disables other trigger surfaces and enabling the right one related to active Tab.
-        private void CZUMain_MouseMove(object sender, MouseEventArgs e)
-        {
-           /* if (triggerDataRefreshStudentPanel.Bounds.Contains(e.Location))
-            {
-              *//*  MessageBox.Show("Run Test  - Trigger Student Panel");
-                if (_connectedUserType == "student") // verify database for any new modifications 
-                {
-                    // verify database for any new modifications 
-                    actions = StudentsPanel.studentTriggerNewRefresh(_connectedUser, ref _studentLastMeeting, ref _studentLastAssignment, ref _studentLastColleague, ref _studentLastCourse);
-                    refreshStudentData(actions);
-                    //
-                }
-                else
-                {
-                    StudentsPanel.updateTeachedClassesList(selectClassID, _teachedClassesIDs, connectedUser); // updating Teacher Teached Classes List every time he clicks
-                }*//*
-            }
-            */
-        }
-        //
+      
 
         // Functions for showing data related to student
 
@@ -1607,7 +1418,6 @@ namespace CZU_APPLICATION
 
                         if (coursesExists == true)
                         {
-                            MessageBox.Show(" student - AM RULAT CAZ DE ASSIGNMENT MAIN PANEL, ASSIGNMENTS EXISTS");
                             string selectedCourse = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
                             bool hasAssignments = AssignmentsTab.updatePanelAsStudent(ref assignmentPanel, ref assignmentTitle, ref assignmentDeadline, ref assignmentState, ref assignmentGrade, selectedCourse, _studentID, ref _assignmentID, _studentClassID);
                             if (hasAssignments == true)
@@ -1656,20 +1466,7 @@ namespace CZU_APPLICATION
         }
         private void teacherAssignments_Click(object sender, EventArgs e) // Display teacher interface for managing assignments
         {
-            MainPanelNoData(true, "disableALL");
-
-            // Deactivating the buttons for interface mode choice as teacher on Assignment Tab
-            assignmentInterfaceButtonsState(false);
-            //
-
-            // Setting up the interface mode for further operations
-            _assignmentTeacherInterfaceMode = "teacherManagesAssignments";
-            //
-
-            // Modify shown elements in page GUI
-            assignmentInterfaceMode(_assignmentTeacherInterfaceMode);
-            //
-
+            // Not done
         }
         private void studentsAssignments_Click(object sender, EventArgs e) // Display students assignments related to the selected class
         {
@@ -1698,7 +1495,6 @@ namespace CZU_APPLICATION
             string selectedClass = Convert.ToString(assignmentSelectClassIDListBox.Items[0]);
             //
 
-            MessageBox.Show($"selected class = {selectedClass}");
 
             // Updating the list of assignments related to the selected class
             AssignmentsTab.classAssignments(selectedClass, ref selectAssignmentNameListBox, _teacherID);
@@ -1709,14 +1505,11 @@ namespace CZU_APPLICATION
             //
             
             
-            MessageBox.Show($"Button Assignment ---> {selectedAssignment}");
-
             // Calling the method that shows the assignments that are satisfing our above conditions
             if (selectedAssignment != "No Assignments") // If there exists minimum one assignment  
             {
 
                 bool availableSolutions =  AssignmentsTab.updatePanelAsTeacher(ref assignmentPanel, ref assignmentTitle, ref _studentIDS, selectedClass, selectedAssignment);
-                MessageBox.Show($"Are available solutions?" + availableSolutions);
                 if (!availableSolutions)
                     MainPanelNoData(true, "assignmentHasNoSolutions");
 
@@ -1755,8 +1548,6 @@ namespace CZU_APPLICATION
                 // Activating the controls from grades Main Panel
                 gradesMainPanelState(true);
                 //
-
-                MessageBox.Show(" Student - AM RULAT CAZ DE Grades MAIN PANEL, COURSES EXISTS");
                 
                 // Select the first course from list
                 string selectedCourse = StudentsTab.getCourseIDbyName(Convert.ToString(gradesSelectCourse.Items[0]));
@@ -1781,7 +1572,6 @@ namespace CZU_APPLICATION
                 }
                 //
 
-                MessageBox.Show($"Final grade = {finalGrade}, count = {count}");
                 if (count != 0) // If there is minimum one grade found
                 {
                     // Formula for final grade
@@ -1986,11 +1776,11 @@ namespace CZU_APPLICATION
                     }
                 case "teacher":
                     {
-                        string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
-                        MessageBox.Show(selectedAssignment);
-                        CZUAssignment assignment1 = new CZUAssignment(selectedAssignment, _studentIDS[0], "teacherGradesSolution");
-                        assignment1.Show();
-                        break;
+                       
+                            string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
+                            CZUAssignment assignment1 = new CZUAssignment(selectedAssignment, _studentIDS[0], "teacherGradesSolution");
+                            assignment1.Show();
+                            break;
                     }
             }
         }
@@ -2015,7 +1805,6 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
-                        MessageBox.Show(selectedAssignment);
                         CZUAssignment assignment2 = new CZUAssignment(selectedAssignment, _studentIDS[1], "teacherGradesSolution");
                         assignment2.Show();
                         break;
@@ -2043,7 +1832,6 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
-                        MessageBox.Show(selectedAssignment);
                         CZUAssignment assignment3 = new CZUAssignment(selectedAssignment, _studentIDS[2], "teacherGradesSolution");
                         assignment3.Show();
                         break;
@@ -2071,7 +1859,6 @@ namespace CZU_APPLICATION
                 case "teacher":
                     {
                         string selectedAssignment = Convert.ToString(selectAssignmentNameListBox.SelectedValue);
-                        MessageBox.Show(selectedAssignment);
                         CZUAssignment assignment4 = new CZUAssignment(selectedAssignment, _studentIDS[3], "teacherGradesSolution");
                         assignment4.Show();
                         break;
@@ -2096,10 +1883,6 @@ namespace CZU_APPLICATION
             Database.insert(command);
         }
 
-      
-
-
-        //
     }
 }
 

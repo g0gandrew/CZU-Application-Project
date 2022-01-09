@@ -107,7 +107,6 @@
             this.gradesButton = new System.Windows.Forms.Button();
             this.questionsButton = new System.Windows.Forms.Button();
             this.Menu = new System.Windows.Forms.Panel();
-            this.triggerDataRefreshStudentPanel = new System.Windows.Forms.Panel();
             this.questionsMainPanel = new System.Windows.Forms.Panel();
             this.questionsPanelMainGB = new System.Windows.Forms.GroupBox();
             this.addQuestions = new System.Windows.Forms.Button();
@@ -157,10 +156,9 @@
             this.label20 = new System.Windows.Forms.Label();
             this.questionsSelectClassListBox = new System.Windows.Forms.ListBox();
             this.questionsClassIDLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.noDataInPanelMessage = new System.Windows.Forms.Label();
             this.assignmentsMainPanel = new System.Windows.Forms.Panel();
+            this.studentsAssignments = new System.Windows.Forms.Button();
             this.teacherAssignments = new System.Windows.Forms.Button();
             this.assignmentsMainPanelGB = new System.Windows.Forms.GroupBox();
             this.selectAssignmentNameListBox = new System.Windows.Forms.ListBox();
@@ -204,9 +202,6 @@
             this.label61 = new System.Windows.Forms.Label();
             this.assignmentSelectClassIDListBox = new System.Windows.Forms.ListBox();
             this.assignmentSelectClassID = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.studentsAssignments = new System.Windows.Forms.Button();
             this.gradesMainPanel = new System.Windows.Forms.Panel();
             this.gradesMainGB = new System.Windows.Forms.GroupBox();
             this.gradesSituation = new System.Windows.Forms.Label();
@@ -1105,17 +1100,6 @@
             this.Menu.Size = new System.Drawing.Size(173, 681);
             this.Menu.TabIndex = 0;
             // 
-            // triggerDataRefreshStudentPanel
-            // 
-            this.triggerDataRefreshStudentPanel.BackColor = System.Drawing.Color.Transparent;
-            this.triggerDataRefreshStudentPanel.Enabled = false;
-            this.triggerDataRefreshStudentPanel.ForeColor = System.Drawing.Color.Transparent;
-            this.triggerDataRefreshStudentPanel.Location = new System.Drawing.Point(174, 0);
-            this.triggerDataRefreshStudentPanel.Name = "triggerDataRefreshStudentPanel";
-            this.triggerDataRefreshStudentPanel.Size = new System.Drawing.Size(1146, 681);
-            this.triggerDataRefreshStudentPanel.TabIndex = 15;
-            this.triggerDataRefreshStudentPanel.Visible = false;
-            // 
             // questionsMainPanel
             // 
             this.questionsMainPanel.Controls.Add(this.questionsPanelMainGB);
@@ -1135,8 +1119,6 @@
             this.questionsPanelMainGB.Controls.Add(this.questionPanel1);
             this.questionsPanelMainGB.Controls.Add(this.questionsSelectClassListBox);
             this.questionsPanelMainGB.Controls.Add(this.questionsClassIDLabel);
-            this.questionsPanelMainGB.Controls.Add(this.button1);
-            this.questionsPanelMainGB.Controls.Add(this.button2);
             this.questionsPanelMainGB.Location = new System.Drawing.Point(20, 28);
             this.questionsPanelMainGB.Name = "questionsPanelMainGB";
             this.questionsPanelMainGB.Size = new System.Drawing.Size(1113, 640);
@@ -1610,33 +1592,6 @@
             this.questionsClassIDLabel.TabIndex = 59;
             this.questionsClassIDLabel.Text = "Class ID:";
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(1049, 579);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(48, 54);
-            this.button1.TabIndex = 52;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.Control;
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Location = new System.Drawing.Point(995, 579);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(48, 54);
-            this.button2.TabIndex = 53;
-            this.button2.UseVisualStyleBackColor = false;
-            // 
             // noDataInPanelMessage
             // 
             this.noDataInPanelMessage.AutoSize = true;
@@ -1660,6 +1615,19 @@
             this.assignmentsMainPanel.Size = new System.Drawing.Size(1146, 681);
             this.assignmentsMainPanel.TabIndex = 64;
             this.assignmentsMainPanel.Visible = false;
+            // 
+            // studentsAssignments
+            // 
+            this.studentsAssignments.BackColor = System.Drawing.Color.LightGray;
+            this.studentsAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.studentsAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.studentsAssignments.Location = new System.Drawing.Point(572, 0);
+            this.studentsAssignments.Name = "studentsAssignments";
+            this.studentsAssignments.Size = new System.Drawing.Size(577, 681);
+            this.studentsAssignments.TabIndex = 2;
+            this.studentsAssignments.Text = "Students Assignments";
+            this.studentsAssignments.UseVisualStyleBackColor = false;
+            this.studentsAssignments.Click += new System.EventHandler(this.studentsAssignments_Click);
             // 
             // teacherAssignments
             // 
@@ -1686,8 +1654,6 @@
             this.assignmentsMainPanelGB.Controls.Add(this.assignment2Panel);
             this.assignmentsMainPanelGB.Controls.Add(this.assignmentSelectClassIDListBox);
             this.assignmentsMainPanelGB.Controls.Add(this.assignmentSelectClassID);
-            this.assignmentsMainPanelGB.Controls.Add(this.button4);
-            this.assignmentsMainPanelGB.Controls.Add(this.button5);
             this.assignmentsMainPanelGB.Location = new System.Drawing.Point(20, 28);
             this.assignmentsMainPanelGB.Name = "assignmentsMainPanelGB";
             this.assignmentsMainPanelGB.Size = new System.Drawing.Size(1113, 640);
@@ -2101,46 +2067,6 @@
             this.assignmentSelectClassID.TabIndex = 59;
             this.assignmentSelectClassID.Text = "Class ID:";
             // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.Control;
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(1049, 579);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(48, 54);
-            this.button4.TabIndex = 52;
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.Control;
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button5.Location = new System.Drawing.Point(995, 579);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(48, 54);
-            this.button5.TabIndex = 53;
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // studentsAssignments
-            // 
-            this.studentsAssignments.BackColor = System.Drawing.Color.LightGray;
-            this.studentsAssignments.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.studentsAssignments.Font = new System.Drawing.Font("Segoe UI Light", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.studentsAssignments.Location = new System.Drawing.Point(572, 0);
-            this.studentsAssignments.Name = "studentsAssignments";
-            this.studentsAssignments.Size = new System.Drawing.Size(577, 681);
-            this.studentsAssignments.TabIndex = 2;
-            this.studentsAssignments.Text = "Students Assignments";
-            this.studentsAssignments.UseVisualStyleBackColor = false;
-            this.studentsAssignments.Click += new System.EventHandler(this.studentsAssignments_Click);
-            // 
             // gradesMainPanel
             // 
             this.gradesMainPanel.Controls.Add(this.gradesMainGB);
@@ -2250,7 +2176,6 @@
             this.Controls.Add(this.questionsMainPanel);
             this.Controls.Add(this.studentsMainPanel);
             this.Controls.Add(this.homeMainPanel);
-            this.Controls.Add(this.triggerDataRefreshStudentPanel);
             this.Controls.Add(this.Menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -2261,7 +2186,6 @@
             this.Text = "CZU University of LifeSciences";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CZUMain_FormClosed);
             this.Load += new System.EventHandler(this.CZUMain_Load);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CZUMain_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.homeMainPanelLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -2421,7 +2345,6 @@
         private System.Windows.Forms.Button gradesButton;
         private System.Windows.Forms.Button questionsButton;
         private System.Windows.Forms.Panel Menu;
-        private System.Windows.Forms.Panel triggerDataRefreshStudentPanel;
         private System.Windows.Forms.Panel questionsMainPanel;
         private System.Windows.Forms.GroupBox questionsPanelMainGB;
         private System.Windows.Forms.Button questionTitle1;
@@ -2456,8 +2379,6 @@
         private System.Windows.Forms.Label question2PriorityLevel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel questionPanel4;
         private System.Windows.Forms.Panel questionPanel2;
         private System.Windows.Forms.Panel questionPanel3;
@@ -2483,8 +2404,6 @@
         private System.Windows.Forms.Panel assignment1Panel;
         private System.Windows.Forms.ListBox assignmentSelectClassIDListBox;
         private System.Windows.Forms.Label assignmentSelectClassID;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button assignment4Button;
         private System.Windows.Forms.GroupBox assignment4GB;
         private System.Windows.Forms.Label assignment4State;

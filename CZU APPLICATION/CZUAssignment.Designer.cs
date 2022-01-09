@@ -54,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.studentSolution = new System.Windows.Forms.RichTextBox();
             this.assignmentDescription1 = new System.Windows.Forms.RichTextBox();
+            this.titleOfAssignment = new System.Windows.Forms.TextBox();
+            this.titleOfAssignmentLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.assignmentMainGB.SuspendLayout();
             this.addAssignmentSolution.SuspendLayout();
@@ -164,6 +166,8 @@
             // 
             // addAssignmentMainGB
             // 
+            this.addAssignmentMainGB.Controls.Add(this.titleOfAssignmentLabel);
+            this.addAssignmentMainGB.Controls.Add(this.titleOfAssignment);
             this.addAssignmentMainGB.Controls.Add(this.assignmentMinGrade);
             this.addAssignmentMainGB.Controls.Add(this.label4);
             this.addAssignmentMainGB.Controls.Add(this.deadline);
@@ -192,7 +196,7 @@
             "8",
             "9",
             "10"});
-            this.assignmentMinGrade.Location = new System.Drawing.Point(751, 386);
+            this.assignmentMinGrade.Location = new System.Drawing.Point(731, 329);
             this.assignmentMinGrade.Name = "assignmentMinGrade";
             this.assignmentMinGrade.Size = new System.Drawing.Size(54, 24);
             this.assignmentMinGrade.TabIndex = 6;
@@ -200,7 +204,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(728, 349);
+            this.label4.Location = new System.Drawing.Point(707, 298);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 20);
             this.label4.TabIndex = 5;
@@ -209,7 +213,7 @@
             // 
             // deadline
             // 
-            this.deadline.Location = new System.Drawing.Point(154, 386);
+            this.deadline.Location = new System.Drawing.Point(119, 326);
             this.deadline.Name = "deadline";
             this.deadline.Size = new System.Drawing.Size(250, 27);
             this.deadline.TabIndex = 4;
@@ -217,7 +221,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(450, 44);
+            this.label3.Location = new System.Drawing.Point(451, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 20);
             this.label3.TabIndex = 1;
@@ -226,7 +230,7 @@
             // label666
             // 
             this.label666.AutoSize = true;
-            this.label666.Location = new System.Drawing.Point(246, 349);
+            this.label666.Location = new System.Drawing.Point(213, 298);
             this.label666.Name = "label666";
             this.label666.Size = new System.Drawing.Size(72, 20);
             this.label666.TabIndex = 3;
@@ -235,7 +239,7 @@
             // 
             // assignmentDescription
             // 
-            this.assignmentDescription.Location = new System.Drawing.Point(129, 76);
+            this.assignmentDescription.Location = new System.Drawing.Point(119, 52);
             this.assignmentDescription.Name = "assignmentDescription";
             this.assignmentDescription.Size = new System.Drawing.Size(752, 232);
             this.assignmentDescription.TabIndex = 0;
@@ -331,14 +335,31 @@
             this.assignmentDescription1.TabIndex = 0;
             this.assignmentDescription1.Text = "";
             // 
+            // titleOfAssignment
+            // 
+            this.titleOfAssignment.Location = new System.Drawing.Point(285, 399);
+            this.titleOfAssignment.Name = "titleOfAssignment";
+            this.titleOfAssignment.Size = new System.Drawing.Size(445, 27);
+            this.titleOfAssignment.TabIndex = 7;
+            // 
+            // titleOfAssignmentLabel
+            // 
+            this.titleOfAssignmentLabel.AutoSize = true;
+            this.titleOfAssignmentLabel.Location = new System.Drawing.Point(482, 370);
+            this.titleOfAssignmentLabel.Name = "titleOfAssignmentLabel";
+            this.titleOfAssignmentLabel.Size = new System.Drawing.Size(41, 20);
+            this.titleOfAssignmentLabel.TabIndex = 8;
+            this.titleOfAssignmentLabel.Text = "Title:";
+            this.titleOfAssignmentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // CZUAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 605);
+            this.Controls.Add(this.addAssignment);
             this.Controls.Add(this.studentAssignmentSolution);
             this.Controls.Add(this.addAssignmentSolution);
-            this.Controls.Add(this.addAssignment);
             this.Controls.Add(this.exitAssignment);
             this.Controls.Add(this.submit);
             this.Controls.Add(this.pictureBox1);
@@ -390,5 +411,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox studentSolution;
         private System.Windows.Forms.RichTextBox assignmentDescription1;
+        private System.Windows.Forms.Label titleOfAssignmentLabel;
+        private System.Windows.Forms.TextBox titleOfAssignment;
     }
 }
